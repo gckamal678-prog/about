@@ -5,6 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>कमल जी.सी. - आधिकारिक वेबसाइट</title>
     <style>
+        :root {
+            --bg-color: #f4f6f9;
+            --text-color: #333;
+            --header-bg: #ffffff;
+            --box-bg: #ffffff;
+            --border-color: #3498db;
+            --sidebar-bg: #2c3e50;
+            --sidebar-text: #ffffff;
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #121212;
+            --text-color: #e0e0e0;
+            --header-bg: #1e1e1e;
+            --box-bg: #1e1e1e;
+            --border-color: #3498db;
+            --sidebar-bg: #1a1a1a;
+            --sidebar-text: #ffffff;
+        }
+
         *, *::before, *::after {
             box-sizing: border-box;
         }
@@ -12,12 +32,13 @@
             margin: 0;
             padding: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f6f9;
-            color: #333;
+            background-color: var(--bg-color);
+            color: var(--text-color);
             line-height: 1.6;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
+            transition: background-color 0.3s, color 0.3s;
         }
 
         /* Top Bar / Header */
@@ -27,13 +48,20 @@
             left: 0;
             width: 100%;
             height: 60px;
-            background-color: #ffffff;
+            background-color: var(--header-bg);
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
             display: flex;
             align-items: center;
             justify-content: space-between;
             padding: 0 20px;
             z-index: 1000;
+            transition: background-color 0.3s;
+        }
+
+        .header-left, .header-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
 
         .menu-btn {
@@ -41,24 +69,40 @@
             border: none;
             font-size: 24px;
             cursor: pointer;
-            color: #2c3e50;
+            color: var(--text-color);
         }
 
         .logo-text {
             font-size: 18px;
             font-weight: bold;
-            color: #2c3e50;
+            color: var(--text-color);
         }
 
-        /* Sidebar Menu (5 Options Only) */
+        .control-btn {
+            background: none;
+            border: 1px solid var(--text-color);
+            color: var(--text-color);
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .control-btn:hover {
+            background-color: var(--text-color);
+            color: var(--bg-color);
+        }
+
+        /* Sidebar Menu */
         .sidebar {
             position: fixed;
             top: 0;
             left: -280px;
             width: 280px;
             height: 100%;
-            background-color: #2c3e50;
-            color: #ffffff;
+            background-color: var(--sidebar-bg);
+            color: var(--sidebar-text);
             transition: left 0.3s ease;
             z-index: 1100;
             padding-top: 80px;
@@ -75,7 +119,7 @@
             right: 20px;
             background: none;
             border: none;
-            color: #ffffff;
+            color: var(--sidebar-text);
             font-size: 24px;
             cursor: pointer;
         }
@@ -105,7 +149,6 @@
             flex: 1;
         }
 
-        /* Section Visibility Control */
         .content-section {
             display: none;
         }
@@ -114,19 +157,20 @@
             display: block;
         }
 
-        /* Hero / Home Section with Tagline on top of photo */
+        /* Hero / Home Section */
         .hero-section {
-            background: #ffffff;
+            background: var(--box-bg);
             border-radius: 12px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
             padding: 25px;
             margin-bottom: 30px;
             text-align: center;
+            transition: background-color 0.3s;
         }
 
         .tagline {
             font-style: italic;
-            color: #2980b9;
+            color: #3498db;
             font-weight: 600;
             margin-bottom: 20px;
             font-size: 1.15em;
@@ -153,28 +197,30 @@
         }
 
         h2 {
-            color: #34495e;
-            border-bottom: 2px solid #3498db;
+            color: var(--text-color);
+            border-bottom: 2px solid var(--border-color);
             padding-bottom: 5px;
             margin-top: 20px;
         }
 
         .section-box {
-            background: #ffffff;
+            background: var(--box-bg);
             border-radius: 12px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
             padding: 30px;
             margin-bottom: 30px;
+            transition: background-color 0.3s;
         }
 
-        /* Footer with All Direct Icons & Links */
+        /* Footer */
         footer {
-            background-color: #2c3e50;
-            color: #ffffff;
+            background-color: var(--sidebar-bg);
+            color: var(--sidebar-text);
             text-align: center;
             padding: 20px;
             margin-top: auto;
             font-size: 15px;
+            transition: background-color 0.3s;
         }
 
         .footer-links {
@@ -206,22 +252,27 @@
         }
     </style>
 </head>
-<body>
+<body data-theme="light">
 
     <header>
-        <button class="menu-btn" onclick="toggleSidebar()">☰</button>
-        <div class="logo-text">kamalgc.com.np</div>
-        <div style="width: 24px;"></div>
+        <div class="header-left">
+            <button class="menu-btn" onclick="toggleSidebar()">☰</button>
+            <div class="logo-text" data-en="kamalgc.com.np" data-np="kamalgc.com.np">kamalgc.com.np</div>
+        </div>
+        <div class="header-right">
+            <button class="control-btn" id="langBtn" onclick="toggleLanguage()">EN</button>
+            <button class="control-btn" id="themeBtn" onclick="toggleTheme()">🌙 Dark</button>
+        </div>
     </header>
 
     <nav class="sidebar" id="sidebar">
         <button class="sidebar-close" onclick="toggleSidebar()">&times;</button>
         <ul>
-            <li onclick="showSection('home')">गृहपृष्ठ (Home)</li>
-            <li onclick="showSection('about')">मेरो बारेमा (About Me)</li>
-            <li onclick="showSection('gallery')">ग्यालरी (Gallery)</li>
-            <li onclick="showSection('tech')">AI र प्रविधि (AI & Tech)</li>
-            <li onclick="showSection('blog')">ब्लग / अपडेट्स (Blog)</li>
+            <li onclick="showSection('home')" data-en="Home" data-np="गृहपृष्ठ (Home)">गृहपृष्ठ (Home)</li>
+            <li onclick="showSection('about')" data-en="About Me" data-np="मेरो बारेमा (About Me)">मेरो बारेमा (About Me)</li>
+            <li onclick="showSection('gallery')" data-en="Gallery" data-np="ग्यालरी (Gallery)">ग्यालरी (Gallery)</li>
+            <li onclick="showSection('tech')" data-en="AI & Tech" data-np="AI र प्रविधि (AI & Tech)">AI र प्रविधि (AI & Tech)</li>
+            <li onclick="showSection('blog')" data-en="Blog / Updates" data-np="ब्लग / अपडेट्स (Blog)">ब्लग / अपडेट्स (Blog)</li>
         </ul>
     </nav>
 
@@ -229,7 +280,7 @@
 
         <div id="home" class="content-section active-section">
             <div class="hero-section">
-                <div class="tagline">"नियमित कार्यक्षेत्रको अनुभव र आधुनिक AI प्रविधिको संगम — एउटा नयाँ सम्भावनाको खोजी।"</div>
+                <div class="tagline" data-en="&quot;The combination of regular work experience and modern AI technology — a search for new possibilities.&quot;" data-np="&quot;नियमित कार्यक्षेत्रको अनुभव र आधुनिक AI प्रविधिको संगम — एउटा नयाँ सम्भावनाको खोजी।&quot;">"नियमित कार्यक्षेत्रको अनुभव र आधुनिक AI प्रविधिको संगम — एउटा नयाँ सम्भावनाको खोजी।"</div>
                 <div class="hero-image-container">
                     <img src="kamal.png" alt="Kamal G.C.">
                 </div>
@@ -238,46 +289,46 @@
 
         <div id="about" class="content-section">
             <div class="section-box">
-                <h2>नमस्कार! म कमल जी.सी.</h2>
-                <p>म मूल घर शिवराज नगरपालिका-९, शिवगढी (कपिलवस्तु) भई हाल कार्यको सिलसिलामा नयाँ दिल्ली (भारत) स्थित <strong>Kosher India Pvt. Ltd.</strong> (<a href="https://www.indiakoshertravel.com" target="_blank">indiakoshertravel.com</a>) मा कार्यरत छु।</p>
-                <p>प्रविधिलाई व्यवहारमा उतारेर दैनिक काम र व्यापारलाई अझ सहज र छिटो बनाउने विषयमा मेरो विशेष रुचि रहेको छ।</p>
+                <h2 data-en="Hello! I am Kamal G.C." data-np="नमस्कार! म कमल जी.सी.">नमस्कार! म कमल जी.सी.</h2>
+                <p data-en="My permanent home is Shivraj Municipality-9, Shivgadhi (Kapilvastu), and currently, I am working at Kosher India Pvt. Ltd. (indiakoshertravel.com) in New Delhi, India." data-np="म मूल घर शिवराज नगरपालिका-९, शिवगढी (कपिलवस्तु) भई हाल कार्यको सिलसिलामा नयाँ दिल्ली (भारत) स्थित Kosher India Pvt. Ltd. (indiakoshertravel.com) मा कार्यरत छु।">म मूल घर शिवराज नगरपालिका-९, शिवगढी (कपिलवस्तु) भई हाल कार्यको सिलसिलामा नयाँ दिल्ली (भारत) स्थित <strong>Kosher India Pvt. Ltd.</strong> (<a href="https://www.indiakoshertravel.com" target="_blank">indiakoshertravel.com</a>) मा कार्यरत छु।</p>
+                <p data-en="I have a special interest in putting technology into practice to make daily work and business smoother and faster." data-np="प्रविधिलाई व्यवहारमा उतारेर दैनिक काम र व्यापारलाई अझ सहज र छिटो बनाउने विषयमा मेरो विशेष रुचि रहेको छ।">प्रविधिलाई व्यवहारमा उतारेर दैनिक काम र व्यापारलाई अझ सहज र छिटो बनाउने विषयमा मेरो विशेष रुचि रहेको छ।</p>
 
-                <h2>कार्य-अनुभव र अनुशासन</h2>
-                <p>Kosher India मा इस्राइली तथा जुडिक (Jewish) संस्कृति र परम्परा अनुसारका अत्यन्तै कडा <strong>कोशर (Kosher) नियमहरू</strong>, उच्चस्तरीय सरसफाइ र गुणस्तरका मापदण्डहरू पालना गर्दै काम गर्नु मेरो दैनिक जीवनको हिस्सा हो।</p>
-                <p><strong>यस कार्यस्थलले मलाई सिकाएको छ:</strong></p>
+                <h2 data-en="Work Experience & Discipline" data-np="कार्य-अनुभव र अनुशासन">कार्य-अनुभव र अनुशासन</h2>
+                <p data-en="Working at Kosher India by following extremely strict Kosher rules, high-level cleanliness, and quality standards according to Israeli and Jewish culture and tradition is a part of my daily life." data-np="Kosher India मा इस्राइली तथा जुडिक (Jewish) संस्कृति र परम्परा अनुसारका अत्यन्तै कडा कोशर (Kosher) नियमहरू, उच्चस्तरीय सरसफाइ र गुणस्तरका मापदण्डहरू पालना गर्दै काम गर्नु मेरो दैनिक जीवनको हिस्सा हो।">Kosher India मा इस्राइली तथा जुडिक (Jewish) संस्कृति र परम्परा अनुसारका अत्यन्तै कडा <strong>कोशर (Kosher) नियमहरू</strong>, उच्चस्तरीय सरसफाइ र गुणस्तरका मापदण्डहरू पालना गर्दै काम गर्नु मेरो दैनिक जीवनको हिस्सा हो।</p>
+                <p><strong data-en="This workplace has taught me:" data-np="यस कार्यस्थलले मलाई सिकाएको छ:">यस कार्यस्थलले मलाई सिकाएको छ:</strong></p>
                 <ul>
-                    <li><strong>उच्च अनुशासन र शुद्धता:</strong> कोशर मापदण्ड र नियमहरूलाई इमानदारीका साथ पालना गर्ने बानी।</li>
-                    <li><strong>अन्तर्राष्ट्रिय कार्यशैली:</strong> विदेशी पाहुना तथा ग्राहकहरूसँग काम गर्दा गुणस्तर र आतिथ्यतामा ध्यान दिने अनुभव।</li>
+                    <li><strong data-en="High Discipline & Purity:" data-en-sub="Habit of faithfully following Kosher standards and rules." data-np="उच्च अनुशासन र शुद्धता:" data-np-sub="कोशर मापदण्ड र नियमहरूलाई इमानदारीका साथ पालना गर्ने बानी।">उच्च अनुशासन र शुद्धता:</strong> कोशर मापदण्ड र नियमहरूलाई इमानदारीका साथ पालना गर्ने बानी।</li>
+                    <li><strong data-en="International Workstyle:" data-en-sub="Experience in paying attention to quality and hospitality while working with foreign guests and clients." data-np="अन्तर्राष्ट्रिय कार्यशैली:" data-np-sub="विदेशी पाहुना तथा ग्राहकहरूसँग काम गर्दा गुणस्तर र आतिथ्यतामा ध्यान दिने अनुभव।">अन्तर्राष्ट्रिय कार्यशैली:</strong> विदेशी पाहुना तथा ग्राहकहरूसँग काम गर्दा गुणस्तर र आतिथ्यतामा ध्यान दिने अनुभव।</li>
                 </ul>
 
-                <h2>प्रविधि र AI प्रतिको हुटहुटी</h2>
-                <p>दिनभरको जिम्मेवारीपूर्वक काम सकेपछि, बाँकी रहेको समयलाई म मेरो रुचि — <strong>AI (कृत्रिम बुद्धिमत्ता)</strong> र आधुनिक प्रविधि सिक्नमा लगाउँछु।</p>
+                <h2 data-en="Passion for Technology & AI" data-np="प्रविधि र AI प्रतिको हुटहुटी">प्रविधि र AI प्रतिको हुटहुटी</h2>
+                <p data-en="After finishing my responsible work for the day, I dedicate my remaining time to learning my interest — AI (Artificial Intelligence) and modern technology." data-np="दिनभरको जिम्मेवारीपूर्वक काम सकेपछि, बाँकी रहेको समयलाई म मेरो रुचि — AI (कृत्रिम बुद्धिमत्ता) र आधुनिक प्रविधि सिक्नमा लगाउँछु।">दिनभरको जिम्मेवारीपूर्वक काम सकेपछि, बाँकी रहेको समयलाई म मेरो रुचि — <strong>AI (कृत्रिम बुद्धिमत्ता)</strong> र आधुनिक प्रविधि सिक्नमा लगाउँछु।</p>
                 <ul>
-                    <li><strong>सोच:</strong> निरन्तर सिकाइ र प्रविधिको सही सदुपयोग।</li>
-                    <li><strong>लक्ष्य:</strong> AI र आधुनिक औजारहरू (Tools) को प्रयोग गरेर दैनिक काम र व्यापारलाई सहज, छिटो र प्रभावकारी बनाउनु।</li>
-                    <li><strong>भविष्यको योजना:</strong> कोशर इन्डियाबाट सिकेको कडा कार्य-अनुशासन र AI को आधुनिक क्षमतालाई जोडेर आफ्नै व्यवसायलाई प्रविधिसँग अघि बढाउनु।</li>
+                    <li><strong data-en="Vision:" data-en-sub="Continuous learning and proper use of technology." data-np="सोच:" data-np-sub="निरन्तर सिकाइ र प्रविधिको सही सदुपयोग।">सोच:</strong> निरन्तर सिकाइ र प्रविधिको सही सदुपयोग।</li>
+                    <li><strong data-en="Goal:" data-en-sub="Using AI and modern tools to make daily work and business smooth, fast, and effective." data-np="लक्ष्य:" data-np-sub="AI र आधुनिक औजारहरू (Tools) को प्रयोग गरेर दैनिक काम र व्यापारलाई सहज, छिटो र प्रभावकारी बनाउनु।">लक्ष्य:</strong> AI र आधुनिक औजारहरू (Tools) को प्रयोग गरेर दैनिक काम र व्यापारलाई सहज, छिटो र प्रभावकारी बनाउनु।</li>
+                    <li><strong data-en="Future Plan:" data-en-sub="Combining the strict work discipline learned from Kosher India and the modern capability of AI to advance my own business with technology." data-np="भविष्यको योजना:" data-np-sub="कोशर इन्डियाबाट सिकेको कडा कार्य-अनुशासन र AI को आधुनिक क्षमतालाई जोडेर आफ्नै व्यवसायलाई प्रविधिसँग अघि बढाउनु।">भविष्यको योजना:</strong> कोशर इन्डियाबाट सिकेको कडा कार्य-अनुशासन र AI को आधुनिक क्षमतालाई जोडेर आफ्नै व्यवसायलाई प्रविधिसँग अघि बढाउनु।</li>
                 </ul>
             </div>
         </div>
 
         <div id="gallery" class="content-section">
             <div class="section-box">
-                <h2>ग्यालरी (Gallery)</h2>
-                <p>यहाँ मेरा कार्यक्षेत्र, यात्रा र AI सिकाइका तस्बिरहरू राखिनेछन्। <em>(छिट्टै थपिँदैछ)</em></p>
+                <h2 data-en="Gallery" data-np="ग्यालरी (Gallery)">ग्यालरी (Gallery)</h2>
+                <p data-en="Photos of my work area, travels, and AI learning will be kept here. (Coming soon)" data-np="यहाँ मेरा कार्यक्षेत्र, यात्रा र AI सिकाइका तस्बिरहरू राखिनेछन्। (छिट्टै थपिँदैछ)">यहाँ मेरा कार्यक्षेत्र, यात्रा र AI सिकाइका तस्बिरहरू राखिनेछन्। <em>(छिट्टै थपिँदैछ)</em></p>
             </div>
         </div>
 
         <div id="tech" class="content-section">
             <div class="section-box">
-                <h2>AI र प्रविधि सिकाइ (AI & Tech)</h2>
-                <p>मैले प्रयोग गरिरहेका विभिन्न AI औजारहरू र प्रविधिका नयाँ सिकाइहरू यहाँ सेयर गरिनेछन्।</p>
+                <h2 data-en="AI & Tech Learning" data-np="AI र प्रविधि सिकाइ (AI & Tech)">AI र प्रविधि सिकाइ (AI & Tech)</h2>
+                <p data-en="Various AI tools I am using and new learning in technology will be shared here." data-np="मैले प्रयोग गरिरहेका विभिन्न AI औजारहरू र प्रविधिका नयाँ सिकाइहरू यहाँ सेयर गरिनेछन्।">मैले प्रयोग गरिरहेका विभिन्न AI औजारहरू र प्रविधिका नयाँ सिकाइहरू यहाँ सेयर गरिनेछन्।</p>
             </div>
         </div>
 
         <div id="blog" class="content-section">
             <div class="section-box">
-                <h2>ब्लग / विचार (Blog)</h2>
-                <p>नयाँ लेख र अनुभवहरू यहाँ निरन्तर थपिँदै जानेछन्।</p>
+                <h2 data-en="Blog / Thoughts" data-np="ब्लग / विचार (Blog)">ब्लग / विचार (Blog)</h2>
+                <p data-en="New articles and experiences will be continuously added here." data-np="नयाँ लेख र अनुभवहरू यहाँ निरन्तर थपिँदै जानेछन्।">नयाँ लेख र अनुभवहरू यहाँ निरन्तर थपिँदै जानेछन्।</p>
             </div>
         </div>
 
@@ -285,7 +336,7 @@
 
     <footer>
         <div class="footer-links">
-            <a href="https://gckamal678-prog.github.io/about/" target="_blank">🌐 pasal.kamalgc.com.np</a>
+            <a href="https://pasal.kamalgc.com.np" target="_blank">🌐 pasal.kamalgc.com.np</a>
             <a href="mailto:Support@kamalgc.com.np">📧 Support@kamalgc.com.np</a>
             <a href="https://wa.me/9779821406500" target="_blank">
                 <svg class="social-icon" viewBox="0 0 24 24" fill="#25D366"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01-1.87-1.87-4.36-2.9-7.01-2.9zm0 1.83c4.49 0 8.08 3.59 8.08 8.08 0 4.49-3.59 8.08-8.08 8.08-1.42 0-2.81-.38-4.02-1.1l-.29-.17-3.03.8.81-2.95-.19-.31c-.79-1.25-1.21-2.7-1.21-4.19 0-4.49 3.59-8.08 8.08-8.08zm4.42 5.92c-.18-.09-1.07-.53-1.24-.59-.17-.06-.29-.09-.41.09-.12.18-.47.59-.58.71-.11.12-.22.14-.4.05-.18-.09-.76-.28-1.45-.89-.54-.48-.91-1.07-1.02-1.25-.11-.18-.01-.28.08-.37.08-.08.18-.22.27-.33.09-.11.12-.18.18-.3.06-.12.03-.23-.01-.32-.05-.09-.41-1-.56-1.37-.15-.36-.3-.31-.41-.32h-.35c-.12 0-.32.05-.49.23-.17.18-.65.63-.65 1.54 0 .91.66 1.79.75 1.91.09.12 1.3 1.99 3.15 2.79.44.19.78.3 1.05.38.44.14.84.12 1.16.07.36-.05 1.07-.44 1.22-.86.15-.42.15-.78.11-.86-.04-.08-.15-.12-.33-.21z"/></svg>
@@ -318,6 +369,36 @@
 
             toggleSidebar();
             window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Dark / Light Theme Toggle
+        function toggleTheme() {
+            const body = document.body;
+            const themeBtn = document.getElementById('themeBtn');
+            if (body.getAttribute('data-theme') === 'dark') {
+                body.setAttribute('data-theme', 'light');
+                themeBtn.innerHTML = '🌙 Dark';
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                themeBtn.innerHTML = '☀️ Light';
+            }
+        }
+
+        // EN / NP Translation Toggle
+        let currentLang = 'np';
+        function toggleLanguage() {
+            currentLang = currentLang === 'np' ? 'en' : 'np';
+            document.getElementById('langBtn').innerText = currentLang === 'np' ? 'EN' : 'NP';
+
+            // Translate elements with data attributes
+            const elements = document.querySelectorAll('[data-np]');
+            elements.forEach(el => {
+                if (currentLang === 'en') {
+                    el.innerText = el.getAttribute('data-en');
+                } else {
+                    el.innerText = el.getAttribute('data-np');
+                }
+            });
         }
     </script>
 
