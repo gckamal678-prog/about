@@ -86,6 +86,7 @@
         .sidebar ul li {
             padding: 15px 25px;
             border-bottom: 1px solid #34495e;
+            cursor: pointer;
         }
 
         .sidebar ul li a {
@@ -95,8 +96,8 @@
             display: block;
         }
 
-        .sidebar ul li a:hover {
-            color: #3498db;
+        .sidebar ul li:hover {
+            background-color: #34495e;
         }
 
         /* Main Container */
@@ -104,6 +105,15 @@
             max-width: 1200px;
             margin: 80px auto 40px auto;
             padding: 20px;
+        }
+
+        /* Section Visibility Control (Suru ma sabai lukcha, active matra dekhincha) */
+        .content-section {
+            display: none;
+        }
+
+        .content-section.active-section {
+            display: block;
         }
 
         /* Hero / About Section with 16:9 layout */
@@ -159,7 +169,7 @@
             color: #34495e;
             border-bottom: 2px solid #3498db;
             padding-bottom: 5px;
-            margin-top: 30px;
+            margin-top: 20px;
         }
 
         .section-box {
@@ -213,73 +223,85 @@
     <nav class="sidebar" id="sidebar">
         <button class="sidebar-close" onclick="toggleSidebar()">&times;</button>
         <ul>
-            <li><a href="#home" onclick="toggleSidebar()">गृहपृष्ठ (Home)</a></li>
-            <li><a href="#about" onclick="toggleSidebar()">मेरो बारेमा (About Me)</a></li>
-            <li><a href="#gallery" onclick="toggleSidebar()">ग्यालरी (Gallery)</a></li>
-            <li><a href="#tech" onclick="toggleSidebar()">AI र प्रविधि (AI & Tech)</a></li>
-            <li><a href="#blog" onclick="toggleSidebar()">ब्लग / अपडेट्स (Blog)</a></li>
-            <li><a href="#contact" onclick="toggleSidebar()">सम्पर्क (Contact)</a></li>
+            <li onclick="showSection('home')">गृहपृष्ठ (Home)</li>
+            <li onclick="showSection('about')">मेरो बारेमा (About Me)</li>
+            <li onclick="showSection('gallery')">ग्यालरी (Gallery)</li>
+            <li onclick="showSection('tech')">AI र प्रविधि (AI & Tech)</li>
+            <li onclick="showSection('blog')">ब्लग / अपडेट्स (Blog)</li>
+            <li onclick="showSection('contact')">सम्पर्क (Contact)</li>
         </ul>
     </nav>
 
-    <div class="main-container" id="home">
+    <div class="main-container">
 
-        <div class="hero-section">
-            <div class="hero-image-container">
-                <img src="kamal.png" alt="Kamal G.C.">
+        <div id="home" class="content-section active-section">
+            <div class="hero-section">
+                <div class="hero-image-container">
+                    <img src="kamal.png" alt="Kamal G.C.">
+                </div>
+                <div class="hero-content">
+                    <div class="tagline">"नियमित कार्यक्षेत्रको अनुभव र आधुनिक AI प्रविधिको संगम — एउटा नयाँ सम्भावनाको खोजी।"</div>
+                    <h1>नमस्कार! म कमल जी.सी.</h1>
+                    <p>म मूल घर शिवराज नगरपालिका-९, शिवगढी (कपिलवस्तु) भई हाल कार्यसिलсилаमा नयाँ दिल्ली (भारत) स्थित <strong>Kosher India Pvt. Ltd.</strong> (<a href="https://www.indiakoshertravel.com" target="_blank">indiakoshertravel.com</a>) मा कार्यरत छु।</p>
+                    <p>प्रविधिलाई व्यवहारमा उतारेर दैनिक काम र व्यापारलाई अझ सहज र छिटो बनाउने विषयमा मेरो विशेष रुचि रहेको छ।</p>
+                </div>
             </div>
-            <div class="hero-content">
-                <div class="tagline">"नियमित कार्यक्षेत्रको अनुभव र आधुनिक AI प्रविधिको संगम — एउटा नयाँ सम्भावनाको खोजी।"</div>
-                <h1>नमस्कार! म कमल जी.सी.</h1>
-                <p>म मूल घर शिवराज नगरपालिका-९, शिवगढी (कपिलवस्तु) भई हाल कार्यसिलсилаमा नयाँ दिल्ली (भारत) स्थित <strong>Kosher India Pvt. Ltd.</strong> (<a href="https://www.indiakoshertravel.com" target="_blank">indiakoshertravel.com</a>) मा कार्यरत छु।</p>
-                <p>प्रविधिलाई व्यवहारमा उतारेर दैनिक काम र व्यापारलाई अझ सहज र छिटो बनाउने विषयमा मेरो विशेष रुचि रहेको छ।</p>
+        </div>
+
+        <div id="about" class="content-section">
+            <div class="section-box">
+                <h2>कार्य-अनुभव र अनुशासन</h2>
+                <p>Kosher India मा इस्राइली तथा जुडिक (Jewish) संस्कृति र परम्परा अनुसारका अत्यन्तै कडा <strong>कोशर (Kosher) नियमहरू</strong>, उच्चस्तरीय सरसफाइ र गुणस्तरका मापदण्डहरू पालना गर्दै काम गर्नु मेरो दैनिक जीवनको हिस्सा हो।</p>
+                <p><strong>यस कार्यस्थलले मलाई सिकाएको छ:</strong></p>
+                <ul>
+                    <li><strong>उच्च अनुशासन र शुद्धता:</strong> कोशर मापदण्ड र नियमहरूलाई इमानदारीका साथ पालना गर्ने बानी।</li>
+                    <li><strong>अन्तर्राष्ट्रिय कार्यशैली:</strong> विदेशी पाहुना तथा ग्राहकहरूसँग काम गर्दा गुणस्तर र आतिथ्यतामा ध्यान दिने अनुभव।</li>
+                </ul>
+
+                <h2>प्रविधि र AI प्रतिको हुटहुटी</h2>
+                <p>दिनभरको जिम्मेवारीपूर्वक काम सकेपछि, बाँकी रहेको समयलाई म मेरो रुचि — <strong>AI (कृत्रिम बुद्धिमत्ता)</strong> र आधुनिक प्रविधि सिक्नमा लगाउँछु।</p>
+                <ul>
+                    <li><strong>सोच:</strong> निरन्तर सिकाइ र प्रविधिको सही सदुपयोग।</li>
+                    <li><strong>लक्ष्य:</strong> AI र आधुनिक औजारहरू (Tools) को प्रयोग गरेर दैनिक काम र व्यापारलाई सहज, छिटो र प्रभावकारी बनाउनु।</li>
+                    <li><strong>भविष्यको योजना:</strong> कोशर इन्डियाबाट सिकेको कडा कार्य-अनुशासन र AI को आधुनिक क्षमतालाई जोडेर आफ्नै व्यवसायलाई प्रविधिसँग अघि बढाउनु।</li>
+                </ul>
             </div>
         </div>
 
-        <div class="section-box" id="about">
-            <h2>कार्य-अनुभव र अनुशासन</h2>
-            <p>Kosher India मा इस्राइली तथा जुडिक (Jewish) संस्कृति र परम्परा अनुसारका अत्यन्तै कडा <strong>कोशर (Kosher) नियमहरू</strong>, उच्चस्तरीय सरसफाइ र गुणस्तरका मापदण्डहरू पालना गर्दै काम गर्नु मेरो दैनिक जीवनको हिस्सा हो।</p>
-            <p><strong>यस कार्यस्थलले मलाई सिकाएको छ:</strong></p>
-            <ul>
-                <li><strong>उच्च अनुशासन र शुद्धता:</strong> कोशर मापदण्ड र नियमहरूलाई इमानदारीका साथ पालना गर्ने बानी।</li>
-                <li><strong>अन्तर्राष्ट्रिय कार्यशैली:</strong> विदेशी पाहुना तथा ग्राहकहरूसँग काम गर्दा गुणस्तर र आतिथ्यतामा ध्यान दिने अनुभव।</li>
-            </ul>
-
-            <h2>प्रविधि र AI प्रतिको हुटहुटी</h2>
-            <p>दिनभरको जिम्मेवारीपूर्वक काम सकेपछि, बाँकी रहेको समयलाई म मेरो रुचि — <strong>AI (कृत्रिम बुद्धिमत्ता)</strong> र आधुनिक प्रविधि सिक्नमा लगाउँछु।</p>
-            <ul>
-                <li><strong>सोच:</strong> निरन्तर सिकाइ र प्रविधिको सही सदुपयोग।</li>
-                <li><strong>लक्ष्य:</strong> AI र आधुनिक औजारहरू (Tools) को प्रयोग गरेर दैनिक काम र व्यापारलाई सहज, छिटो र प्रभावकारी बनाउनु।</li>
-                <li><strong>भविष्यको योजना:</strong> कोशर इन्डियाबाट सिकेको कडा कार्य-अनुशासन र AI को आधुनिक क्षमतालाई जोडेर आफ्नै व्यवसायलाई प्रविधिसँग अघि बढाउनु।</li>
-            </ul>
+        <div id="gallery" class="content-section">
+            <div class="section-box">
+                <h2>ग्यालरी (Gallery)</h2>
+                <p>यहाँ मेरा कार्यक्षेत्र, यात्रा र AI सिकाइका तस्बिरहरू राखिनेछन्। <em>(छिट्टै थपिँदैछ)</em></p>
+            </div>
         </div>
 
-        <div class="section-box" id="gallery">
-            <h2>ग्यालरी (Gallery)</h2>
-            <p>यहाँ मेरा कार्यक्षेत्र, यात्रा र AI सिकाइका तस्बिरहरू राखिनेछन्। <em>(छिट्टै थपिँदैछ)</em></p>
+        <div id="tech" class="content-section">
+            <div class="section-box">
+                <h2>AI र प्रविधि सिकाइ (AI & Tech)</h2>
+                <p>मैले प्रयोग गरिरहेका विभिन्न AI औजारहरू र प्रविधिका नयाँ सिकाइहरू यहाँ सेयर गरिनेछन्।</p>
+            </div>
         </div>
 
-        <div class="section-box" id="tech">
-            <h2>AI र प्रविधि सिकाइ (AI & Tech)</h2>
-            <p>मैले प्रयोग गरिरहेका विभिन्न AI औजारहरू र प्रविधिका नयाँ सिकाइहरू यहाँ सेयर गरिनेछन्।</p>
+        <div id="blog" class="content-section">
+            <div class="section-box">
+                <h2>ब्लग / विचार (Blog)</h2>
+                <p>नयाँ लेख र अनुभवहरू यहाँ निरन्तर थपिँदै जानेछन्।</p>
+            </div>
         </div>
 
-        <div class="section-box" id="blog">
-            <h2>ब्लग / विचार (Blog)</h2>
-            <p>नयाँ लेख र अनुभवहरू यहाँ निरन्तर थपिँदै जानेछन्।</p>
-        </div>
-
-        <div class="section-box" id="contact">
-            <h2>सम्पर्क गर्नुहोस् (Contact Me)</h2>
-            <p>प्रविधिलाई व्यवहारमा उतारेर केही नयाँ गर्ने मेरो यो यात्रामा तपाईं मलाई निम्न माध्यमबाट जोडिन सक्नुहुन्छ:</p>
-            <ul class="contact-list">
-                <li>🌐 <strong>वेबसाइट:</strong> kamalgc.com.np</li>
-                <li>📧 <strong>इमेल:</strong> Support@kamalgc.com.np</li>
-                <li>💬 <strong>ह्वाट्सएप:</strong> +977 9821406500</li>
-                <li>👍 <strong>फेसबुक पेज:</strong> <a href="https://www.facebook.com/share/1cj8hZKnyW/" target="_blank">फेसबुक पेज लिङ्क</a></li>
-                <li>📍 <strong>स्थायी ठेगाना:</strong> शिवराज नगरपालिका-९, शिवगढी अञ्चलपुर, कपिलवस्तु</li>
-                <li>💼 <strong>हालको कार्यस्थल:</strong> Kosher India Pvt. Ltd., नयाँ दिल्ली, भारत</li>
-            </ul>
+        <div id="contact" class="content-section">
+            <div class="section-box">
+                <h2>सम्पर्क गर्नुहोस् (Contact Me)</h2>
+                <p>प्रविधिलाई व्यवहारमा उतारेर केही नयाँ गर्ने मेरो यो यात्रामा तपाईं मलाई निम्न माध्यमबाट जोडिन सक्नुहुन्छ:</p>
+                <ul class="contact-list">
+                    <li>🌐 <strong>वेबसाइट:</strong> kamalgc.com.np</li>
+                    <li>📧 <strong>इमेल:</strong> Support@kamalgc.com.np</li>
+                    <li>💬 <strong>ह्वाट्सएप:</strong> +977 9821406500</li>
+                    <li>👍 <strong>फेसबुक पेज:</strong> <a href="https://www.facebook.com/share/1cj8hZKnyW/" target="_blank">फेसबुक पेज लिङ्क</a></li>
+                    <li>📍 <strong>स्थायी ठेगाना:</strong> शिवराज नगरपालिका-९, शिवगढी अञ्चलपुर, कपिलवस्तु</li>
+                    <li>💼 <strong>हालको कार्यस्थल:</strong> Kosher India Pvt. Ltd., नयाँ दिल्ली, भारत</li>
+                </ul>
+            </div>
         </div>
 
     </div>
@@ -289,9 +311,31 @@
     </footer>
 
     <script>
+        // मेनुबार खोल्ने र बन्द गर्ने फंक्सन
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
             sidebar.classList.toggle('active');
+        }
+
+        // मेनुको अप्सन थिच्दा सम्बन्धित सेक्सন मात्र देखाउने र अरू लुकाउने फंक्सन
+        function showSection(sectionId) {
+            // सबै सेक्सनहरू लुकाउने
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(sec => {
+                sec.classList.remove('active-section');
+            });
+
+            // क्लिक गरेको सेक्सन मात्र देखाउने
+            const targetSection = document.getElementById(sectionId);
+            if (targetSection) {
+                targetSection.classList.add('active-section');
+            }
+
+            // मेनु क्लिक गरेपछि साइडबार स्वतः बन्द हुने
+            toggleSidebar();
+            
+            // पेजको माथितिर स्क्रोल हुने
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
     </script>
 
