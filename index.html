@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>कमल जी.सी. - आधिकारिक वेबसाइट</title>
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f6f9;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Top Bar / Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background-color: #ffffff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            z-index: 1000;
+        }
+
+        .menu-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #2c3e50;
+        }
+
+        .logo-text {
+            font-size: 18px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        /* Sidebar Menu */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -280px;
+            width: 280px;
+            height: 100%;
+            background-color: #2c3e50;
+            color: #ffffff;
+            transition: left 0.3s ease;
+            z-index: 1100;
+            padding-top: 80px;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.2);
+        }
+
+        .sidebar.active {
+            left: 0;
+        }
+
+        .sidebar-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: #ffffff;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar ul li {
+            padding: 15px 25px;
+            border-bottom: 1px solid #34495e;
+        }
+
+        .sidebar ul li a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 16px;
+            display: block;
+        }
+
+        .sidebar ul li a:hover {
+            color: #3498db;
+        }
+
+        /* Main Container */
+        .main-container {
+            max-width: 1200px;
+            margin: 80px auto 40px auto;
+            padding: 20px;
+        }
+
+        /* Hero / About Section with 16:9 layout */
+        .hero-section {
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            display: flex;
+            flex-wrap: wrap;
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+
+        .hero-image-container {
+            flex: 1;
+            min-width: 300px;
+            aspect-ratio: 16 / 9;
+            background-color: #e2e8f0;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-image-placeholder {
+            text-align: center;
+            color: #64748b;
+            padding: 20px;
+        }
+
+        .hero-content {
+            flex: 1;
+            min-width: 300px;
+            padding: 40px;
+        }
+
+        .tagline {
+            font-style: italic;
+            color: #2980b9;
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-top: 0;
+            font-size: 2em;
+        }
+
+        h2 {
+            color: #34495e;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 5px;
+            margin-top: 30px;
+        }
+
+        .section-box {
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        .contact-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .contact-list li {
+            margin-bottom: 10px;
+        }
+
+        .contact-list a {
+            color: #2980b9;
+            text-decoration: none;
+        }
+
+        .contact-list a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .hero-section {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <button class="menu-btn" onclick="toggleSidebar()">☰</button>
+        <div class="logo-text">kamalgc.com.np</div>
+        <div style="width: 24px;"></div>
+    </header>
+
+    <nav class="sidebar" id="sidebar">
+        <button class="sidebar-close" onclick="toggleSidebar()">&times;</button>
+        <ul>
+            <li><a href="#home" onclick="toggleSidebar()">गृहपृष्ठ (Home)</a></li>
+            <li><a href="#about" onclick="toggleSidebar()">मेरो बारेमा (About Me)</a></li>
+            <li><a href="#gallery" onclick="toggleSidebar()">ग्यालरी (Gallery)</a></li>
+            <li><a href="#tech" onclick="toggleSidebar()">AI र प्रविधि (AI & Tech)</a></li>
+            <li><a href="#blog" onclick="toggleSidebar()">ब्लग / अपडेट्स (Blog)</a></li>
+            <li><a href="#contact" onclick="toggleSidebar()">सम्पर्क (Contact)</a></li>
+        </ul>
+    </nav>
+
+    <div class="main-container" id="home">
+
+        <div class="hero-section">
+            <div class="hero-image-container">
+                <div class="hero-image-placeholder">
+                    [ १६:९ साइजको फुल फोटो राख्ने ठाउँ ]<br>
+                    <small>तपाईंको फोटो यहाँ देखिनेछ</small>
+                </div>
+            </div>
+            <div class="hero-content">
+                <div class="tagline">"नियमित कार्यक्षेत्रको अनुभव र आधुनिक AI प्रविधिको संगम — एउटा नयाँ सम्भावनाको खोजी।"</div>
+                <h1>नमस्कार! म कमल जी.सी.</h1>
+                <p>म मूल घर शिवराज नगरपालिका-९, शिवगढी (कपिलवस्तु) भई हाल कार्यसिलсилаमा नयाँ दिल्ली (भारत) स्थित <strong>Kosher India Pvt. Ltd.</strong> (<a href="https://www.indiakoshertravel.com" target="_blank">indiakoshertravel.com</a>) मा कार्यरत छु।</p>
+                <p>प्रविधिलाई व्यवहारमा उतारेर दैनिक काम र व्यापारलाई अझ सहज र छिटो बनाउने विषयमा मेरो विशेष रुचि रहेको छ।</p>
+            </div>
+        </div>
+
+        <div class="section-box" id="about">
+            <h2>कार्य-अनुभव र अनुशासन</h2>
+            <p>Kosher India मा इस्राइली तथा जुडिक (Jewish) संस्कृति र परम्परा अनुसारका अत्यन्तै कडा <strong>कोशर (Kosher) नियमहरू</strong>, उच्चस्तरीय सरसफाइ र गुणस्तरका मापदण्डहरू पालना गर्दै काम गर्नु मेरो दैनिक जीवनको हिस्सा हो।</p>
+            <p><strong>यस कार्यस्थलले मलाई सिकाएको छ:</strong></p>
+            <ul>
+                <li><strong>उच्च अनुशासन र शुद्धता:</strong> कोशर मापदण्ड र नियमहरूलाई इमानदारीका साथ पालना गर्ने बानी।</li>
+                <li><strong>अन्तर्राष्ट्रिय कार्यशैली:</strong> विदेशी पाहुना तथा ग्राहकहरूसँग काम गर्दा गुणस्तर र आतिथ्यतामा ध्यान दिने अनुभव।</li>
+            </ul>
+
+            <h2>प्रविधि र AI प्रतिको हुटहुटी</h2>
+            <p>दिनभरको जिम्मेवारीपूर्वक काम सकेपछि, बाँकी रहेको समयलाई म मेरो रुचि — <strong>AI (कृत्रिम बुद्धिमत्ता)</strong> र आधुनिक प्रविधि सिक्नमा लगाउँछु।</p>
+            <ul>
+                <li><strong>सोच:</strong> निरन्तर सिकाइ र प्रविधिको सही सदुपयोग।</li>
+                <li><strong>लक्ष्य:</strong> AI र आधुनिक औजारहरू (Tools) को प्रयोग गरेर दैनिक काम र व्यापारलाई सहज, छिटो र प्रभावकारी बनाउनु।</li>
+                <li><strong>भविष्यको योजना:</strong> कोशर इन्डियाबाट सिकेको कडा कार्य-अनुशासन र AI को आधुनिक क्षमतालाई जोडेर आफ्नै व्यवसायलाई प्रविधिसँग अघि बढाउनु।</li>
+            </ul>
+        </div>
+
+        <div class="section-box" id="gallery">
+            <h2>ग्यालरी (Gallery)</h2>
+            <p>यहाँ मेरा कार्यक्षेत्र, यात्रा र AI सिकाइका तस्बिरहरू राखिनेछन्। <em>(छिट्टै थपिँदैछ)</em></p>
+        </div>
+
+        <div class="section-box" id="tech">
+            <h2>AI र प्रविधि सिकाइ (AI & Tech)</h2>
+            <p>मैले प्रयोग गरिरहेका विभिन्न AI औजारहरू र प्रविधिका नयाँ सिकाइहरू यहाँ सेयर गरिनेछन्।</p>
+        </div>
+
+        <div class="section-box" id="blog">
+            <h2>ब्लग / विचार (Blog)</h2>
+            <p>नयाँ लेख र अनुभवहरू यहाँ निरन्तर थपिँदै जानेछन्।</p>
+        </div>
+
+        <div class="section-box" id="contact">
+            <h2>सम्पर्क गर्नुहोस् (Contact Me)</h2>
+            <p>प्रविधिलाई व्यवहारमा उतारेर केही नयाँ गर्ने मेरो यो यात्रामा तपाईं मलाई निम्न माध्यमबाट जोडिन सक्नुहुन्छ:</p>
+            <ul class="contact-list">
+                <li>🌐 <strong>वेबसाइट:</strong> kamalgc.com.np</li>
+                <li>📧 <strong>इमेल:</strong> Support@kamalgc.com.np</li>
+                <li>💬 <strong>ह्वाट्सएप:</strong> +977 9821406500</li>
+                <li>👍 <strong>फेसबुक पेज:</strong> <a href="https://www.facebook.com/share/1cj8hZKnyW/" target="_blank">फेसबुक पेज लिङ्क</a></li>
+                <li>📍 <strong>स्थायी ठेगाना:</strong> शिवराज नगरपालिका-९, शिवगढी अञ्चलपुर, कपिलवस्तु</li>
+                <li>💼 <strong>हालको कार्यस्थल:</strong> Kosher India Pvt. Ltd., नयाँ दिल्ली, भारत</li>
+            </ul>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Kamal G.C. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('active');
+        }
+    </script>
+
+</body>
+</html>
