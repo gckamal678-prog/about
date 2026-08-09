@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>कमल जी.सी. - आधिकारिक वेबसाइट</title>
+    <!-- Google Font for Brand Logo -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    
     <style>
         :root {
             --bg-color: #f4f6f9;
@@ -57,7 +62,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 20px;
+            padding: 0 15px;
             z-index: 1000;
             transition: background-color 0.3s;
         }
@@ -65,7 +70,7 @@
         .header-left, .header-right {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
         }
 
         .menu-btn {
@@ -76,20 +81,27 @@
             color: var(--text-color);
         }
 
+        /* Stylized Brand Logo Text */
         .logo-text {
-            font-size: 18px;
-            font-weight: bold;
-            color: var(--text-color);
+            font-family: 'Poppins', 'Segoe UI', sans-serif;
+            font-size: 19px;
+            font-weight: 700;
+            color: #3498db;
+            letter-spacing: 0.5px;
+            text-decoration: none;
+            background: linear-gradient(45deg, #2980b9, #3498db);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .control-btn {
             background: none;
             border: 1px solid var(--text-color);
             color: var(--text-color);
-            padding: 5px 10px;
+            padding: 4px 8px;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: bold;
         }
 
@@ -98,20 +110,20 @@
             color: var(--bg-color);
         }
 
-        /* Live Information Bar */
+        /* Compact Live Information Bar */
         .live-status-bar {
             margin-top: 60px;
             background-color: var(--banner-bg);
             color: var(--banner-text);
-            padding: 8px 15px;
+            padding: 6px 10px;
             text-align: center;
-            font-size: 0.9em;
+            font-size: 0.85em;
             font-weight: 500;
             border-bottom: 1px solid rgba(0,0,0,0.05);
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 12px;
+            gap: 8px;
             flex-wrap: wrap;
         }
 
@@ -165,8 +177,8 @@
         .main-container {
             max-width: 1200px;
             width: 100%;
-            margin: 20px auto 40px auto;
-            padding: 0 20px;
+            margin: 15px auto 40px auto;
+            padding: 0 15px;
             flex: 1;
         }
 
@@ -183,8 +195,8 @@
             background: var(--box-bg);
             border-radius: 12px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            padding: 25px;
-            margin-bottom: 30px;
+            padding: 20px;
+            margin-bottom: 25px;
             text-align: center;
             transition: background-color 0.3s;
         }
@@ -194,7 +206,7 @@
             color: #3498db;
             font-weight: 600;
             margin-bottom: 20px;
-            font-size: 1.15em;
+            font-size: 1.1em;
         }
 
         .hero-image-container {
@@ -228,8 +240,8 @@
             background: var(--box-bg);
             border-radius: 12px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            padding: 30px;
-            margin-bottom: 30px;
+            padding: 25px;
+            margin-bottom: 25px;
             transition: background-color 0.3s;
         }
 
@@ -240,7 +252,7 @@
             text-align: center;
             padding: 20px;
             margin-top: auto;
-            font-size: 15px;
+            font-size: 14px;
             transition: background-color 0.3s;
         }
 
@@ -250,7 +262,7 @@
             justify-content: center;
             align-items: center;
             flex-wrap: wrap;
-            gap: 20px;
+            gap: 15px;
         }
 
         .footer-links a {
@@ -267,8 +279,8 @@
         }
 
         .social-icon {
-            width: 22px;
-            height: 22px;
+            width: 20px;
+            height: 20px;
             vertical-align: middle;
         }
     </style>
@@ -278,7 +290,7 @@
     <header>
         <div class="header-left">
             <button class="menu-btn" onclick="toggleSidebar()">☰</button>
-            <div class="logo-text" data-en="kamalgc.com.np" data-np="kamalgc.com.np">kamalgc.com.np</div>
+            <div class="logo-text">kamalgc.com.np</div>
         </div>
         <div class="header-right">
             <button class="control-btn" id="langBtn" onclick="toggleLanguage()">EN</button>
@@ -286,11 +298,11 @@
         </div>
     </header>
 
-    <!-- Live Date, Time & Weather Status Bar -->
+    <!-- Compact Live Status Bar without '17' emoji and shortened date -->
     <div class="live-status-bar" id="liveStatusBar">
         <span id="locationText">📍 नयाँ दिल्ली (भारत)</span> |
-        <span id="nepaliDateText">📅 २०८३ साउन २४</span> |
-        <span id="englishDateText">📅 Aug 9, 2026</span> |
+        <span id="nepaliDateText">२०८३ साउन २४</span> |
+        <span id="englishDateText">Aug 09 (Sun)</span> |
         <span id="timeText">⏰ --:--:--</span> |
         <span id="weatherText">🌤️ --°C</span>
     </div>
@@ -418,21 +430,19 @@
             }
         }
 
-        // अङ्ग्रेजीबाट नेपाली अङ्क रूपान्तरण गर्ने helper
+        // अङ्ग्रेजीबाट नेपाली अङ्क रूपान्तरण
         function toNepaliDigits(str) {
             const nepDigits = ['०', '१', '२', '३', '४', '५', '६', '७', '८', '९'];
             return str.toString().replace(/\d/g, x => nepDigits[x]);
         }
 
-        // नेपाली मिति (B.S.) गणना गर्ने सरल फसन
+        // नेपाली मिति (B.S.) गणना फसन
         function getNepaliDateStr(now) {
-            // AD 2026-08-09 -> BS 2083-04-24 (साउन २४)
             const nepMonths = ['बैशाख', 'जेठ', 'असार', 'साउन', 'भदौ', 'असोज', 'कात्तिक', 'मंसिर', 'पुस', 'माघ', 'फागुन', 'चैत'];
             const startAD = new Date(2026, 7, 9); // Aug 9, 2026
             const diffDays = Math.floor((now - startAD) / (1000 * 60 * 60 * 24));
             
-            let bsYear = 2083;
-            let bsMonth = 3; // साउन (0-indexed 3)
+            let bsMonth = 3; // साउन
             let bsDay = 24 + diffDays;
 
             if (bsDay > 31) {
@@ -443,7 +453,7 @@
             return `२०८३ ${nepMonths[bsMonth]} ${toNepaliDigits(bsDay)}`;
         }
 
-        // भाषा स्विच गर्ने प्रणाली (EN / NP)
+        // भाषा स्विच (EN / NP)
         function toggleLanguage() {
             currentLang = currentLang === 'np' ? 'en' : 'np';
             document.getElementById('langBtn').innerText = currentLang === 'np' ? 'EN' : 'NP';
@@ -460,20 +470,26 @@
             updateLiveStatus();
         }
 
-        // घडी, नेपाली र अङ्ग्रेजी मिति अपडेट
+        // घडी र छोटो मिति अपडेट
         function updateLiveStatus() {
             const now = new Date();
             let timeStr = now.toLocaleTimeString(currentLang === 'en' ? 'en-US' : 'ne-NP');
             document.getElementById('timeText').innerText = '⏰ ' + timeStr;
 
+            const daysEn = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+            const monthsEn = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            const monthNameStr = monthsEn[now.getMonth()];
+            const dayNumStr = String(now.getDate()).padStart(2, '0');
+            const dayNameStr = daysEn[now.getDay()];
+
             if (currentLang === 'en') {
                 document.getElementById('locationText').innerText = '📍 New Delhi, India';
-                document.getElementById('nepaliDateText').innerText = '📅 BS 2083 Shrawan 24';
-                document.getElementById('englishDateText').innerText = '📅 ' + now.toLocaleDateString('en-US', { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' });
+                document.getElementById('nepaliDateText').innerText = 'BS 2083 Shrawan 24';
+                document.getElementById('englishDateText').innerText = `${monthNameStr} ${dayNumStr} (${dayNameStr})`;
             } else {
                 document.getElementById('locationText').innerText = '📍 नयाँ दिल्ली (भारत)';
-                document.getElementById('nepaliDateText').innerText = '📅 ' + getNepaliDateStr(now);
-                document.getElementById('englishDateText').innerText = '📅 ' + now.toLocaleDateString('ne-NP', { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' });
+                document.getElementById('nepaliDateText').innerText = getNepaliDateStr(now);
+                document.getElementById('englishDateText').innerText = `${monthNameStr} ${dayNumStr} (${dayNameStr})`;
             }
         }
 
@@ -484,8 +500,7 @@
                 const data = await response.json();
                 const temp = Math.round(data.current_weather.temperature);
                 
-                const weatherEl = document.getElementById('weatherText');
-                weatherEl.innerText = `🌤️ ${temp}°C`;
+                document.getElementById('weatherText').innerText = `🌤️ ${temp}°C`;
             } catch (error) {
                 document.getElementById('weatherText').innerText = '🌤️ --°C';
             }
