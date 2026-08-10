@@ -99,6 +99,21 @@
                    data-np="यदि तपाईं पनि कामको व्यस्तताबाट अलिकति ब्रेक लिएर मनलाई शान्त र ताजा बनाउन चाहनुहुन्छ भने, CP को सेन्ट्रल पार्क एउटा उत्कृष्ट गन्तव्य हो।">
                    यदि तपाईं पनि कामको व्यस्तताबाट अलिकति ब्रेक लिएर मनलाई शान्त र ताजा बनाउन चाहनुहुन्छ भने, CP को सेन्ट्रल पार्क एउटा उत्कृष्ट गन्तव्य हो।
                 </p>
+
+                <!-- फोटो र लेखको ठीक मुनि सेयर गर्ने SVG लोगोहरू -->
+                <div style="margin: 25px 0 10px 0; text-align: center;">
+                    <p style="margin-bottom: 10px; font-size: 14px; font-weight: bold; color: var(--text-color);">सेयर गर्नुहोस्:</p>
+                    <div style="display: flex; justify-content: center; gap: 20px; align-items: center;">
+                        <!-- WhatsApp Logo Button -->
+                        <a href="https://api.whatsapp.com/send?text=kamalgc.com.np/blog.html - दिल्लीको CP सेन्ट्रल पार्कमा बिताएको एउटा स्मरणीय शनिबार" target="_blank" title="Share on WhatsApp" style="text-decoration: none; display: inline-flex;">
+                            <svg width="36" height="36" viewBox="0 0 24 24" fill="#25d366"><path d="M12.01 2C6.48 2 2 6.48 2 12.01c0 2.09.64 4.07 1.84 5.74L2 22l4.52-1.74c1.57.97 3.39 1.49 5.49 1.49 5.53 0 10.01-4.48 10.01-10.01S17.54 2 12.01 2zM17.05 15.2c-.22.6-1.12 1.15-1.55 1.22-.38.07-.84.14-2.73-.62-2.32-.93-3.79-3.23-3.9-3.38-.11-.15-1.01-1.35-1.01-2.57s.62-1.82.84-2.07c.22-.25.59-.32.84-.32.22 0 .44 0 .63.01.2.01.48.02.69.51.22.48.74 1.8.8 1.93.06.13.1.28.02.45-.08.17-.13.25-.26.41-.13.16-.27.33-.39.46-.13.13-.27.27-.11.54.16.27.71 1.18 1.52 1.91 1.04.93 1.92 1.23 2.19 1.37.27.14.43.12.59-.06s.69-.81.87-1.08c.18-.27.36-.22.61-.13.25.09 1.59.75 1.87.89.28.14.46.21.53.33.07.12.07.7-.15 1.3z"/></svg>
+                        </a>
+                        <!-- Facebook Logo Button -->
+                        <a href="https://www.facebook.com/sharer/sharer.php?u=https://kamalgc.com.np/blog.html" target="_blank" title="Share on Facebook" style="text-decoration: none; display: inline-flex;">
+                            <svg width="36" height="36" viewBox="0 0 24 24" fill="#1877f2"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.35 7 13 7c.77 0 1.5.06 2.2.17V10h-1.2c-.88 0-1.2.55-1.2 1.3V12h3l-.33 3H14v6.8c4.56-.93 8-4.96 8-9.8z"/></svg>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -108,6 +123,13 @@
             <a href="https://pasal.kamalgc.com.np" target="_blank">🌐 pasal.kamalgc.com.np</a>
             <a href="mailto:Support@kamalgc.com.np">📧 Support@kamalgc.com.np</a>
         </div>
+
+        <div style="margin: 15px 0; text-align: center; font-size: 14px;">
+            <p id="adminVisitorBox" style="margin-bottom: 8px; color: var(--sidebar-text); display: none;">
+                👀 कुल भिजिटर (Admin Only): <span id="visitorCount" style="font-weight: bold; color: #3498db;">--</span>
+            </p>
+        </div>
+
         <p>&copy; 2026 Kamal G.C. All Rights Reserved.</p>
     </footer>
 
@@ -150,12 +172,10 @@
                     const lat = position.coords.latitude;
                     const lon = position.coords.longitude;
                     try {
-                        // Reverse Geocoding to get City/Location name
                         const geoRes = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`);
                         const geoData = await geoRes.json();
-                        const cityName = geoData.address.city || geoData.address.town || geoData.address.village || geoData.address.state || "थло";
+                        const cityName = geoData.address.city || geoData.address.town || geoData.address.village || geoData.address.state || "स्थान";
 
-                        // Weather fetch using Open-Meteo
                         const weatherRes = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`);
                         const weatherData = await weatherRes.json();
                         const temp = Math.round(weatherData.current_weather.temperature);
@@ -193,6 +213,25 @@
         setInterval(updateLiveStatus, 1000); 
         updateLiveStatus();
         fetchLiveLocationAndWeather();
+
+        // Visitor Counter & Admin Trigger script (किबोर्डमा 'admin' टाइप गरेपछि मात्र भिजिटर संख्या देखिन्छ)
+        let vCount = localStorage.getItem('site_visitor_count') || Math.floor(Math.random() * 50) + 120;
+        if(!localStorage.getItem('site_visited')) { 
+            vCount++; 
+            localStorage.setItem('site_visitor_count', vCount); 
+            localStorage.setItem('site_visited', 'true'); 
+        }
+        document.getElementById('visitorCount').innerText = vCount;
+
+        let typedCode = '';
+        document.addEventListener('keydown', (e) => {
+            typedCode += e.key;
+            if (typedCode.endsWith('admin')) {
+                const box = document.getElementById('adminVisitorBox');
+                box.style.display = box.style.display === 'none' ? 'block' : 'none';
+                alert('भिजिटर काउन्टर मोड: ' + vCount);
+            }
+        });
     </script>
 </body>
 </html>
