@@ -29,6 +29,8 @@
         .main-container { max-width: 1200px; width: 100%; margin: 15px auto 40px auto; padding: 0 15px; flex: 1; }
         .section-box { background: var(--box-bg); border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); padding: 25px; margin-bottom: 25px; }
         h2 { color: var(--text-color); border-bottom: 2px solid var(--border-color); padding-bottom: 5px; margin-top: 20px; }
+        .hero-image-container { width: 100%; max-width: 500px; margin: 0 auto; aspect-ratio: 16 / 9; background-color: #e2e8f0; display: flex; align-items: center; justify-content: center; overflow: hidden; border-radius: 8px; }
+        .hero-image-container img { width: 100%; height: 100%; object-fit: cover; }
         footer { background-color: var(--sidebar-bg); color: var(--sidebar-text); text-align: center; padding: 20px; margin-top: auto; font-size: 14px; }
         .footer-links { margin-bottom: 12px; display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 15px; }
         .footer-links a { color: #3498db; text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; }
@@ -68,7 +70,20 @@
     <div class="main-container">
         <div class="section-box">
             <h2 data-en="AI & Tech Learning" data-np="AI र प्रविधि सिकाइ (AI & Tech)">AI र प्रविधि सिकाइ (AI & Tech)</h2>
-            <p data-en="Various AI tools I am using and new learning in technology will be shared here." data-np="मैले प्रयोग गरिरहेका विभिन्न AI औजारहरू र प्रविधिका नयाँ सिकाइहरू यहाँ सेयर गरिनेछन्।">मैले प्रयोग गरिरहेका विभिन्न AI औजारहरू र प्रविधिका नयाँ सिकाइहरू यहाँ सेयर गरिनेछन्।</p>
+        </div>
+
+        <div class="section-box" style="text-align: center;">
+            <h2 data-en="My New AI Project: WPA" data-np="मेरो नयाँ AI प्रोजेक्ट: WPA">मेरो नयाँ AI प्रोजेक्ट: WPA</h2>
+
+            <div class="hero-image-container" style="margin: 15px auto; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+                <img src="mychat.jpg" alt="WPA Login Screen - Kamal G.C." style="width: 100%; height: auto; border-radius: 8px;">
+            </div>
+            
+            <p style="font-size: 1.05em; line-height: 1.7; margin-top: 20px; color: var(--text-color);"
+               data-en="This is a glimpse of my upcoming AI project, WPA. I am just starting out, and honestly, I don't know exactly how it will turn out or when it will be fully successful. But the journey of learning and building is what matters. I'm sharing this here as the first step of my new venture in technology."
+               data-np="यो मेरो आगामी AI प्रोजेक्ट, WPA को एउटा झलक हो। म यसको भर्खर सुरुवात गर्दैछु। इमानदारीपूर्वक भन्नुपर्दा, यो कस्तो बन्छ वा कहिलेसम्म सफल हुन्छ मलाई थाहा छैन। तर सिक्ने र बनाउने यात्रा नै मुख्य कुरा हो। प्रविधिको क्षेत्रमा मेरो यो नयाँ प्रयासको पहिलो पाइलाको रूपमा म यसलाई यहाँ सेयर गर्दैछु।">
+               यो मेरो आगामी AI प्रोजेक्ट, WPA को एउटा झलक हो। म यसको भर्खर सुरुवात गर्दैछु। इमानदारीपूर्वक भन्नुपर्दा, यो कस्तो बन्छ वा कहिलेसम्म सफल हुन्छ मलाई थाहा छैन। तर सिक्ने र बनाउने यात्रा नै मुख्य कुरा हो। प्रविधिको क्षेत्रमा मेरो यो नयाँ प्रयासको पहिलो पाइलाको रूपमा म यसलाई यहाँ सेयर गर्दैछु।
+            </p>
         </div>
     </div>
 
@@ -76,7 +91,20 @@
         <div class="footer-links">
             <a href="https://pasal.kamalgc.com.np" target="_blank">🌐 pasal.kamalgc.com.np</a>
             <a href="mailto:Support@kamalgc.com.np">📧 Support@kamalgc.com.np</a>
+            <a href="https://wa.me/9779821406500" target="_blank">WhatsApp</a>
+            <a href="https://www.facebook.com/share/1cj8hZKnyW/" target="_blank">Facebook</a>
         </div>
+
+        <div style="margin: 15px 0; text-align: center; font-size: 14px;">
+            <p id="adminVisitorBox" style="margin-bottom: 8px; color: var(--sidebar-text); display: none;">
+                👀 कुल भिजिटर (Admin Only): <span id="visitorCount" style="font-weight: bold; color: #3498db;">--</span>
+            </p>
+            <div style="display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;">
+                <a href="https://api.whatsapp.com/send?text=kamalgc.com.np/tech.html - AI प्रोजेक्ट WPA हेर्नुहोस्!" target="_blank" style="background: #25d366; color: white; padding: 6px 12px; border-radius: 5px; text-decoration: none; font-weight: 600; font-size: 13px;">WhatsApp मा सेयर</a>
+                <a href="https://www.facebook.com/sharer/sharer.php?u=https://kamalgc.com.np/tech.html" target="_blank" style="background: #1877f2; color: white; padding: 6px 12px; border-radius: 5px; text-decoration: none; font-weight: 600; font-size: 13px;">Facebook मा सेयर</a>
+            </div>
+        </div>
+
         <p>&copy; 2026 Kamal G.C. All Rights Reserved.</p>
     </footer>
 
@@ -160,6 +188,25 @@
         setInterval(updateLiveStatus, 1000); 
         updateLiveStatus();
         fetchLiveLocationAndWeather();
+
+        // Visitor Counter & Admin Trigger script
+        let vCount = localStorage.getItem('site_visitor_count') || Math.floor(Math.random() * 50) + 120;
+        if(!localStorage.getItem('site_visited')) { 
+            vCount++; 
+            localStorage.setItem('site_visitor_count', vCount); 
+            localStorage.setItem('site_visited', 'true'); 
+        }
+        document.getElementById('visitorCount').innerText = vCount;
+
+        let typedCode = '';
+        document.addEventListener('keydown', (e) => {
+            typedCode += e.key;
+            if (typedCode.endsWith('admin')) {
+                const box = document.getElementById('adminVisitorBox');
+                box.style.display = box.style.display === 'none' ? 'block' : 'none';
+                alert('भिजिटर काउन्टर मोड: ' + vCount);
+            }
+        });
     </script>
 </body>
 </html>
