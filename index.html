@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>कमल जी.सी. - आधिकारिक वेबसाइट</title>
+    <title>कमल जी.सी. - गृहपृष्ठ</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" rel="stylesheet">
@@ -17,15 +17,17 @@
         .menu-btn { background: none; border: none; font-size: 24px; cursor: pointer; color: var(--text-color); }
         .logo-text { font-family: 'Poppins', sans-serif; font-size: 19px; font-weight: 700; background: linear-gradient(45deg, #2980b9, #3498db); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-decoration: none; }
         .control-btn { background: none; border: 1px solid var(--text-color); color: var(--text-color); padding: 4px 8px; border-radius: 5px; cursor: pointer; font-size: 13px; font-weight: bold; }
+        .control-btn:hover { background-color: var(--text-color); color: var(--bg-color); }
         .live-status-bar { margin-top: 60px; background-color: var(--banner-bg); color: var(--banner-text); padding: 6px 10px; text-align: center; font-size: 0.78em; font-weight: 500; border-bottom: 1px solid rgba(0,0,0,0.05); display: flex; justify-content: center; align-items: center; gap: 6px; white-space: nowrap; overflow-x: auto; }
         .sidebar { position: fixed; top: 0; left: -280px; width: 280px; height: 100%; background-color: var(--sidebar-bg); color: var(--sidebar-text); transition: left 0.3s ease; z-index: 1100; padding-top: 80px; box-shadow: 2px 0 5px rgba(0,0,0,0.2); }
         .sidebar.active { left: 0; }
         .sidebar-close { position: absolute; top: 20px; right: 20px; background: none; border: none; color: var(--sidebar-text); font-size: 24px; cursor: pointer; }
         .sidebar ul { list-style: none; padding: 0; margin: 0; }
-        .sidebar ul li { padding: 15px 25px; border-bottom: 1px solid #34495e; cursor: pointer; }
+        .sidebar ul li { border-bottom: 1px solid #34495e; }
+        .sidebar ul li a { display: block; padding: 15px 25px; color: var(--sidebar-text); text-decoration: none; }
         .sidebar ul li:hover { background-color: #34495e; }
         .main-container { max-width: 1200px; width: 100%; margin: 15px auto 40px auto; padding: 0 15px; flex: 1; }
-        .hero-section { background: var(--box-bg); border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); padding: 20px; text-align: center; }
+        .hero-section { background: var(--box-bg); border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); padding: 20px; margin-bottom: 25px; text-align: center; }
         .tagline { font-style: italic; color: #3498db; font-weight: 600; margin-bottom: 20px; font-size: 1.1em; }
         .hero-image-container { width: 100%; max-width: 900px; margin: 0 auto; aspect-ratio: 16 / 9; background-color: #e2e8f0; display: flex; align-items: center; justify-content: center; overflow: hidden; border-radius: 8px; }
         .hero-image-container img { width: 100%; height: 100%; object-fit: cover; }
@@ -58,17 +60,17 @@
     <nav class="sidebar" id="sidebar">
         <button class="sidebar-close" onclick="toggleSidebar()">&times;</button>
         <ul>
-            <li onclick="location.href='index.html'">गृहपृष्ठ (Home)</li>
-            <li onclick="location.href='about.html'">मेरो बारेमा (About Me)</li>
-            <li onclick="location.href='gallery.html'">ग्यालरी (Gallery)</li>
-            <li onclick="location.href='tech.html'">AI र प्रविधि (AI & Tech)</li>
-            <li onclick="location.href='blog.html'">ब्लग / अपडेट्स (Blog)</li>
+            <li><a href="index.html" data-en="Home" data-np="गृहपृष्ठ (Home)">गृहपृष्ठ (Home)</a></li>
+            <li><a href="about.html" data-en="About Me" data-np="मेरो बारेमा (About Me)">मेरो बारेमा (About Me)</a></li>
+            <li><a href="gallery.html" data-en="Gallery" data-np="ग्यालरी (Gallery)">ग्यालरी (Gallery)</a></li>
+            <li><a href="tech.html" data-en="AI & Tech" data-np="AI र प्रविधि (AI & Tech)">AI र प्रविधि (AI & Tech)</a></li>
+            <li><a href="blog.html" data-en="Blog / Updates" data-np="ब्लग / अपडेट्स (Blog)">ब्लग / अपडेट्स (Blog)</a></li>
         </ul>
     </nav>
 
     <div class="main-container">
         <div class="hero-section">
-            <div class="tagline">"नियमित कार्यक्षेत्रको अनुभव र आधुनिक AI प्रविधिको संगम — एउटा नयाँ सम्भावनाको खोजी।"</div>
+            <div class="tagline" data-en="&quot;The combination of regular work experience and modern AI technology — a search for new possibilities.&quot;" data-np="&quot;नियमित कार्यक्षेत्रको अनुभव र आधुनिक AI प्रविधिको संगम — एउटा नयाँ सम्भावनाको खोजी।&quot;">"नियमित कार्यक्षेत्रको अनुभव र आधुनिक AI प्रविधिको संगम — एउटा नयाँ सम्भावनाको खोजी।"</div>
             <div class="hero-image-container">
                 <img src="kamal.png" alt="Kamal G.C.">
             </div>
@@ -79,6 +81,8 @@
         <div class="footer-links">
             <a href="https://pasal.kamalgc.com.np" target="_blank">🌐 pasal.kamalgc.com.np</a>
             <a href="mailto:Support@kamalgc.com.np">📧 Support@kamalgc.com.np</a>
+            <a href="https://wa.me/9779821406500" target="_blank">WhatsApp</a>
+            <a href="https://www.facebook.com/share/1cj8hZKnyW/" target="_blank">Facebook</a>
         </div>
         <p>&copy; 2026 Kamal G.C. All Rights Reserved.</p>
     </footer>
@@ -89,66 +93,80 @@
         function toggleTheme() {
             const body = document.body;
             const themeBtn = document.getElementById('themeBtn');
-            if (body.getAttribute('data-theme') === 'dark') { body.setAttribute('data-theme', 'light'); themeBtn.innerHTML = '🌙 Dark'; }
-            else { body.setAttribute('data-theme', 'dark'); themeBtn.innerHTML = '☀️ Light'; }
+            if (body.getAttribute('data-theme') === 'dark') {
+                body.setAttribute('data-theme', 'light');
+                themeBtn.innerHTML = '🌙 Dark';
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                themeBtn.innerHTML = '☀️ Light';
+            }
         }
-        function toNepaliDigits(str) { const d = ['०', '१', '२', '३', '४', '५', '६', '७', '८', '९']; return str.toString().replace(/\d/g, x => d[x]); }
+        function toNepaliDigits(str) { const nepDigits = ['०', '१', '२', '३', '४', '५', '६', '७', '८', '९']; return str.toString().replace(/\d/g, x => nepDigits[x]); }
         function getNepaliDateStr(now) {
-            const m = ['बैशाख', 'जेठ', 'असार', 'साउन', 'भदौ', 'असोज', 'कात्तिक', 'मंसिर', 'पुस', 'माघ', 'फागुन', 'चैत'];
-            const diff = Math.floor((now - new Date(2026, 7, 9)) / (1000 * 60 * 60 * 24));
-            let bm = 3, bd = 24 + diff;
-            if(bd > 31) { bd -= 31; bm++; }
-            return `२०८३ ${m[bm]} ${toNepaliDigits(bd)}`;
+            const nepMonths = ['बैशाख', 'जेठ', 'असार', 'साउन', 'भदौ', 'असोज', 'कात्तिक', 'मंसिर', 'पुस', 'माघ', 'फागुन', 'चैत'];
+            const startAD = new Date(2026, 7, 9);
+            const diffDays = Math.floor((now - startAD) / (1000 * 60 * 60 * 24));
+            let bsMonth = 3, bsDay = 24 + diffDays;
+            if (bsDay > 31) { bsDay -= 31; bsMonth++; }
+            return `२०८३ ${nepMonths[bsMonth]} ${toNepaliDigits(bsDay)}`;
         }
         function toggleLanguage() {
             currentLang = currentLang === 'np' ? 'en' : 'np';
             document.getElementById('langBtn').innerText = currentLang === 'np' ? 'EN' : 'NP';
-            fetchLiveLocationAndWeather();
+            document.querySelectorAll('[data-np]').forEach(el => {
+                el.innerText = el.getAttribute(currentLang === 'en' ? 'data-en' : 'data-np');
+            });
+            updateLiveStatus();
         }
-        async function fetchLiveLocationAndWeather() {
-            try {
-                const posRes = await fetch('https://ipapi.co/json/');
-                const posData = await posRes.json();
-                const lat = posData.latitude;
-                const lon = posData.longitude;
-                const city = posData.city || 'Unknown';
-                
-                document.getElementById('locationText').innerText = city;
 
-                const weatherRes = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`);
-                const weatherData = await weatherRes.json();
-                const temp = Math.round(weatherData.current_weather.temperature);
-                document.getElementById('weatherText').innerText = `${temp}°C`;
-            } catch(e) {
-                document.getElementById('locationText').innerText = 'Location Unavailable';
-                document.getElementById('weatherText').innerText = '--°C';
+        // Live Geolocation and Weather Fetcher
+        function fetchLiveLocationAndWeather() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(async (position) => {
+                    const lat = position.coords.latitude;
+                    const lon = position.coords.longitude;
+                    try {
+                        const geoRes = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`);
+                        const geoData = await geoRes.json();
+                        const cityName = geoData.address.city || geoData.address.town || geoData.address.village || geoData.address.state || "स्थान";
+
+                        const weatherRes = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`);
+                        const weatherData = await weatherRes.json();
+                        const temp = Math.round(weatherData.current_weather.temperature);
+
+                        document.getElementById('locationText').innerText = cityName;
+                        document.getElementById('weatherText').innerText = `${temp}°C`;
+                    } catch (err) {
+                        document.getElementById('locationText').innerText = "लोकेसन प्राप्त भएन";
+                        document.getElementById('weatherText').innerText = "--°C";
+                    }
+                }, () => {
+                    document.getElementById('locationText').innerText = "अनुमति अस्वीकृत";
+                    document.getElementById('weatherText').innerText = "--°C";
+                });
+            } else {
+                document.getElementById('locationText').innerText = "समर्थन छैन";
             }
         }
-        function updateClock() {
+
+        function updateLiveStatus() {
             const now = new Date();
             document.getElementById('timeText').innerText = now.toLocaleTimeString(currentLang === 'en' ? 'en-US' : 'ne-NP');
-            const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-            document.getElementById('englishDateText').innerText = `${months[now.getMonth()]} ${String(now.getDate()).padStart(2, '0')} (${days[now.getDay()]})`;
-            document.getElementById('nepaliDateText').innerText = currentLang === 'en' ? 'BS 2083 Shrawan 24' : getNepaliDateStr(now);
+            const daysEn = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+            const monthsEn = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            const monthNameStr = monthsEn[now.getMonth()], dayNumStr = String(now.getDate()).padStart(2, '0'), dayNameStr = daysEn[now.getDay()];
+            
+            if (currentLang === 'en') {
+                document.getElementById('nepaliDateText').innerText = 'BS 2083 Shrawan 24';
+            } else {
+                document.getElementById('nepaliDateText').innerText = getNepaliDateStr(now);
+            }
+            document.getElementById('englishDateText').innerText = `${monthNameStr} ${dayNumStr} (${dayNameStr})`;
         }
-        setInterval(updateClock, 1000);
-        updateClock();
+
+        setInterval(updateLiveStatus, 1000); 
+        updateLiveStatus();
         fetchLiveLocationAndWeather();
-    </script>
-</body>
-</html>
-            } catch (e) { document.getElementById('weatherText').innerText = '🌤️ --°C'; }
-        }
-        setInterval(updateLiveStatus, 1000); updateLiveStatus();
-        fetchLiveWeather(); setInterval(fetchLiveWeather, 600000);
-    </script>
-</body>
-</html>
-            } catch (e) { document.getElementById('weatherText').innerText = '🌤️ --°C'; }
-        }
-        setInterval(updateLiveStatus, 1000); updateLiveStatus();
-        fetchLiveWeather(); setInterval(fetchLiveWeather, 600000);
     </script>
 </body>
 </html>
