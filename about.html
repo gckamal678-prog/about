@@ -91,3 +91,124 @@
 
     <footer>
         <div class="footer-links">
+            <a href="https://pasal.kamalgc.com.np" target="_blank">🌐 pasal.kamalgc.com.np</a>
+            <a href="mailto:Support@kamalgc.com.np">📧 Support@kamalgc.com.np</a>
+            <a href="https://wa.me/9779821406500" target="_blank">WhatsApp</a>
+            <a href="https://www.facebook.com/share/1cj8hZKnyW/" target="_blank">Facebook</a>
+        </div>
+
+        <div style="margin: 15px 0; text-align: center; font-size: 14px;">
+            <p id="adminVisitorBox" style="margin-bottom: 8px; color: var(--sidebar-text); display: none;">
+                👀 कुल भिजिटर (Admin Only): <span id="visitorCount" style="font-weight: bold; color: #3498db;">--</span>
+            </p>
+            <div style="display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;">
+                <a href="https://api.whatsapp.com/send?text=kamalgc.com.np/about.html - मेरो बारेमा पढ्नुहोस्!" target="_blank" style="background: #25d366; color: white; padding: 6px 12px; border-radius: 5px; text-decoration: none; font-weight: 600; font-size: 13px;">WhatsApp मा सेयर</a>
+                <a href="https://www.facebook.com/sharer/sharer.php?u=https://kamalgc.com.np/about.html" target="_blank" style="background: #1877f2; color: white; padding: 6px 12px; border-radius: 5px; text-decoration: none; font-weight: 600; font-size: 13px;">Facebook मा सेयर</a>
+            </div>
+        </div>
+
+        <p>&copy; 2026 Kamal G.C. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        let currentLang = 'np';
+        function toggleSidebar() { document.getElementById('sidebar').classList.toggle('active'); }
+        function toggleTheme() {
+            const body = document.body;
+            const themeBtn = document.getElementById('themeBtn');
+            if (body.getAttribute('data-theme') === 'dark') {
+                body.setAttribute('data-theme', 'light');
+                themeBtn.innerHTML = '🌙 Dark';
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                themeBtn.innerHTML = '☀️ Light';
+            }
+        }
+        function toNepaliDigits(str) { const nepDigits = ['०', '१', '२', '३', '४', '५', '६', '७', '८', '९']; return str.toString().replace(/\d/g, x => nepDigits[x]); }
+        function getNepaliDateStr(now) {
+            const nepMonths = ['बैशाख', 'जेठ', 'असार', 'साउन', 'भदौ', 'असोज', 'कात्तिक', 'मंसिर', 'पुस', 'माघ', 'फागुन', 'चैत'];
+            const startAD = new Date(2026, 7, 9);
+            const diffDays = Math.floor((now - startAD) / (1000 * 60 * 60 * 24));
+            let bsMonth = 3, bsDay = 24 + diffDays;
+            if (bsDay > 31) { bsDay -= 31; bsMonth++; }
+            return `२०८३ ${nepMonths[bsMonth]} ${toNepaliDigits(bsDay)}`;
+        }
+        function toggleLanguage() {
+            currentLang = currentLang === 'np' ? 'en' : 'np';
+            document.getElementById('langBtn').innerText = currentLang === 'np' ? 'EN' : 'NP';
+            document.querySelectorAll('[data-np]').forEach(el => {
+                el.innerText = el.getAttribute(currentLang === 'en' ? 'data-en' : 'data-np');
+            });
+            updateLiveStatus();
+        }
+
+        // Live Geolocation and Weather Fetcher
+        function fetchLiveLocationAndWeather() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(async (position) => {
+                    const lat = position.coords.latitude;
+                    const lon = position.coords.longitude;
+                    try {
+                        const geoRes = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`);
+                        const geoData = await geoRes.json();
+                        const cityName = geoData.address.city || geoData.address.town || geoData.address.village || geoData.address.state || "स्थान";
+
+                        const weatherRes = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`);
+                        const weatherData = await weatherRes.json();
+                        const temp = Math.round(weatherData.current_weather.temperature);
+
+                        document.getElementById('locationText').innerText = cityName;
+                        document.getElementById('weatherText').innerText = `${temp}°C`;
+                    } catch (err) {
+                        document.getElementById('locationText').innerText = "लोकेसन प्राप्त भएन";
+                        document.getElementById('weatherText').innerText = "--°C";
+                    }
+                }, () => {
+                    document.getElementById('locationText').innerText = "अनुमति अस्वीकृत";
+                    document.getElementById('weatherText').innerText = "--°C";
+                });
+            } else {
+                document.getElementById('locationText').innerText = "समर्थन छैन";
+            }
+        }
+
+        function updateLiveStatus() {
+            const now = new Date();
+            document.getElementById('timeText').innerText = now.toLocaleTimeString(currentLang === 'en' ? 'en-US' : 'ne-NP');
+            const daysEn = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+            const monthsEn = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            const monthNameStr = monthsEn[now.getMonth()], dayNumStr = String(now.getDate()).padStart(2, '0'), dayNameStr = daysEn[now.getDay()];
+            
+            if (currentLang === 'en') {
+                document.getElementById('nepaliDateText').innerText = 'BS 2083 Shrawan 24';
+            } else {
+                document.getElementById('nepaliDateText').innerText = getNepaliDateStr(now);
+            }
+            document.getElementById('englishDateText').innerText = `${monthNameStr} ${dayNumStr} (${dayNameStr})`;
+        }
+
+        setInterval(updateLiveStatus, 1000); 
+        updateLiveStatus();
+        fetchLiveLocationAndWeather();
+
+        // Visitor Counter & Admin Trigger script
+        let vCount = localStorage.getItem('site_visitor_count') || Math.floor(Math.random() * 50) + 120;
+        if(!localStorage.getItem('site_visited')) { 
+            vCount++; 
+            localStorage.setItem('site_visitor_count', vCount); 
+            localStorage.setItem('site_visited', 'true'); 
+        }
+        document.getElementById('visitorCount').innerText = vCount;
+
+        let typedCode = '';
+        document.addEventListener('keydown', (e) => {
+            typedCode += e.key;
+            if (typedCode.endsWith('admin')) {
+                const box = document.getElementById('adminVisitorBox');
+                box.style.display = box.style.display === 'none' ? 'block' : 'none';
+                alert('भिजिटर काउन्टर मोड: ' + vCount);
+            }
+        });
+    </script>
+</body>
+</html>
