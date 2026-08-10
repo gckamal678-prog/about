@@ -1,13 +1,140 @@
-<div id="gallery" class="content-section">
-            <div class="section-box">
-                <h2 data-en="Gallery" data-np="ग्यालरी (Gallery)">ग्यालरी (Gallery)</h2>
-                <p data-en="Photos of my work area, travels, and AI learning will be kept here. (Coming soon)" data-np="यहाँ मेरा कार्यक्षेत्र, यात्रा र AI सिकाइका तस्बिरहरू राखिनेछन्। (छिट्टै थपिँदैछ)">यहाँ मेरा कार्यक्षेत्र, यात्रा र AI सिकाइका तस्बिरहरू राखिनेछन्। <em>(छिट्टै थपिँदैछ)</em></p>
-            </div>
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ग्यालरी - कमल जी.सी.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --bg-color: #f4f6f9; --text-color: #333; --header-bg: #ffffff; --box-bg: #ffffff; --border-color: #3498db; --sidebar-bg: #2c3e50; --sidebar-text: #ffffff; --banner-bg: #eaf2f8; --banner-text: #1b4f72; }
+        [data-theme="dark"] { --bg-color: #121212; --text-color: #e0e0e0; --header-bg: #1e1e1e; --box-bg: #1e1e1e; --border-color: #3498db; --sidebar-bg: #1a1a1a; --sidebar-text: #ffffff; --banner-bg: #2a2a2a; --banner-text: #85c1e9; }
+        *, *::before, *::after { box-sizing: border-box; }
+        body { margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--bg-color); color: var(--text-color); line-height: 1.6; display: flex; flex-direction: column; min-height: 100vh; transition: background-color 0.3s, color 0.3s; }
+        header { position: fixed; top: 0; left: 0; width: 100%; height: 60px; background-color: var(--header-bg); box-shadow: 0 2px 5px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: space-between; padding: 0 15px; z-index: 1000; }
+        .header-left, .header-right { display: flex; align-items: center; gap: 12px; }
+        .menu-btn { background: none; border: none; font-size: 24px; cursor: pointer; color: var(--text-color); }
+        .logo-text { font-family: 'Poppins', sans-serif; font-size: 19px; font-weight: 700; background: linear-gradient(45deg, #2980b9, #3498db); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-decoration: none; }
+        .control-btn { background: none; border: 1px solid var(--text-color); color: var(--text-color); padding: 4px 8px; border-radius: 5px; cursor: pointer; font-size: 13px; font-weight: bold; }
+        .control-btn:hover { background-color: var(--text-color); color: var(--bg-color); }
+        .live-status-bar { margin-top: 60px; background-color: var(--banner-bg); color: var(--banner-text); padding: 6px 10px; text-align: center; font-size: 0.85em; font-weight: 500; border-bottom: 1px solid rgba(0,0,0,0.05); display: flex; justify-content: center; align-items: center; gap: 8px; flex-wrap: wrap; }
+        .sidebar { position: fixed; top: 0; left: -280px; width: 280px; height: 100%; background-color: var(--sidebar-bg); color: var(--sidebar-text); transition: left 0.3s ease; z-index: 1100; padding-top: 80px; box-shadow: 2px 0 5px rgba(0,0,0,0.2); }
+        .sidebar.active { left: 0; }
+        .sidebar-close { position: absolute; top: 20px; right: 20px; background: none; border: none; color: var(--sidebar-text); font-size: 24px; cursor: pointer; }
+        .sidebar ul { list-style: none; padding: 0; margin: 0; }
+        .sidebar ul li { border-bottom: 1px solid #34495e; }
+        .sidebar ul li a { display: block; padding: 15px 25px; color: var(--sidebar-text); text-decoration: none; }
+        .sidebar ul li:hover { background-color: #34495e; }
+        .main-container { max-width: 1200px; width: 100%; margin: 15px auto 40px auto; padding: 0 15px; flex: 1; }
+        .section-box { background: var(--box-bg); border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); padding: 25px; margin-bottom: 25px; }
+        h2 { color: var(--text-color); border-bottom: 2px solid var(--border-color); padding-bottom: 5px; margin-top: 20px; }
+        footer { background-color: var(--sidebar-bg); color: var(--sidebar-text); text-align: center; padding: 20px; margin-top: auto; font-size: 14px; }
+        .footer-links { margin-bottom: 12px; display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 15px; }
+        .footer-links a { color: #3498db; text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; }
+    </style>
+</head>
+<body data-theme="light">
+    <header>
+        <div class="header-left">
+            <button class="menu-btn" onclick="toggleSidebar()">☰</button>
+            <a href="index.html" class="logo-text">kamalgc.com.np</a>
         </div>
+        <div class="header-right">
+            <button class="control-btn" id="langBtn" onclick="toggleLanguage()">EN</button>
+            <button class="control-btn" id="themeBtn" onclick="toggleTheme()">🌙 Dark</button>
+        </div>
+    </header>
 
-        <div id="tech" class="content-section">
-            <div class="section-box">
-                <h2 data-en="AI & Tech Learning" data-np="AI र प्रविधि सिकाइ (AI & Tech)">AI र प्रविधि सिकाइ (AI & Tech)</h2>
-                <p data-en="Various AI tools I am using and new learning in technology will be shared here." data-np="मैले प्रयोग गरिरहेका विभिन्न AI औजारहरू र प्रविधिका नयाँ सिकाइहरू यहाँ सेयर गरिनेछन्।">मैले प्रयोग गरिरहेका विभिन्न AI औजारहरू र प्रविधिका नयाँ सिकाइहरू यहाँ सेयर गरिनेछन्।</p>
-            </div>
+    <div class="live-status-bar" id="liveStatusBar">
+        <span id="locationText">📍 नयाँ दिल्ली (भारत)</span> |
+        <span id="nepaliDateText">२०८३ साउन २४</span> |
+        <span id="englishDateText">Aug 09 (Sun)</span> |
+        <span id="timeText">⏰ --:--:--</span> |
+        <span id="weatherText">🌤️ --°C</span>
+    </div>
+
+    <nav class="sidebar" id="sidebar">
+        <button class="sidebar-close" onclick="toggleSidebar()">&times;</button>
+        <ul>
+            <li><a href="index.html" data-en="Home" data-np="गृहपृष्ठ (Home)">गृहपृष्ठ (Home)</a></li>
+            <li><a href="about.html" data-en="About Me" data-np="मेरो बारेमा (About Me)">मेरो बारेमा (About Me)</a></li>
+            <li><a href="gallery.html" data-en="Gallery" data-np="ग्यालरी (Gallery)">ग्यालरी (Gallery)</a></li>
+            <li><a href="tech.html" data-en="AI & Tech" data-np="AI र प्रविधि (AI & Tech)">AI र प्रविधि (AI & Tech)</a></li>
+            <li><a href="blog.html" data-en="Blog / Updates" data-np="ब्लग / अपडेट्स (Blog)">ब्लग / अपडेट्स (Blog)</a></li>
+        </ul>
+    </nav>
+
+    <div class="main-container">
+        <div class="section-box">
+            <h2 data-en="Gallery" data-np="ग्यालरी (Gallery)">ग्यालरी (Gallery)</h2>
+            <p data-en="Photos of my work area, travels, and AI learning will be kept here. (Coming soon)" data-np="यहाँ मेरा कार्यक्षेत्र, यात्रा र AI सिकाइका तस्बिरहरू राखिनेछन्। (छिट्टै थपिँदैछ)">यहाँ मेरा कार्यक्षेत्र, यात्रा र AI सिकाइका तस्बिरहरू राखिनेछन्। <em>(छिट्टै थपिँदैछ)</em></p>
         </div>
+    </div>
+
+    <footer>
+        <div class="footer-links">
+            <a href="https://pasal.kamalgc.com.np" target="_blank">🌐 pasal.kamalgc.com.np</a>
+            <a href="mailto:Support@kamalgc.com.np">📧 Support@kamalgc.com.np</a>
+        </div>
+        <p>&copy; 2026 Kamal G.C. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        let currentLang = 'np';
+        function toggleSidebar() { document.getElementById('sidebar').classList.toggle('active'); }
+        function toggleTheme() {
+            const body = document.body;
+            const themeBtn = document.getElementById('themeBtn');
+            if (body.getAttribute('data-theme') === 'dark') {
+                body.setAttribute('data-theme', 'light');
+                themeBtn.innerHTML = '🌙 Dark';
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                themeBtn.innerHTML = '☀️ Light';
+            }
+        }
+        function toNepaliDigits(str) { const nepDigits = ['०', '१', '२', '३', '४', '५', '६', '७', '८', '९']; return str.toString().replace(/\d/g, x => nepDigits[x]); }
+        function getNepaliDateStr(now) {
+            const nepMonths = ['बैशाख', 'जेठ', 'असार', 'साउन', 'भदौ', 'असोज', 'कात्तिक', 'मंसिर', 'पुस', 'माघ', 'फागुन', 'चैत'];
+            const startAD = new Date(2026, 7, 9);
+            const diffDays = Math.floor((now - startAD) / (1000 * 60 * 60 * 24));
+            let bsMonth = 3, bsDay = 24 + diffDays;
+            if (bsDay > 31) { bsDay -= 31; bsMonth++; }
+            return `२०८३ ${nepMonths[bsMonth]} ${toNepaliDigits(bsDay)}`;
+        }
+        function toggleLanguage() {
+            currentLang = currentLang === 'np' ? 'en' : 'np';
+            document.getElementById('langBtn').innerText = currentLang === 'np' ? 'EN' : 'NP';
+            document.querySelectorAll('[data-np]').forEach(el => {
+                el.innerText = el.getAttribute(currentLang === 'en' ? 'data-en' : 'data-np');
+            });
+            updateLiveStatus();
+        }
+        function updateLiveStatus() {
+            const now = new Date();
+            document.getElementById('timeText').innerText = '⏰ ' + now.toLocaleTimeString(currentLang === 'en' ? 'en-US' : 'ne-NP');
+            const daysEn = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+            const monthsEn = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            const monthNameStr = monthsEn[now.getMonth()], dayNumStr = String(now.getDate()).padStart(2, '0'), dayNameStr = daysEn[now.getDay()];
+            if (currentLang === 'en') {
+                document.getElementById('locationText').innerText = '📍 New Delhi, India';
+                document.getElementById('nepaliDateText').innerText = 'BS 2083 Shrawan 24';
+            } else {
+                document.getElementById('locationText').innerText = '📍 नयाँ दिल्ली (भारत)';
+                document.getElementById('nepaliDateText').innerText = getNepaliDateStr(now);
+            }
+            document.getElementById('englishDateText').innerText = `${monthNameStr} ${dayNumStr} (${dayNameStr})`;
+        }
+        async function fetchLiveWeather() {
+            try {
+                const res = await fetch('https://api.open-meteo.com/v1/forecast?latitude=28.61&longitude=77.20&current_weather=true');
+                const data = await res.json();
+                document.getElementById('weatherText').innerText = `🌤️ ${Math.round(data.current_weather.temperature)}°C`;
+            } catch (e) { document.getElementById('weatherText').innerText = '🌤️ --°C'; }
+        }
+        setInterval(updateLiveStatus, 1000); updateLiveStatus();
+        fetchLiveWeather(); setInterval(fetchLiveWeather, 600000);
+    </script>
+</body>
+</html>
