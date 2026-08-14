@@ -10,8 +10,28 @@
     <link rel="manifest" href="manifest.json">
 
     <style>
-        :root { --bg-color: #f4f6f9; --text-color: #333; --header-bg: #ffffff; --box-bg: #ffffff; --border-color: #3498db; --sidebar-bg: #2c3e50; --sidebar-text: #ffffff; --banner-bg: #eaf2f8; --banner-text: #1b4f72; }
-        [data-theme="dark"] { --bg-color: #121212; --text-color: #e0e0e0; --header-bg: #1e1e1e; --box-bg: #1e1e1e; --border-color: #3498db; --sidebar-bg: #1a1a1a; --sidebar-text: #ffffff; --banner-bg: #2a2a2a; --banner-text: #85c1e9; }
+        :root { 
+            --bg-color: #f4f6f9; 
+            --text-color: #333; 
+            --header-bg: #ffffff; 
+            --box-bg: #ffffff; 
+            --border-color: #3498db; 
+            --sidebar-bg: #2c3e50; 
+            --sidebar-text: #ffffff; 
+            --banner-bg: #eaf2f8; 
+            --banner-text: #1b4f72; 
+        }
+        [data-theme="dark"] { 
+            --bg-color: #121212; 
+            --text-color: #e0e0e0; 
+            --header-bg: #1e1e1e; 
+            --box-bg: #1e1e1e; 
+            --border-color: #3498db; 
+            --sidebar-bg: #1a1a1a; 
+            --sidebar-text: #ffffff; 
+            --banner-bg: #2a2a2a; 
+            --banner-text: #85c1e9; 
+        }
         *, *::before, *::after { box-sizing: border-box; }
         body { margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--bg-color); color: var(--text-color); line-height: 1.6; display: flex; flex-direction: column; min-height: 100vh; transition: background-color 0.3s, color 0.3s; }
         header { position: fixed; top: 0; left: 0; width: 100%; height: 60px; background-color: var(--header-bg); box-shadow: 0 2px 5px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: space-between; padding: 0 15px; z-index: 1000; }
@@ -28,9 +48,10 @@
         .sidebar ul li { border-bottom: 1px solid #34495e; }
         .sidebar ul li a { display: block; padding: 15px 25px; color: var(--sidebar-text); text-decoration: none; }
         .sidebar ul li:hover { background-color: #34495e; }
-        .main-container { max-width: 1200px; width: 100%; margin: 15px auto 40px auto; padding: 0 15px; flex: 1; }
-        .section-box { background: var(--box-bg); border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); padding: 25px; margin-bottom: 25px; }
-        h2 { color: var(--text-color); border-bottom: 2px solid var(--border-color); padding-bottom: 5px; margin-top: 20px; }
+        .main-container { max-width: 1200px; width: 100%; margin: 80px auto 40px auto; padding: 0 15px; flex: 1; }
+        .gallery-item { background: var(--box-bg); color: var(--text-color); padding: 20px; margin-bottom: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); box-sizing: border-box; }
+        .blog-header h3 { margin: 0 0 8px 0; font-size: 20px; color: var(--text-color); font-weight: bold; }
+        .gallery-caption { margin-top: 15px; font-family: sans-serif; color: var(--text-color); line-height: 1.6; }
         footer { background-color: var(--sidebar-bg); color: var(--sidebar-text); text-align: center; padding: 20px; margin-top: auto; font-size: 14px; }
         .footer-links { margin-bottom: 12px; display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 15px; }
         .footer-links a { color: #3498db; text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; }
@@ -64,97 +85,82 @@
             <li><a href="gallery.html" data-en="Gallery" data-np="ग्यालरी (Gallery)">ग्यालरी (Gallery)</a></li>
             <li><a href="tech.html" data-en="AI & Tech" data-np="AI र प्रविधि (AI & Tech)">AI र प्रविधि (AI & Tech)</a></li>
             <li><a href="blog.html" data-en="Blog / Updates" data-np="ब्लग / अपडेट्स (Blog)">ब्लग / अपडेट्स (Blog)</a></li>
-            <li><a href="emergency.html" data-en="Emergency Contacts" data-np="आकस्मिक सेवाहरू (Emergency)">आकस्मिक सेवाहरू (Emergency)</a></li>
-
+            <li><button class="control-btn" style="border:none; background:none; color:inherit; text-align:left; width:100%; padding:0;" data-en="Emergency Contacts" data-np="आकस्मिक सेवाहरू (Emergency)">आकस्मिक सेवाहरू (Emergency)</button></li>
         </ul>
     </nav>
-<div class="gallery-item" style="background: #fff; padding: 15px; margin-bottom: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); box-sizing: border-box;">
-    
-    <div class="blog-header" style="text-align: center; margin-bottom: 15px;">
-        <h3 style="margin: 0 0 8px 0; font-size: 20px; color: #222; font-weight: bold;">जिन्दगीको गोरेटोमा अलि पछाडि फर्केर हेर्दा... 🍃</h3>
-        <hr style="border: none; height: 3px; background: #007bff; width: 60px; margin: 0 auto;">
-    </div>
 
-    <img src="16year.png" alt="मेरो १५-१६ वर्षको उमेरको फोटो" style="width: 100%; height: auto; border-radius: 8px; display: block;">
-    
-    <div class="gallery-caption" style="margin-top: 15px; font-family: sans-serif; color: #444; line-height: 1.6;">
-        <p>यो फोटो मेरो १५–१६ वर्षको उमेरको हो। टोपी ढल्काएर खिचिएको यो तस्बिरले मलाई मेरो बाल्यकाल र किशोरावस्थाको सङ्गमको याद दिलाउँछ। प्रकृतिको काखमा खिचिएको यो फोटोमा देखिने त्यो उमेरको सादगी, निर्दोषपना र निर्भीक रूप साँच्चै नै अनमोल छ।</p>
-        
-        <p style="margin-top: 10px;">
-            <a href="https://youtu.be/Dh4344mVZ4w?si=_NXNLRwOGD7bA4v9" target="_blank" style="color: #007bff; text-decoration: none; font-weight: bold;">
-                ▶ युट्युबमा भिडियो हेर्नुहोस्
-            </a>
-        </p>
-    </div>
+    <div class="main-container">
+        <!-- पहिलो ग्यालरी आइटम -->
+        <div class="gallery-item">
+            <div class="blog-header" style="text-align: center; margin-bottom: 15px;">
+                <h3 data-en="Looking back at the path of life... 🍃" data-np="जिन्दगीको गोरेटोमा अलि पछाडि फर्केर हेर्दा... 🍃">जिन्दगीको गोरेटोमा अलि पछाडि फर्केर हेर्दा... 🍃</h3>
+                <hr style="border: none; height: 3px; background: #007bff; width: 60px; margin: 0 auto;">
+            </div>
 
-    <div class="share-box" style="text-align: center; margin-top: 15px; border-top: 1px solid #eee; padding-top: 12px;">
-        <span style="font-size: 13px; color: #666; display: block; margin-bottom: 8px; font-weight: bold;">यो पोस्ट शेयर गर्नुहोस्:</span>
-        <a href="https://api.whatsapp.com/send?text=%E0%A4%9C%E0%A4%BF%E0%A4%A8%E0%A5%8D%E0%A4%A6%E0%A4%97%E0%A5%80%E0%A4%95%E0%A5%8B%20%E0%A4%97%E0%A5%8B%E0%A4%B0%E0%A5%87%E0%A4%9F%E0%A5%8B%E0%A4%AE%E0%A4%BE...%20https://kamalgc.com.np" target="_blank" style="margin: 0 10px; text-decoration: none; font-size: 16px; color: #25D366; font-weight: bold;"> WhatsApp</a>
-        <a href="https://www.facebook.com/sharer/sharer.php?u=https://kamalgc.com.np" target="_blank" style="margin: 0 10px; text-decoration: none; font-size: 16px; color: #1877F2; font-weight: bold;"> Facebook</a>
-    </div>
-</div>
+            <img src="16year.png" alt="मेरो १५-१६ वर्षको उमेरको फोटो" style="width: 100%; height: auto; border-radius: 8px; display: block;">
+            
+            <div class="gallery-caption">
+                <p data-en="This photo is from when I was 15-16 years old. Captured with a tilted cap, this picture reminds me of the confluence of my childhood and adolescence. The simplicity, innocence, and fearless nature of that age captured in the lap of nature is truly priceless." data-np="यो फोटो मेरो १५–१६ वर्षको उमेरको हो। टोपी ढल्काएर खिचिएको यो तस्बिरले मलाई मेरो बाल्यकाल र किशोरावस्थाको सङ्गमको याद दिलाउँछ। प्रकृतिको काखमा खिचिएको यो फोटोमा देखिने त्यो उमेरको सादगी, निर्दोषपना र निर्भीक रूप साँच्चै नै अनमोल छ।">
+                    यो फोटो मेरो १५–१६ वर्षको उमेरको हो। टोपी ढल्काएर खिचिएको यो तस्बिरले मलाई मेरो बाल्यकाल र किशोरावस्थाको सङ्गमको याद दिलाउँछ। प्रकृतिको काखमा खिचिएको यो फोटोमा देखिने त्यो उमेरको सादगी, निर्दोषपना र निर्भीक रूप साँच्चै नै अनमोल छ।
+                </p>
+                
+                <p style="margin-top: 10px;">
+                    <a href="https://youtu.be/Dh4344mVZ4w?si=_NXNLRwOGD7bA4v9" target="_blank" style="color: #007bff; text-decoration: none; font-weight: bold;" data-en="▶ Watch video on YouTube" data-np="▶ युट्युबमा भिडियो हेर्नुहोस्">
+                        ▶ युट्युबमा भिडियो हेर्नुहोस्
+                    </a>
+                </p>
+            </div>
 
-<div class="gallery-item" style="background: #fff; padding: 15px; margin-bottom: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); box-sizing: border-box;">
-    
-    <div class="blog-header" style="text-align: center; margin-bottom: 15px;">
-        <h3 class="blog-title" style="margin: 0 0 8px 0; font-size: 20px; color: #222; font-weight: bold;">
-            एउटा नौलो यात्रा, जसले मलाई धेरै कुरा सिकायो
-        </h3>
-        <hr style="border: none; height: 3px; background: #007bff; width: 60px; margin: 0 auto;">
-    </div>
-
-    <img src="keral.png" alt="केरला यात्रा" style="width: 100%; height: auto; border-radius: 8px; display: block;">
-    
-    <div class="gallery-caption" style="margin-top: 15px; font-family: sans-serif; color: #444; line-height: 1.6;">
-        
-        <div class="lang-np">
-            <p>जीवनमा केही यस्ता अध्यायहरू हुन्छन्, जसका पाना पल्टाउँदा मुटुको एउटा कुनामा अनौठो किसिमको सिहरन र मिठास महसुस हुन्छ। आज जति नै समय घर्किए पनि, जब म १७ वर्षको त्यो कलिलो उमेरलाई फर्केर हेर्छु, लाग्छ त्यो हिजोको मात्र कुरा हो। घरभित्रका पारिवारिक समस्याहरू, जिम्मेवारीको भारी र केही गरेर देखाउने हुटहुटीले मलाई घरमै बस्न दिएन। सानै उमेरमा संसारको ठूलो जिम्मेवारी काँधमा बोकेर पहिलो पटक साथीहरूसँग घर छोडेर परदेशतिर लाग्दै, गन्तव्य केरलातर्फ पाइला टेकेँ।</p>
-            <p>यात्रारम्भ निकै कष्टकर थियो। पुस महिनाको चिमचिम जाडो, बाक्लो हुस्सुले पूरै बाटो ढाकेको थियो। घरदेखि जिप र बस चढेर गोरखपुरसम्म पुग्दाको त्यो यात्रा निकै खतरनाक र डरलाग्दो थियो। गोरखपुर पुगेर केरला जाने ट्रेन समातियो। त्यो ट्रेन यात्रा मेरो जीवनको सबैभन्दा लामो र थकाउने यात्रा थियो, जहाँ भोक, प्यास र थकाइ सहँदै हामीले अनन्त बाटो काट्यौँ।</p>
-            <p>अन्ततः केरला पुगेर कडा मेहनतपछि काम भेटियो। पहिलो पटक आफ्नै पसिनाको कमाइ हात पर्दाको खुसी शब्दमा वर्णन गर्नै सकिन्न। त्यही कमाइबाट मैले आफ्नो लागि एउटा नयाँ मोबाइल पनि किनेँ। तर, विदेशी भूमिमा सिम कार्ड पाउनुचाहिँ फलामको चिउरा चपाए सरह भयो, जसको लागि धेरै सास्ती भोग्नुपर्‍यो। त्यहाँको प्रसिद्ध लुलु मल र KFC को स्वाद आज पनि मेरो सम्झनामा ताजै छ। कामको धपेडीका बीच एक महिना नपुग्दै साथीसँग केरलाका केही सुन्दर ठाउँहरू घुम्यौँ। नयाँ ठाउँले मेरा मनका पीडाहरूलाई केही क्षणका लागि भए पनि भुलाइदिएको थियो।</p>
-            <p>अन्ततः संघर्षका ती अमूल्य दिनहरूसँगै मेरो यात्रा फेरि दिल्लीतर्फ मोडियो। आज फर्केर हेर्दा लाग्छ, त्यो १७ वर्षको ठिटो जसले परिवारको जिम्मेवारी बोकेर हिँडेको थियो, उसले जीवनका धेरै कठोर पाठ त्यही एउटै यात्रामा सिकिसकेको थियो।</p>
+            <div class="share-box" style="text-align: center; margin-top: 15px; border-top: 1px solid rgba(0,0,0,0.1); padding-top: 12px;">
+                <span style="font-size: 13px; display: block; margin-bottom: 8px; font-weight: bold;" data-en="Share this post:" data-np="यो पोस्ट शेयर गर्नुहोस्:">यो पोस्ट शेयर गर्नुहोस्:</span>
+                <a href="https://api.whatsapp.com/send?text=https://kamalgc.com.np" target="_blank" style="margin: 0 10px; text-decoration: none; font-size: 16px; color: #25D366; font-weight: bold;"> WhatsApp</a>
+                <a href="https://www.facebook.com/sharer/sharer.php?u=https://kamalgc.com.np" target="_blank" style="margin: 0 10px; text-decoration: none; font-size: 16px; color: #1877F2; font-weight: bold;"> Facebook</a>
+            </div>
         </div>
 
-        <div class="lang-en" style="display: none;">
-            <p>There are some chapters in life that, when turning their pages, bring a unique thrill and sweetness to the heart. No matter how much time passes, when I look back at that tender age of 17, it feels like just yesterday. Family issues at home, the burden of responsibilities, and the urge to prove something wouldn't let me stay at home. Taking the huge responsibility of the world on my shoulders at a young age, I left home with friends for a foreign land and stepped towards my destination, Kerala.</p>
-            <p>The journey was very painful. The chilly cold of Poush (December-January) and thick fog covered the entire path. Traveling from home by jeep and bus to Gorakhpur was very dangerous and scary. Reaching Gorakhpur, we caught the train to Kerala. That train journey was the longest and most exhausting journey of my life, where we covered an endless path enduring hunger, thirst, and fatigue.</p>
-            <p>Finally, after reaching Kerala and working hard, I got a job. The happiness of getting my first self-earned money is indescribable. With that money, I bought a new mobile for myself. However, getting a SIM card in a foreign land was like chewing iron pellets, for which I had to endure a lot of trouble. The taste of the famous Lulu Mall and KFC there is still fresh in my memory. Amidst the hustle and bustle of work, within a month, we explored some beautiful places in Kerala with friends. That new place made me forget my sorrows for a while.</p>
-            <p>Finally, along with those precious days of struggle, my journey turned back towards Delhi. Looking back today, it feels like that 17-year-old boy who carried the family's responsibility had already learned many harsh lessons of life on that very journey.</p>
-        </div>
+        <!-- दोस्रो ग्यालरी आइटम (केरला यात्रा) -->
+        <div class="gallery-item">
+            <div class="blog-header" style="text-align: center; margin-bottom: 15px;">
+                <h3 class="blog-title" data-en="A New Journey That Taught Me Many Things" data-np="एउटा नौलो यात्रा, जसले मलाई धेरै कुरा सिकायो">एउटा नौलो यात्रा, जसले मलाई धेरै कुरा सिकायो</h3>
+                <hr style="border: none; height: 3px; background: #007bff; width: 60px; margin: 0 auto;">
+            </div>
 
-    </div>
-
-    <div class="share-box" style="text-align: center; margin-top: 15px; border-top: 1px solid #eee; padding-top: 12px;">
-        <span style="font-size: 13px; color: #666; display: block; margin-bottom: 8px; font-weight: bold;">यो पोस्ट शेयर गर्नुहोस्:</span>
-        <a href="https://api.whatsapp.com/send?text=%E0%A4%8F%E0%A4%89%E0%A4%9F%E0%A4%BE%20%E0%A4%A8%E0%A5%8C%E0%A4%B2%E0%A5%8B%20%E0%A4%AF%E0%A4%BE%E0%A4%A4%E0%A5%8D%E0%A4%B0%E0%A4%BE%20https://kamalgc.com.np" target="_blank" style="margin: 0 10px; text-decoration: none; font-size: 16px; color: #25D366; font-weight: bold;"> WhatsApp</a>
-        <a href="https://www.facebook.com/sharer/sharer.php?u=https://kamalgc.com.np" target="_blank" style="margin: 0 10px; text-decoration: none; font-size: 16px; color: #1877F2; font-weight: bold;"> Facebook</a>
-    </div>
-</div>
-
-<script>
-    // यदि तपाईंको वेबसाइटमा पहिले नै EN/NP को स्क्रिप्ट छ भने यो नराख्दा पनि हुन्छ, 
-    // तर भाषा बदल्दा यो ब्लग पनि सँगै बदलिनेछ।
-    document.addEventListener("DOMContentLoaded", function() {
-        const enBtn = document.querySelector("#en-btn"); // तपाईंको साइटको EN बटनको आइडी वा क्लास अनुसार मिलाउनुहोला
-        const npBtn = document.querySelector("#np-btn");
-        
-        // उदाहरणको लागि यदि तपाईंको साइटमा भाषा परिवर्तन गर्ने ग्लोबल फंक्सन छ भने यसले आफै समात्छ।
-    });
-</script>
-
-
-            <!-- फोटो र लेखको मुनि सेयर गर्ने SVG लोगोहरू -->
-            <div style="margin: 25px 0 10px 0; text-align: center;">
-                <p style="margin-bottom: 10px; font-size: 14px; font-weight: bold; color: var(--text-color);">सेयर गर्नुहोस्:</p>
-                <div style="display: flex; justify-content: center; gap: 20px; align-items: center;">
-                    <!-- WhatsApp Logo Button -->
-                    <a href="https://api.whatsapp.com/send?text=kamalgc.com.np/gallery.html - कमल जी.सी. को ग्यालरी हेर्नुहोस्!" target="_blank" title="Share on WhatsApp" style="text-decoration: none; display: inline-flex;">
-                        <svg width="36" height="36" viewBox="0 0 24 24" fill="#25d366"><path d="M12.01 2C6.48 2 2 6.48 2 12.01c0 2.09.64 4.07 1.84 5.74L2 22l4.52-1.74c1.57.97 3.39 1.49 5.49 1.49 5.53 0 10.01-4.48 10.01-10.01S17.54 2 12.01 2zM17.05 15.2c-.22.6-1.12 1.15-1.55 1.22-.38.07-.84.14-2.73-.62-2.32-.93-3.79-3.23-3.9-3.38-.11-.15-1.01-1.35-1.01-2.57s.62-1.82.84-2.07c.22-.25.59-.32.84-.32.22 0 .44 0 .63.01.2.01.48.02.69.51.22.48.74 1.8.8 1.93.06.13.1.28.02.45-.08.17-.13.25-.26.41-.13.16-.27.33-.39.46-.13.13-.27.27-.11.54.16.27.71 1.18 1.52 1.91 1.04.93 1.92 1.23 2.19 1.37.27.14.43.12.59-.06s.69-.81.87-1.08c.18-.27.36-.22.61-.13.25.09 1.59.75 1.87.89.28.14.46.21.53.33.07.12.07.7-.15 1.3z"/></svg>
-                    </a>
-                    <!-- Facebook Logo Button -->
-                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://kamalgc.com.np/gallery.html" target="_blank" title="Share on Facebook" style="text-decoration: none; display: inline-flex;">
-                        <svg width="36" height="36" viewBox="0 0 24 24" fill="#1877f2"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.35 7 13 7c.77 0 1.5.06 2.2.17V10h-1.2c-.88 0-1.2.55-1.2 1.3V12h3l-.33 3H14v6.8c4.56-.93 8-4.96 8-9.8z"/></svg>
-                    </a>
+            <img src="keral.png" alt="केरला यात्रा" style="width: 100%; height: auto; border-radius: 8px; display: block;">
+            
+            <div class="gallery-caption">
+                <div class="translatable-story">
+                    <p data-en="There are some chapters in life that bring a unique thrill and sweetness to the heart when looking back. No matter how much time passes, when I look back at that tender age of 17, it feels like just yesterday. Family issues, responsibilities, and the urge to do something didn't let me stay at home. Taking a huge responsibility on my shoulders, I left home with friends for Kerala." data-np="जीवनमा केही यस्ता अध्यायहरू हुन्छन्, जसका पाना पल्टाउँदा मुटुको एउटा कुनामा अनौठो किसिमको सिहरन र मिठास महसुस हुन्छ। आज जति नै समय घर्किए पनि, जब म १७ वर्षको त्यो कलिलो उमेरलाई फर्केर हेर्छु, लाग्छ त्यो हिजोको मात्र कुरा हो। घरभित्रका पारिवारिक समस्याहरू, जिम्मेवारीको भारी र केही गरेर देखाउने हुटहुटीले मलाई घरमै बस्न दिएन। सानै उमेरमा संसारको ठूलो जिम्मेवारी काँधमा बोकेर पहिलो पटक साथीहरूसँग घर छोडेर परदेशतिर लाग्दै, गन्तव्य केरलातर्फ पाइला टेकेँ।">
+                        जीवनमा केही यस्ता अध्यायहरू हुन्छन्, जसका पाना पल्टाउँदा मुटुको एउटा कुनामा अनौठो किसिमको सिहरन र मिठास महसुस हुन्छ। आज जति नै समय घर्किए पनि, जब म १७ वर्षको त्यो कलिलो उमेरलाई फर्केर हेर्छु, लाग्छ त्यो हिजोको मात्र कुरा हो। घरभित्रका पारिवारिक समस्याहरू, जिम्मेवारीको भारी र केही गरेर देखाउने हुटहुटीले मलाई घरमै बस्न दिएन। सानै उमेरमा संसारको ठूलो जिम्मेवारी काँधमा बोकेर पहिलो पटक साथीहरूसँग घर छोडेर परदेशतिर लाग्दै, गन्तव्य केरलातर्फ पाइला टेकेँ।
+                    </p>
+                    <p data-en="The journey was very painful. The chilly cold of Poush and thick fog covered the path. Traveling from home by jeep and bus to Gorakhpur was very dangerous, and from there we caught the train to Kerala. That train journey was the longest and most exhausting experience of my life, enduring hunger and fatigue." data-np="यात्रारम्भ निकै कष्टकर थियो। पुस महिनाको चिमचिम जाडो, बाक्लो हुस्सुले पूरै बाटो ढाकेको थियो। घरदेखि जिप र बस चढेर गोरखपुरसम्म पुग्दाको त्यो यात्रा निकै खतरनाक र डरलाग्दो थियो। गोरखपुर पुगेर केरला जाने ट्रेन समातियो। त्यो ट्रेन यात्रा मेरो जीवनको सबैभन्दा लामो र थकाउने यात्रा थियो, जहाँ भोक, प्यास र थकाइ सहँदै हामीले अनन्त बाटो काट्यौँ।">
+                        यात्रारम्भ निकै कष्टकर थियो। पुस महिनाको चिमचिम जाडो, बाक्लो हुस्सुले पूरै बाटो ढाकेको थियो। घरदेखि जिप र बस चढेर गोरखपुरसम्म पुग्दाको त्यो यात्रा निकै खतरनाक र डरलाग्दो थियो। गोरखपुर पुगेर केरला जाने ट्रेन समातियो। त्यो ट्रेन यात्रा मेरो जीवनको सबसे लामो र थकाउने यात्रा थियो, जहाँ भोक, प्यास र थकाइ सहँदै हामीले अनन्त बाटो काट्यौँ।
+                    </p>
+                    <p data-en="Finally, after reaching Kerala and working hard, I got a job. The happiness of my first self-earned money is indescribable, with which I bought a new mobile. Getting a SIM card was tough. Within a month, we explored some beautiful places in Kerala, which helped me forget my sorrows." data-np="अन्ततः केरला पुगेर कडा मेहनतपछि काम भेटियो। पहिलो पटक आफ्नै पसिनाको कमाइ हात पर्दाको खुसी शब्दमा वर्णन गर्नै सकिन्न। त्यही कमाइबाट मैले आफ्नो लागि एउटा नयाँ मोबाइल पनि किनेँ। तर, विदेशी भूमिमा सिम कार्ड पाउनुचाहिँ फलामको चिउरा चपाए सरह भयो। कामको धपेडीका बीच एक महिना नपुग्दै साथीसँग केरलाका केही सुन्दर ठाउँहरू घुम्यौँ। नयाँ ठाउँले मेरा मनका पीडाहरूलाई केही क्षणका लागि भए पनि भुलाइदिएको थियो।">
+                        अन्ततः केरला पुगेर कडा मेहनतपछि काम भेटियो। पहिलो पटक आफ्नै पसिनाको कमाइ हात पर्दाको खुसी शब्दमा वर्णन गर्नै सकिन्न। त्यही कमाइबाट मैले आफ्नो लागि एउटा नयाँ मोबाइल पनि किनेँ। तर, विदेशी भूमिमा सिम कार्ड पाउनुचाहिँ फलामको चिउरा चपाए सरह भयो। कामको धपेडीका बीच एक महिना नपुग्दै साथीसँग केरलाका केही सुन्दर ठाउँहरू घुम्यौँ। नयाँ ठाउँले मेरा मनका पीडाहरूलाई केही क्षणका लागि भए पनि भुलाइदिएको थियो।
+                    </p>
+                    <p data-en="Finally, along with those precious days of struggle, my journey turned back towards Delhi. Looking back today, it feels like that 17-year-old boy who carried the family's responsibility had already learned many harsh lessons of life on that very journey." data-np="अन्ततः संघर्षका ती अमूल्य दिनहरूसँगै मेरो यात्रा फेरि दिल्लीतर्फ मोडियो। आज फर्केर हेर्दा लाग्छ, त्यो १७ वर्षको ठिटो जसले परिवारको जिम्मेवारी बोकेर हिँडेको थियो, उसले जीवनका धेरै कठोर पाठ त्यही एउटै यात्रामा सिकिसकेको थियो।">
+                        अन्ततः संघर्षका ती अमूल्य दिनहरूसँगै मेरो यात्रा फेरि दिल्लीतर्फ मोडियो। आज फर्केर हेर्दा लाग्छ, त्यो १७ वर्षको ठिटो जसले परिवारको जिम्मेवारी बोकेर हिँडेको थियो, उसले जीवनका धेरै कठोर पाठ त्यही एउटै यात्रामा सिकिसकेको थियो।
+                    </p>
                 </div>
+            </div>
+
+            <div class="share-box" style="text-align: center; margin-top: 15px; border-top: 1px solid rgba(0,0,0,0.1); padding-top: 12px;">
+                <span style="font-size: 13px; display: block; margin-bottom: 8px; font-weight: bold;" data-en="Share this post:" data-np="यो पोस्ट शेयर गर्नुहोस्:">यो पोस्ट शेयर गर्नुहोस्:</span>
+                <a href="https://api.whatsapp.com/send?text=https://kamalgc.com.np" target="_blank" style="margin: 0 10px; text-decoration: none; font-size: 16px; color: #25D366; font-weight: bold;"> WhatsApp</a>
+                <a href="https://www.facebook.com/sharer/sharer.php?u=https://kamalgc.com.np" target="_blank" style="margin: 0 10px; text-decoration: none; font-size: 16px; color: #1877F2; font-weight: bold;"> Facebook</a>
+            </div>
+        </div>
+
+        <!-- शेयर गर्ने SVG लोगोहरू -->
+        <div style="margin: 25px 0 10px 0; text-align: center;">
+            <p style="margin-bottom: 10px; font-size: 14px; font-weight: bold;" data-en="Share:" data-np="सेयर गर्नुहोस्:">सेयर गर्नुहोस्:</p>
+            <div style="display: flex; justify-content: center; gap: 20px; align-items: center;">
+                <a href="https://api.whatsapp.com/send?text=kamalgc.com.np/gallery.html" target="_blank" title="Share on WhatsApp" style="text-decoration: none; display: inline-flex;">
+                    <svg width="36" height="36" viewBox="0 0 24 24" fill="#25d366"><path d="M12.01 2C6.48 2 2 6.48 2 12.01c0 2.09.64 4.07 1.84 5.74L2 22l4.52-1.74c1.57.97 3.39 1.49 5.49 1.49 5.53 0 10.01-4.48 10.01-10.01S17.54 2 12.01 2zM17.05 15.2c-.22.6-1.12 1.15-1.55 1.22-.38.07-.84.14-2.73-.62-2.32-.93-3.79-3.23-3.9-3.38-.11-.15-1.01-1.35-1.01-2.57s.62-1.82.84-2.07c.22-.25.59-.32.84-.32.22 0 .44 0 .63.01.2.01.48.02.69.51.22.48.74 1.8.8 1.93.06.13.1.28.02.45-.08.17-.13.25-.26.41-.13.16-.27.33-.39.46-.13.13-.27.27-.11.54.16.27.71 1.18 1.52 1.91 1.04.93 1.92 1.23 2.19 1.37.27.14.43.12.59-.06s.69-.81.87-1.08c.18-.27.36-.22.61-.13.25.09 1.59.75 1.87.89.28.14.46.21.53.33.07.12.07.7-.15 1.3z"/></svg>
+                </a>
+                <a href="https://www.facebook.com/sharer/sharer.php?u=https://kamalgc.com.np/gallery.html" target="_blank" title="Share on Facebook" style="text-decoration: none; display: inline-flex;">
+                    <svg width="36" height="36" viewBox="0 0 24 24" fill="#1877f2"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.35 7 13 7c.77 0 1.5.06 2.2.17V10h-1.2c-.88 0-1.2.55-1.2 1.3V12h3l-.33 3H14v6.8c4.56-.93 8-4.96 8-9.8z"/></svg>
+                </a>
             </div>
         </div>
     </div>
@@ -167,7 +173,7 @@
 
         <div style="margin: 15px 0; text-align: center; font-size: 14px;">
             <p id="adminVisitorBox" style="margin-bottom: 8px; color: var(--sidebar-text); display: none;">
-                👀 कुल भिजिटर (Admin Only): <span id="visitorCount" style="font-weight: bold; color: #3498db;">--</span>
+                <span data-en="👀 Total Visitors (Admin Only):" data-np="👀 कुल भिजिटर (Admin Only):">👀 कुल भिजिटर (Admin Only):</span> <span id="visitorCount" style="font-weight: bold; color: #3498db;">--</span>
             </p>
         </div>
 
@@ -177,6 +183,7 @@
     <script>
         let currentLang = 'np';
         function toggleSidebar() { document.getElementById('sidebar').classList.toggle('active'); }
+        
         function toggleTheme() {
             const body = document.body;
             const themeBtn = document.getElementById('themeBtn');
@@ -188,7 +195,12 @@
                 themeBtn.innerHTML = '☀️ Light';
             }
         }
-        function toNepaliDigits(str) { const nepDigits = ['०', '१', '२', '३', '४', '५', '६', '७', '८', '९']; return str.toString().replace(/\d/g, x => nepDigits[x]); }
+
+        function toNepaliDigits(str) { 
+            const nepDigits = ['०', '१', '२', '३', '४', '५', '६', '७', '८', '९']; 
+            return str.toString().replace(/\d/g, x => nepDigits[x]); 
+        }
+
         function getNepaliDateStr(now) {
             const nepMonths = ['बैशाख', 'जेठ', 'असार', 'साउन', 'भदौ', 'असोज', 'कात्तिक', 'मंसिर', 'पुस', 'माघ', 'फागुन', 'चैत'];
             const startAD = new Date(2026, 7, 9);
@@ -197,12 +209,17 @@
             if (bsDay > 31) { bsDay -= 31; bsMonth++; }
             return `२०८३ ${nepMonths[bsMonth]} ${toNepaliDigits(bsDay)}`;
         }
+
         function toggleLanguage() {
             currentLang = currentLang === 'np' ? 'en' : 'np';
             document.getElementById('langBtn').innerText = currentLang === 'np' ? 'EN' : 'NP';
+            
+            // सबै data-np / data-en एलिमेन्टहरू परिवर्तन गर्ने
             document.querySelectorAll('[data-np]').forEach(el => {
-                el.innerText = el.getAttribute(currentLang === 'en' ? 'data-en' : 'data-np');
+                const text = el.getAttribute(currentLang === 'en' ? 'data-en' : 'data-np');
+                if (text) el.innerText = text;
             });
+
             updateLiveStatus();
         }
 
@@ -255,7 +272,7 @@
         updateLiveStatus();
         fetchLiveLocationAndWeather();
 
-        // Visitor Counter & Admin Trigger script (किबोर्डमा 'admin' टाइप गरेपछि मात्र भिजिटर संख्या देखिन्छ)
+        // Visitor Counter & Admin Trigger script
         let vCount = localStorage.getItem('site_visitor_count') || Math.floor(Math.random() * 50) + 120;
         if(!localStorage.getItem('site_visited')) { 
             vCount++; 
