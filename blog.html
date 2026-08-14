@@ -3,239 +3,212 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ब्लग / विचार - कमल जी.सी.</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" rel="stylesheet">
-   <link rel="manifest" href="manifest.json">
-
+    <title>Blog - Kamal G.C.</title>
     <style>
-        :root { --bg-color: #f4f6f9; --text-color: #333; --header-bg: #ffffff; --box-bg: #ffffff; --border-color: #3498db; --sidebar-bg: #2c3e50; --sidebar-text: #ffffff; --banner-bg: #eaf2f8; --banner-text: #1b4f72; }
-        [data-theme="dark"] { --bg-color: #121212; --text-color: #e0e0e0; --header-bg: #1e1e1e; --box-bg: #1e1e1e; --border-color: #3498db; --sidebar-bg: #1a1a1a; --sidebar-text: #ffffff; --banner-bg: #2a2a2a; --banner-text: #85c1e9; }
-        *, *::before, *::after { box-sizing: border-box; }
-        body { margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--bg-color); color: var(--text-color); line-height: 1.6; display: flex; flex-direction: column; min-height: 100vh; transition: background-color 0.3s, color 0.3s; }
-        header { position: fixed; top: 0; left: 0; width: 100%; height: 60px; background-color: var(--header-bg); box-shadow: 0 2px 5px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: space-between; padding: 0 15px; z-index: 1000; }
-        .header-left, .header-right { display: flex; align-items: center; gap: 12px; }
-        .menu-btn { background: none; border: none; font-size: 24px; cursor: pointer; color: var(--text-color); }
-        .logo-text { font-family: 'Poppins', sans-serif; font-size: 19px; font-weight: 700; background: linear-gradient(45deg, #2980b9, #3498db); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-decoration: none; }
-        .control-btn { background: none; border: 1px solid var(--text-color); color: var(--text-color); padding: 4px 8px; border-radius: 5px; cursor: pointer; font-size: 13px; font-weight: bold; }
-        .control-btn:hover { background-color: var(--text-color); color: var(--bg-color); }
-        .live-status-bar { margin-top: 60px; background-color: var(--banner-bg); color: var(--banner-text); padding: 6px 10px; text-align: center; font-size: 0.78em; font-weight: 500; border-bottom: 1px solid rgba(0,0,0,0.05); display: flex; justify-content: center; align-items: center; gap: 6px; white-space: nowrap; overflow-x: auto; }
-        .sidebar { position: fixed; top: 0; left: -280px; width: 280px; height: 100%; background-color: var(--sidebar-bg); color: var(--sidebar-text); transition: left 0.3s ease; z-index: 1100; padding-top: 80px; box-shadow: 2px 0 5px rgba(0,0,0,0.2); }
-        .sidebar.active { left: 0; }
-        .sidebar-close { position: absolute; top: 20px; right: 20px; background: none; border: none; color: var(--sidebar-text); font-size: 24px; cursor: pointer; }
-        .sidebar ul { list-style: none; padding: 0; margin: 0; }
-        .sidebar ul li { border-bottom: 1px solid #34495e; }
-        .sidebar ul li a { display: block; padding: 15px 25px; color: var(--sidebar-text); text-decoration: none; }
-        .sidebar ul li:hover { background-color: #34495e; }
-        .main-container { max-width: 1200px; width: 100%; margin: 15px auto 40px auto; padding: 0 15px; flex: 1; }
-        .section-box { background: var(--box-bg); border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); padding: 25px; margin-bottom: 25px; }
-        h2 { color: var(--text-color); border-bottom: 2px solid var(--border-color); padding-bottom: 5px; margin-top: 20px; }
-        footer { background-color: var(--sidebar-bg); color: var(--sidebar-text); text-align: center; padding: 20px; margin-top: auto; font-size: 14px; }
-        .footer-links { margin-bottom: 12px; display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 15px; }
-        .footer-links a { color: #3498db; text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; }
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f6f9;
+            color: #333;
+        }
+        /* Navbar स्टाइल */
+        nav {
+            background-color: #1e293b;
+            padding: 15px;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: bold;
+            font-size: 15px;
+        }
+        nav a:hover {
+            color: #38bdf8;
+        }
+        /* भाषा र समय बार */
+        .top-bar {
+            background: #e2e8f0;
+            padding: 8px;
+            text-align: center;
+            font-size: 14px;
+        }
+        .top-bar button {
+            background: #0f172a;
+            color: white;
+            border: none;
+            padding: 4px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 5px;
+            font-weight: bold;
+        }
+        /* कन्टेनर */
+        .container {
+            max-width: 650px;
+            margin: 20px auto;
+            padding: 0 15px;
+        }
+        .blog-card {
+            background: #fff;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            box-sizing: border-box;
+        }
+        .blog-header {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        .blog-title {
+            margin: 0 0 8px 0;
+            font-size: 20px;
+            color: #1e293b;
+            font-weight: bold;
+        }
+        .blog-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            display: block;
+        }
+        .blog-caption {
+            margin-top: 15px;
+            color: #444;
+            line-height: 1.6;
+        }
+        .share-box {
+            text-align: center;
+            margin-top: 15px;
+            border-top: 1px solid #eee;
+            padding-top: 12px;
+        }
+        footer {
+            background: #1e293b;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            margin-top: 30px;
+            font-size: 14px;
+        }
     </style>
 </head>
-<body data-theme="light">
-    <header>
-        <div class="header-left">
-            <button class="menu-btn" onclick="toggleSidebar()">☰</button>
-            <a href="index.html" class="logo-text">kamalgc.com.np</a>
-        </div>
-        <div class="header-right">
-            <button class="control-btn" id="langBtn" onclick="toggleLanguage()">EN</button>
-            <button class="control-btn" id="themeBtn" onclick="toggleTheme()">🌙 Dark</button>
-        </div>
-    </header>
+<body>
 
-    <div class="live-status-bar" id="liveStatusBar">
-        <span id="locationText">लोड हुँदैछ...</span> |
-        <span id="nepaliDateText">२०८३ साउन २४</span> |
-        <span id="englishDateText">Aug 09 (Sun)</span> |
-        <span id="timeText">--:--:--</span> |
-        <span id="weatherText">--°C</span>
-    </div>
-
-    <nav class="sidebar" id="sidebar">
-        <button class="sidebar-close" onclick="toggleSidebar()">&times;</button>
-        <ul>
-            <li><a href="index.html" data-en="Home" data-np="गृहपृष्ठ (Home)">गृहपृष्ठ (Home)</a></li>
-            <li><a href="about.html" data-en="About Me" data-np="मेरो बारेमा (About Me)">मेरो बारेमा (About Me)</a></li>
-            <li><a href="gallery.html" data-en="Gallery" data-np="ग्यालरी (Gallery)">ग्यालरी (Gallery)</a></li>
-            <li><a href="tech.html" data-en="AI & Tech" data-np="AI र प्रविधि (AI & Tech)">AI र प्रविधि (AI & Tech)</a></li>
-            <li><a href="blog.html" data-en="Blog / Updates" data-np="ब्लग / अपडेट्स (Blog)">ब्लग / अपडेट्स (Blog)</a></li>
-            <li><a href="emergency.html" data-en="Emergency Contacts" data-np="आकस्मिक सेवाहरू (Emergency)">आकस्मिक सेवाहरू (Emergency)</a></li>
-
-        </ul>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="blog.html" style="color: #38bdf8;">Blog</a>
+        <a href="ai.html">AI</a>
+        <a href="emergency.html">Emergency</a>
     </nav>
 
-    <div class="main-container">
-        <div class="section-box">
-            <h2 data-en="Blog / Thoughts" data-np="ब्लग / विचार (Blog)">ब्लग / विचार (Blog)</h2>
-            
-            <div style="margin-top: 20px;">
-                <h3 style="color: #3498db; margin-bottom: 15px;" 
-                    data-en="Title: A Memorable Saturday Spent at CP Central Park, Delhi" 
-                    data-np="शीर्षक: दिल्लीको CP सेन्ट्रल पार्कमा बिताएको एउटा स्मरणीय शनिबार">
-                    शीर्षक: दिल्लीको CP सेन्ट्रल पार्कमा बिताएको एउटा स्मरणीय शनिबार
-                </h3>
-                
-                <div style="margin-bottom: 20px; text-align: center;">
-                    <img src="kamal.png" alt="Kamal G.C. at Central Park, New Delhi" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
-                </div>
-                
-                <p data-en="What could be a better time than a Saturday off, obtained after six consecutive days of hard work, running around, and fatigue! To forget that exhaustion of the week and refresh my mind and soul, I used this holiday to visit the famous 'Central Park' in Connaught Place (CP), the heart of New Delhi." 
-                   data-np="हप्ताको छ दिनको लगातार काम, भागदौड र थकानपछि प्राप्त हुने शनिबारको बिदाभन्दा उत्तम समय अरू के नै हुन सक्छ र! हप्ताभरिको त्यो थकानलाई भुल्न र मन-मस्तिष्कलाई ताजा बनाउन यही बिदाको सदुपयोग गर्दै म नयाँ दिल्लीको मुटु मानिने कनेक्ट प्लेस (Connaught Place - CP) को प्रसिद्ध 'सेन्ट्रल पार्क' घुम्न पुगेको थिएँ।">
-                   हप्ताको छ दिनको लगातार काम, भागदौड र थकानपछि प्राप्त हुने शनिबारको बिदाभन्दा उत्तम समय अरू के नै हुन सक्छ र! हप्ताभरिको त्यो थकानलाई भुल्न र मन-मस्तिष्कलाई ताजा बनाउन यही बिदाको सदुपयोग गर्दै म नयाँ दिल्लीको मुटु मानिने कनेक्ट प्लेस (Connaught Place - CP) को प्रसिद्ध 'सेन्ट्रल पार्क' घुम्न पुगेको थिएँ।
-                </p>
-                
-                <p data-en="As soon as I stepped out of Rajiv Chowk metro station, the greenery and open atmosphere of Central Park made me feel like all the fatigue of the week had vanished in a moment. Since it was a holiday, the park had a good buzz of people— some chatting with friends, some busy taking photos, and others relaxing in the peace of nature." 
-                   data-np="राजीव चोक मेट्रो स्टेशनबाट बाहिर निस्कने बित्तिकै देखिने सेन्ट्रल पार्कको हरियाली र खुला वातावरणले हप्ताभरिको सबै थकान एकैछिनमा मेटाएको महसुस भयो। बिदाको दिन भएकाले पार्कमा मानिसहरूको राम्रै चहलपहल थियो— कोही साथीभाइसँग गफिँदै थिए, कोही फोटो खिच्न व्यस्त थिए त कोही प्रकृतिको शान्तिमा सुस्ताइरहेका थिए।">
-                   राजीव चोक मेट्रो स्टेशनबाट बाहिर निस्कने बित्तिकै देखिने सेन्ट्रल पार्कको हरियाली र खुला वातावरणले हप्ताभरिको सबै थकान एकैछिनमा मेटाएको महसुस भयो। बिदाको दिन भएकाले पार्कमा मानिसहरूको राम्रै चहलपहल थियो— कोही साथीभाइसँग गफिँदै थिए, कोही फोटो खिच्न व्यस्त थिए त कोही प्रकृतिको शान्तिमा सुस्ताइरहेका थिए।
-                </p>
-                
-                <p data-en="This time's outing was even more special for me because I was wearing a t-shirt bearing the national flag of Nepal, the pride of my country. Walking around in the crowd of a foreign land and amidst a busy schedule while carrying the identity of one's own country gives a distinct sense of pride, energy, and happiness inside. This photo captured against the background of the green grass and scenic view of the park has made that leisure moment memorable forever." 
-                   data-np="यस पटकको घुमघाम मेरो लागि अझ विशेष रह्यो, किनकि मैले आफ्नो देशको गौरव नेपालको राष्ट्रिय झण्डा अंकित टि-सर्ट पहिरिएको थिएँ। परदेशको भीडमा र कामको व्यस्तताबीच पनि आफ्नै देशको पहिचान बोकेर हिँड्दा मनभित्र एउटा अलग्गै गर्व, ऊर्जा र खुसीको महसुस हुँदोरहेछ। पार्कको हरियो घाँस र मनोरम दृश्यको पृष्ठभूमिमा खिचिएको यो तस्बिरले मेरो त्यो फुर्सदको पललाई सधैंका लागि यादगार बनाएको छ।">
-                   यस पटकको घुमघाम मेरो लागि अझ विशेष रह्यो, किनकि मैले आफ्नो देशको गौरव नेपालको राष्ट्रिय झण्डा अंकित टि-सर्ट पहिरिएको थिएँ। परदेशको भीडमा र कामको व्यस्तताबीच पनि आफ्नै देशको पहिचान बोकेर हिँड्दा मनभित्र एउटा अलग्गै गर्व, ऊर्जा र खुसीको महसुस हुँदोरहेछ। पार्कको हरियो घाँस र मनोरम दृश्यको पृष्ठभूमिमा खिचिएको यो तस्बिरले मेरो त्यो फुर्सदको पललाई सधैंका लागि यादगार बनाएको छ।
-                </p>
-                
-                <p data-en="If you also want to take a little break from the hustle and bustle of work and calm and refresh your mind, CP's Central Park is an excellent destination." 
-                   data-np="यदि तपाईं पनि कामको व्यस्तताबाट अलिकति ब्रेक लिएर मनलाई शान्त र ताजा बनाउन चाहनुहुन्छ भने, CP को सेन्ट्रल पार्क एउटा उत्कृष्ट गन्तव्य हो।">
-                   यदि तपाईं पनि कामको व्यस्तताबाट अलिकति ब्रेक लिएर मनलाई शान्त र ताजा बनाउन चाहनुहुन्छ भने, CP को सेन्ट्रल पार्क एउटा उत्कृष्ट गन्तव्य हो।
-                </p>
+    <div class="top-bar">
+        <span>Kamal G.C. | </span>
+        <button onclick="setLanguage('np')">NP</button>
+        <button onclick="setLanguage('en')">EN</button>
+    </div>
 
-                <!-- फोटो र लेखको ठीक मुनि सेयर गर्ने SVG लोगोहरू -->
-                <div style="margin: 25px 0 10px 0; text-align: center;">
-                    <p style="margin-bottom: 10px; font-size: 14px; font-weight: bold; color: var(--text-color);">सेयर गर्नुहोस्:</p>
-                    <div style="display: flex; justify-content: center; gap: 20px; align-items: center;">
-                        <!-- WhatsApp Logo Button -->
-                        <a href="https://api.whatsapp.com/send?text=kamalgc.com.np/blog.html - दिल्लीको CP सेन्ट्रल पार्कमा बिताएको एउटा स्मरणीय शनिबार" target="_blank" title="Share on WhatsApp" style="text-decoration: none; display: inline-flex;">
-                            <svg width="36" height="36" viewBox="0 0 24 24" fill="#25d366"><path d="M12.01 2C6.48 2 2 6.48 2 12.01c0 2.09.64 4.07 1.84 5.74L2 22l4.52-1.74c1.57.97 3.39 1.49 5.49 1.49 5.53 0 10.01-4.48 10.01-10.01S17.54 2 12.01 2zM17.05 15.2c-.22.6-1.12 1.15-1.55 1.22-.38.07-.84.14-2.73-.62-2.32-.93-3.79-3.23-3.9-3.38-.11-.15-1.01-1.35-1.01-2.57s.62-1.82.84-2.07c.22-.25.59-.32.84-.32.22 0 .44 0 .63.01.2.01.48.02.69.51.22.48.74 1.8.8 1.93.06.13.1.28.02.45-.08.17-.13.25-.26.41-.13.16-.27.33-.39.46-.13.13-.27.27-.11.54.16.27.71 1.18 1.52 1.91 1.04.93 1.92 1.23 2.19 1.37.27.14.43.12.59-.06s.69-.81.87-1.08c.18-.27.36-.22.61-.13.25.09 1.59.75 1.87.89.28.14.46.21.53.33.07.12.07.7-.15 1.3z"/></svg>
+    <div class="container">
+
+        <div class="blog-card">
+            <div class="blog-header">
+                <h3 class="blog-title" data-np="जिन्दगीको गोरेटोमा अलि पछाडि फर्केर हेर्दा... 🍃" data-en="Looking back a little bit on the path of life... 🍃">
+                    जिन्दगीको गोरेटोमा अलि पछाडि फर्केर हेर्दा... 🍃
+                </h3>
+                <hr style="border: none; height: 3px; background: #007bff; width: 60px; margin: 0 auto;">
+            </div>
+
+            <img src="16year.png" alt="16 years old photo">
+
+            <div class="blog-caption">
+                <div class="lang-np">
+                    <p>यो फोटो मेरो १५–१६ वर्षको उमेरको हो। टोपी ढल्काएर खिचिएको यो तस्बिरले मलाई मेरो बाल्यकाल र किशोरावस्थाको सङ्गमको याद दिलाउँछ। प्रकृतिको काखमा खिचिएको यो फोटोमा देखिने त्यो उमेरको सादगी, निर्दोषपना र निर्भीक रूप साँच्चै नै अनमोल छ।</p>
+                    <p style="margin-top: 10px;">
+                        <a href="https://youtu.be/Dh4344mVZ4w?si=_NXNLRwOGD7bA4v9" target="_blank" style="color: #007bff; text-decoration: none; font-weight: bold;">
+                            ▶ युट्युबमा भिडियो हेर्नुहोस्
                         </a>
-                        <!-- Facebook Logo Button -->
-                        <a href="https://www.facebook.com/sharer/sharer.php?u=https://kamalgc.com.np/blog.html" target="_blank" title="Share on Facebook" style="text-decoration: none; display: inline-flex;">
-                            <svg width="36" height="36" viewBox="0 0 24 24" fill="#1877f2"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.35 7 13 7c.77 0 1.5.06 2.2.17V10h-1.2c-.88 0-1.2.55-1.2 1.3V12h3l-.33 3H14v6.8c4.56-.93 8-4.96 8-9.8z"/></svg>
+                    </p>
+                </div>
+                <div class="lang-en" style="display: none;">
+                    <p>This photo is from when I was 15-16 years old. This picture, taken with a tilted cap, reminds me of the confluence of my childhood and adolescence. The simplicity, innocence, and fearless look of that age captured in the lap of nature are truly priceless.</p>
+                    <p style="margin-top: 10px;">
+                        <a href="https://youtu.be/Dh4344mVZ4w?si=_NXNLRwOGD7bA4v9" target="_blank" style="color: #007bff; text-decoration: none; font-weight: bold;">
+                            ▶ Watch video on YouTube
                         </a>
-                    </div>
+                    </p>
                 </div>
             </div>
+
+            <div class="share-box">
+                <span style="font-size: 13px; color: #666; display: block; margin-bottom: 8px; font-weight: bold;" class="share-text" data-np="यो पोस्ट शेयर गर्नुहोस्:" data-en="Share this post:">यो पोस्ट शेयर गर्नुहोस्:</span>
+                <a href="https://api.whatsapp.com/send?text=%E0%A4%9C%E0%A4%BF%E0%A4%A8%E0%A5%8D%E0%A4%A6%E0%A4%97%E0%A5%80%E0%A4%95%E0%A5%8B%20%E0%A4%97%E0%A5%8B%E0%A4%B0%E0%A5%87%E0%A4%9F%E0%A5%8B%E0%A4%AE%E0%A4%BE...%20https://kamalgc.com.np" target="_blank" style="margin: 0 10px; text-decoration: none; font-size: 15px; color: #25D366; font-weight: bold;"> WhatsApp</a>
+                <a href="https://www.facebook.com/sharer/sharer.php?u=https://kamalgc.com.np" target="_blank" style="margin: 0 10px; text-decoration: none; font-size: 15px; color: #1877F2; font-weight: bold;"> Facebook</a>
+            </div>
         </div>
+
+
+        <div class="blog-card">
+            <div class="blog-header">
+                <h3 class="blog-title" data-np="एउटा नौलो यात्रा, जसले मलाई धेरै कुरा सिकायो" data-en="A New Journey That Taught Me Many Things">
+                    एउटा नौलो यात्रा, जसले मलाई धेरै कुरा सिकायो
+                </h3>
+                <hr style="border: none; height: 3px; background: #007bff; width: 60px; margin: 0 auto;">
+            </div>
+
+            <img src="keral.png" alt="Kerala Journey">
+
+            <div class="blog-caption">
+                <div class="lang-np">
+                    <p>जीवनमा केही यस्ता अध्यायहरू हुन्छन्, जसका पाना पल्टाउँदा मुटुको एउटा कुनामा अनौठो किसिमको सिहरन र मिठास महसुस हुन्छ। आज जति नै समय घर्किए पनि, जब म १७ वर्षको त्यो कलिलो उमेरलाई फर्केर हेर्छु, लाग्छ त्यो हिजोको मात्र कुरा हो। घरभित्रका पारिवारिक समस्याहरू, जिम्मेवारीको भारी र केही गरेर देखाउने हुटहुटीले मलाई घरमै बस्न दिएन। सानै उमेरमा संसारको ठूलो जिम्मेवारी काँधमा बोकेर पहिलो पटक साथीहरूसँग घर छोडेर परदेशतिर लाग्दै, गन्तव्य केरलातर्फ पाइला टेकेँ।</p>
+                    <p>यात्रारम्भ निकै कष्टकर थियो। पुस महिनाको चिमचिम जाडो, बाक्लो हुस्सुले पूरै बाटो ढाकेको थियो। घरदेखि जिप र बस चढेर गोरखपुरसम्म पुग्दाको त्यो यात्रा निकै खतरनाक र डरलाग्दो थियो। गोरखपुर पुगेर केरला जाने ट्रेन समातियो। त्यो ट्रेन यात्रा मेरो जीवनको सबसे लामो र थकाउने यात्रा थियो, जहाँ भोक, प्यास र थकाइ सहँदै हामीले अनन्त बाटो काट्यौँ।</p>
+                    <p>अन्ततः केरला पुगेर कडा मेहनतपछि काम भेटियो। पहिलो पटक आफ्नै पसिनाको कमाइ हात पर्दाको खुसी शब्दमा वर्णन गर्नै सकिन्न। त्यही कमाइबाट मैले आफ्नो लागि एउटा नयाँ मोबाइल पनि किनेँ। तर, विदेशी भूमिमा सिम कार्ड पाउनुचाहिँ फलामको चिउरा चपाए सरह भयो, जसको लागि धेरै सास्ती भोग्नुपर्‍यो। त्यहाँको प्रसिद्ध लुलु मल र KFC को स्वाद आज पनि मेरो सम्झनामा ताजै छ। कामको धपेडीका बीच एक महिना नपुग्दै साथीसँग केरलाका केही सुन्दर ठाउँहरू घुम्यौँ। नयाँ ठाउँले मेरा मनका पीडाहरूलाई केही क्षणका लागि भए पनि भुलाइदिएको थियो।</p>
+                    <p>अन्ततः संघर्षका ती अमूल्य दिनहरूसँगै मेरो यात्रा फेरि दिल्लीतर्फ मोडियो। आज फर्केर हेर्दा लाग्छ, त्यो १७ वर्षको ठिटो जसले परिवारको जिम्मेवारी बोकेर हिँडेको थियो, उसले जीवनका धेरै कठोर पाठ त्यही एउटै यात्रामा सिकिसकेको थियो।</p>
+                </div>
+                <div class="lang-en" style="display: none;">
+                    <p>There are some chapters in life that, when turning their pages, bring a unique thrill and sweetness to the heart. No matter how much time passes, when I look back at that tender age of 17, it feels like just yesterday. Family issues at home, the burden of responsibilities, and the urge to prove something wouldn't let me stay at home. Taking the huge responsibility of the world on my shoulders at a young age, I left home with friends for a foreign land and stepped towards my destination, Kerala.</p>
+                    <p>The journey was very painful. The chilly cold of Poush and thick fog covered the entire path. Traveling from home by jeep and bus to Gorakhpur was very dangerous and scary. Reaching Gorakhpur, we caught the train to Kerala. That train journey was the longest and most exhausting journey of my life, where we covered an endless path enduring hunger, thirst, and fatigue.</p>
+                    <p>Finally, after reaching Kerala and working hard, I got a job. The happiness of getting my first self-earned money is indescribable. With that money, I bought a new mobile for myself. However, getting a SIM card in a foreign land was like chewing iron pellets, for which I had to endure a lot of trouble. The taste of the famous Lulu Mall and KFC there is still fresh in my memory. Amidst the hustle and bustle of work, within a month, we explored some beautiful places in Kerala with friends. That new place made me forget my sorrows for a while.</p>
+                    <p>Finally, along with those precious days of struggle, my journey turned back towards Delhi. Looking back today, it feels like that 17-year-old boy who carried the family's responsibility had already learned many harsh lessons of life on that very journey.</p>
+                </div>
+            </div>
+
+            <div class="share-box">
+                <span style="font-size: 13px; color: #666; display: block; margin-bottom: 8px; font-weight: bold;" class="share-text" data-np="यो पोस्ट शेयर गर्नुहोस्:" data-en="Share this post:">यो पोस्ट शेयर गर्नुहोस्:</span>
+                <a href="https://api.whatsapp.com/send?text=%E0%A4%8F%E0%A4%89%E0%A4%9F%E0%A4%BE%20%E0%A4%A8%E0%A5%8C%E0%A4%B2%E0%A5%8B%20%E0%A4%AF%E0%A4%BE%E0%A4%A4%E0%A5%8D%E0%A4%B0%E0%A4%BE%20https://kamalgc.com.np" target="_blank" style="margin: 0 10px; text-decoration: none; font-size: 15px; color: #25D366; font-weight: bold;"> WhatsApp</a>
+                <a href="https://www.facebook.com/sharer/sharer.php?u=https://kamalgc.com.np" target="_blank" style="margin: 0 10px; text-decoration: none; font-size: 15px; color: #1877F2; font-weight: bold;"> Facebook</a>
+            </div>
+        </div>
+
     </div>
 
     <footer>
-        <div class="footer-links">
-            <a href="https://pasal.kamalgc.com.np" target="_blank">🌐 pasal.kamalgc.com.np</a>
-            <a href="mailto:Support@kamalgc.com.np">📧 Support@kamalgc.com.np</a>
-        </div>
-
-        <div style="margin: 15px 0; text-align: center; font-size: 14px;">
-            <p id="adminVisitorBox" style="margin-bottom: 8px; color: var(--sidebar-text); display: none;">
-                👀 कुल भिजिटर (Admin Only): <span id="visitorCount" style="font-weight: bold; color: #3498db;">--</span>
-            </p>
-        </div>
-
         <p>&copy; 2026 Kamal G.C. All Rights Reserved.</p>
     </footer>
 
     <script>
-        let currentLang = 'np';
-        function toggleSidebar() { document.getElementById('sidebar').classList.toggle('active'); }
-        function toggleTheme() {
-            const body = document.body;
-            const themeBtn = document.getElementById('themeBtn');
-            if (body.getAttribute('data-theme') === 'dark') {
-                body.setAttribute('data-theme', 'light');
-                themeBtn.innerHTML = '🌙 Dark';
+        function setLanguage(lang) {
+            const npElements = document.querySelectorAll('.lang-np');
+            const enElements = document.querySelectorAll('.lang-en');
+            const titles = document.querySelectorAll('.blog-title');
+            const shareTexts = document.querySelectorAll('.share-text');
+
+            if (lang === 'en') {
+                npElements.forEach(el => el.style.display = 'none');
+                enElements.forEach(el => el.style.display = 'block');
+                titles.forEach(el => el.innerText = el.getAttribute('data-en'));
+                shareTexts.forEach(el => el.innerText = el.getAttribute('data-en'));
             } else {
-                body.setAttribute('data-theme', 'dark');
-                themeBtn.innerHTML = '☀️ Light';
+                npElements.forEach(el => el.style.display = 'block');
+                enElements.forEach(el => el.style.display = 'none');
+                titles.forEach(el => el.innerText = el.getAttribute('data-np'));
+                shareTexts.forEach(el => el.innerText = el.getAttribute('data-np'));
             }
         }
-        function toNepaliDigits(str) { const nepDigits = ['०', '१', '२', '३', '४', '५', '६', '७', '८', '९']; return str.toString().replace(/\d/g, x => nepDigits[x]); }
-        function getNepaliDateStr(now) {
-            const nepMonths = ['बैशाख', 'जेठ', 'असार', 'साउन', 'भदौ', 'असोज', 'कात्तिक', 'मंसिर', 'पुस', 'माघ', 'फागुन', 'चैत'];
-            const startAD = new Date(2026, 7, 9);
-            const diffDays = Math.floor((now - startAD) / (1000 * 60 * 60 * 24));
-            let bsMonth = 3, bsDay = 24 + diffDays;
-            if (bsDay > 31) { bsDay -= 31; bsMonth++; }
-            return `२०८३ ${nepMonths[bsMonth]} ${toNepaliDigits(bsDay)}`;
-        }
-        function toggleLanguage() {
-            currentLang = currentLang === 'np' ? 'en' : 'np';
-            document.getElementById('langBtn').innerText = currentLang === 'np' ? 'EN' : 'NP';
-            document.querySelectorAll('[data-np]').forEach(el => {
-                el.innerText = el.getAttribute(currentLang === 'en' ? 'data-en' : 'data-np');
-            });
-            updateLiveStatus();
-        }
-
-        // Automatic Geolocation and Weather Fetcher
-        function fetchLiveLocationAndWeather() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(async (position) => {
-                    const lat = position.coords.latitude;
-                    const lon = position.coords.longitude;
-                    try {
-                        const geoRes = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`);
-                        const geoData = await geoRes.json();
-                        const cityName = geoData.address.city || geoData.address.town || geoData.address.village || geoData.address.state || "स्थान";
-
-                        const weatherRes = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`);
-                        const weatherData = await weatherRes.json();
-                        const temp = Math.round(weatherData.current_weather.temperature);
-
-                        document.getElementById('locationText').innerText = cityName;
-                        document.getElementById('weatherText').innerText = `${temp}°C`;
-                    } catch (err) {
-                        document.getElementById('locationText').innerText = "लोकेसन प्राप्त भएन";
-                        document.getElementById('weatherText').innerText = "--°C";
-                    }
-                }, () => {
-                    document.getElementById('locationText').innerText = "अनुमति अस्वीकृत";
-                    document.getElementById('weatherText').innerText = "--°C";
-                });
-            } else {
-                document.getElementById('locationText').innerText = "समर्थन छैन";
-            }
-        }
-
-        function updateLiveStatus() {
-            const now = new Date();
-            document.getElementById('timeText').innerText = now.toLocaleTimeString(currentLang === 'en' ? 'en-US' : 'ne-NP');
-            const daysEn = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-            const monthsEn = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-            const monthNameStr = monthsEn[now.getMonth()], dayNumStr = String(now.getDate()).padStart(2, '0'), dayNameStr = daysEn[now.getDay()];
-            
-            if (currentLang === 'en') {
-                document.getElementById('nepaliDateText').innerText = 'BS 2083 Shrawan 24';
-            } else {
-                document.getElementById('nepaliDateText').innerText = getNepaliDateStr(now);
-            }
-            document.getElementById('englishDateText').innerText = `${monthNameStr} ${dayNumStr} (${dayNameStr})`;
-        }
-
-        setInterval(updateLiveStatus, 1000); 
-        updateLiveStatus();
-        fetchLiveLocationAndWeather();
-
-        // Visitor Counter & Admin Trigger script (किबोर्डमा 'admin' टाइप गरेपछि मात्र भिजिटर संख्या देखिन्छ)
-        let vCount = localStorage.getItem('site_visitor_count') || Math.floor(Math.random() * 50) + 120;
-        if(!localStorage.getItem('site_visited')) { 
-            vCount++; 
-            localStorage.setItem('site_visitor_count', vCount); 
-            localStorage.setItem('site_visited', 'true'); 
-        }
-        document.getElementById('visitorCount').innerText = vCount;
-
-        let typedCode = '';
-        document.addEventListener('keydown', (e) => {
-            typedCode += e.key;
-            if (typedCode.endsWith('admin')) {
-                const box = document.getElementById('adminVisitorBox');
-                box.style.display = box.style.display === 'none' ? 'block' : 'none';
-                alert('भिजिटर काउन्टर मोड: ' + vCount);
-            }
-        });
     </script>
+
 </body>
 </html>
