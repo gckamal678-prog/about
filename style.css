@@ -1,0 +1,150 @@
+/* Zoom र Selection रोक्न बेसिक सेटअप */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  touch-action: pan-y; /* Pinch zoom रोक्न र Vertical Scroll मात्र अनुमति दिन */
+  user-select: none;   /* टेक्स्ट सेलेक्ट हुन नदिन */
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #0d1117;
+  color: #e6edf3;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden; /* पूरै पेज जुम वा स्क्रोल हुन नदिन */
+}
+
+/* १. Top Header */
+.top-header {
+  height: 50px;
+  background: #161b22;
+  border-bottom: 1px solid #30363d;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+  flex-shrink: 0;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+}
+
+.lock-indicator {
+  font-size: 11px;
+  color: #58a6ff;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.top-nav a {
+  color: #f0f6fc;
+  text-decoration: none;
+  font-size: 12px;
+  margin-left: 8px;
+  padding: 4px 6px;
+  background: #21262d;
+  border-radius: 4px;
+  border: 1px solid #30363d;
+}
+
+/* २. Secondary Bar */
+.secondary-bar {
+  background: #1f242d;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 8px 10px;
+  font-size: 11px;
+  border-bottom: 2px solid #238636;
+  flex-shrink: 0;
+  justify-content: space-between;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #8b949e;
+}
+
+.info-item i {
+  color: #58a6ff;
+}
+
+.lock-controls {
+  color: #2ea043;
+  font-weight: bold;
+}
+
+/* ३. Middle Content Area (Scrollable) */
+.content-area {
+  flex: 1;
+  overflow-y: auto; /* बिचको भाग मात्र स्क्रोल हुनेछ */
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.card {
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.card h2 {
+  font-size: 16px;
+  color: #58a6ff;
+  margin-bottom: 8px;
+}
+
+.card p {
+  font-size: 13px;
+  color: #c9d1d9;
+  line-height: 1.5;
+}
+
+.media-placeholder {
+  margin-top: 10px;
+  height: 120px;
+  background: #0d1117;
+  border: 1px dashed #30363d;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #8b949e;
+  gap: 5px;
+}
+
+/* ४. Footer */
+.bottom-footer {
+  height: 60px;
+  background: #161b22;
+  border-top: 2px solid #da3633;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  color: #8b949e;
+  flex-shrink: 0;
+}
+
+.contact-info {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 4px;
+  color: #58a6ff;
+}
+
+.copyright {
+  font-weight: bold;
+  color: #f0f6fc;
+}
