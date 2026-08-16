@@ -1,4 +1,4 @@
-  * {
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -29,13 +29,35 @@ body.light-mode {
   background: linear-gradient(145deg, #1e293b, #0f172a);
   box-shadow: 0 8px 20px rgba(0,0,0,0.5);
   border-bottom: 2px solid #334155;
-  padding: 10px 5px;
+  padding: 5px;
 }
 
 body.light-mode .top-header {
   background: linear-gradient(145deg, #ffffff, #e2e8f0);
   box-shadow: 0 8px 20px rgba(0,0,0,0.1);
   border-bottom: 2px solid #cbd5e1;
+}
+
+/* New Top Row - Brand and Icons */
+.brand-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 10px;
+  margin-bottom: 5px;
+}
+
+.brand-name {
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #38bdf8;
+}
+
+.brand-icons {
+  display: flex;
+  gap: 15px;
+  font-size: 1.2rem;
+  cursor: pointer;
 }
 
 /* 5 Nav Buttons - 1st Row */
@@ -103,7 +125,7 @@ body.light-mode .info-row {
 
 /* Scrollable Middle Section */
 .middle-content {
-  margin-top: 100px; /* Space for Top Header */
+  margin-top: 140px; /* Space for Top Header (updated for new row) */
   margin-bottom: 60px; /* Space for Footer */
   flex: 1;
   overflow-y: auto;
