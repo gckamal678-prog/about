@@ -12,9 +12,19 @@
 </head>
 <body class="dark-mode">
 
-  <!-- Fixed Top Header -->
+  <!-- Fixed Top Main Header -->
   <header class="top-header">
-    <!-- Row 1: 5 Main Navigation Buttons -->
+    
+    <!-- New Top Row: Brand, Search, Profile -->
+    <div class="brand-row">
+      <span class="brand-name">KAMAL G.C.</span>
+      <div class="brand-icons">
+        <i class="fa-solid fa-search"></i>
+        <i class="fa-solid fa-user-circle"></i>
+      </div>
+    </div>
+
+    <!-- Row 2: 5 Main Navigation Buttons -->
     <nav class="nav-row">
       <button class="btn-3d" onclick="location.href='#blog'" data-np="ब्लग" data-en="Blog">ब्लग</button>
       <button class="btn-3d" onclick="location.href='#emergency'" data-np="आपतकालीन" data-en="Emergency">आपतकालीन</button>
@@ -23,7 +33,7 @@
       <button class="btn-3d lang-btn" id="lang-toggle" onclick="toggleLanguage()">EN</button>
     </nav>
 
-    <!-- Row 2: Dynamic Live Info Bar -->
+    <!-- Row 3: Dynamic Live Info Bar -->
     <div class="info-row">
       <div class="info-item"><i class="fa-solid fa-location-dot"></i> <span id="user-location">Locating...</span></div>
       <div class="info-item"><i class="fa-regular fa-clock"></i> <span id="real-time">--:--:--</span></div>
