@@ -2,8 +2,8 @@
 <html lang="np">
 <head>
   <link rel="manifest" href="manifest.json">
-<link rel="icon" type="image/png" sizes="192x192" href="mylogo.png">
-<link rel="apple-touch-icon" href="mylogo.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="mylogo.png">
+  <link rel="apple-touch-icon" href="mylogo.png">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>KAMAL G.C. Portal</title>
@@ -93,20 +93,29 @@
       gap: 16px;
       font-size: 1.2rem;
       color: #cbd5e1;
+      align-items: center;
     }
 
     body.light-mode .brand-icons {
       color: #334155;
     }
 
-    .brand-icons i {
+    .brand-icons i, .profile-nav-avatar {
       cursor: pointer;
       transition: transform 0.2s ease, color 0.2s ease;
     }
 
-    .brand-icons i:hover {
+    .brand-icons i:hover, .profile-nav-avatar:hover {
       transform: scale(1.15);
       color: #38bdf8;
+    }
+
+    .profile-nav-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #38bdf8;
     }
 
     /* Row 2: 5 Main 3D Buttons */
@@ -303,10 +312,11 @@
       background: #1e293b;
       border: 1px solid #475569;
       width: 90%;
-      max-width: 350px;
+      max-width: 360px;
       border-radius: 12px;
-      padding: 15px;
+      padding: 20px;
       box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+      text-align: center;
     }
 
     body.light-mode .modal-box {
@@ -318,25 +328,69 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-size: 14px;
+      font-size: 15px;
       font-weight: bold;
-      margin-bottom: 10px;
+      margin-bottom: 15px;
     }
 
     .close-btn {
       cursor: pointer;
       color: #f43f5e;
+      font-size: 1.2rem;
+    }
+
+    /* प्रोफाइल फोटो (अझ ठूलो र सफा साइज) */
+    .profile-img-container {
+      position: relative;
+      width: 110px;
+      height: 110px;
+      margin: 0 auto 15px auto;
+    }
+
+    .profile-img-preview {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #38bdf8;
+      background: #0f172a;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+
+    .change-photo-btn {
+      position: absolute;
+      bottom: 2px;
+      right: 2px;
+      background: #0284c7;
+      color: white;
+      border-radius: 50%;
+      width: 34px;
+      height: 34px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      font-size: 14px;
+      border: 2px solid #1e293b;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.4);
+      transition: transform 0.2s;
+    }
+
+    .change-photo-btn:hover {
+      transform: scale(1.1);
+      background: #0369a1;
     }
 
     .input-field {
       width: 100%;
-      padding: 8px;
+      padding: 10px;
       border-radius: 6px;
       border: 1px solid #475569;
       background: #0f172a;
       color: #fff;
-      font-size: 12px;
-      margin-bottom: 10px;
+      font-size: 13px;
+      margin-bottom: 12px;
+      text-align: left;
     }
 
     body.light-mode .input-field {
@@ -347,13 +401,18 @@
 
     .submit-btn {
       width: 100%;
-      padding: 8px;
+      padding: 10px;
       background: #0284c7;
       color: #fff;
       border: none;
       border-radius: 6px;
       font-weight: bold;
       cursor: pointer;
+      font-size: 13px;
+    }
+
+    .submit-btn:hover {
+      background: #0369a1;
     }
 
     /* Locked Footer */
@@ -405,7 +464,7 @@
       </div>
       <div class="brand-icons">
         <i class="fa-solid fa-magnifying-glass" title="Search" onclick="openSearchModal()"></i>
-        <i class="fa-solid fa-circle-user" title="Profile" onclick="openProfileModal()"></i>
+        <img src="mylogo.png" id="nav-profile-img" class="profile-nav-avatar" title="Profile" onclick="openProfileModal()" alt="Profile">
       </div>
     </div>
 
@@ -430,73 +489,95 @@
     </div>
   </header>
 
-  <!-- Middle Scrollable Area (Headlines Content) -->
+  <!-- Middle Scrollable Area (क्रमबद्ध कार्डहरू) -->
   <main class="middle-content" id="content-container">
     
-    <!-- 1. Blog Headline Card -->
-    <div class="card">
-      <div class="card-header">
-        <i class="fa-solid fa-newspaper"></i>
-        <span data-np="ताजा ब्लग र अनुभवहरू" data-en="Latest Blog & Articles">ताजा ब्लग र अनुभवहरू</span>
-      </div>
-      <div class="card-desc" data-np="जीवनका अनुभव, यात्रा र विचारहरूबारे लेखिएका नयाँ ब्लग पोस्टहरू पढ्नुहोस्।" data-en="Read latest blog posts regarding personal journeys and insights.">
-        जीवनका अनुभव, यात्रा र विचारहरूबारे लेखिएका नयाँ ब्लग पोस्टहरू पढ्नुहोस्।
-      </div>
-      <a href="blog.html" class="card-btn" data-np="ब्लग खोल्नुहोस् &rarr;" data-en="Open Blog &rarr;">ब्लग खोल्नुहोस् &rarr;</a>
-    </div>
-
-    <!-- 2. Emergency Headline Card -->
+    <!-- ==========================================
+         १. आपत्कालीन सम्पर्क सेवा (Emergency)
+         ========================================== -->
     <div class="card emergency-card">
       <div class="card-header">
         <i class="fa-solid fa-phone-volume"></i>
-        <span data-np="आपत्कालीन सम्पर्क सेवा" data-en="Emergency Contact Services">आपत्कालीन सम्पर्क सेवा</span>
+        <span data-np="१. आपत्कालीन सम्पर्क सेवा" data-en="1. Emergency Contact Services">१. आपत्कालीन सम्पर्क सेवा</span>
       </div>
-      <div class="card-desc" data-np="प्रहरी, एम्बुलेन्स, दमकल र अन्य जरुरी हेल्पलाइन नम्बरहरू तुरुन्त हेर्नुहोस्।" data-en="Access critical helpline numbers for police, ambulance, and fire service.">
-        प्रहरी, एम्बुलेन्स, दमकल र अन्य जरुरी हेल्पलाइन नम्बरहरू तुरुन्त हेर्नुहोस्।
+      <div class="card-desc" data-np="प्रहरी, एम्बुलेन्स, र दमकल जस्ता जरुरी हेल्पलाइन नम्बरहरूको पहुँच।" data-en="Access to necessary helpline numbers like police, ambulance, and fire brigade.">
+        प्रहरी, एम्बुलेन्स, र दमकल जस्ता जरुरी हेल्पलाइन नम्बरहरूको पहुँच।
       </div>
       <a href="emergency.html" class="card-btn" data-np="नम्बरहरू हेर्नुहोस् &rarr;" data-en="View Numbers &rarr;">नम्बरहरू हेर्नुहोस् &rarr;</a>
     </div>
 
-    <!-- 3. Tech Headline Card -->
-<!-- कार्ड १: बाल पाठशाला PWA -->
-<div class="card" style="margin-bottom: 15px;">
-  <div class="card-header">
-    <i class="fa-solid fa-graduation-cap"></i>
-    <span data-np="१. प्रविधिमा नयाँ फड्को: PWA र बाल पाठशाला" data-en="1. New Leap in Tech: PWA & Kids Learning">
-      १. प्रविधिमा नयाँ फड्को: PWA र बाल पाठशाला
-    </span>
-  </div>
-  <div class="card-desc" data-np="PWA प्रविधि र AI को प्रयोग गरी बालबालिकाका लागि निर्माण गरिएको आधुनिक सिकाइ प्लेटफर्म (kids.kamalgc.com.np)..." data-en="Modern learning platform (kids.kamalgc.com.np) built for children using PWA and AI technology...">
-    PWA प्रविधि र AI को प्रयोग गरी बालबालिकाका लागि निर्माण गरिएको आधुनिक सिकाइ प्लेटफर्म (kids.kamalgc.com.np)...
-  </div>
-  <a href="tech.html#post-1" class="card-btn" data-np="पुरा लेख पढ्नुहोस् &rarr;" data-en="Read Full Article &rarr;">पुरा लेख पढ्नुहोस् &rarr;</a>
-</div>
+    <!-- ==========================================
+         २. पहिलो ब्लग (जिन्दगीको गोरेटोमा...)
+         ========================================== -->
+    <div class="card">
+      <div class="card-header">
+        <i class="fa-solid fa-newspaper"></i>
+        <span data-np="२. जिन्दगीको गोरेटोमा अलि पछाडि फर्केर हेर्दा..." data-en="2. Looking back on the path of life...">२. जिन्दगीको गोरेटोमा अलि पछाडि फर्केर हेर्दा...</span>
+      </div>
+      <div class="card-desc" data-np="१५–१६ वर्षको उमेरको फोटो र किशोरावस्थाको सादगी, निर्दोषपना सम्बन्धी संस्मरण।" data-en="Memoirs and photos from the age of 15-16 years old.">
+        १५–१६ वर्षको उमेरको फोटो र किशोरावस्थाको सादगी, निर्दोषपना सम्बन्धी संस्मरण।
+      </div>
+      <a href="blog.html#blog-1" class="card-btn" data-np="ब्लग पढ्नुहोस् &rarr;" data-en="Read Blog &rarr;">ब्लग पढ्नुहोस् &rarr;</a>
+    </div>
 
-<!-- कार्ड २: AI प्रोजेक्ट WPA -->
-<div class="card">
-  <div class="card-header">
-    <i class="fa-solid fa-robot"></i>
-    <span data-np="२. मेरो नयाँ AI प्रोजेक्ट: WPA" data-en="2. My New AI Project: WPA">
-      २. मेरो नयाँ AI प्रोजेक्ट: WPA
-    </span>
-  </div>
-  <div class="card-desc" data-np="प्रविधिको क्षेत्रमा मेरो नयाँ प्रयासको पहिलो पाइला: WPA AI प्रोजेक्टको बारेमा सानो जानकारी..." data-en="The first step of my new venture in technology: A brief overview of the WPA AI project...">
-    प्रविधिको क्षेत्रमा मेरो नयाँ प्रयासको पहिलो पाइला: WPA AI प्रोजेक्टको बारेमा सानो जानकारी...
-  </div>
-  <a href="tech.html#post-2" class="card-btn" data-np="पुरा लेख पढ्नुहोस् &rarr;" data-en="Read Full Article &rarr;">पुरा लेख पढ्नुहोस् &rarr;</a>
-</div>
+    <!-- ==========================================
+         ३. दोस्रो ब्लग (एउटा नौलो यात्रा...)
+         ========================================== -->
+    <div class="card">
+      <div class="card-header">
+        <i class="fa-solid fa-book-open"></i>
+        <span data-np="३. एउटा नौलो यात्रा, जसले मलाई धेरै कुरा सिकायो" data-en="3. A New Journey That Taught Me Many Things">३. एउटा नौलो यात्रा, जसले मलाई धेरै कुरा सिकायో</span>
+      </div>
+      <div class="card-desc" data-np="१७ वर्षको उमेरमा घर छाडेर केरलातर्फ गरिएको संघर्षमय र सिकाइले भरिएको यात्राको कथा।" data-en="The story of a struggling and educational journey to Kerala at the age of 17.">
+        १७ वर्षको उमेरमा घर छाडेर केरलातर्फ गरिएको संघर्षमय र सिकाइले भरिएको यात्राको कथा।
+      </div>
+      <a href="blog.html#blog-2" class="card-btn" data-np="ब्लग पढ्नुहोस् &rarr;" data-en="Read Blog &rarr;">ब्लग पढ्नुहोस् &rarr;</a>
+    </div>
 
-    <!-- 4. About Me Headline Card -->
+    <!-- ==========================================
+         ४. प्रविधि: PWA र बाल पाठशाला
+         ========================================== -->
+    <div class="card">
+      <div class="card-header">
+        <i class="fa-solid fa-graduation-cap"></i>
+        <span data-np="४. PWA र बाल पाठशाला" data-en="4. PWA and Kids Learning Platform">४. PWA र बाल पाठशाला</span>
+      </div>
+      <div class="card-desc" data-np="बालबालिकाका लागि AI र Progressive Web App (PWA) प्रविधि प्रयोग गरी बनाइएको आधुनिक सिकाइ प्लेटफर्म (kids.kamalgc.com.np)।" data-en="Modern learning platform built for children using AI and Progressive Web App (PWA) technology.">
+        बालबालिकाका लागि AI र Progressive Web App (PWA) प्रविधि प्रयोग गरी बनाइएको आधुनिक सिकाइ प्लेटफर्म (kids.kamalgc.com.np)।
+      </div>
+      <a href="tech.html#post-1" class="card-btn" data-np="पुरा लेख पढ्नुहोस् &rarr;" data-en="Read Full Article &rarr;">पुरा लेख पढ्नुहोस् &rarr;</a>
+    </div>
+
+    <!-- ==========================================
+         ५. प्रविधि: WPA AI प्रोजेक्ट
+         ========================================== -->
+    <div class="card">
+      <div class="card-header">
+        <i class="fa-solid fa-robot"></i>
+        <span data-np="५. WPA AI प्रोजेक्ट" data-en="5. WPA AI Project">५. WPA AI प्रोजेक्ट</span>
+      </div>
+      <div class="card-desc" data-np="प्रविधिको क्षेत्रमा सुरु गरिएको नयाँ AI प्रोजेक्ट (WPA) को परिचय।" data-en="Introduction to the new AI project (WPA) started in the field of technology.">
+        प्रविधिको क्षेत्रमा सुरु गरिएको नयाँ AI प्रोजेक्ट (WPA) को परिचय।
+      </div>
+      <a href="tech.html#post-2" class="card-btn" data-np="पुरा लेख पढ्नुहोस् &rarr;" data-en="Read Full Article &rarr;">पुरा लेख पढ्नुहोस् &rarr;</a>
+    </div>
+
+    <!-- ==========================================
+         ६. मेरो परिचय र बायो (About Me)
+         ========================================== -->
     <div class="card">
       <div class="card-header">
         <i class="fa-solid fa-user-gear"></i>
-        <span data-np="मेरो परिचय र बायो" data-en="About Me & Profile">मेरो परिचय र बायो</span>
+        <span data-np="६. परिचय र बायो" data-en="6. About Me & Bio">६. परिचय र बायो</span>
       </div>
-      <div class="card-desc" data-np="मेरो व्यक्तिगत पृष्ठभूमि, काम र मेरो उद्देश्यको बारेमा विस्तृत जानकारी।" data-en="Learn more about my background, work, and personal portfolio.">
-        मेरो व्यक्तिगत पृष्ठभूमि, काम र मेरो उद्देश्यको बारेमा विस्तृत जानकारी।
+      <div class="card-desc" data-np="व्यक्तिगत पृष्ठभूमि, काम, र उद्देश्यको विवरण।" data-en="Details of personal background, work, and objectives.">
+        व्यक्तिगत पृष्ठभूमि, काम, र उद्देश्यको विवरण।
       </div>
       <a href="about.html" class="card-btn" data-np="विस्तृत हेर्नुहोस् &rarr;" data-en="Read More &rarr;">विस्तृत हेर्नुहोस् &rarr;</a>
     </div>
+
+    <!-- 💡 [सुझाव - ७]: पछि भ्लग (Blog) वा प्रविधि (Tech) मा नयाँ कुरा थप्नु परेमा, 
+         यही ठाउँमा नयाँ `<div class="card">...</div>` बनाएर सजिलै थप्न सक्नुहुनेछ। -->
 
   </main>
 
@@ -511,16 +592,26 @@
     </div>
   </div>
 
-  <!-- Profile Save Modal Box -->
+  <!-- Profile Save Modal Box (ठूलो साइज, ग्यालरीबाट फोटो फेर्न मिल्ने) -->
   <div class="modal-overlay" id="profile-modal">
     <div class="modal-box">
       <div class="modal-header">
-        <span data-np="प्रोफाइल सेभ गर्नुहोस्" data-en="User Profile">प्रोफाइल सेभ गर्नुहोस्</span>
+        <span data-np="प्रोफाइल सुरक्षित गर्नुहोस्" data-en="Save Profile">प्रोफाइल सुरक्षित गर्नुहोस्</span>
         <i class="fa-solid fa-xmark close-btn" onclick="closeProfileModal()"></i>
       </div>
+      
+      <!-- Profile Picture Section (अझ ठूलो साइज) -->
+      <div class="profile-img-container">
+        <img src="mylogo.png" id="modal-profile-img" class="profile-img-preview" alt="Profile Photo">
+        <label for="profile-upload" class="change-photo-btn" title="ગ्यालरीबाट फोटो फेर्नुहोस्">
+          <i class="fa-solid fa-camera"></i>
+        </label>
+        <input type="file" id="profile-upload" accept="image/*" style="display: none;" onchange="handleImageUpload(event)">
+      </div>
+
       <input type="text" id="user-name-input" class="input-field" placeholder="तपाईंको नाम (Full Name)">
       <input type="email" id="user-email-input" class="input-field" placeholder="तपाईंको इमेल (Email Address)">
-      <button class="submit-btn" onclick="saveUserProfile()" data-np="सुरक्षित गर्नुहोस्" data-en="Save Profile">सुरक्षित गर्नुहोस्</button>
+      <button class="submit-btn" onclick="saveUserProfile()" data-np="सेभ गर्नुहोस्" data-en="Save">सेभ गर्नुहोस्</button>
     </div>
   </div>
 
@@ -636,19 +727,39 @@
       });
     }
 
-    // --- Profile LocalStorage Logic ---
+    // --- Profile LocalStorage & Gallery Image Upload Logic ---
     function openProfileModal() {
       document.getElementById('profile-modal').style.display = 'flex';
       
-      // Load existing saved profile
       const savedName = localStorage.getItem('kamal_portal_user_name') || '';
       const savedEmail = localStorage.getItem('kamal_portal_user_email') || '';
+      const savedImg = localStorage.getItem('kamal_portal_user_img');
+
       document.getElementById('user-name-input').value = savedName;
       document.getElementById('user-email-input').value = savedEmail;
+
+      if (savedImg) {
+        document.getElementById('modal-profile-img').src = savedImg;
+      }
     }
 
     function closeProfileModal() {
       document.getElementById('profile-modal').style.display = 'none';
+    }
+
+    // मोबाइलको ग्यालरीबाट फोटो छानेर ठूलो साइजमा राख्ने र सेभ गर्ने
+    function handleImageUpload(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const imgData = e.target.result;
+          document.getElementById('modal-profile-img').src = imgData;
+          document.getElementById('nav-profile-img').src = imgData;
+          localStorage.setItem('kamal_portal_user_img', imgData);
+        };
+        reader.readAsDataURL(file);
+      }
     }
 
     function saveUserProfile() {
@@ -664,6 +775,15 @@
         alert(currentLang === 'NP' ? "कृपया नाम भर्नुहोस्।" : "Please enter your name.");
       }
     }
+
+    // पेज लोड हुँदा सेभ भएको फोटो देखाउने
+    window.onload = function() {
+      const savedImg = localStorage.getItem('kamal_portal_user_img');
+      if (savedImg) {
+        document.getElementById('nav-profile-img').src = savedImg;
+        document.getElementById('modal-profile-img').src = savedImg;
+      }
+    };
   </script>
 </body>
 </html>
