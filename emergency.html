@@ -1,322 +1,265 @@
 <!DOCTYPE html>
-<html lang="ne">
+<html lang="np">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>आकस्मिक सेवाहरू - कमल जी.सी.</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" rel="stylesheet">
-    <link rel="manifest" href="manifest.json">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Emergency Services - KAMAL G.C.</title>
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
 
-    <style>
-        :root { --bg-color: #f4f6f9; --text-color: #333; --header-bg: #ffffff; --box-bg: #ffffff; --border-color: #3498db; --sidebar-bg: #2c3e50; --sidebar-text: #ffffff; --banner-bg: #eaf2f8; --banner-text: #1b4f72; }
-        [data-theme="dark"] { --bg-color: #121212; --text-color: #e0e0e0; --header-bg: #1e1e1e; --box-bg: #1e1e1e; --border-color: #3498db; --sidebar-bg: #1a1a1a; --sidebar-text: #ffffff; --banner-bg: #2a2a2a; --banner-text: #85c1e9; }
-        *, *::before, *::after { box-sizing: border-box; }
-        body { margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--bg-color); color: var(--text-color); line-height: 1.6; display: flex; flex-direction: column; min-height: 100vh; transition: background-color 0.3s, color 0.3s; }
-        header { position: fixed; top: 0; left: 0; width: 100%; height: 60px; background-color: var(--header-bg); box-shadow: 0 2px 5px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: space-between; padding: 0 15px; z-index: 1000; }
-        .header-left, .header-right { display: flex; align-items: center; gap: 12px; }
-        .menu-btn { background: none; border: none; font-size: 24px; cursor: pointer; color: var(--text-color); }
-        .logo-text { font-family: 'Poppins', sans-serif; font-size: 19px; font-weight: 700; background: linear-gradient(45deg, #2980b9, #3498db); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-decoration: none; }
-        .control-btn { background: none; border: 1px solid var(--text-color); color: var(--text-color); padding: 4px 8px; border-radius: 5px; cursor: pointer; font-size: 13px; font-weight: bold; }
-        .control-btn:hover { background-color: var(--text-color); color: var(--bg-color); }
-        .live-status-bar { margin-top: 60px; background-color: var(--banner-bg); color: var(--banner-text); padding: 6px 10px; text-align: center; font-size: 0.78em; font-weight: 500; border-bottom: 1px solid rgba(0,0,0,0.05); display: flex; justify-content: center; align-items: center; gap: 6px; white-space: nowrap; overflow-x: auto; }
-        .sidebar { position: fixed; top: 0; left: -280px; width: 280px; height: 100%; background-color: var(--sidebar-bg); color: var(--sidebar-text); transition: left 0.3s ease; z-index: 1100; padding-top: 80px; box-shadow: 2px 0 5px rgba(0,0,0,0.2); }
-        .sidebar.active { left: 0; }
-        .sidebar-close { position: absolute; top: 20px; right: 20px; background: none; border: none; color: var(--sidebar-text); font-size: 24px; cursor: pointer; }
-        .sidebar ul { list-style: none; padding: 0; margin: 0; }
-        .sidebar ul li { border-bottom: 1px solid #34495e; }
-        .sidebar ul li a { display: block; padding: 15px 25px; color: var(--sidebar-text); text-decoration: none; }
-        .sidebar ul li:hover { background-color: #34495e; }
-        .main-container { max-width: 1200px; width: 100%; margin: 15px auto 40px auto; padding: 0 15px; flex: 1; }
-        .section-box { background: var(--box-bg); border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); padding: 25px; margin-bottom: 25px; }
-        h2 { color: var(--text-color); border-bottom: 2px solid var(--border-color); padding-bottom: 5px; margin-top: 20px; }
-        
-        /* Emergency Contact Grid Style */
-        .emergency-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; margin-top: 15px; }
-        .emergency-card { background: var(--bg-color); border: 1px solid rgba(0,0,0,0.1); padding: 15px; border-radius: 8px; display: flex; align-items: center; justify-content: space-between; }
-        .emergency-info h4 { margin: 0 0 5px 0; font-size: 15px; color: var(--text-color); }
-        .emergency-number { font-size: 18px; font-weight: bold; color: #e74c3c; text-decoration: none; background: rgba(231, 76, 60, 0.1); padding: 6px 12px; border-radius: 6px; display: inline-block; }
-        .emergency-number:hover { background: #e74c3c; color: white; }
+    body {
+      background-color: #0f172a;
+      color: #f8fafc;
+      padding: 20px 15px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
 
-        footer { background-color: var(--sidebar-bg); color: var(--sidebar-text); text-align: center; padding: 20px; margin-top: auto; font-size: 14px; }
-        .footer-links { margin-bottom: 12px; display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 15px; }
-        .footer-links a { color: #3498db; text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; }
-    </style>
+    .main-container {
+      width: 100%;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .section-box {
+      background: #1e293b;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      border: 1px solid #334155;
+    }
+
+    h2 {
+      color: #38bdf8;
+      font-size: 1.3rem;
+      margin-bottom: 8px;
+      text-align: center;
+    }
+
+    p {
+      font-size: 13.5px;
+      line-height: 1.6;
+      color: #cbd5e1;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    h3 {
+      font-size: 1rem;
+      color: #f59e0b;
+      margin-top: 25px;
+      margin-bottom: 12px;
+      border-left: 4px solid #f59e0b;
+      padding-left: 8px;
+    }
+
+    /* Emergency Grid Layout */
+    .emergency-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 12px;
+    }
+
+    /* Card Styling */
+    .emergency-card {
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid #334155;
+      border-radius: 10px;
+      padding: 12px 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.2s ease;
+    }
+
+    .emergency-card:hover {
+      border-color: #38bdf8;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(56, 189, 248, 0.15);
+    }
+
+    .emergency-info h4 {
+      font-size: 14px;
+      font-weight: 600;
+      color: #e2e8f0;
+    }
+
+    /* Call Button / Number Styling */
+    .emergency-number {
+      background: linear-gradient(145deg, #2563eb, #1d4ed8);
+      color: #ffffff !important;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 15px;
+      padding: 6px 14px;
+      border-radius: 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+      white-space: nowrap;
+      transition: transform 0.1s ease, background 0.2s ease;
+    }
+
+    .emergency-number:active {
+      transform: scale(0.95);
+    }
+
+    .emergency-number:hover {
+      background: linear-gradient(145deg, #1d4ed8, #1e40af);
+    }
+
+    @media (max-width: 480px) {
+      .emergency-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
-<body data-theme="light">
-    <header>
-        <div class="header-left">
-            <button class="menu-btn" onclick="toggleSidebar()">☰</button>
-            <a href="index.html" class="logo-text">kamalgc.com.np</a>
-        </div>
-        <div class="header-right">
-            <button class="control-btn" id="langBtn" onclick="toggleLanguage()">EN</button>
-            <button class="control-btn" id="themeBtn" onclick="toggleTheme()">🌙 Dark</button>
-        </div>
-    </header>
+<body>
 
-    <div class="live-status-bar" id="liveStatusBar">
-        <span id="locationText">लोड हुँदैछ...</span> |
-        <span id="nepaliDateText">२०८३ साउन २४</span> |
-        <span id="englishDateText">Aug 09 (Sun)</span> |
-        <span id="timeText">--:--:--</span> |
-        <span id="weatherText">--°C</span>
+  <main class="main-container">
+    <div class="section-box">
+      
+      <!-- Page Header -->
+      <h2 data-en="Nepal Emergency & Helpline Services" data-np="नेपालका मुख्य आपत्कालीन तथा हेल्पलाइन सेवाहरू">नेपालका मुख्य आपत्कालीन तथा हेल्पलाइन सेवाहरू</h2>
+      <p data-en="Important contact numbers for emergency assistance, safety, and public services in Nepal. Click on any number to call directly." data-np="नेपालमा आइपर्ने विभिन्न आपत्कालीन अवस्था, सुरक्षा र सेवाहरूको लागि चाहिने महत्त्वपूर्ण सम्पर्क नम्बरहरू। नम्बरमा क्लिक गरेर सीधा फोन गर्न सकिन्छ।">
+        नेपालमा आइपर्ने विभिन्न आपत्कालीन अवस्था, सुरक्षा र सेवाहरूको लागि चाहिने महत्त्वपूर्ण सम्पर्क नम्बरहरू। नम्बरमा क्लिक गरेर सीधा फोन गर्न सकिन्छ।
+      </p>
+
+      <!-- Section 1: Core Emergency Services -->
+      <h3 data-en="Core Emergency Services" data-np="मुख्य आपत्कालीन सेवाहरू">मुख्य आपत्कालीन सेवाहरू</h3>
+      <div class="emergency-grid">
+        <div class="emergency-card">
+          <div class="emergency-info">
+            <h4 data-en="🚓 Police Emergency" data-np="🚓 नेपाल प्रहरी (Police)">🚓 नेपाल प्रहरी (Police)</h4>
+          </div>
+          <a href="tel:100" class="emergency-number">१००</a>
+        </div>
+        <div class="emergency-card">
+          <div class="emergency-info">
+            <h4 data-en="🚒 Fire Brigade" data-np="🚒 दमकल (Fire Brigade)">🚒 दमकल (Fire Brigade)</h4>
+          </div>
+          <a href="tel:101" class="emergency-number">१०१</a>
+        </div>
+        <div class="emergency-card">
+          <div class="emergency-info">
+            <h4 data-en="🚑 Ambulance Service" data-np="🚑 एम्बुलेन्स (Ambulance)">🚑 एम्बुलेन्स (Ambulance)</h4>
+          </div>
+          <a href="tel:102" class="emergency-number">१०२</a>
+        </div>
+        <div class="emergency-card">
+          <div class="emergency-info">
+            <h4 data-en="🚔 Traffic Police" data-np="🚔 ट्राफिक प्रहरी (Traffic)">🚔 ट्राफिक प्रहरी (Traffic)</h4>
+          </div>
+          <a href="tel:103" class="emergency-number">१०३</a>
+        </div>
+        <div class="emergency-card">
+          <div class="emergency-info">
+            <h4 data-en="🔍 Missing Child Search" data-np="🔍 हराएका बालबालिका खोजतलास">🔍 हराएका बालबालिका खोजतलास</h4>
+          </div>
+          <a href="tel:104" class="emergency-number">१०४</a>
+        </div>
+        <div class="emergency-card">
+          <div class="emergency-info">
+            <h4 data-en="🪖 Armed Police Force" data-np="🪖 सशस्त्र प्रहरी बल (APF)">🪖 सशस्त्र प्रहरी बल (APF)</h4>
+          </div>
+          <a href="tel:1114" class="emergency-number">१११४</a>
+        </div>
+      </div>
+
+      <!-- Section 2: Social & Grievance Helplines -->
+      <h3 data-en="Social & Grievance Helplines" data-np="सामाजिक, सुरक्षा तथा गुनासो हेल्पलाइन">सामाजिक, सुरक्षा तथा गुनासो हेल्पलाइन</h3>
+      <div class="emergency-grid">
+        <div class="emergency-card">
+          <div class="emergency-info">
+            <h4 data-en="👶 Child Helpline" data-np="👶 बाल हेल्पलाइन (Child Helpline)">👶 बाल हेल्पलाइन (Child Helpline)</h4>
+          </div>
+          <a href="tel:1098" class="emergency-number">१०९८</a>
+        </div>
+        <div class="emergency-card">
+          <div class="emergency-info">
+            <h4 data-en="📞 Hello Sarkar (Grievance)" data-np="📞 हेलो सरकार (Government Grievance)">📞 हेलो सरकार (Government Grievance)</h4>
+          </div>
+          <a href="tel:1111" class="emergency-number">११११</a>
+        </div>
+        <div class="emergency-card">
+          <div class="emergency-info">
+            <h4 data-en="👩 Women Violence Helpline" data-np="👩 महिला हिंसा हेल्पलाइन">👩 महिला हिंसा हेल्पलाइन</h4>
+          </div>
+          <a href="tel:1145" class="emergency-number">११४५</a>
+        </div>
+        <div class="emergency-card">
+          <div class="emergency-info">
+            <h4 data-en="🧠 Mental Health Counseling" data-np="🧠 मानसिक स्वास्थ्य परामर्श">🧠 मानसिक स्वास्थ्य परामर्श</h4>
+          </div>
+          <a href="tel:1166" class="emergency-number">११६६</a>
+        </div>
+        <div class="emergency-card">
+          <div class="emergency-info">
+            <h4 data-en="🧳 Tourist Police" data-np="🧳 पर्यटक प्रहरी (Tourist Police)">🧳 पर्यटक प्रहरी (Tourist Police)</h4>
+          </div>
+          <a href="tel:1144" class="emergency-number">११४४</a>
+        </div>
+        <div class="emergency-card">
+          <div class="emergency-info">
+            <h4 data-en="🕵️ CIAA (Anti-Corruption)" data-np="🕵️ अख्तियार दुरुपयोग अनुसन्धान">🕵️ अख्तियार दुरुपयोग अनुसन्धान</h4>
+          </div>
+          <a href="tel:107" class="emergency-number">१०७</a>
+        </div>
+      </div>
+
+      <!-- Section 3: Disaster, Health & Utility Services -->
+      <h3 data-en="Disaster, Health & Utility Services" data-np="विपद्, स्वास्थ्य तथा सेवा सम्बन्धी">विपद्, स्वास्थ्य तथा सेवा सम्बन्धी</h3>
+      <div class="emergency-grid">
+        <div class="emergency-card">
+          <div class="emergency-info">
+            <h4 data-en="🩸 Blood Bank (Red Cross)" data-np="🩸 रक्तसञ्चार सेवा (Blood Bank)">🩸 रक्तसञ्चार सेवा (Blood Bank)</h4>
+          </div>
+          <a href="tel:015231816" class="emergency-number" style="font-size: 13px;">०१-५२३१८१६</a>
+        </div>
+        <div class="emergency-card">
+          <div class="emergency-info">
+            <h4 data-en="🌪️ Disaster Management" data-np="🌪️ विपद् व्यवस्थापन (Disaster)">🌪️ विपद् व्यवस्थापन (Disaster)</h4>
+          </div>
+          <a href="tel:1234" class="emergency-number">१२३४</a>
+        </div>
+        <div class="emergency-card">
+          <div class="emergency-info">
+            <h4 data-en="🏥 Health Emergency" data-np="🏥 स्वास्थ्य आपत्कालीन सेवा">🏥 स्वास्थ्य आपत्कालीन सेवा</h4>
+          </div>
+          <a href="tel:1115" class="emergency-number">१११५</a>
+        </div>
+        <div class="emergency-card">
+          <div class="emergency-info">
+            <h4 data-en="🏠 Ministry of Home Affairs" data-np="🏠 गृह मन्त्रालय (Home Ministry)">🏠 गृह मन्त्रालय (Home Ministry)</h4>
+          </div>
+          <a href="tel:1112" class="emergency-number">१११२</a>
+        </div>
+        <div class="emergency-card">
+          <div class="emergency-info">
+            <h4 data-en="⚡ Electricity Authority (NEA)" data-np="⚡ नेपाल विद्युत् प्राधिकरण (NEA)">⚡ नेपाल विद्युत् प्राधिकरण (NEA)</h4>
+          </div>
+          <a href="tel:1150" class="emergency-number" style="font-size: 13px;">११५० / ११५१</a>
+        </div>
+        <div class="emergency-card">
+          <div class="emergency-info">
+            <h4 data-en="ℹ️ Telecom Inquiry" data-np="ℹ️ नेपाल टेलिकम सोधपुछ (Inquiry)">ℹ️ नेपाल टेलिकम सोधपुछ (Inquiry)</h4>
+          </div>
+          <a href="tel:197" class="emergency-number">१९७</a>
+        </div>
+      </div>
+
     </div>
+  </main>
 
-    <nav class="sidebar" id="sidebar">
-        <button class="sidebar-close" onclick="toggleSidebar()">&times;</button>
-        <ul>
-            <li><a href="index.html" data-en="Home" data-np="गृहपृष्ठ (Home)">गृहपृष्ठ (Home)</a></li>
-            <li><a href="about.html" data-en="About Me" data-np="मेरो बारेमा (About Me)">मेरो बारेमा (About Me)</a></li>
-            <li><a href="blog.html" data-en="Blog / Updates" data-np="ब्लग / अपडेट्स (Blog)">ब्लग / अपडेट्स (Blog)</a></li>
-            <li><a href="ai.html" data-en="AI & Tech" data-np="AI र प्रविधि (AI & Tech)">AI र प्रविधि (AI & Tech)</a></li>
-            <li><a href="emergency.html" data-en="Emergency Contacts" data-np="आकस्मिक सेवाहरू (Emergency)">आकस्मिक सेवाहरू (Emergency)</a></li>
-        </ul>
-    </nav>
-
-    <main class="main-container">
-        <div class="section-box">
-            <h2 data-en="Nepal Emergency & Helpline Services" data-np="नेपालका मुख्य आपत्कालीन तथा हेल्पलाइन सेवाहरू">नेपालका मुख्य आपत्कालीन तथा हेल्पलाइन सेवाहरू</h2>
-            <p data-en="Important contact numbers for emergency assistance, safety, and public services in Nepal. Click on any number to call directly." data-np="नेपालमा आइपर्ने विभिन्न आपत्कालीन अवस्था, सुरक्षा र सेवाहरूको लागि चाहिने महत्त्वपूर्ण सम्पर्क नम्बरहरू। नम्बरमा क्लिक गरेर सीधा फोन गर्न सकिन्छ।">नेपालमा आइपर्ने विभिन्न आपत्कालीन अवस्था, सुरक्षा र सेवाहरूको लागि चाहिने महत्त्वपूर्ण सम्पर्क नम्बरहरू। नम्बरमा क्लिक गरेर सीधा फोन गर्न सकिन्छ।</p>
-
-            <h3 style="margin-top: 25px; color: var(--border-color);" data-en="Core Emergency Services" data-np="मुख्य आपत्कालीन सेवाहरू">मुख्य आपत्कालीन सेवाहरू</h3>
-            <div class="emergency-grid">
-                <div class="emergency-card">
-                    <div class="emergency-info">
-                        <h4 data-en="🚓 Police Emergency" data-np="🚓 नेपाल प्रहरी (Police)">🚓 नेपाल प्रहरी (Police)</h4>
-                    </div>
-                    <a href="tel:100" class="emergency-number">१००</a>
-                </div>
-                <div class="emergency-card">
-                    <div class="emergency-info">
-                        <h4 data-en="🚒 Fire Brigade" data-np="🚒 दमकल (Fire Brigade)">🚒 दमकल (Fire Brigade)</h4>
-                    </div>
-                    <a href="tel:101" class="emergency-number">१०१</a>
-                </div>
-                <div class="emergency-card">
-                    <div class="emergency-info">
-                        <h4 data-en="🚑 Ambulance Service" data-np="🚑 एम्बुलेन्स (Ambulance)">🚑 एम्बुलेन्स (Ambulance)</h4>
-                    </div>
-                    <a href="tel:102" class="emergency-number">१०२</a>
-                </div>
-                <div class="emergency-card">
-                    <div class="emergency-info">
-                        <h4 data-en="🚔 Traffic Police" data-np="🚔 ट्राफिक प्रहरी (Traffic)">🚔 ट्राफिक प्रहरी (Traffic)</h4>
-                    </div>
-                    <a href="tel:103" class="emergency-number">१०३</a>
-                </div>
-                <div class="emergency-card">
-                    <div class="emergency-info">
-                        <h4 data-en="🔍 Missing Child Search" data-np="🔍 हराएका बालबालिका खोजतलास">🔍 हराएका बालबालिका खोजतलास</h4>
-                    </div>
-                    <a href="tel:104" class="emergency-number">१०४</a>
-                </div>
-                <div class="emergency-card">
-                    <div class="emergency-info">
-                        <h4 data-en="🪖 Armed Police Force" data-np="🪖 सशस्त्र प्रहरी बल (APF)">🪖 सशस्त्र प्रहरी बल (APF)</h4>
-                    </div>
-                    <a href="tel:1114" class="emergency-number">१११४</a>
-                </div>
-            </div>
-
-            <h3 style="margin-top: 30px; color: var(--border-color);" data-en="Social & Grievance Helplines" data-np="सामाजिक, सुरक्षा तथा गुनासो हेल्पलाइन">सामाजिक, सुरक्षा तथा गुनासो हेल्पलाइन</h3>
-            <div class="emergency-grid">
-                <div class="emergency-card">
-                    <div class="emergency-info">
-                        <h4 data-en="👶 Child Helpline" data-np="👶 बाल हेल्पलाइन (Child Helpline)">👶 बाल हेल्पलाइन (Child Helpline)</h4>
-                    </div>
-                    <a href="tel:1098" class="emergency-number">१०९८</a>
-                </div>
-                <div class="emergency-card">
-                    <div class="emergency-info">
-                        <h4 data-en="📞 Hello Sarkar (Grievance)" data-np="📞 हेलो सरकार (Government Grievance)">📞 हेलो सरकार (Government Grievance)</h4>
-                    </div>
-                    <a href="tel:1111" class="emergency-number">११११</a>
-                </div>
-                <div class="emergency-card">
-                    <div class="emergency-info">
-                        <h4 data-en="👩 Women Violence Helpline" data-np="👩 महिला हिंसा हेल्पलाइन">👩 महिला हिंसा हेल्पलाइन</h4>
-                    </div>
-                    <a href="tel:1145" class="emergency-number">११४५</a>
-                </div>
-                <div class="emergency-card">
-                    <div class="emergency-info">
-                        <h4 data-en="🧠 Mental Health Counseling" data-np="🧠 मानसिक स्वास्थ्य परामर्श">🧠 मानसिक स्वास्थ्य परामर्श</h4>
-                    </div>
-                    <a href="tel:1166" class="emergency-number">११६६</a>
-                </div>
-                <div class="emergency-card">
-                    <div class="emergency-info">
-                        <h4 data-en="🧳 Tourist Police" data-np="🧳 पर्यटक प्रहरी (Tourist Police)">🧳 पर्यटक प्रहरी (Tourist Police)</h4>
-                    </div>
-                    <a href="tel:1144" class="emergency-number">११४४</a>
-                </div>
-                <div class="emergency-card">
-                    <div class="emergency-info">
-                        <h4 data-en="🕵️ CIAA (Anti-Corruption)" data-np="🕵️ अख्तियार दुरुपयोग अनुसन्धान">🕵️ अख्तियार दुरुपयोग अनुसन्धान</h4>
-                    </div>
-                    <a href="tel:107" class="emergency-number">१०७</a>
-                </div>
-            </div>
-
-            <h3 style="margin-top: 30px; color: var(--border-color);" data-en="Disaster, Health & Utility Services" data-np="विपद्, स्वास्थ्य तथा सेवा सम्बन्धी">विपद्, स्वास्थ्य तथा सेवा सम्बन्धी</h3>
-            <div class="emergency-grid">
-                <div class="emergency-card">
-                    <div class="emergency-info">
-                        <h4 data-en="🩸 Blood Bank (Red Cross)" data-np="🩸 रक्तसञ्चार सेवा (Blood Bank)">🩸 रक्तसञ्चार सेवा (Blood Bank)</h4>
-                    </div>
-                    <a href="tel:015231816" class="emergency-number" style="font-size: 15px;">०१-५२३१८१६</a>
-                </div>
-                <div class="emergency-card">
-                    <div class="emergency-info">
-                        <h4 data-en="🌪️ Disaster Management" data-np="🌪️ विपद् व्यवस्थापन (Disaster)">🌪️ विपद् व्यवस्थापन (Disaster)</h4>
-                    </div>
-                    <a href="tel:1234" class="emergency-number">१२३४</a>
-                </div>
-                <div class="emergency-card">
-                    <div class="emergency-info">
-                        <h4 data-en="🏥 Health Emergency" data-np="🏥 स्वास्थ्य आपत्कालीन सेवा">🏥 स्वास्थ्य आपत्कालीन सेवा</h4>
-                    </div>
-                    <a href="tel:1115" class="emergency-number">१११५</a>
-                </div>
-                <div class="emergency-card">
-                    <div class="emergency-info">
-                        <h4 data-en="🏠 Ministry of Home Affairs" data-np="🏠 गृह मन्त्रालय (Home Ministry)">🏠 गृह मन्त्रालय (Home Ministry)</h4>
-                    </div>
-                    <a href="tel:1112" class="emergency-number">१११२</a>
-                </div>
-                <div class="emergency-card">
-                    <div class="emergency-info">
-                        <h4 data-en="⚡ Electricity Authority (NEA)" data-np="⚡ नेपाल विद्युत् प्राधिकरण (NEA)">⚡ नेपाल विद्युत् प्राधिकरण (NEA)</h4>
-                    </div>
-                    <a href="tel:1150" class="emergency-number" style="font-size: 15px;">११५० / ११५१</a>
-                </div>
-                <div class="emergency-card">
-                    <div class="emergency-info">
-                        <h4 data-en="ℹ️ Telecom Inquiry" data-np="ℹ️ नेपाल टेलिकम सोधपुछ (Inquiry)">ℹ️ नेपाल टेलिकम सोधपुछ (Inquiry)</h4>
-                    </div>
-                    <a href="tel:197" class="emergency-number">१९७</a>
-                </div>
-            </div>
-
-        </div>
-    </main>
-
-    <footer>
-        <div class="footer-links">
-            <a href="https://pasal.kamalgc.com.np" target="_blank">🌐 pasal.kamalgc.com.np</a>
-            <a href="mailto:Support@kamalgc.com.np">📧 Support@kamalgc.com.np</a>
-        </div>
-
-        <div style="margin: 10px 0; font-size: 13px;">
-            <p id="adminVisitorBox" style="color: var(--sidebar-text); display: none;">
-                👀 कुल भिजिटर: <span id="visitorCount" style="font-weight: bold; color: #3498db;">--</span>
-            </p>
-        </div>
-
-        <p>&copy; 2026 Kamal G.C. All Rights Reserved.</p>
-    </footer>
-
-    <script>
-        let currentLang = 'np';
-        function toggleSidebar() { document.getElementById('sidebar').classList.toggle('active'); }
-        function toggleTheme() {
-            const body = document.body;
-            const themeBtn = document.getElementById('themeBtn');
-            if (body.getAttribute('data-theme') === 'dark') {
-                body.setAttribute('data-theme', 'light');
-                themeBtn.innerHTML = '🌙 Dark';
-            } else {
-                body.setAttribute('data-theme', 'dark');
-                themeBtn.innerHTML = '☀️ Light';
-            }
-        }
-        function toNepaliDigits(str) { const nepDigits = ['०', '१', '२', '३', '४', '५', '६', '७', '८', '९']; return str.toString().replace(/\d/g, x => nepDigits[x]); }
-        function getNepaliDateStr(now) {
-            const nepMonths = ['बैशाख', 'जेठ', 'असार', 'साउन', 'भदौ', 'असोज', 'कात्तिक', 'मंसिर', 'पुस', 'माघ', 'फागुन', 'चैत'];
-            const startAD = new Date(2026, 7, 9);
-            const diffDays = Math.floor((now - startAD) / (1000 * 60 * 60 * 24));
-            let bsMonth = 3, bsDay = 24 + diffDays;
-            if (bsDay > 31) { bsDay -= 31; bsMonth++; }
-            return `२०८३ ${nepMonths[bsMonth]} ${toNepaliDigits(bsDay)}`;
-        }
-        function toggleLanguage() {
-            currentLang = currentLang === 'np' ? 'en' : 'np';
-            document.getElementById('langBtn').innerText = currentLang === 'np' ? 'EN' : 'NP';
-            document.querySelectorAll('[data-np]').forEach(el => {
-                el.innerText = el.getAttribute(currentLang === 'en' ? 'data-en' : 'data-np');
-            });
-            updateLiveStatus();
-        }
-
-        // Live Geolocation and Weather Fetcher
-        function fetchLiveLocationAndWeather() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(async (position) => {
-                    const lat = position.coords.latitude;
-                    const lon = position.coords.longitude;
-                    try {
-                        const geoRes = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`);
-                        const geoData = await geoRes.json();
-                        const cityName = geoData.address.city || geoData.address.town || geoData.address.village || geoData.address.state || "स्थान";
-
-                        const weatherRes = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`);
-                        const weatherData = await weatherRes.json();
-                        const temp = Math.round(weatherData.current_weather.temperature);
-
-                        document.getElementById('locationText').innerText = cityName;
-                        document.getElementById('weatherText').innerText = `${temp}°C`;
-                    } catch (err) {
-                        document.getElementById('locationText').innerText = "लोकेसन प्राप्त भएन";
-                        document.getElementById('weatherText').innerText = "--°C";
-                    }
-                }, () => {
-                    document.getElementById('locationText').innerText = "अनुमति अस्वीकृत";
-                    document.getElementById('weatherText').innerText = "--°C";
-                });
-            } else {
-                document.getElementById('locationText').innerText = "समर्थन छैन";
-            }
-        }
-
-        function updateLiveStatus() {
-            const now = new Date();
-            document.getElementById('timeText').innerText = now.toLocaleTimeString(currentLang === 'en' ? 'en-US' : 'ne-NP');
-            const daysEn = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-            const monthsEn = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-            const monthNameStr = monthsEn[now.getMonth()], dayNumStr = String(now.getDate()).padStart(2, '0'), dayNameStr = daysEn[now.getDay()];
-            
-            if (currentLang === 'en') {
-                document.getElementById('nepaliDateText').innerText = 'BS 2083 Shrawan 24';
-            } else {
-                document.getElementById('nepaliDateText').innerText = getNepaliDateStr(now);
-            }
-            document.getElementById('englishDateText').innerText = `${monthNameStr} ${dayNumStr} (${dayNameStr})`;
-        }
-
-        setInterval(updateLiveStatus, 1000); 
-        updateLiveStatus();
-        fetchLiveLocationAndWeather();
-
-        // Visitor Counter & Admin Trigger script
-        let vCount = localStorage.getItem('site_visitor_count') || Math.floor(Math.random() * 50) + 120;
-        if(!localStorage.getItem('site_visited')) { 
-            vCount++; 
-            localStorage.setItem('site_visitor_count', vCount); 
-            localStorage.setItem('site_visited', 'true'); 
-        }
-        document.getElementById('visitorCount').innerText = vCount;
-
-        let typedCode = '';
-        document.addEventListener('keydown', (e) => {
-            typedCode += e.key;
-            if (typedCode.endsWith('admin')) {
-                const box = document.getElementById('adminVisitorBox');
-                box.style.display = box.style.display === 'none' ? 'block' : 'none';
-                alert('भिजिटर काउन्टर मोड: ' + vCount);
-            }
-        });
-    </script>
 </body>
 </html>
