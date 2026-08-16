@@ -32,24 +32,46 @@
       margin: 0 auto;
     }
 
+    .top-bar {
+      margin-bottom: 15px;
+    }
+
+    .back-home-btn {
+      color: #38bdf8;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
     .section-box {
       background: #1e293b;
       border-radius: 16px;
       padding: 24px;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
       border: 1px solid #334155;
-      margin-bottom: 20px;
+      margin-bottom: 25px;
     }
 
     h2 {
       color: #38bdf8;
       font-size: 1.3rem;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
+      line-height: 1.4;
+    }
+
+    .sub-title {
+      color: #f59e0b;
+      font-size: 1rem;
+      margin-top: 18px;
+      margin-bottom: 8px;
     }
 
     /* Hero Image Styling */
     .hero-image-container {
-      margin: 20px auto;
+      margin: 18px auto;
       max-width: 100%;
       border-radius: 12px;
       overflow: hidden;
@@ -72,7 +94,23 @@
       font-size: 14.5px;
       line-height: 1.8;
       color: #cbd5e1;
-      margin-top: 15px;
+      margin-top: 12px;
+    }
+
+    ul, ol {
+      margin-left: 20px;
+      margin-top: 10px;
+      color: #cbd5e1;
+      font-size: 14.5px;
+      line-height: 1.7;
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    li strong {
+      color: #38bdf8;
     }
 
     /* Share Section Styling */
@@ -104,21 +142,113 @@
     .share-icons a:hover {
       transform: scale(1.15);
     }
+
+    .app-link-box {
+      background: #0f172a;
+      border: 1px solid #0284c7;
+      padding: 12px;
+      border-radius: 8px;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .app-link-box a {
+      color: #38bdf8;
+      font-weight: bold;
+      text-decoration: none;
+    }
   </style>
 </head>
 <body>
 
   <main class="main-container">
     
+    <!-- मुख्य पृष्ठ फर्कने लिङ्क -->
+    <div class="top-bar">
+      <a href="index.html" class="back-home-btn"><i class="fa-solid fa-arrow-left"></i> मुख्य पृष्ठमा फर्कनुहोस्</a>
+    </div>
+
     <!-- Title Box -->
     <div class="section-box">
       <h2 data-en="AI & Tech Learning" data-np="AI र प्रविधि सिकाइ (AI & Tech)">AI र प्रविधि सिकाइ (AI & Tech)</h2>
     </div>
 
-    <!-- Project Box -->
-    <div class="section-box" style="text-align: center;">
-      <h2 data-en="My New AI Project: WPA" data-np="मेरो नयाँ AI प्रोजेक्ट: WPA">मेरो नयाँ AI प्रोजेक्ट: WPA</h2>
+    <!-- ================= पोष्ट १: बाल पाठशाला (PWA) ================= -->
+    <div class="section-box" id="post-1">
+      <h2 data-en="1. New Leap in Tech: Progressive Web App (PWA) & Kids Learning" data-np="१. प्रविधिमा नयाँ फड्को: Progressive Web App (PWA) र बालबालिकाको आधुनिक सिकाइ!">
+        १. प्रविधिमा नयाँ फड्को: Progressive Web App (PWA) र बालबालिकाको आधुनिक सिकाइ!
+      </h2>
 
+      <!-- फोटो १ (kids.png) -->
+      <div class="hero-image-container">
+        <img src="kids.png" alt="बाल पाठशाला PWA - kids.png">
+      </div>
+
+      <p>
+        आजको डिजिटल युगमा प्रविधि र कृत्रिम बौद्धिकता (AI) ले शिक्षा क्षेत्रलाई झन् सहज, रमाइलो र प्रभावकारी बनाइरहेका छन्। बालबालिकालाई डिजिटल माध्यमबाट सजिलै सिकाउन आधुनिक वेब विकासको उत्कृष्ट प्रविधि PWA (Progressive Web App) प्रयोग गरी हामीले बाल पाठशाला (<a href="https://kids.kamalgc.com.np" target="_blank" style="color: #38bdf8;">kids.kamalgc.com.np</a>) निर्माण गरेका छौँ।
+      </p>
+
+      <h3 class="sub-title">❓ PWA (Progressive Web App) भनेको के हो?</h3>
+      <p>
+        सजिलो भाषामा भन्नुपर्दा, PWA एउटा यस्तो प्रविधि हो जसले वेबसाइटलाई नै सक्कली मोबाइल एप जस्तै बनाइदिन्छ। सामान्य एपहरू जस्तै Play Store वा App Store मा गएर धेरै MB खर्च गरी डाउनलोड गरिरहनु पर्दैन। यसलाई केवल एक क्लिकमा मोबाइलको Home Screen मा सेभ गरेर एप जसरी नै चलाउन सकिन्छ।
+      </p>
+
+      <h3 class="sub-title">🌟 PWA का प्रमुख विशेषता र फाइदाहरू</h3>
+      <ul>
+        <li>⚡ <strong>Instant Installation:</strong> Play Store जानै पर्दैन! वेबसाइट खोल्ने बित्तिकै "Add to Home Screen" मा थिचेर सेकेन्डमै इन्स्टल गर्न सकिन्छ।</li>
+        <li>💾 <strong>Storage र Data को भारी बचत:</strong> ५०-१०० MB का भारी एपहरूको सट्टा यो एकदमै हलुका (२-३ MB भन्दा पनि सानो) हुन्छ, जसले गर्दा मोबाइलको मेमोरी र डाटा बचत हुन्छ।</li>
+        <li>📶 <strong>Offline Access (बिना इन्टरनेट चल्ने):</strong> Service Worker प्रविधिको प्रयोगका कारण इन्टरनेट नभएको वा ढिलो भएको ठाउँमा पनि मुख्य पाठहरू, चित्रहरू र अभ्यासहरू सहजै खुल्छन्।</li>
+        <li>🔄 <strong>Auto Update (स्वचालित अपडेट):</strong> एप अपडेट गर्न Play Store गइरहनु पर्दैन; नयाँ फिचर आउने बित्तिकै स्वतः अपडेट हुन्छ।</li>
+        <li>📱 <strong>Fully Responsive:</strong> मोबाइल, ट्याब्लेट वा कम्प्युटर—जुनसुकै स्क्रिनमा पनि यो चिटिक्क र सहज देखिन्छ।</li>
+      </ul>
+
+      <h3 class="sub-title">👶 बालबालिकाका लागि बाल पाठशाला (kids.kamalgc.com.np) नै किन?</h3>
+      <p>हामीले PWA प्रविधिको प्रयोग गरी गाउँ-शहर, जहाँसुकैका बालबालिकाले बिना कुनै रुकावट सिक्न सकून् भन्ने उद्देश्य राखेका छौँ। एपमा उपलब्ध सामग्रीहरू:</p>
+      <ul>
+        <li>🎨 नेपाली कखरा, अङ्ग्रेजी वर्णमाला (Alphabet) र गणित पहाडा</li>
+        <li>🧠 दिमाग तिखार्ने सजिला क्विज (Quiz)</li>
+        <li>🖌️ सिर्जनशीलता बढाउने डिजिटल चित्र कोर्ने बोर्ड (Drawing Canvas)</li>
+      </ul>
+
+      <h3 class="sub-title">🤖 भविष्यको योजना: AI (Artificial Intelligence) को एकीकरण</h3>
+      <p>हामी छिटै यस एपमा AI प्रविधि जोड्दैछौँ, जसले:</p>
+      <ul>
+        <li>🔹 बालबालिकाको उच्चारण सुनेर सही वा गलत छुट्ट्याउन मद्दत गर्नेछ।</li>
+        <li>🔹 बच्चाको सिकाइ क्षमता अनुसार नयाँ-नयाँ प्रश्नहरू आफैँ तयार पार्नेछ।</li>
+      </ul>
+
+      <h3 class="sub-title">📲 आजै प्रयोग गरी हेर्नुहोस्! (कसरी इन्स्टल गर्ने?)</h3>
+      <ol>
+        <li>आफ्नो मोबाइलको Chrome वा Safari Browser मा <a href="https://kids.kamalgc.com.np" target="_blank" style="color: #38bdf8;">kids.kamalgc.com.np</a> खोल्नुहोस्।</li>
+        <li>स्क्रिनमा देखिने "Add to Home Screen" वा "Install App" बटनमा क्लिक गर्नुहोस्।</li>
+        <li>अब तपाईंको मोबाइलको Apps List मा बाल पाठशाला तयार भयो!</li>
+      </ol>
+
+      <div class="app-link-box">
+        🚀 एप सिधै प्रयोग गर्न यहाँ थिच्नुहोस्: <br>
+        <a href="https://kids.kamalgc.com.np" target="_blank">https://kids.kamalgc.com.np</a>
+      </div>
+
+      <!-- Share Box (पोष्ट १) -->
+      <div class="share-section">
+        <p class="share-title" data-en="Share Post 1:" data-np="सेयर गर्नुहोस् (पोष्ट १):">सेयर गर्नुहोस् (पोष्ट १):</p>
+        <div class="share-icons">
+          <a href="https://api.whatsapp.com/send?text=kamalgc.com.np/tech.html#post-1 - बाल पाठशाला PWA!" target="_blank" title="Share on WhatsApp">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="#25d366"><path d="M12.01 2C6.48 2 2 6.48 2 12.01c0 2.09.64 4.07 1.84 5.74L2 22l4.52-1.74c1.57.97 3.39 1.49 5.49 1.49 5.53 0 10.01-4.48 10.01-10.01S17.54 2 12.01 2zM17.05 15.2c-.22.6-1.12 1.15-1.55 1.22-.38.07-.84.14-2.73-.62-2.32-.93-3.79-3.23-3.9-3.38-.11-.15-1.01-1.35-1.01-2.57s.62-1.82.84-2.07c.22-.25.59-.32.84-.32.22 0 .44 0 .63.01.2.01.48.02.69.51.22.48.74 1.8.8 1.93.06.13.1.28.02.45-.08.17-.13.25-.26.41-.13.16-.27.33-.39.46-.13.13-.27.27-.11.54.16.27.71 1.18 1.52 1.91 1.04.93 1.92 1.23 2.19 1.37.27.14.43.12.59-.06s.69-.81.87-1.08c.18-.27.36-.22.61-.13.25.09 1.59.75 1.87.89.28.14.46.21.53.33.07.12.07.7-.15 1.3z"/></svg>
+          </a>
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://kamalgc.com.np/tech.html#post-1" target="_blank" title="Share on Facebook">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="#1877f2"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.35 7 13 7c.77 0 1.5.06 2.2.17V10h-1.2c-.88 0-1.2.55-1.2 1.3V12h3l-.33 3H14v6.8c4.56-.93 8-4.96 8-9.8z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ================= पोष्ट २: AI प्रोजेक्ट WPA ================= -->
+    <div class="section-box" style="text-align: center;" id="post-2">
+      <h2 data-en="2. My New AI Project: WPA" data-np="२. मेरो नयाँ AI प्रोजेक्ट: WPA">२. मेरो नयाँ AI प्रोजेक्ट: WPA</h2>
+
+      <!-- फोटो २ (mychat.jpg) -->
       <div class="hero-image-container">
         <img src="mychat.jpg" alt="WPA Login Screen - Kamal G.C.">
       </div>
@@ -128,22 +258,21 @@
         यो मेरो आगामी AI प्रोजेक्ट, WPA को एउटा झलक हो। म यसको भर्खर सुरुवात गर्दैछु। इमानदारीपूर्वक भन्नुपर्दा, यो कस्तो बन्छ वा कहिलेसम्म सफल हुन्छ मलाई थाहा छैन। तर सिक्ने र बनाउने यात्रा नै मुख्य कुरा हो। प्रविधिको क्षेत्रमा मेरो यो नयाँ प्रयासको पहिलो पाइलाको रूपमा म यसलाई यहाँ सेयर गर्दैछु।
       </p>
 
-      <!-- Share Box -->
+      <!-- Share Box (पोष्ट २) -->
       <div class="share-section">
-        <p class="share-title" data-en="Share this project:" data-np="सेयर गर्नुहोस्:">सेयर गर्नुहोस्:</p>
+        <p class="share-title" data-en="Share Post 2:" data-np="सेयर गर्नुहोस् (पोष्ट २):">सेयर गर्नुहोस् (पोष्ट २):</p>
         <div class="share-icons">
-          <!-- WhatsApp -->
-          <a href="https://api.whatsapp.com/send?text=kamalgc.com.np/tech.html - AI प्रोजेक्ट WPA हेर्नुहोस्!" target="_blank" title="Share on WhatsApp">
+          <a href="https://api.whatsapp.com/send?text=kamalgc.com.np/tech.html#post-2 - AI प्रोजेक्ट WPA हेर्नुहोस्!" target="_blank" title="Share on WhatsApp">
             <svg width="36" height="36" viewBox="0 0 24 24" fill="#25d366"><path d="M12.01 2C6.48 2 2 6.48 2 12.01c0 2.09.64 4.07 1.84 5.74L2 22l4.52-1.74c1.57.97 3.39 1.49 5.49 1.49 5.53 0 10.01-4.48 10.01-10.01S17.54 2 12.01 2zM17.05 15.2c-.22.6-1.12 1.15-1.55 1.22-.38.07-.84.14-2.73-.62-2.32-.93-3.79-3.23-3.9-3.38-.11-.15-1.01-1.35-1.01-2.57s.62-1.82.84-2.07c.22-.25.59-.32.84-.32.22 0 .44 0 .63.01.2.01.48.02.69.51.22.48.74 1.8.8 1.93.06.13.1.28.02.45-.08.17-.13.25-.26.41-.13.16-.27.33-.39.46-.13.13-.27.27-.11.54.16.27.71 1.18 1.52 1.91 1.04.93 1.92 1.23 2.19 1.37.27.14.43.12.59-.06s.69-.81.87-1.08c.18-.27.36-.22.61-.13.25.09 1.59.75 1.87.89.28.14.46.21.53.33.07.12.07.7-.15 1.3z"/></svg>
           </a>
-          <!-- Facebook -->
-          <a href="https://www.facebook.com/sharer/sharer.php?u=https://kamalgc.com.np/tech.html" target="_blank" title="Share on Facebook">
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://kamalgc.com.np/tech.html#post-2" target="_blank" title="Share on Facebook">
             <svg width="36" height="36" viewBox="0 0 24 24" fill="#1877f2"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.35 7 13 7c.77 0 1.5.06 2.2.17V10h-1.2c-.88 0-1.2.55-1.2 1.3V12h3l-.33 3H14v6.8c4.56-.93 8-4.96 8-9.8z"/></svg>
           </a>
         </div>
       </div>
 
     </div>
+
   </main>
 
 </body>
