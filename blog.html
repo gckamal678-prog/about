@@ -1,214 +1,144 @@
 <!DOCTYPE html>
-<html lang="ne">
+<html lang="np">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog - Kamal G.C.</title>
-    <style>
-        body {
-            font-family: sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f6f9;
-            color: #333;
-        }
-        /* Navbar स्टाइल */
-        nav {
-            background-color: #1e293b;
-            padding: 15px;
-            text-align: center;
-        }
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin: 0 10px;
-            font-weight: bold;
-            font-size: 15px;
-        }
-        nav a:hover {
-            color: #38bdf8;
-        }
-        /* भाषा र समय बार */
-        .top-bar {
-            background: #e2e8f0;
-            padding: 8px;
-            text-align: center;
-            font-size: 14px;
-        }
-        .top-bar button {
-            background: #0f172a;
-            color: white;
-            border: none;
-            padding: 4px 10px;
-            border-radius: 4px;
-            cursor: pointer;
-            margin-left: 5px;
-            font-weight: bold;
-        }
-        /* कन्टेनर */
-        .container {
-            max-width: 650px;
-            margin: 20px auto;
-            padding: 0 15px;
-        }
-        .blog-card {
-            background: #fff;
-            padding: 20px;
-            margin-bottom: 25px;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-            box-sizing: border-box;
-        }
-        .blog-header {
-            text-align: center;
-            margin-bottom: 15px;
-        }
-        .blog-title {
-            margin: 0 0 8px 0;
-            font-size: 20px;
-            color: #1e293b;
-            font-weight: bold;
-        }
-        .blog-card img {
-            width: 100%;
-            height: auto;
-            border-radius: 8px;
-            display: block;
-        }
-        .blog-caption {
-            margin-top: 15px;
-            color: #444;
-            line-height: 1.6;
-        }
-        .share-box {
-            text-align: center;
-            margin-top: 15px;
-            border-top: 1px solid #eee;
-            padding-top: 12px;
-        }
-        footer {
-            background: #1e293b;
-            color: white;
-            text-align: center;
-            padding: 15px;
-            margin-top: 30px;
-            font-size: 14px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blogs - KAMAL G.C.</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      background-color: #0f172a;
+      color: #ffffff;
+      font-family: 'Segoe UI', sans-serif;
+      padding: 15px;
+    }
+    .blog-container {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .blog-card {
+      background: #1e293b;
+      border-radius: 12px;
+      padding: 15px;
+      margin-bottom: 25px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+      border: 1px solid #334155;
+    }
+    .blog-header {
+      text-align: center;
+      margin-bottom: 12px;
+    }
+    .blog-number {
+      background: #007bff;
+      color: #fff;
+      font-weight: bold;
+      padding: 2px 10px;
+      border-radius: 15px;
+      font-size: 14px;
+      display: inline-block;
+      margin-bottom: 6px;
+    }
+    .blog-title {
+      font-size: 18px;
+      color: #38bdf8;
+      margin-bottom: 8px;
+    }
+    .blog-card img {
+      width: 100%;
+      border-radius: 8px;
+      margin-bottom: 12px;
+    }
+    .blog-caption p {
+      font-size: 14px;
+      line-height: 1.6;
+      color: #cbd5e1;
+      margin-bottom: 8px;
+    }
+    .share-box {
+      margin-top: 15px;
+      padding-top: 10px;
+      border-top: 1px solid #334155;
+      text-align: center;
+    }
+  </style>
 </head>
 <body>
 
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="blog.html" style="color: #38bdf8;">Blog</a>
-        <a href="ai.html">AI</a>
-        <a href="emergency.html">Emergency</a>
-    </nav>
+  <div class="blog-container">
 
-    <div class="top-bar">
-        <span>Kamal G.C. | </span>
-        <button onclick="setLanguage('np')">NP</button>
-        <button onclick="setLanguage('en')">EN</button>
+    <!-- १. पहिलो ब्लग -->
+    <div class="blog-card">
+      <div class="blog-header">
+        <span class="blog-number">१.</span>
+        <h3 class="blog-title" data-np="जिन्दगीको गोरेटोमा अलि पछाडि फर्केर हेर्दा... 🍃" data-en="Looking back a little bit on the path of life... 🍃">
+          जिन्दगीको गोरेटोमा अलि पछाडि फर्केर हेर्दा... 🍃
+        </h3>
+        <hr style="border: none; height: 3px; background: #007bff; width: 60px; margin: 0 auto;">
+      </div>
+
+      <img src="16year.png" alt="16 years old photo">
+
+      <div class="blog-caption">
+        <div class="lang-np">
+          <p>यो फोटो मेरो १५–१६ वर्षको उमेरको हो। टोपी ढल्काएर खिचिएको यो तस्बिरले मलाई मेरो बाल्यकाल र किशोरावस्थाको सङ्गमको याद दिलाउँछ। प्रकृतिको काखमा खिचिएको यो फोटोमा देखिने त्यो उमेरको सादगी, निर्दोषपना र निर्भीक रूप साँच्चै नै अनमोल छ।</p>
+          <p style="margin-top: 10px;">
+            <a href="https://youtu.be/Dh4344mVZ4w?si=_NXNLRwOGD7bA4v9" target="_blank" style="color: #007bff; text-decoration: none; font-weight: bold;">
+              ▶ युट्युबमा भिडियो हेर्नुहोस्
+            </a>
+          </p>
+        </div>
+        <div class="lang-en" style="display: none;">
+          <p>This photo is from when I was 15-16 years old. This picture, taken with a tilted cap, reminds me of the confluence of my childhood and adolescence. The simplicity, innocence, and fearless look of that age captured in the lap of nature are truly priceless.</p>
+          <p style="margin-top: 10px;">
+            <a href="https://youtu.be/Dh4344mVZ4w?si=_NXNLRwOGD7bA4v9" target="_blank" style="color: #007bff; text-decoration: none; font-weight: bold;">
+              ▶ Watch video on YouTube
+            </a>
+          </p>
+        </div>
+      </div>
+
+      <div class="share-box">
+        <span style="font-size: 13px; color: #94a3b8; display: block; margin-bottom: 8px; font-weight: bold;" class="share-text" data-np="यो पोस्ट शेयर गर्नुहोस्:" data-en="Share this post:">यो पोस्ट शेयर गर्नुहोस्:</span>
+        <a href="https://api.whatsapp.com/send?text=%E0%A4%9C%E0%A4%BF%E0%A4%A8%E0%A5%8D%E0%A4%A6%E0%A4%97%E0%A5%80%E0%A4%95%E0%A5%8B%20%E0%A4%97%E0%A5%8B%E0%A4%B0%E0%A5%87%E0%A4%9F%E0%A5%8B%E0%A4%AE%E0%A4%BE...%20https://kamalgc.com.np" target="_blank" style="margin: 0 10px; text-decoration: none; font-size: 15px; color: #25D366; font-weight: bold;"> WhatsApp</a>
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https://kamalgc.com.np" target="_blank" style="margin: 0 10px; text-decoration: none; font-size: 15px; color: #1877F2; font-weight: bold;"> Facebook</a>
+      </div>
     </div>
 
-    <div class="container">
+    <!-- २. दोस्रो ब्लग -->
+    <div class="blog-card">
+      <div class="blog-header">
+        <span class="blog-number">२.</span>
+        <h3 class="blog-title" data-np="एउटा नौलो यात्रा, जसले मलाई धेरै कुरा सिकायो" data-en="A New Journey That Taught Me Many Things">
+          एउटा नौलो यात्रा, जसले मलाई धेरै कुरा सिकायो
+        </h3>
+        <hr style="border: none; height: 3px; background: #007bff; width: 60px; margin: 0 auto;">
+      </div>
 
-        <div class="blog-card">
-            <div class="blog-header">
-                <h3 class="blog-title" data-np="जिन्दगीको गोरेटोमा अलि पछाडि फर्केर हेर्दा... 🍃" data-en="Looking back a little bit on the path of life... 🍃">
-                    जिन्दगीको गोरेटोमा अलि पछाडि फर्केर हेर्दा... 🍃
-                </h3>
-                <hr style="border: none; height: 3px; background: #007bff; width: 60px; margin: 0 auto;">
-            </div>
+      <img src="keral.png" alt="Kerala Journey">
 
-            <img src="16year.png" alt="16 years old photo">
-
-            <div class="blog-caption">
-                <div class="lang-np">
-                    <p>यो फोटो मेरो १५–१६ वर्षको उमेरको हो। टोपी ढल्काएर खिचिएको यो तस्बिरले मलाई मेरो बाल्यकाल र किशोरावस्थाको सङ्गमको याद दिलाउँछ। प्रकृतिको काखमा खिचिएको यो फोटोमा देखिने त्यो उमेरको सादगी, निर्दोषपना र निर्भीक रूप साँच्चै नै अनमोल छ।</p>
-                    <p style="margin-top: 10px;">
-                        <a href="https://youtu.be/Dh4344mVZ4w?si=_NXNLRwOGD7bA4v9" target="_blank" style="color: #007bff; text-decoration: none; font-weight: bold;">
-                            ▶ युट्युबमा भिडियो हेर्नुहोस्
-                        </a>
-                    </p>
-                </div>
-                <div class="lang-en" style="display: none;">
-                    <p>This photo is from when I was 15-16 years old. This picture, taken with a tilted cap, reminds me of the confluence of my childhood and adolescence. The simplicity, innocence, and fearless look of that age captured in the lap of nature are truly priceless.</p>
-                    <p style="margin-top: 10px;">
-                        <a href="https://youtu.be/Dh4344mVZ4w?si=_NXNLRwOGD7bA4v9" target="_blank" style="color: #007bff; text-decoration: none; font-weight: bold;">
-                            ▶ Watch video on YouTube
-                        </a>
-                    </p>
-                </div>
-            </div>
-
-            <div class="share-box">
-                <span style="font-size: 13px; color: #666; display: block; margin-bottom: 8px; font-weight: bold;" class="share-text" data-np="यो पोस्ट शेयर गर्नुहोस्:" data-en="Share this post:">यो पोस्ट शेयर गर्नुहोस्:</span>
-                <a href="https://api.whatsapp.com/send?text=%E0%A4%9C%E0%A4%BF%E0%A4%A8%E0%A5%8D%E0%A4%A6%E0%A4%97%E0%A5%80%E0%A4%95%E0%A5%8B%20%E0%A4%97%E0%A5%8B%E0%A4%B0%E0%A5%87%E0%A4%9F%E0%A5%8B%E0%A4%AE%E0%A4%BE...%20https://kamalgc.com.np" target="_blank" style="margin: 0 10px; text-decoration: none; font-size: 15px; color: #25D366; font-weight: bold;"> WhatsApp</a>
-                <a href="https://www.facebook.com/sharer/sharer.php?u=https://kamalgc.com.np" target="_blank" style="margin: 0 10px; text-decoration: none; font-size: 15px; color: #1877F2; font-weight: bold;"> Facebook</a>
-            </div>
+      <div class="blog-caption">
+        <div class="lang-np">
+          <p>जीवनमा केही यस्ता अध्यायहरू हुन्छन्, जसका पाना पल्टाउँदा मुटुको एउटा कुनामा अनौठो किसिमको सिहरन र मिठास महसुस हुन्छ। आज जति नै समय घर्किए पनि, जब म १७ वर्षको त्यो कलिलो उमेरलाई फर्केर हेर्छु, लाग्छ त्यो हिजोको मात्र कुरा हो। घरभित्रका पारिवारिक समस्याहरू, जिम्मेवारीको भारी र केही गरेर देखाउने हुटहुटीले मलाई घरमै बस्न दिएन। सानै उमेरमा संसारको ठूलो जिम्मेवारी काँधमा बोकेर पहिलो पटक साथीहरूसँग घर छोडेर परदेशतिर लाग्दै, गन्तव्य केरलातर्फ पाइला टेकेँ।</p>
+          <p>यात्रारम्भ निकै कष्टकर थियो। पुस महिनाको चिमचिम जाडो, बाक्लो हुस्सुले पूरै बाटो ढाकेको थियो। घरदेखि जिप र बस चढेर गोरखपुरसम्म पुग्दाको त्यो यात्रा निकै खतरनाक र डरलाग्दो थियो। गोरखपुर पुगेर केरला जाने ट्रेन समातियो। त्यो ट्रेन यात्रा मेरो जीवनको सबसे लामो र थकाउने यात्रा थियो, जहाँ भोक, प्यास र थकाइ सहँदै हामीले अनन्त बाटो काट्यौँ।</p>
+          <p>अन्ततः केरला पुगेर कडा मेहनतपछि काम भेटियो। पहिलो पटक आफ्नै पसिनाको कमाइ हात पर्दाको खुसी शब्दमा वर्णन गर्नै सकिन्न। त्यही कमाइबाट मैले आफ्नो लागि एउटा नयाँ मोबाइल पनि किनेँ। तर, विदेशी भूमिमा सिम कार्ड पाउनुचाहिँ फलामको चिउरा चपाए सरह भयो, जसको लागि धेरै सास्ती भोग्नुपर्‍यो। त्यहाँको प्रसिद्ध लुलु मल र KFC को स्वाद आज पनि मेरो सम्झनामा ताजै छ। कामको धपेडीका बीच एक महिना नपुग्दै साथीसँग केरलाका केही सुन्दर ठाउँहरू घुम्यौँ। नयाँ ठाउँले मेरा मनका पीडाहरूलाई केही क्षणका लागि भए पनि भुलाइदिएको थियो।</p>
+          <p>अन्ततः संघर्षका ती अमूल्य दिनहरूसँगै मेरो यात्रा फेरि दिल्लीतर्फ मोडियो। आज फर्केर हेर्दा लाग्छ, त्यो १७ वर्षको ठिटो जसले परिवारको जिम्मेवारी बोकेर हिँडेको थियो, उसले जीवनका धेरै कठोर पाठ त्यही एउटै यात्रामा सिकिसकेको थियो।</p>
         </div>
-
-
-        <div class="blog-card">
-            <div class="blog-header">
-                <h3 class="blog-title" data-np="एउटा नौलो यात्रा, जसले मलाई धेरै कुरा सिकायो" data-en="A New Journey That Taught Me Many Things">
-                    एउटा नौलो यात्रा, जसले मलाई धेरै कुरा सिकायो
-                </h3>
-                <hr style="border: none; height: 3px; background: #007bff; width: 60px; margin: 0 auto;">
-            </div>
-
-            <img src="keral.png" alt="Kerala Journey">
-
-            <div class="blog-caption">
-                <div class="lang-np">
-                    <p>जीवनमा केही यस्ता अध्यायहरू हुन्छन्, जसका पाना पल्टाउँदा मुटुको एउटा कुनामा अनौठो किसिमको सिहरन र मिठास महसुस हुन्छ। आज जति नै समय घर्किए पनि, जब म १७ वर्षको त्यो कलिलो उमेरलाई फर्केर हेर्छु, लाग्छ त्यो हिजोको मात्र कुरा हो। घरभित्रका पारिवारिक समस्याहरू, जिम्मेवारीको भारी र केही गरेर देखाउने हुटहुटीले मलाई घरमै बस्न दिएन। सानै उमेरमा संसारको ठूलो जिम्मेवारी काँधमा बोकेर पहिलो पटक साथीहरूसँग घर छोडेर परदेशतिर लाग्दै, गन्तव्य केरलातर्फ पाइला टेकेँ।</p>
-                    <p>यात्रारम्भ निकै कष्टकर थियो। पुस महिनाको चिमचिम जाडो, बाक्लो हुस्सुले पूरै बाटो ढाकेको थियो। घरदेखि जिप र बस चढेर गोरखपुरसम्म पुग्दाको त्यो यात्रा निकै खतरनाक र डरलाग्दो थियो। गोरखपुर पुगेर केरला जाने ट्रेन समातियो। त्यो ट्रेन यात्रा मेरो जीवनको सबसे लामो र थकाउने यात्रा थियो, जहाँ भोक, प्यास र थकाइ सहँदै हामीले अनन्त बाटो काट्यौँ।</p>
-                    <p>अन्ततः केरला पुगेर कडा मेहनतपछि काम भेटियो। पहिलो पटक आफ्नै पसिनाको कमाइ हात पर्दाको खुसी शब्दमा वर्णन गर्नै सकिन्न। त्यही कमाइबाट मैले आफ्नो लागि एउटा नयाँ मोबाइल पनि किनेँ। तर, विदेशी भूमिमा सिम कार्ड पाउनुचाहिँ फलामको चिउरा चपाए सरह भयो, जसको लागि धेरै सास्ती भोग्नुपर्‍यो। त्यहाँको प्रसिद्ध लुलु मल र KFC को स्वाद आज पनि मेरो सम्झनामा ताजै छ। कामको धपेडीका बीच एक महिना नपुग्दै साथीसँग केरलाका केही सुन्दर ठाउँहरू घुम्यौँ। नयाँ ठाउँले मेरा मनका पीडाहरूलाई केही क्षणका लागि भए पनि भुलाइदिएको थियो।</p>
-                    <p>अन्ततः संघर्षका ती अमूल्य दिनहरूसँगै मेरो यात्रा फेरि दिल्लीतर्फ मोडियो। आज फर्केर हेर्दा लाग्छ, त्यो १७ वर्षको ठिटो जसले परिवारको जिम्मेवारी बोकेर हिँडेको थियो, उसले जीवनका धेरै कठोर पाठ त्यही एउटै यात्रामा सिकिसकेको थियो।</p>
-                </div>
-                <div class="lang-en" style="display: none;">
-                    <p>There are some chapters in life that, when turning their pages, bring a unique thrill and sweetness to the heart. No matter how much time passes, when I look back at that tender age of 17, it feels like just yesterday. Family issues at home, the burden of responsibilities, and the urge to prove something wouldn't let me stay at home. Taking the huge responsibility of the world on my shoulders at a young age, I left home with friends for a foreign land and stepped towards my destination, Kerala.</p>
-                    <p>The journey was very painful. The chilly cold of Poush and thick fog covered the entire path. Traveling from home by jeep and bus to Gorakhpur was very dangerous and scary. Reaching Gorakhpur, we caught the train to Kerala. That train journey was the longest and most exhausting journey of my life, where we covered an endless path enduring hunger, thirst, and fatigue.</p>
-                    <p>Finally, after reaching Kerala and working hard, I got a job. The happiness of getting my first self-earned money is indescribable. With that money, I bought a new mobile for myself. However, getting a SIM card in a foreign land was like chewing iron pellets, for which I had to endure a lot of trouble. The taste of the famous Lulu Mall and KFC there is still fresh in my memory. Amidst the hustle and bustle of work, within a month, we explored some beautiful places in Kerala with friends. That new place made me forget my sorrows for a while.</p>
-                    <p>Finally, along with those precious days of struggle, my journey turned back towards Delhi. Looking back today, it feels like that 17-year-old boy who carried the family's responsibility had already learned many harsh lessons of life on that very journey.</p>
-                </div>
-            </div>
-
-            <div class="share-box">
-                <span style="font-size: 13px; color: #666; display: block; margin-bottom: 8px; font-weight: bold;" class="share-text" data-np="यो पोस्ट शेयर गर्नुहोस्:" data-en="Share this post:">यो पोस्ट शेयर गर्नुहोस्:</span>
-                <a href="https://api.whatsapp.com/send?text=%E0%A4%8F%E0%A4%89%E0%A4%9F%E0%A4%BE%20%E0%A4%A8%E0%A5%8C%E0%A4%B2%E0%A5%8B%20%E0%A4%AF%E0%A4%BE%E0%A4%A4%E0%A5%8D%E0%A4%B0%E0%A4%BE%20https://kamalgc.com.np" target="_blank" style="margin: 0 10px; text-decoration: none; font-size: 15px; color: #25D366; font-weight: bold;"> WhatsApp</a>
-                <a href="https://www.facebook.com/sharer/sharer.php?u=https://kamalgc.com.np" target="_blank" style="margin: 0 10px; text-decoration: none; font-size: 15px; color: #1877F2; font-weight: bold;"> Facebook</a>
-            </div>
+        <div class="lang-en" style="display: none;">
+          <p>There are some chapters in life that, when turning their pages, bring a unique thrill and sweetness to the heart. No matter how much time passes, when I look back at that tender age of 17, it feels like just yesterday. Family issues at home, the burden of responsibilities, and the urge to prove something wouldn't let me stay at home. Taking the huge responsibility of the world on my shoulders at a young age, I left home with friends for a foreign land and stepped towards my destination, Kerala.</p>
+          <p>The journey was very painful. The chilly cold of Poush and thick fog covered the entire path. Traveling from home by jeep and bus to Gorakhpur was very dangerous and scary. Reaching Gorakhpur, we caught the train to Kerala. That train journey was the longest and most exhausting journey of my life, where we covered an endless path enduring hunger, thirst, and fatigue.</p>
+          <p>Finally, after reaching Kerala and working hard, I got a job. The happiness of getting my first self-earned money is indescribable. With that money, I bought a new mobile for myself. However, getting a SIM card in a foreign land was like chewing iron pellets, for which I had to endure a lot of trouble. The taste of the famous Lulu Mall and KFC there is still fresh in my memory. Amidst the hustle and bustle of work, within a month, we explored some beautiful places in Kerala with friends. That new place made me forget my sorrows for a while.</p>
+          <p>Finally, along with those precious days of struggle, my journey turned back towards Delhi. Looking back today, it feels like that 17-year-old boy who carried the family's responsibility had already learned many harsh lessons of life on that very journey.</p>
         </div>
+      </div>
 
+      <div class="share-box">
+        <span style="font-size: 13px; color: #94a3b8; display: block; margin-bottom: 8px; font-weight: bold;" class="share-text" data-np="यो पोस्ट शेयर गर्नुहोस्:" data-en="Share this post:">यो पोस्ट शेयर गर्नुहोस्:</span>
+        <a href="https://api.whatsapp.com/send?text=%E0%A4%8F%E0%A4%9F%E0%A4%BE%20%E0%A4%A8%E0%A5%8C%E0%A4%B2%E0%A5%8B%20%E0%A4%AF%E0%A4%BE%E0%A4%A4%E0%A5%8D%E0%A4%B0%E0%A4%BE%20https://kamalgc.com.np" target="_blank" style="margin: 0 10px; text-decoration: none; font-size: 15px; color: #25D366; font-weight: bold;"> WhatsApp</a>
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https://kamalgc.com.np" target="_blank" style="margin: 0 10px; text-decoration: none; font-size: 15px; color: #1877F2; font-weight: bold;"> Facebook</a>
+      </div>
     </div>
 
-    <footer>
-        <p>&copy; 2026 Kamal G.C. All Rights Reserved.</p>
-    </footer>
-
-    <script>
-        function setLanguage(lang) {
-            const npElements = document.querySelectorAll('.lang-np');
-            const enElements = document.querySelectorAll('.lang-en');
-            const titles = document.querySelectorAll('.blog-title');
-            const shareTexts = document.querySelectorAll('.share-text');
-
-            if (lang === 'en') {
-                npElements.forEach(el => el.style.display = 'none');
-                enElements.forEach(el => el.style.display = 'block');
-                titles.forEach(el => el.innerText = el.getAttribute('data-en'));
-                shareTexts.forEach(el => el.innerText = el.getAttribute('data-en'));
-            } else {
-                npElements.forEach(el => el.style.display = 'block');
-                enElements.forEach(el => el.style.display = 'none');
-                titles.forEach(el => el.innerText = el.getAttribute('data-np'));
-                shareTexts.forEach(el => el.innerText = el.getAttribute('data-np'));
-            }
-        }
-    </script>
+  </div>
 
 </body>
 </html>
