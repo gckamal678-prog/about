@@ -1,150 +1,192 @@
-/* Zoom र Selection रोक्न बेसिक सेटअप */
+/* Zoom in/out, User Select र Horizontal Scroll रोक्न */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  touch-action: pan-y; /* Pinch zoom रोक्न र Vertical Scroll मात्र अनुमति दिन */
-  user-select: none;   /* टेक्स्ट सेलेक्ट हुन नदिन */
+  touch-action: pan-y; /* Pinch zoom रोक्ने, vertical scroll मात्र दिने */
+  user-select: none;   /* Select गर्न नदिने */
+  -webkit-user-select: none;
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #0d1117;
-  color: #e6edf3;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background-color: #12161f;
+  color: #e2e8f0;
   display: flex;
   flex-direction: column;
   height: 100vh;
-  overflow: hidden; /* पूरै पेज जुम वा स्क्रोल हुन नदिन */
+  overflow: hidden; /* पूरै विन्डो स्क्रोल हुन नदिन */
 }
 
-/* १. Top Header */
+/* १. TOP HEADER */
 .top-header {
-  height: 50px;
-  background: #161b22;
-  border-bottom: 1px solid #30363d;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 10px;
-  flex-shrink: 0;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.5);
-}
-
-.lock-indicator {
-  font-size: 11px;
-  color: #58a6ff;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.top-nav a {
-  color: #f0f6fc;
-  text-decoration: none;
-  font-size: 12px;
-  margin-left: 8px;
-  padding: 4px 6px;
-  background: #21262d;
-  border-radius: 4px;
-  border: 1px solid #30363d;
-}
-
-/* २. Secondary Bar */
-.secondary-bar {
-  background: #1f242d;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  padding: 8px 10px;
-  font-size: 11px;
-  border-bottom: 2px solid #238636;
-  flex-shrink: 0;
-  justify-content: space-between;
-}
-
-.info-item {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  color: #8b949e;
-}
-
-.info-item i {
-  color: #58a6ff;
-}
-
-.lock-controls {
-  color: #2ea043;
-  font-weight: bold;
-}
-
-/* ३. Middle Content Area (Scrollable) */
-.content-area {
-  flex: 1;
-  overflow-y: auto; /* बिचको भाग मात्र स्क्रोल हुनेछ */
-  padding: 15px;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-.card {
-  background: #161b22;
-  border: 1px solid #30363d;
-  border-radius: 8px;
-  padding: 15px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-}
-
-.card h2 {
-  font-size: 16px;
-  color: #58a6ff;
-  margin-bottom: 8px;
-}
-
-.card p {
-  font-size: 13px;
-  color: #c9d1d9;
-  line-height: 1.5;
-}
-
-.media-placeholder {
-  margin-top: 10px;
-  height: 120px;
-  background: #0d1117;
-  border: 1px dashed #30363d;
-  border-radius: 6px;
+  height: 48px;
+  background: linear-gradient(180deg, #1e2638 0%, #161c28 100%);
+  border-bottom: 2px solid #8b0000; /* Red Border accent */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: #8b949e;
+  padding: 4px 8px;
+  flex-shrink: 0;
+}
+
+.lock-tag {
+  font-size: 11px;
+  color: #a0aec0;
+  display: flex;
+  align-items: center;
   gap: 5px;
+  margin-bottom: 2px;
 }
 
-/* ४. Footer */
-.bottom-footer {
-  height: 60px;
-  background: #161b22;
-  border-top: 2px solid #da3633;
+.lock-tag i {
+  color: #d69e2e;
+}
+
+.top-links {
+  font-size: 12px;
+  font-weight: 600;
+  color: #e2e8f0;
+  display: flex;
+  gap: 6px;
+}
+
+/* २. SECONDARY BAR */
+.secondary-bar {
+  background: #1a202c;
+  border-bottom: 1px solid #2d3748;
+  padding: 8px 12px;
+  font-size: 11px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.sec-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sec-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #cbd5e0;
+}
+
+.sec-item i {
+  color: #63b3ed;
+}
+
+.toggle-row {
+  justify-content: flex-start;
+  gap: 8px;
+  margin-top: 2px;
+  padding-top: 4px;
+  border-top: 1px dashed #2d3748;
+}
+
+.toggle-switch {
+  width: 28px;
+  height: 14px;
+  background: #4a5568;
+  border-radius: 10px;
+  position: relative;
+  display: inline-block;
+}
+
+.toggle-switch .dot {
+  width: 10px;
+  height: 10px;
+  background: #fff;
+  border-radius: 50%;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+}
+
+.mode-text, .lang-text {
+  color: #a0aec0;
+  font-size: 10px;
+}
+
+/* ३. SCROLLING CONTENT AREA */
+.scrolling-content {
+  flex: 1;
+  overflow-y: auto; /* बिचको भाग मात्र स्क्रोल हुने */
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.content-card {
+  background: #1a202c;
+  border: 1px solid #2d3748;
+  border-radius: 8px;
+  padding: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.content-card h2 {
+  font-size: 15px;
+  color: #e2e8f0;
+  margin-bottom: 10px;
+}
+
+.media-box {
+  background: #2d3748;
+  border-radius: 6px;
+  height: 100px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: 11px;
-  color: #8b949e;
+  color: #a0aec0;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.media-box i {
+  font-size: 24px;
+}
+
+.video-box i {
+  color: #e53e3e;
+}
+
+.content-list {
+  list-style-type: disc;
+  padding-left: 20px;
+  color: #cbd5e0;
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* ४. FOOTER (Locked) */
+.bottom-footer {
+  background: #161c28;
+  border-top: 2px solid #8b0000; /* Red Border accent */
+  padding: 8px 10px;
+  text-align: center;
+  font-size: 10px;
+  color: #a0aec0;
   flex-shrink: 0;
 }
 
-.contact-info {
-  display: flex;
-  gap: 12px;
-  margin-bottom: 4px;
-  color: #58a6ff;
+.footer-contact p {
+  margin-bottom: 2px;
+  color: #cbd5e0;
 }
 
-.copyright {
+.footer-copyright {
+  margin-top: 4px;
   font-weight: bold;
-  color: #f0f6fc;
+  color: #e2e8f0;
+  letter-spacing: 0.5px;
 }
