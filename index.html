@@ -2,81 +2,95 @@
 <html lang="ne">
 <head>
   <meta charset="UTF-8" />
-  <!-- Zoom out/in बन्द गर्न viewport मा user-scalable=no राखिएको छ -->
+  <!-- Zoom in/out पूरै बन्द गर्न user-scalable=no -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>Kamal G.C. Mobile Layout</title>
+  <title>KAMAL G.C.</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 </head>
 <body>
 
-  <!-- १. Top Fixed Header (Locked) -->
+  <!-- १. TOP HEADER (Locked) -->
   <header class="top-header">
-    <div class="lock-indicator">
+    <div class="lock-tag">
       <i class="fa-solid fa-lock"></i>
-      <span>LOCK MODE</span>
+      <span>तालचा लगाउने: DISABLED</span>
     </div>
-    <nav class="top-nav">
-      <a href="#block">ब्लक प्रविधि</a>
-      <a href="#emergency">आपतकालीन</a>
-      <a href="#about">मेरो बारे</a>
-    </nav>
+    <div class="top-links">
+      <span>ब्लक प्रविधि</span>
+      <span>/</span>
+      <span>आपतकालीन</span>
+      <span>/</span>
+      <span>मेरो बारे</span>
+    </div>
   </header>
 
-  <!-- २. Secondary Fixed Bar (Locked) -->
+  <!-- २. SECONDARY LOCKED BAR -->
   <section class="secondary-bar">
-    <div class="info-item">
-      <i class="fa-solid fa-location-dot"></i>
-      <span>काठमाडौँ</span>
+    <div class="sec-row">
+      <div class="sec-item">
+        <i class="fa-solid fa-location-dot"></i>
+        <span>लाइभ लोकेशन:</span>
+      </div>
+      <div class="sec-item">
+        <i class="fa-regular fa-clock"></i>
+        <span>समय: [Current Time]</span>
+      </div>
     </div>
-    <div class="info-item">
-      <i class="fa-regular fa-clock"></i>
-      <span>१२:३० PM</span>
+
+    <div class="sec-row">
+      <div class="sec-item">
+        <i class="fa-regular fa-calendar-days"></i>
+        <span>वि.सं. मिति: [BS Date]</span>
+      </div>
+      <div class="sec-item">
+        <i class="fa-solid fa-temperature-three-quarters"></i>
+        <span>तापक्रम: [Temperature]</span>
+      </div>
     </div>
-    <div class="info-item">
-      <i class="fa-regular fa-calendar-days"></i>
-      <span>२०८३ वैशाख १५</span>
-    </div>
-    <div class="info-item">
-      <i class="fa-solid fa-temperature-half"></i>
-      <span>२५°C</span>
-    </div>
-    <div class="info-item lock-controls">
-      <i class="fa-solid fa-moon"></i>
-      <span>EN/NP</span>
-      <i class="fa-solid fa-lock-keyhole"></i>
+
+    <div class="sec-row toggle-row">
+      <span class="mode-label">मोड/भाषा</span>
+      <div class="toggle-switch">
+        <span class="dot"></span>
+      </div>
+      <span class="mode-text">Dark/Light</span>
+      <span class="lang-text">en/np</span>
     </div>
   </section>
 
-  <!-- ३. Middle Scrollable Content Area (स्क्रोल हुने मुख्य भाग) -->
-  <main class="content-area">
-    <article class="card">
-      <h2>ब्लक प्रविधि सम्बन्धी अपडेट</h2>
-      <p>यहाँ तपाईंको ब्लक प्रविधि वा अन्य विषयवस्तुको विवरण रहनेछ। यो भाग मात्र स्क्रोल हुन्छ।</p>
-      <div class="media-placeholder">
+  <!-- ३. MID-SECTION: SCROLLING CONTENT AREA (बिचमा मात्र स्क्रोल हुने) -->
+  <main class="scrolling-content">
+    <div class="content-card">
+      <h2>लेख शीर्षकहरू</h2>
+      <div class="media-box">
         <i class="fa-solid fa-image"></i>
-        <span>चित्र / भिडियो</span>
+        <p>चित्रहरू</p>
       </div>
-    </article>
+      <ul class="content-list">
+        <li>चित्रहरू</li>
+        <li>भिडियोहरू</li>
+      </ul>
+    </div>
 
-    <article class="card">
-      <h2>आपतकालीन सूचना</h2>
-      <p>आपतकालीन सम्पर्क तथा महत्त्वपूर्ण जानकारीहरू यहाँ राखिनेछ।</p>
-    </article>
-
-    <article class="card">
-      <h2>मेरो बारेमा</h2>
-      <p>व्यक्तिगत विवरण, अनुभव र अन्य जानकारीहरू यस खण्डमा उपलब्ध हुनेछन्।</p>
-    </article>
+    <div class="content-card">
+      <div class="media-box video-box">
+        <i class="fa-solid fa-circle-play"></i>
+        <p>भिडियोहरू</p>
+      </div>
+      <ul class="content-list">
+        <li>भिडियोहरू</li>
+      </ul>
+    </div>
   </main>
 
-  <!-- ४. Fixed Footer (Locked) -->
+  <!-- ४. FOOTER (Locked) -->
   <footer class="bottom-footer">
-    <div class="contact-info">
-      <span>@kids.kamalgc.com.np</span>
-      <span>Support@kamalgc.com.np</span>
+    <div class="footer-contact">
+      <p>सम्पर्क: @kids.kamalgc.com.np</p>
+      <p>सहायता: Support@kamalgc.com.np</p>
     </div>
-    <div class="copyright">
+    <div class="footer-copyright">
       ©2026 KAMAL G.C. ALL RIGHTS RESERVED
     </div>
   </footer>
