@@ -1,222 +1,203 @@
 <!DOCTYPE html>
-<html lang="ne">
+<html lang="np">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>मेरो बारेमा - कमल जी.सी.</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" rel="stylesheet">
-    <link rel="manifest" href="manifest.json">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Me - KAMAL G.C.</title>
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
 
-    <style>
-        :root { --bg-color: #f4f6f9; --text-color: #333; --header-bg: #ffffff; --box-bg: #ffffff; --border-color: #3498db; --sidebar-bg: #2c3e50; --sidebar-text: #ffffff; --banner-bg: #eaf2f8; --banner-text: #1b4f72; }
-        [data-theme="dark"] { --bg-color: #121212; --text-color: #e0e0e0; --header-bg: #1e1e1e; --box-bg: #1e1e1e; --border-color: #3498db; --sidebar-bg: #1a1a1a; --sidebar-text: #ffffff; --banner-bg: #2a2a2a; --banner-text: #85c1e9; }
-        *, *::before, *::after { box-sizing: border-box; }
-        body { margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--bg-color); color: var(--text-color); line-height: 1.6; display: flex; flex-direction: column; min-height: 100vh; transition: background-color 0.3s, color 0.3s; }
-        header { position: fixed; top: 0; left: 0; width: 100%; height: 60px; background-color: var(--header-bg); box-shadow: 0 2px 5px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: space-between; padding: 0 15px; z-index: 1000; }
-        .header-left, .header-right { display: flex; align-items: center; gap: 12px; }
-        .menu-btn { background: none; border: none; font-size: 24px; cursor: pointer; color: var(--text-color); }
-        .logo-text { font-family: 'Poppins', sans-serif; font-size: 19px; font-weight: 700; background: linear-gradient(45deg, #2980b9, #3498db); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-decoration: none; }
-        .control-btn { background: none; border: 1px solid var(--text-color); color: var(--text-color); padding: 4px 8px; border-radius: 5px; cursor: pointer; font-size: 13px; font-weight: bold; }
-        .control-btn:hover { background-color: var(--text-color); color: var(--bg-color); }
-        .live-status-bar { margin-top: 60px; background-color: var(--banner-bg); color: var(--banner-text); padding: 6px 10px; text-align: center; font-size: 0.78em; font-weight: 500; border-bottom: 1px solid rgba(0,0,0,0.05); display: flex; justify-content: center; align-items: center; gap: 6px; white-space: nowrap; overflow-x: auto; }
-        .sidebar { position: fixed; top: 0; left: -280px; width: 280px; height: 100%; background-color: var(--sidebar-bg); color: var(--sidebar-text); transition: left 0.3s ease; z-index: 1100; padding-top: 80px; box-shadow: 2px 0 5px rgba(0,0,0,0.2); }
-        .sidebar.active { left: 0; }
-        .sidebar-close { position: absolute; top: 20px; right: 20px; background: none; border: none; color: var(--sidebar-text); font-size: 24px; cursor: pointer; }
-        .sidebar ul { list-style: none; padding: 0; margin: 0; }
-        .sidebar ul li { border-bottom: 1px solid #34495e; }
-        .sidebar ul li a { display: block; padding: 15px 25px; color: var(--sidebar-text); text-decoration: none; }
-        .sidebar ul li:hover { background-color: #34495e; }
-        .main-container { max-width: 1200px; width: 100%; margin: 15px auto 40px auto; padding: 0 15px; flex: 1; }
-        .section-box { background: var(--box-bg); border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); padding: 25px; margin-bottom: 25px; }
-        h2 { color: var(--text-color); border-bottom: 2px solid var(--border-color); padding-bottom: 5px; margin-top: 20px; }
-        footer { background-color: var(--sidebar-bg); color: var(--sidebar-text); text-align: center; padding: 20px; margin-top: auto; font-size: 14px; }
-        .footer-links { margin-bottom: 12px; display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 15px; }
-        .footer-links a { color: #3498db; text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; }
-    </style>
+    body {
+      background-color: #0f172a;
+      color: #f8fafc;
+      padding: 20px 15px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .main-container {
+      width: 100%;
+      max-width: 650px;
+      margin: 0 auto;
+    }
+
+    .section-box {
+      background: #1e293b;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      border: 1px solid #334155;
+    }
+
+    h2 {
+      color: #38bdf8;
+      font-size: 1.25rem;
+      margin-top: 20px;
+      margin-bottom: 10px;
+      border-bottom: 2px solid #007bff;
+      padding-bottom: 6px;
+      display: inline-block;
+    }
+
+    .section-box > h2:first-child {
+      margin-top: 0;
+    }
+
+    p {
+      font-size: 14px;
+      line-height: 1.7;
+      color: #cbd5e1;
+      margin-bottom: 12px;
+    }
+
+    p strong {
+      color: #f59e0b;
+    }
+
+    a {
+      color: #38bdf8;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    ul {
+      list-style-type: none;
+      padding-left: 0;
+      margin-bottom: 15px;
+    }
+
+    ul li {
+      font-size: 14px;
+      line-height: 1.6;
+      color: #cbd5e1;
+      margin-bottom: 10px;
+      background: rgba(15, 23, 42, 0.5);
+      padding: 10px 12px;
+      border-radius: 8px;
+      border-left: 4px solid #38bdf8;
+    }
+
+    ul li strong {
+      color: #f1f5f9;
+    }
+
+    .share-section {
+      margin-top: 25px;
+      padding-top: 15px;
+      border-top: 1px solid #334155;
+      text-align: center;
+    }
+
+    .share-title {
+      margin-bottom: 12px;
+      font-size: 14px;
+      font-weight: bold;
+      color: #94a3b8;
+    }
+
+    .share-icons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .share-icons a {
+      transition: transform 0.2s ease;
+    }
+
+    .share-icons a:hover {
+      transform: scale(1.15);
+    }
+  </style>
 </head>
-<body data-theme="light">
-    <header>
-        <div class="header-left">
-            <button class="menu-btn" onclick="toggleSidebar()">☰</button>
-            <a href="index.html" class="logo-text">kamalgc.com.np</a>
-        </div>
-        <div class="header-right">
-            <button class="control-btn" id="langBtn" onclick="toggleLanguage()">EN</button>
-            <button class="control-btn" id="themeBtn" onclick="toggleTheme()">🌙 Dark</button>
-        </div>
-    </header>
+<body>
 
-    <div class="live-status-bar" id="liveStatusBar">
-        <span id="locationText">लोड हुँदैछ...</span> |
-        <span id="nepaliDateText">२०८३ साउन २४</span> |
-        <span id="englishDateText">Aug 09 (Sun)</span> |
-        <span id="timeText">--:--:--</span> |
-        <span id="weatherText">--°C</span>
+  <div class="main-container">
+    <div class="section-box">
+      
+      <!-- Section 1: Introduction -->
+      <h2 data-en="Hello! I am Kamal G.C." data-np="नमस्कार! म कमल जी.सी.">नमस्कार! म कमल जी.सी.</h2>
+      
+      <p data-en="My permanent home is Shivraj Municipality-9, Shivgadhi (Kapilvastu), and currently, I am working at Kosher India Pvt. Ltd. (indiakoshertravel.com) in New Delhi, India." data-np="म मूल घर शिवराज नगरपालिका-९, शिवगढी (कपिलवस्तु) भई हाल कार्यको सिलसिलामा नयाँ दिल्ली (भारत) स्थित Kosher India Pvt. Ltd. (indiakoshertravel.com) मा कार्यरत छु।">
+        म मूल घर शिवराज नगरपालिका-९, शिवगढी (कपिलवस्तु) भई हाल कार्यको सिलसिलामा नयाँ दिल्ली (भारत) स्थित <strong>Kosher India Pvt. Ltd.</strong> (<a href="https://www.indiakoshertravel.com" target="_blank">indiakoshertravel.com</a>) मा कार्यरत छु।
+      </p>
+      
+      <p data-en="I have a special interest in putting technology into practice to make daily work and business smoother and faster." data-np="प्रविधिलाई व्यवहारमा उतारेर दैनिक काम र व्यापारलाई अझ सहज र छिटो बनाउने विषयमा मेरो विशेष रुचि रहेको छ।">
+        प्रविधिलाई व्यवहारमा उतारेर दैनिक काम र व्यापारलाई अझ सहज र छिटो बनाउने विषयमा मेरो विशेष रुचि रहेको छ।
+      </p>
+
+      <!-- Section 2: Experience -->
+      <h2 data-en="Work Experience & Discipline" data-np="कार्य-अनुभव र अनुशासन">कार्य-अनुभव र अनुशासन</h2>
+      
+      <p data-en="Working at Kosher India by following extremely strict Kosher rules, high-level cleanliness, and quality standards according to Israeli and Jewish culture and tradition is a part of my daily life." data-np="Kosher India मा इस्राइली तथा जुडिक (Jewish) संस्कृति र परम्परा अनुसारका अत्यन्तै कडा कोशर (Kosher) नियमहरू, उच्चस्तरीय सरसफाइ र गुणस्तरका मापदण्डहरू पालना गर्दै काम गर्नु मेरो दैनिक जीवनको हिस्सा हो।">
+        Kosher India मा इस्राइली तथा जुडिक (Jewish) संस्कृति र परम्परा अनुसारका अत्यन्तै कडा <strong>कोशर (Kosher) नियमहरू</strong>, उच्चस्तरीय सरसफाइ र गुणस्तरका मापदण्डहरू पालना गर्दै काम गर्नु मेरो दैनिक जीवनको हिस्सा हो।
+      </p>
+      
+      <p><strong data-en="This workplace has taught me:" data-np="यस कार्यस्थलले मलाई सिकाएको छ:">यस कार्यस्थलले मलाई सिकाएको छ:</strong></p>
+      
+      <ul>
+        <li>
+          <strong data-en="High Discipline & Purity:" data-np="उच्च अनुशासन र शुद्धता:">उच्च अनुशासन र शुद्धता:</strong> 
+          <span data-en="Habit of faithfully following Kosher standards and rules." data-np="कोशर मापदण्ड र नियमहरूलाई इमानदारीका साथ पालना गर्ने बानी।">कोशर मापदण्ड र नियमहरूलाई इमानदारीका साथ पालना गर्ने बानी।</span>
+        </li>
+        <li>
+          <strong data-en="International Workstyle:" data-np="अन्तर्राष्ट्रिय कार्यशैली:">अन्तर्राष्ट्रिय कार्यशैली:</strong> 
+          <span data-en="Experience in paying attention to quality and hospitality while working with foreign guests and clients." data-np="विदेशी पाहुना तथा ग्राहकहरूसँग काम गर्दा गुणस्तर र आतिथ्यतामा ध्यान दिने अनुभव।">विदेशी पाहुना तथा ग्राहकहरूसँग काम गर्दा गुणस्तर र आतिथ्यतामा ध्यान दिने अनुभव।</span>
+        </li>
+      </ul>
+
+      <!-- Section 3: Tech & AI -->
+      <h2 data-en="Passion for Technology & AI" data-np="प्रविधि र AI प्रतिको हुटहुटी">प्रविधि र AI प्रतिको हुटहुटी</h2>
+      
+      <p data-en="After finishing my responsible work for the day, I dedicate my remaining time to learning my interest — AI (Artificial Intelligence) and modern technology." data-np="दिनभरको जिम्मेवारीपूर्वक काम सकेपछि, बाँकी रहेको समयलाई म मेरो रुचि — AI (कृत्रिम बुद्धिमत्ता) र आधुनिक प्रविधि सिक्नमा लगाउँछु।">
+        दिनभरको जिम्मेवारीपूर्वक काम सकेपछि, बाँकी रहेको समयलाई म मेरो रुचि — <strong>AI (कृत्रिम बुद्धिमत्ता)</strong> र आधुनिक प्रविधि सिक्नमा लगाउँछु।
+      </p>
+      
+      <ul>
+        <li>
+          <strong data-en="Vision:" data-np="सोच:">सोच:</strong> 
+          <span data-en="Continuous learning and proper use of technology." data-np="निरन्तर सिकाइ र प्रविधिको सही सदुपयोग।">निरन्तर सिकाइ र प्रविधिको सही सदुपयोग।</span>
+        </li>
+        <li>
+          <strong data-en="Goal:" data-np="लक्ष्य:">लक्ष्य:</strong> 
+          <span data-en="Using AI and modern tools to make daily work and business smooth, fast, and effective." data-np="AI र आधुनिक औजारहरू (Tools) को प्रयोग गरेर दैनिक काम र व्यापारलाई सहज, छिटो र प्रभावकारी बनाउनु।">AI र आधुनिक औजारहरू (Tools) को प्रयोग गरेर दैनिक काम र व्यापारलाई सहज, छिटो र प्रभावकारी बनाउनु।</span>
+        </li>
+        <li>
+          <strong data-en="Future Plan:" data-np="भविष्यको योजना:">भविष्यको योजना:</strong> 
+          <span data-en="Combining the strict work discipline learned from Kosher India and the modern capability of AI to advance my own business with technology." data-np="कोशर इन्डियाबाट सिकेको कडा कार्य-अनुशासन र AI को आधुनिक क्षमतालाई जोडेर आफ्नै व्यवसायलाई प्रविधिसँग अघि बढाउनु।">कोशर इन्डियाबाट सिकेको कडा कार्य-अनुशासन र AI को आधुनिक क्षमतालाई जोडेर आफ्नै व्यवसायलाई प्रविधिसँग अघि बढाउनु।</span>
+        </li>
+      </ul>
+
+      <!-- Share Box -->
+      <div class="share-section">
+        <p class="share-title" data-en="Share this page:" data-np="सेयर गर्नुहोस्:">सेयर गर्नुहोस्:</p>
+        <div class="share-icons">
+          <a href="https://api.whatsapp.com/send?text=kamalgc.com.np/about.html - मेरो बारेमा पढ्नुहोस्!" target="_blank" title="Share on WhatsApp">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="#25d366"><path d="M12.01 2C6.48 2 2 6.48 2 12.01c0 2.09.64 4.07 1.84 5.74L2 22l4.52-1.74c1.57.97 3.39 1.49 5.49 1.49 5.53 0 10.01-4.48 10.01-10.01S17.54 2 12.01 2zM17.05 15.2c-.22.6-1.12 1.15-1.55 1.22-.38.07-.84.14-2.73-.62-2.32-.93-3.79-3.23-3.9-3.38-.11-.15-1.01-1.35-1.01-2.57s.62-1.82.84-2.07c.22-.25.59-.32.84-.32.22 0 .44 0 .63.01.2.01.48.02.69.51.22.48.74 1.8.8 1.93.06.13.1.28.02.45-.08.17-.13.25-.26.41-.13.16-.27.33-.39.46-.13.13-.27.27-.11.54.16.27.71 1.18 1.52 1.91 1.04.93 1.92 1.23 2.19 1.37.27.14.43.12.59-.06s.69-.81.87-1.08c.18-.27.36-.22.61-.13.25.09 1.59.75 1.87.89.28.14.46.21.53.33.07.12.07.7-.15 1.3z"/></svg>
+          </a>
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://kamalgc.com.np/about.html" target="_blank" title="Share on Facebook">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="#1877f2"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.35 7 13 7c.77 0 1.5.06 2.2.17V10h-1.2c-.88 0-1.2.55-1.2 1.3V12h3l-.33 3H14v6.8c4.56-.93 8-4.96 8-9.8z"/></svg>
+          </a>
+        </div>
+      </div>
+
     </div>
+  </div>
 
-    <nav class="sidebar" id="sidebar">
-        <button class="sidebar-close" onclick="toggleSidebar()">&times;</button>
-        <ul>
-            <li><a href="index.html" data-en="Home" data-np="गृहपृष्ठ (Home)">गृहपृष्ठ (Home)</a></li>
-            <li><a href="about.html" data-en="About Me" data-np="मेरो बारेमा (About Me)">मेरो बारेमा (About Me)</a></li>
-            <li><a href="blog.html" data-en="Blog / Updates" data-np="ब्लग / अपडेट्स (Blog)">ब्लग / अपडेट्स (Blog)</a></li>
-            <li><a href="ai.html" data-en="AI & Tech" data-np="AI र प्रविधि (AI & Tech)">AI र प्रविधि (AI & Tech)</a></li>
-            <li><a href="emergency.html" data-en="Emergency Contacts" data-np="आकस्मिक सेवाहरू (Emergency)">आकस्मिक सेवाहरू (Emergency)</a></li>
-        </ul>
-    </nav>
-
-    <div class="main-container">
-        <div class="section-box">
-            <h2 data-en="Hello! I am Kamal G.C." data-np="नमस्कार! म कमल जी.सी.">नमस्कार! म कमल जी.सी.</h2>
-            <p data-en="My permanent home is Shivraj Municipality-9, Shivgadhi (Kapilvastu), and currently, I am working at Kosher India Pvt. Ltd. (indiakoshertravel.com) in New Delhi, India." data-np="म मूल घर शिवराज नगरपालिका-९, शिवगढी (कपिलवस्तु) भई हाल कार्यको सिलसिलामा नयाँ दिल्ली (भारत) स्थित Kosher India Pvt. Ltd. (indiakoshertravel.com) मा कार्यरत छु।">म मूल घर शिवराज नगरपालिका-९, शिवगढी (कपिलवस्तु) भई हाल कार्यको सिलसिलामा नयाँ दिल्ली (भारत) स्थित <strong>Kosher India Pvt. Ltd.</strong> (<a href="https://www.indiakoshertravel.com" target="_blank">indiakoshertravel.com</a>) मा कार्यरत छु।</p>
-            <p data-en="I have a special interest in putting technology into practice to make daily work and business smoother and faster." data-np="प्रविधिलाई व्यवहारमा उतारेर दैनिक काम र व्यापारलाई अझ सहज र छिटो बनाउने विषयमा मेरो विशेष रुचि रहेको छ।">प्रविधिलाई व्यवहारमा उतारेर दैनिक काम र व्यापारलाई अझ सहज र छिटो बनाउने विषयमा मेरो विशेष रुचि रहेको छ।</p>
-
-            <h2 data-en="Work Experience & Discipline" data-np="कार्य-अनुभव र अनुशासन">कार्य-अनुभव र अनुशासन</h2>
-            <p data-en="Working at Kosher India by following extremely strict Kosher rules, high-level cleanliness, and quality standards according to Israeli and Jewish culture and tradition is a part of my daily life." data-np="Kosher India मा is्राइली तथा जुडिक (Jewish) संस्कृति र परम्परा अनुसारका अत्यन्तै कडा कोशर (Kosher) नियमहरू, उच्चस्तरीय सरसफाइ र गुणस्तरका मापदण्डहरू पालना गर्दै काम गर्नु मेरो दैनिक जीवनको हिस्सा हो।">Kosher India मा इस्राइली तथा जुडिक (Jewish) संस्कृति र परम्परा अनुसारका अत्यन्तै कडा <strong>कोशर (Kosher) नियमहरू</strong>, उच्चस्तरीय सरसफाइ र गुणस्तरका मापदण्डहरू पालना गर्दै काम गर्नु मेरो दैनिक जीवनको हिस्सा हो।</p>
-            <p><strong data-en="This workplace has taught me:" data-np="यस कार्यस्थलले मलाई सिकाएको छ:">यस कार्यस्थलले मलाई सिकाएको छ:</strong></p>
-            <ul>
-                <li><strong data-en="High Discipline & Purity:" data-np="उच्च अनुशासन र शुद्धता:">उच्च अनुशासन र शुद्धता:</strong> <span data-en="Habit of faithfully following Kosher standards and rules." data-np="कोशर मापदण्ड र नियमहरूलाई इमानदारीका साथ पालना गर्ने बानी।">कोशर मापदण्ड र नियमहरूलाई इमानदारीका साथ पालना गर्ने बानी।</span></li>
-                <li><strong data-en="International Workstyle:" data-np="अन्तर्राष्ट्रिय कार्यशैली:">अन्तर्राष्ट्रिय कार्यशैली:</strong> <span data-en="Experience in paying attention to quality and hospitality while working with foreign guests and clients." data-np="विदेशी पाहुना तथा ग्राहकहरूसँग काम गर्दा गुणस्तर र आतिथ्यतामा ध्यान दिने अनुभव।">विदेशी पाहुना तथा ग्राहकहरूसँग काम गर्दा गुणस्तर र आतिथ्यतामा ध्यान दिने अनुभव।</span></li>
-            </ul>
-
-            <h2 data-en="Passion for Technology & AI" data-np="प्रविधि र AI प्रतिको हुटहुटी">प्रविधि र AI प्रतिको हुटहुटी</h2>
-            <p data-en="After finishing my responsible work for the day, I dedicate my remaining time to learning my interest — AI (Artificial Intelligence) and modern technology." data-np="दिनभरको जिम्मेवारीपूर्वक काम सकेपछि, बाँकी रहेको समयलाई म मेरो रुचि — AI (कृत्रिम बुद्धिमत्ता) र आधुनिक प्रविधि सिक्नमा लगाउँछु।">दिनभरको जिम्मेवारीपूर्वक काम सकेपछि, बाँकी रहेको समयलाई म मेरो रुचि — <strong>AI (कृत्रिम बुद्धिमत्ता)</strong> र आधुनिक प्रविधि सिक्नमा लगाउँछु।</p>
-            <ul>
-                <li><strong data-en="Vision:" data-np="सोच:">सोच:</strong> <span data-en="Continuous learning and proper use of technology." data-np="निरन्तर सिकाइ र प्रविधिको सही सदुपयोग।">निरन्तर सिकाइ र प्रविधिको सही सदुपयोग।</span></li>
-                <li><strong data-en="Goal:" data-np="लक्ष्य:">लक्ष्य:</strong> <span data-en="Using AI and modern tools to make daily work and business smooth, fast, and effective." data-np="AI र आधुनिक औजारहरू (Tools) को प्रयोग गरेर दैनिक काम र व्यापारलाई सहज, छिटो र प्रभावकारी बनाउनु।">AI र आधुनिक औजारहरू (Tools) को प्रयोग गरेर दैनिक काम र व्यापारलाई सहज, छिटो र प्रभावकारी बनाउनु।</span></li>
-                <li><strong data-en="Future Plan:" data-np="भविष्यको योजना:">भविष्यको योजना:</strong> <span data-en="Combining the strict work discipline learned from Kosher India and the modern capability of AI to advance my own business with technology." data-np="कोशर इन्डियाबाट सिकेको कडा कार्य-अनुशासन र AI को आधुनिक क्षमतालाई जोडेर आफ्नै व्यवसायलाई प्रविधिसँग अघि बढाउनु।">कोशर इन्डियाबाट सिकेको कडा कार्य-अनुशासन र AI को आधुनिक क्षमतालाई जोडेर आफ्नै व्यवसायलाई प्रविधिसँग अघि बढाउनु।</span></li>
-            </ul>
-
-            <div style="margin: 25px 0 10px 0; text-align: center;">
-                <p style="margin-bottom: 10px; font-size: 14px; font-weight: bold; color: var(--text-color);">सेयर गर्नुहोस्:</p>
-                <div style="display: flex; justify-content: center; gap: 20px; align-items: center;">
-                    <a href="https://api.whatsapp.com/send?text=kamalgc.com.np/about.html - मेरो बारेमा पढ्नुहोस्!" target="_blank" title="Share on WhatsApp" style="text-decoration: none; display: inline-flex;">
-                        <svg width="36" height="36" viewBox="0 0 24 24" fill="#25d366"><path d="M12.01 2C6.48 2 2 6.48 2 12.01c0 2.09.64 4.07 1.84 5.74L2 22l4.52-1.74c1.57.97 3.39 1.49 5.49 1.49 5.53 0 10.01-4.48 10.01-10.01S17.54 2 12.01 2zM17.05 15.2c-.22.6-1.12 1.15-1.55 1.22-.38.07-.84.14-2.73-.62-2.32-.93-3.79-3.23-3.9-3.38-.11-.15-1.01-1.35-1.01-2.57s.62-1.82.84-2.07c.22-.25.59-.32.84-.32.22 0 .44 0 .63.01.2.01.48.02.69.51.22.48.74 1.8.8 1.93.06.13.1.28.02.45-.08.17-.13.25-.26.41-.13.16-.27.33-.39.46-.13.13-.27.27-.11.54.16.27.71 1.18 1.52 1.91 1.04.93 1.92 1.23 2.19 1.37.27.14.43.12.59-.06s.69-.81.87-1.08c.18-.27.36-.22.61-.13.25.09 1.59.75 1.87.89.28.14.46.21.53.33.07.12.07.7-.15 1.3z"/></svg>
-                    </a>
-                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://kamalgc.com.np/about.html" target="_blank" title="Share on Facebook" style="text-decoration: none; display: inline-flex;">
-                        <svg width="36" height="36" viewBox="0 0 24 24" fill="#1877f2"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.35 7 13 7c.77 0 1.5.06 2.2.17V10h-1.2c-.88 0-1.2.55-1.2 1.3V12h3l-.33 3H14v6.8c4.56-.93 8-4.96 8-9.8z"/></svg>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <footer>
-        <div class="footer-links">
-            <a href="https://pasal.kamalgc.com.np" target="_blank">🌐 pasal.kamalgc.com.np</a>
-            <a href="mailto:Support@kamalgc.com.np">📧 Support@kamalgc.com.np</a>
-        </div>
-
-        <div style="margin: 15px 0; text-align: center; font-size: 14px;">
-            <p id="adminVisitorBox" style="margin-bottom: 8px; color: var(--sidebar-text); display: none;">
-                👀 कुल भिजिटर (Admin Only): <span id="visitorCount" style="font-weight: bold; color: #3498db;">--</span>
-            </p>
-        </div>
-
-        <p>&copy; 2026 Kamal G.C. All Rights Reserved.</p>
-    </footer>
-
-    <script>
-        let currentLang = 'np';
-        function toggleSidebar() { document.getElementById('sidebar').classList.toggle('active'); }
-        function toggleTheme() {
-            const body = document.body;
-            const themeBtn = document.getElementById('themeBtn');
-            if (body.getAttribute('data-theme') === 'dark') {
-                body.setAttribute('data-theme', 'light');
-                themeBtn.innerHTML = '🌙 Dark';
-            } else {
-                body.setAttribute('data-theme', 'dark');
-                themeBtn.innerHTML = '☀️ Light';
-            }
-        }
-        function toNepaliDigits(str) { const nepDigits = ['०', '१', '२', '३', '४', '५', '६', '७', '८', '९']; return str.toString().replace(/\d/g, x => nepDigits[x]); }
-        function getNepaliDateStr(now) {
-            const nepMonths = ['बैशाख', 'जेठ', 'असार', 'साउन', 'भदौ', 'असोज', 'कात्तिक', 'मंसिर', 'पुस', 'माघ', 'फागुन', 'चैत'];
-            const startAD = new Date(2026, 7, 9);
-            const diffDays = Math.floor((now - startAD) / (1000 * 60 * 60 * 24));
-            let bsMonth = 3, bsDay = 24 + diffDays;
-            if (bsDay > 31) { bsDay -= 31; bsMonth++; }
-            return `२०८३ ${nepMonths[bsMonth]} ${toNepaliDigits(bsDay)}`;
-        }
-        function toggleLanguage() {
-            currentLang = currentLang === 'np' ? 'en' : 'np';
-            document.getElementById('langBtn').innerText = currentLang === 'np' ? 'EN' : 'NP';
-            document.querySelectorAll('[data-np]').forEach(el => {
-                el.innerText = el.getAttribute(currentLang === 'en' ? 'data-en' : 'data-np');
-            });
-            updateLiveStatus();
-        }
-
-        // Live Geolocation and Weather Fetcher
-        function fetchLiveLocationAndWeather() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(async (position) => {
-                    const lat = position.coords.latitude;
-                    const lon = position.coords.longitude;
-                    try {
-                        const geoRes = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`);
-                        const geoData = await geoRes.json();
-                        const cityName = geoData.address.city || geoData.address.town || geoData.address.village || geoData.address.state || "स्थान";
-
-                        const weatherRes = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`);
-                        const weatherData = await weatherRes.json();
-                        const temp = Math.round(weatherData.current_weather.temperature);
-
-                        document.getElementById('locationText').innerText = cityName;
-                        document.getElementById('weatherText').innerText = `${temp}°C`;
-                    } catch (err) {
-                        document.getElementById('locationText').innerText = "लोकेसन प्राप्त भएन";
-                        document.getElementById('weatherText').innerText = "--°C";
-                    }
-                }, () => {
-                    document.getElementById('locationText').innerText = "अनुमति अस्वीकृत";
-                    document.getElementById('weatherText').innerText = "--°C";
-                });
-            } else {
-                document.getElementById('locationText').innerText = "समर्थन छैन";
-            }
-        }
-
-        function updateLiveStatus() {
-            const now = new Date();
-            document.getElementById('timeText').innerText = now.toLocaleTimeString(currentLang === 'en' ? 'en-US' : 'ne-NP');
-            const daysEn = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-            const monthsEn = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-            const monthNameStr = monthsEn[now.getMonth()], dayNumStr = String(now.getDate()).padStart(2, '0'), dayNameStr = daysEn[now.getDay()];
-            
-            if (currentLang === 'en') {
-                document.getElementById('nepaliDateText').innerText = 'BS 2083 Shrawan 24';
-            } else {
-                document.getElementById('nepaliDateText').innerText = getNepaliDateStr(now);
-            }
-            document.getElementById('englishDateText').innerText = `${monthNameStr} ${dayNumStr} (${dayNameStr})`;
-        }
-
-        setInterval(updateLiveStatus, 1000); 
-        updateLiveStatus();
-        fetchLiveLocationAndWeather();
-
-        // Visitor Counter & Admin Trigger script
-        let vCount = localStorage.getItem('site_visitor_count') || Math.floor(Math.random() * 50) + 120;
-        if(!localStorage.getItem('site_visited')) { 
-            vCount++; 
-            localStorage.setItem('site_visitor_count', vCount); 
-            localStorage.setItem('site_visited', 'true'); 
-        }
-        document.getElementById('visitorCount').innerText = vCount;
-
-        let typedCode = '';
-        document.addEventListener('keydown', (e) => {
-            typedCode += e.key;
-            if (typedCode.endsWith('admin')) {
-                const box = document.getElementById('adminVisitorBox');
-                box.style.display = box.style.display === 'none' ? 'block' : 'none';
-                alert('भिजिटर काउन्टर मोड: ' + vCount);
-            }
-        });
-    </script>
 </body>
 </html>
