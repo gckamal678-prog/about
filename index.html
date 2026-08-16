@@ -3,14 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>KAMAL G.C. Portal</title>
+  <title>KAMAL G.C. - Personal Website</title>
   
-  <!-- FontAwesome Icons for Search & Profile -->
+  <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
-  <!-- Nepali Date Functions Engine -->
-  <script src="https://nepali-date-picker.bighnaraj.com.np/nepali.functions.v3.7.min.js"></script>
-
   <style>
     * {
       margin: 0;
@@ -20,358 +17,206 @@
     }
 
     body {
+      background-color: #0f172a;
+      color: #f8fafc;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
-      height: 100vh;
-      overflow: hidden;
-      background-color: #0d1322;
-      color: #f8fafc;
+      justify-content: space-between;
     }
 
-    /* Light Theme Styling */
-    body.light-mode {
-      background-color: #f1f5f9;
-      color: #0f172a;
-    }
-
-    /* Fixed Top Section Header */
-    .top-header {
-      position: fixed;
+    /* Navigation Bar */
+    nav {
+      background: #1e293b;
+      border-bottom: 1px solid #334155;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
       top: 0;
-      width: 100%;
-      z-index: 1000;
-      background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.7);
-      border-bottom: 2px solid #334155;
-      padding: 8px;
+      z-index: 100;
     }
 
-    body.light-mode .top-header {
-      background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 100%);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-      border-bottom: 2px solid #94a3b8;
-    }
-
-    /* Row 1: Brand Title, Search & Profile Icons */
-    .brand-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 4px 8px 8px 8px;
-    }
-
-    .brand-title-container {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .brand-logo-icon {
-      font-size: 1.3rem;
-      color: #f59e0b;
-      text-shadow: 0 0 10px rgba(245, 158, 11, 0.5);
-    }
-
-    .brand-name {
-      font-weight: 800;
-      font-size: 1.25rem;
-      letter-spacing: 1px;
-      color: #38bdf8;
-      text-shadow: 0 2px 5px rgba(0,0,0,0.6);
-    }
-
-    body.light-mode .brand-name {
-      color: #0284c7;
-      text-shadow: none;
-    }
-
-    .brand-icons {
-      display: flex;
-      gap: 16px;
+    nav .logo {
       font-size: 1.2rem;
-      color: #cbd5e1;
-    }
-
-    body.light-mode .brand-icons {
-      color: #334155;
-    }
-
-    .brand-icons i {
-      cursor: pointer;
-      transition: transform 0.2s ease, color 0.2s ease;
-    }
-
-    .brand-icons i:hover {
-      transform: scale(1.15);
-      color: #38bdf8;
-    }
-
-    /* Row 2: 5 Main 3D Buttons */
-    .nav-row {
-      display: flex;
-      justify-content: space-between;
-      gap: 5px;
-      margin-bottom: 8px;
-    }
-
-    .btn-3d {
-      flex: 1;
-      padding: 8px 2px;
-      font-size: 11px;
       font-weight: bold;
-      border: 1px solid #f59e0b;
-      border-radius: 8px;
-      background: linear-gradient(145deg, #d97706, #92400e);
-      color: #ffffff;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.4), 0 4px 0 #78350f, 0 6px 10px rgba(0,0,0,0.5);
-      cursor: pointer;
-      transition: all 0.1s ease;
-      text-align: center;
-      white-space: nowrap;
-      text-shadow: 0 1px 2px rgba(0,0,0,0.8);
-    }
-
-    .btn-3d:active {
-      transform: translateY(3px);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.4), 0 1px 0 #78350f, 0 2px 4px rgba(0,0,0,0.4);
-    }
-
-    .lang-btn {
-      background: linear-gradient(145deg, #2563eb, #1e40af);
-      border-color: #60a5fa;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.4), 0 4px 0 #1e3a8a, 0 6px 10px rgba(0,0,0,0.5);
-    }
-
-    .lang-btn:active {
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.4), 0 1px 0 #1e3a8a;
-    }
-
-    /* Row 3: Dynamic Info Bar */
-    .info-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: rgba(15, 23, 42, 0.7);
-      padding: 6px 8px;
-      border-radius: 6px;
-      font-size: 11px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
-    }
-
-    body.light-mode .info-row {
-      background: rgba(0, 0, 0, 0.05);
-      border: 1px solid rgba(0, 0, 0, 0.1);
-      box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
-    }
-
-    .info-item {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-
-    .info-item i {
-      color: #f59e0b;
-    }
-
-    .theme-toggle {
-      cursor: pointer;
-      background: #334155;
-      color: #fff;
-      padding: 3px 8px;
-      border-radius: 12px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.4);
-      border: 1px solid #475569;
-    }
-
-    body.light-mode .theme-toggle {
-      background: #cbd5e1;
-      color: #0f172a;
-      border-color: #94a3b8;
-    }
-
-    /* Middle Scrollable Section */
-    .middle-content {
-      margin-top: 140px;
-      margin-bottom: 55px;
-      flex: 1;
-      overflow-y: auto;
-      padding: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .placeholder-text {
-      opacity: 0.5;
-      text-align: center;
-      font-style: italic;
-    }
-
-    /* Locked Footer */
-    .bottom-footer {
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-      background: #020617;
-      color: white;
-      text-align: center;
-      padding: 8px 5px;
-      font-size: 11px;
-      border-top: 1px solid #1e293b;
-      box-shadow: 0 -4px 12px rgba(0,0,0,0.6);
-      z-index: 1000;
-    }
-
-    .footer-contact {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      margin-bottom: 4px;
-    }
-
-    .footer-contact a {
       color: #38bdf8;
       text-decoration: none;
-      font-weight: 500;
     }
 
-    .footer-copyright {
-      color: #94a3b8;
-      font-size: 10px;
-      font-weight: 500;
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 15px;
+    }
+
+    nav ul li a {
+      color: #cbd5e1;
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.2s ease;
+    }
+
+    nav ul li a:hover {
+      color: #38bdf8;
+    }
+
+    /* Main Container */
+    .main-container {
+      width: 100%;
+      max-width: 650px;
+      margin: 30px auto;
+      padding: 0 15px;
+      flex-grow: 1;
+    }
+
+    .hero-box {
+      background: #1e293b;
+      border-radius: 16px;
+      padding: 30px 24px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      border: 1px solid #334155;
+    }
+
+    .hero-box h1 {
+      color: #38bdf8;
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+    }
+
+    .hero-box p {
+      color: #cbd5e1;
+      font-size: 15px;
+      line-height: 1.6;
+      margin-bottom: 25px;
+    }
+
+    /* Quick Nav Buttons */
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 12px;
+    }
+
+    .menu-card {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid #334155;
+      padding: 15px;
+      border-radius: 12px;
+      text-decoration: none;
+      color: #f8fafc;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .menu-card i {
+      font-size: 24px;
+      color: #38bdf8;
+    }
+
+    .menu-card span {
+      font-size: 13.5px;
+      font-weight: 600;
+    }
+
+    .menu-card:hover {
+      border-color: #38bdf8;
+      transform: translateY(-3px);
+      background: rgba(15, 23, 42, 0.9);
+    }
+
+    /* Footer */
+    footer {
+      background: #1e293b;
+      border-top: 1px solid #334155;
+      padding: 20px;
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 10px;
+    }
+
+    .footer-links a {
+      color: #cbd5e1;
+      font-size: 20px;
+      transition: color 0.2s ease, transform 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .footer-links a:hover {
+      color: #38bdf8;
+      transform: scale(1.15);
+    }
+
+    .footer-text {
+      font-size: 12px;
+      color: #64748b;
     }
   </style>
 </head>
-<body class="dark-mode">
+<body>
 
-  <!-- Fixed Top Header -->
-  <header class="top-header">
-    
-    <!-- Row 1: Logo Title, Search & Profile Icons -->
-    <div class="brand-row">
-      <div class="brand-title-container">
-        <i class="fa-solid fa-gem brand-logo-icon"></i>
-        <span class="brand-name">KAMAL G.C.</span>
+  <!-- Top Navigation -->
+  <nav>
+    <a href="index.html" class="logo">KAMAL G.C.</a>
+    <ul>
+      <li><a href="about.html">About</a></li>
+      <li><a href="tech.html">AI & Tech</a></li>
+      <li><a href="emergency.html">Emergency</a></li>
+    </ul>
+  </nav>
+
+  <!-- Main Content Box -->
+  <main class="main-container">
+    <div class="hero-box">
+      <h1>स्वागतम्! (Welcome)</h1>
+      <p>मेरो व्यक्तिगत वेबसाइटमा स्वागत छ। यहाँ मेरो परिचय, प्रविधि/AI सम्बन्धी जानकारी र नेपालका मुख्य आपत्कालीन सेवाहरूको लिङ्क प्राप्त गर्न सक्नुहुन्छ।</p>
+
+      <!-- Main Navigation Buttons -->
+      <div class="menu-grid">
+        <a href="about.html" class="menu-card">
+          <i class="fa-solid fa-user"></i>
+          <span>मेरो बारेमा</span>
+        </a>
+        <a href="tech.html" class="menu-card">
+          <i class="fa-solid fa-robot"></i>
+          <span>AI र प्रविधि</span>
+        </a>
+        <a href="emergency.html" class="menu-card">
+          <i class="fa-solid fa-phone-volume"></i>
+          <span>आपत्कालीन नम्बर</span>
+        </a>
       </div>
-      <div class="brand-icons">
-        <i class="fa-solid fa-magnifying-glass" title="Search"></i>
-        <i class="fa-solid fa-circle-user" title="Profile"></i>
-      </div>
-    </div>
-
-    <!-- Row 2: 5 Navigation Buttons -->
-    <nav class="nav-row">
-      <button class="btn-3d" onclick="location.href='#blog'" data-np="ब्लग" data-en="Blog">ब्लग</button>
-      <button class="btn-3d" onclick="location.href='#emergency'" data-np="आपतकालीन" data-en="Emergency">आपतकालीन</button>
-      <button class="btn-3d" onclick="location.href='#tech'" data-np="प्रबिधी" data-en="Technology">प्रबिधी</button>
-      <button class="btn-3d" onclick="location.href='#about'" data-np="मेरो बारेमा" data-en="About Me">मेरो बारेमा</button>
-      <button class="btn-3d lang-btn" id="lang-toggle" onclick="toggleLanguage()">EN</button>
-    </nav>
-
-    <!-- Row 3: Live Dynamic Bar -->
-    <div class="info-row">
-      <div class="info-item"><i class="fa-solid fa-location-dot"></i> <span id="user-location">Locating...</span></div>
-      <div class="info-item"><i class="fa-regular fa-clock"></i> <span id="real-time">--:--:--</span></div>
-      <div class="info-item"><i class="fa-regular fa-calendar-alt"></i> <span id="nepali-date">----/--/--</span></div>
-      <div class="info-item"><i class="fa-solid fa-cloud-sun"></i> <span id="weather-temp">--°C</span></div>
-      <div class="info-item theme-toggle" onclick="toggleTheme()">
-        <i class="fa-solid fa-moon" id="theme-icon"></i> <span id="theme-text">Dark</span>
-      </div>
-    </div>
-  </header>
-
-  <!-- Middle Scrollable Area -->
-  <main class="middle-content">
-    <div class="placeholder-text" data-np="यहाँ पछि तपाईंको फोटो र लेखहरू रहनेछन्..." data-en="Your photos and articles will appear here later...">
-      यहाँ पछि तपाईंको फोटो र लेखहरू रहनेछन्...
     </div>
   </main>
 
-  <!-- Locked Bottom Footer -->
-  <footer class="bottom-footer">
-    <div class="footer-contact">
-      <a href="mailto:kids.kamalgc.com.np"><i class="fa-solid fa-envelope"></i> kids.kamalgc.com.np</a>
-      <a href="mailto:Support@kamalgc.com.np"><i class="fa-solid fa-headset"></i> Support@kamalgc.com.np</a>
+  <!-- Footer -->
+  <footer>
+    <div class="footer-links">
+      <!-- App Icon Link -->
+      <a href="https://kids.kamalgc.com.np" target="_blank" title="Kids App">
+        <i class="fa-solid fa-mobile-screen-button"></i>
+      </a>
+      <!-- Main Domain Link -->
+      <a href="https://kamalgc.com.np" target="_blank" title="Website Home">
+        <i class="fa-solid fa-globe"></i>
+      </a>
     </div>
-    <div class="footer-copyright">
-      &copy; 2026 KAMAL G.C. ALL RIGHTS RESERVED.
-    </div>
+    <p class="footer-text">&copy; KAMAL G.C. All Rights Reserved.</p>
   </footer>
 
-  <script>
-    let currentLang = 'NP';
-
-    // 1. Real-Time Clock Function
-    function updateClock() {
-      const now = new Date();
-      document.getElementById('real-time').innerText = now.toLocaleTimeString();
-    }
-    setInterval(updateClock, 1000);
-    updateClock();
-
-    // 2. Dynamic Nepali Date Converter Function
-    function setNepaliDate() {
-      if (typeof NepaliFunctions !== 'undefined') {
-        const now = new Date();
-        const bsDate = NepaliFunctions.AD2BS({ year: now.getFullYear(), month: now.getMonth() + 1, day: now.getDate() });
-        document.getElementById('nepali-date').innerText = `${bsDate.year}/${bsDate.month}/${bsDate.day}`;
-      } else {
-        document.getElementById('nepali-date').innerText = "२०८३/०५/३१";
-      }
-    }
-    setNepaliDate();
-
-    // 3. Location & Temperature API
-    function getLiveLocationAndWeather() {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(position => {
-          const lat = position.coords.latitude;
-          const lon = position.coords.longitude;
-
-          fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`)
-            .then(res => res.json())
-            .then(data => {
-              document.getElementById('weather-temp').innerText = `${data.current_weather.temperature}°C`;
-            })
-            .catch(() => {
-              document.getElementById('weather-temp').innerText = "--°C";
-            });
-
-          fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`)
-            .then(res => res.json())
-            .then(data => {
-              const city = data.address.city || data.address.town || data.address.state || "Location";
-              document.getElementById('user-location').innerText = city;
-            })
-            .catch(() => {
-              document.getElementById('user-location').innerText = "Delhi";
-            });
-        }, () => {
-          document.getElementById('user-location').innerText = "Delhi";
-        });
-      }
-    }
-    getLiveLocationAndWeather();
-
-    // 4. Dark / Light Mode Toggle
-    function toggleTheme() {
-      document.body.classList.toggle('light-mode');
-      const isLight = document.body.classList.contains('light-mode');
-      document.getElementById('theme-icon').className = isLight ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
-      document.getElementById('theme-text').innerText = isLight ? 'Light' : 'Dark';
-    }
-
-    // 5. English / Nepali Language Engine
-    function toggleLanguage() {
-      currentLang = currentLang === 'NP' ? 'EN' : 'NP';
-      document.getElementById('lang-toggle').innerText = currentLang === 'NP' ? 'EN' : 'NP';
-
-      document.querySelectorAll('[data-np]').forEach(el => {
-        el.innerText = currentLang === 'NP' ? el.getAttribute('data-np') : el.getAttribute('data-en');
-      });
-    }
-  </script>
 </body>
 </html>
