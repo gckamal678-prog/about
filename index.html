@@ -1,210 +1,85 @@
 <!DOCTYPE html>
 <html lang="ne">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>कमल जी.सी. - गृहपृष्ठ</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" rel="stylesheet">
-    <link rel="manifest" href="manifest.json">
-
-    <style>
-        :root { --bg-color: #f4f6f9; --text-color: #333; --header-bg: #ffffff; --box-bg: #ffffff; --border-color: #3498db; --sidebar-bg: #2c3e50; --sidebar-text: #ffffff; --banner-bg: #eaf2f8; --banner-text: #1b4f72; }
-        [data-theme="dark"] { --bg-color: #121212; --text-color: #e0e0e0; --header-bg: #1e1e1e; --box-bg: #1e1e1e; --border-color: #3498db; --sidebar-bg: #1a1a1a; --sidebar-text: #ffffff; --banner-bg: #2a2a2a; --banner-text: #85c1e9; }
-        *, *::before, *::after { box-sizing: border-box; }
-        body { margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--bg-color); color: var(--text-color); line-height: 1.6; display: flex; flex-direction: column; min-height: 100vh; transition: background-color 0.3s, color 0.3s; }
-        header { position: fixed; top: 0; left: 0; width: 100%; height: 60px; background-color: var(--header-bg); box-shadow: 0 2px 5px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: space-between; padding: 0 15px; z-index: 1000; }
-        .header-left, .header-right { display: flex; align-items: center; gap: 12px; }
-        .menu-btn { background: none; border: none; font-size: 24px; cursor: pointer; color: var(--text-color); }
-        .logo-text { font-family: 'Poppins', sans-serif; font-size: 19px; font-weight: 700; background: linear-gradient(45deg, #2980b9, #3498db); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-decoration: none; }
-        .control-btn { background: none; border: 1px solid var(--text-color); color: var(--text-color); padding: 4px 8px; border-radius: 5px; cursor: pointer; font-size: 13px; font-weight: bold; }
-        .control-btn:hover { background-color: var(--text-color); color: var(--bg-color); }
-        .live-status-bar { margin-top: 60px; background-color: var(--banner-bg); color: var(--banner-text); padding: 6px 10px; text-align: center; font-size: 0.78em; font-weight: 500; border-bottom: 1px solid rgba(0,0,0,0.05); display: flex; justify-content: center; align-items: center; gap: 6px; white-space: nowrap; overflow-x: auto; }
-        .sidebar { position: fixed; top: 0; left: -280px; width: 280px; height: 100%; background-color: var(--sidebar-bg); color: var(--sidebar-text); transition: left 0.3s ease; z-index: 1100; padding-top: 80px; box-shadow: 2px 0 5px rgba(0,0,0,0.2); }
-        .sidebar.active { left: 0; }
-        .sidebar-close { position: absolute; top: 20px; right: 20px; background: none; border: none; color: var(--sidebar-text); font-size: 24px; cursor: pointer; }
-        .sidebar ul { list-style: none; padding: 0; margin: 0; }
-        .sidebar ul li { border-bottom: 1px solid #34495e; }
-        .sidebar ul li a { display: block; padding: 15px 25px; color: var(--sidebar-text); text-decoration: none; }
-        .sidebar ul li:hover { background-color: #34495e; }
-        .main-container { max-width: 1200px; width: 100%; margin: 15px auto 40px auto; padding: 0 15px; flex: 1; }
-        .hero-section { background: var(--box-bg); border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); padding: 20px; margin-bottom: 25px; text-align: center; }
-        .tagline { font-style: italic; color: #3498db; font-weight: 600; margin-bottom: 20px; font-size: 1.1em; }
-        .hero-image-container { width: 100%; max-width: 900px; margin: 0 auto; aspect-ratio: 16 / 9; background-color: #e2e8f0; display: flex; align-items: center; justify-content: center; overflow: hidden; border-radius: 8px; }
-        .hero-image-container img { width: 100%; height: 100%; object-fit: cover; }
-        footer { background-color: var(--sidebar-bg); color: var(--sidebar-text); text-align: center; padding: 20px; margin-top: auto; font-size: 14px; }
-        .footer-links { margin-bottom: 12px; display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 15px; }
-        .footer-links a { color: #3498db; text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; }
-    </style>
+  <meta charset="UTF-8" />
+  <!-- Zoom out/in बन्द गर्न viewport मा user-scalable=no राखिएको छ -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Kamal G.C. Mobile Layout</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 </head>
-<body data-theme="light">
-    <header>
-        <div class="header-left">
-            <button class="menu-btn" onclick="toggleSidebar()">☰</button>
-            <a href="index.html" class="logo-text">kamalgc.com.np</a>
-        </div>
-        <div class="header-right">
-            <button class="control-btn" id="langBtn" onclick="toggleLanguage()">EN</button>
-            <button class="control-btn" id="themeBtn" onclick="toggleTheme()">🌙 Dark</button>
-        </div>
-    </header>
+<body>
 
-    <div class="live-status-bar" id="liveStatusBar">
-        <span id="locationText">लोड हुँदैछ...</span> |
-        <span id="nepaliDateText">२०८३ साउन २४</span> |
-        <span id="englishDateText">Aug 09 (Sun)</span> |
-        <span id="timeText">--:--:--</span> |
-        <span id="weatherText">--°C</span>
+  <!-- १. Top Fixed Header (Locked) -->
+  <header class="top-header">
+    <div class="lock-indicator">
+      <i class="fa-solid fa-lock"></i>
+      <span>LOCK MODE</span>
     </div>
-
-    <nav class="sidebar" id="sidebar">
-        <button class="sidebar-close" onclick="toggleSidebar()">&times;</button>
-        <ul>
-            <li><a href="index.html" data-en="Home" data-np="गृहपृष्ठ (Home)">गृहपृष्ठ (Home)</a></li>
-            <li><a href="about.html" data-en="About Me" data-np="मेरो बारेमा (About Me)">मेरो बारेमा (About Me)</a></li>
-            <li><a href="blog.html" data-en="Blog / Updates" data-np="ब्लग / अपडेट्स (Blog)">ब्लग / अपडेट्स (Blog)</a></li>
-            <li><a href="ai.html" data-en="AI & Tech" data-np="AI र प्रविधि (AI & Tech)">AI र प्रविधि (AI & Tech)</a></li>
-            <li><a href="emergency.html" data-en="Emergency Contacts" data-np="आकस्मिक सेवाहरू (Emergency)">आकस्मिक सेवाहरू (Emergency)</a></li>
-        </ul>
+    <nav class="top-nav">
+      <a href="#block">ब्लक प्रविधि</a>
+      <a href="#emergency">आपतकालीन</a>
+      <a href="#about">मेरो बारे</a>
     </nav>
+  </header>
 
-    <div class="main-container">
-        <div class="hero-section">
-            <div class="tagline" data-en="&quot;The combination of regular work experience and modern AI technology — a search for new possibilities.&quot;" data-np="&quot;नियमित कार्यक्षेत्रको अनुभव र आधुनिक AI प्रविधिको संगम — एउटा नयाँ सम्भावनाको खोजी।&quot;">"नियमित कार्यक्षेत्रको अनुभव र आधुनिक AI प्रविधिको संगम — एउटा नयाँ सम्भावनाको खोजी।"</div>
-            
-            <div class="hero-image-container">
-                <img src="kamal.png" alt="Kamal G.C.">
-            </div>
-
-            <div style="margin: 25px 0 10px 0; text-align: center;">
-                <p style="margin-bottom: 10px; font-size: 14px; font-weight: bold; color: var(--text-color);">सेयर गर्नुहोस्:</p>
-                <div style="display: flex; justify-content: center; gap: 20px; align-items: center;">
-                    <a href="https://api.whatsapp.com/send?text=kamalgc.com.np - कमल जी.सी. को गृहपृष्ठ हेर्नुहोस्!" target="_blank" title="Share on WhatsApp" style="text-decoration: none; display: inline-flex;">
-                        <svg width="36" height="36" viewBox="0 0 24 24" fill="#25d366"><path d="M12.01 2C6.48 2 2 6.48 2 12.01c0 2.09.64 4.07 1.84 5.74L2 22l4.52-1.74c1.57.97 3.39 1.49 5.49 1.49 5.53 0 10.01-4.48 10.01-10.01S17.54 2 12.01 2zM17.05 15.2c-.22.6-1.12 1.15-1.55 1.22-.38.07-.84.14-2.73-.62-2.32-.93-3.79-3.23-3.9-3.38-.11-.15-1.01-1.35-1.01-2.57s.62-1.82.84-2.07c.22-.25.59-.32.84-.32.22 0 .44 0 .63.01.2.01.48.02.69.51.22.48.74 1.8.8 1.93.06.13.1.28.02.45-.08.17-.13.25-.26.41-.13.16-.27.33-.39.46-.13.13-.27.27-.11.54.16.27.71 1.18 1.52 1.91 1.04.93 1.92 1.23 2.19 1.37.27.14.43.12.59-.06s.69-.81.87-1.08c.18-.27.36-.22.61-.13.25.09 1.59.75 1.87.89.28.14.46.21.53.33.07.12.07.7-.15 1.3z"/></svg>
-                    </a>
-                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://kamalgc.com.np" target="_blank" title="Share on Facebook" style="text-decoration: none; display: inline-flex;">
-                        <svg width="36" height="36" viewBox="0 0 24 24" fill="#1877f2"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.35 7 13 7c.77 0 1.5.06 2.2.17V10h-1.2c-.88 0-1.2.55-1.2 1.3V12h3l-.33 3H14v6.8c4.56-.93 8-4.96 8-9.8z"/></svg>
-                    </a>
-                </div>
-            </div>
-        </div>
+  <!-- २. Secondary Fixed Bar (Locked) -->
+  <section class="secondary-bar">
+    <div class="info-item">
+      <i class="fa-solid fa-location-dot"></i>
+      <span>काठमाडौँ</span>
     </div>
+    <div class="info-item">
+      <i class="fa-regular fa-clock"></i>
+      <span>१२:३० PM</span>
+    </div>
+    <div class="info-item">
+      <i class="fa-regular fa-calendar-days"></i>
+      <span>२०८३ वैशाख १५</span>
+    </div>
+    <div class="info-item">
+      <i class="fa-solid fa-temperature-half"></i>
+      <span>२५°C</span>
+    </div>
+    <div class="info-item lock-controls">
+      <i class="fa-solid fa-moon"></i>
+      <span>EN/NP</span>
+      <i class="fa-solid fa-lock-keyhole"></i>
+    </div>
+  </section>
 
-    <footer>
-        <div class="footer-links">
-            <a href="https://pasal.kamalgc.com.np" target="_blank">🌐 pasal.kamalgc.com.np</a>
-            <a href="mailto:Support@kamalgc.com.np">📧 Support@kamalgc.com.np</a>
-        </div>
+  <!-- ३. Middle Scrollable Content Area (स्क्रोल हुने मुख्य भाग) -->
+  <main class="content-area">
+    <article class="card">
+      <h2>ब्लक प्रविधि सम्बन्धी अपडेट</h2>
+      <p>यहाँ तपाईंको ब्लक प्रविधि वा अन्य विषयवस्तुको विवरण रहनेछ। यो भाग मात्र स्क्रोल हुन्छ।</p>
+      <div class="media-placeholder">
+        <i class="fa-solid fa-image"></i>
+        <span>चित्र / भिडियो</span>
+      </div>
+    </article>
 
-        <div style="margin: 15px 0; text-align: center; font-size: 14px;">
-            <p id="adminVisitorBox" style="margin-bottom: 8px; color: var(--sidebar-text); display: none;">
-                👀 कुल भिजिटर (Admin Only): <span id="visitorCount" style="font-weight: bold; color: #3498db;">--</span>
-            </p>
-        </div>
+    <article class="card">
+      <h2>आपतकालीन सूचना</h2>
+      <p>आपतकालीन सम्पर्क तथा महत्त्वपूर्ण जानकारीहरू यहाँ राखिनेछ।</p>
+    </article>
 
-        <p>&copy; 2026 Kamal G.C. All Rights Reserved.</p>
-    </footer>
+    <article class="card">
+      <h2>मेरो बारेमा</h2>
+      <p>व्यक्तिगत विवरण, अनुभव र अन्य जानकारीहरू यस खण्डमा उपलब्ध हुनेछन्।</p>
+    </article>
+  </main>
 
-    <script>
-        let currentLang = 'np';
-        function toggleSidebar() { document.getElementById('sidebar').classList.toggle('active'); }
-        function toggleTheme() {
-            const body = document.body;
-            const themeBtn = document.getElementById('themeBtn');
-            if (body.getAttribute('data-theme') === 'dark') {
-                body.setAttribute('data-theme', 'light');
-                themeBtn.innerHTML = '🌙 Dark';
-            } else {
-                body.setAttribute('data-theme', 'dark');
-                themeBtn.innerHTML = '☀️ Light';
-            }
-        }
-        function toNepaliDigits(str) { const nepDigits = ['०', '१', '२', '३', '४', '५', '६', '७', '८', '९']; return str.toString().replace(/\d/g, x => nepDigits[x]); }
-        function getNepaliDateStr(now) {
-            const nepMonths = ['बैशाख', 'जेठ', 'असार', 'साउन', 'भदौ', 'असोज', 'कात्तिक', 'मंसिर', 'पुस', 'माघ', 'फागुन', 'चैत'];
-            const startAD = new Date(2026, 7, 9);
-            const diffDays = Math.floor((now - startAD) / (1000 * 60 * 60 * 24));
-            let bsMonth = 3, bsDay = 24 + diffDays;
-            if (bsDay > 31) { bsDay -= 31; bsMonth++; }
-            return `२०८३ ${nepMonths[bsMonth]} ${toNepaliDigits(bsDay)}`;
-        }
-        function toggleLanguage() {
-            currentLang = currentLang === 'np' ? 'en' : 'np';
-            document.getElementById('langBtn').innerText = currentLang === 'np' ? 'EN' : 'NP';
-            document.querySelectorAll('[data-np]').forEach(el => {
-                el.innerText = el.getAttribute(currentLang === 'en' ? 'data-en' : 'data-np');
-            });
-            updateLiveStatus();
-        }
+  <!-- ४. Fixed Footer (Locked) -->
+  <footer class="bottom-footer">
+    <div class="contact-info">
+      <span>@kids.kamalgc.com.np</span>
+      <span>Support@kamalgc.com.np</span>
+    </div>
+    <div class="copyright">
+      ©2026 KAMAL G.C. ALL RIGHTS RESERVED
+    </div>
+  </footer>
 
-        // Live Geolocation and Weather Fetcher
-        function fetchLiveLocationAndWeather() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(async (position) => {
-                    const lat = position.coords.latitude;
-                    const lon = position.coords.longitude;
-                    try {
-                        const geoRes = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`);
-                        const geoData = await geoRes.json();
-                        const cityName = geoData.address.city || geoData.address.town || geoData.address.village || geoData.address.state || "स्थान";
-
-                        const weatherRes = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`);
-                        const weatherData = await weatherRes.json();
-                        const temp = Math.round(weatherData.current_weather.temperature);
-
-                        document.getElementById('locationText').innerText = cityName;
-                        document.getElementById('weatherText').innerText = `${temp}°C`;
-                    } catch (err) {
-                        document.getElementById('locationText').innerText = "लोकेसन प्राप्त भएन";
-                        document.getElementById('weatherText').innerText = "--°C";
-                    }
-                }, () => {
-                    document.getElementById('locationText').innerText = "अनुमति अस्वीकृत";
-                    document.getElementById('weatherText').innerText = "--°C";
-                });
-            } else {
-                document.getElementById('locationText').innerText = "समर्थन छैन";
-            }
-        }
-
-        function updateLiveStatus() {
-            const now = new Date();
-            document.getElementById('timeText').innerText = now.toLocaleTimeString(currentLang === 'en' ? 'en-US' : 'ne-NP');
-            const daysEn = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-            const monthsEn = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-            const monthNameStr = monthsEn[now.getMonth()], dayNumStr = String(now.getDate()).padStart(2, '0'), dayNameStr = daysEn[now.getDay()];
-            
-            if (currentLang === 'en') {
-                document.getElementById('nepaliDateText').innerText = 'BS 2083 Shrawan 24';
-            } else {
-                document.getElementById('nepaliDateText').innerText = getNepaliDateStr(now);
-            }
-            document.getElementById('englishDateText').innerText = `${monthNameStr} ${dayNumStr} (${dayNameStr})`;
-        }
-
-        setInterval(updateLiveStatus, 1000); 
-        updateLiveStatus();
-        fetchLiveLocationAndWeather();
-
-        // Visitor Counter & Admin Trigger script
-        let vCount = localStorage.getItem('site_visitor_count') || Math.floor(Math.random() * 50) + 120;
-        if(!localStorage.getItem('site_visited')) { 
-            vCount++; 
-            localStorage.setItem('site_visitor_count', vCount); 
-            localStorage.setItem('site_visited', 'true'); 
-        }
-        document.getElementById('visitorCount').innerText = vCount;
-
-        let typedCode = '';
-        document.addEventListener('keydown', (e) => {
-            typedCode += e.key;
-            if (typedCode.endsWith('admin')) {
-                const box = document.getElementById('adminVisitorBox');
-                box.style.display = box.style.display === 'none' ? 'block' : 'none';
-                alert('भिजिटर काउन्टर मोड: ' + vCount);
-            }
-        });
-    </script>
 </body>
 </html>
