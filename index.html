@@ -5,16 +5,25 @@
   <link rel="icon" type="image/png" sizes="192x192" href="mylogo.png">
   <link rel="apple-touch-icon" href="mylogo.png">
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- ZOOM LOCK META TAG -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  
   <title>KAMAL G.C. Portal</title>
   
   <!-- FontAwesome Icons for Search, App & Profile -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <!-- Nepali Date Functions Engine -->
-  <script src="https://nepali-date-picker.bighnaraj.com.np/nepali.functions.v3.7.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/nepali-date-converter@2.0.1/dist/nepali-date-converter.umd.js"></script>
 
   <style>
+    /* ZOOM PREVENT CSS */
+    html, body {
+      touch-action: manipulation;
+      -ms-touch-action: manipulation;
+    }
+
     * {
       margin: 0;
       padding: 0;
@@ -339,7 +348,7 @@
       font-size: 1.2rem;
     }
 
-    /* प्रोफाइल फोटो (अझ ठूलो र सफा साइज) */
+    /* प्रोफाइल फोटो */
     .profile-img-container {
       position: relative;
       width: 110px;
@@ -489,12 +498,10 @@
     </div>
   </header>
 
-  <!-- Middle Scrollable Area (क्रमबद्ध कार्डहरू) -->
+  <!-- Middle Scrollable Area -->
   <main class="middle-content" id="content-container">
     
-    <!-- ==========================================
-         १. आपत्कालीन सम्पर्क सेवा (Emergency)
-         ========================================== -->
+    <!-- १. आपत्कालीन सम्पर्क सेवा -->
     <div class="card emergency-card">
       <div class="card-header">
         <i class="fa-solid fa-phone-volume"></i>
@@ -506,9 +513,7 @@
       <a href="emergency.html" class="card-btn" data-np="नम्बरहरू हेर्नुहोस् &rarr;" data-en="View Numbers &rarr;">नम्बरहरू हेर्नुहोस् &rarr;</a>
     </div>
 
-    <!-- ==========================================
-         २. पहिलो ब्लग (जिन्दगीको गोरेटोमा...)
-         ========================================== -->
+    <!-- २. पहिलो ब्लग -->
     <div class="card">
       <div class="card-header">
         <i class="fa-solid fa-newspaper"></i>
@@ -520,13 +525,11 @@
       <a href="blog.html#blog-1" class="card-btn" data-np="ब्लग पढ्नुहोस् &rarr;" data-en="Read Blog &rarr;">ब्लग पढ्नुहोस् &rarr;</a>
     </div>
 
-    <!-- ==========================================
-         ३. दोस्रो ब्लग (एउटा नौलो यात्रा...)
-         ========================================== -->
+    <!-- ३. दोस्रो ब्लग -->
     <div class="card">
       <div class="card-header">
         <i class="fa-solid fa-book-open"></i>
-        <span data-np="३. एउटा नौलो यात्रा, जसले मलाई धेरै कुरा सिकायो" data-en="3. A New Journey That Taught Me Many Things">३. एउटा नौलो यात्रा, जसले मलाई धेरै कुरा सिकायో</span>
+        <span data-np="३. एउटा नौलो यात्रा, जसले मलाई धेरै कुरा सिकायो" data-en="3. A New Journey That Taught Me Many Things">३. एउटा नौलो यात्रा, जसले मलाई धेरै कुरा सिकायो</span>
       </div>
       <div class="card-desc" data-np="१७ वर्षको उमेरमा घर छाडेर केरलातर्फ गरिएको संघर्षमय र सिकाइले भरिएको यात्राको कथा।" data-en="The story of a struggling and educational journey to Kerala at the age of 17.">
         १७ वर्षको उमेरमा घर छाडेर केरलातर्फ गरिएको संघर्षमय र सिकाइले भरिएको यात्राको कथा।
@@ -534,9 +537,7 @@
       <a href="blog.html#blog-2" class="card-btn" data-np="ब्लग पढ्नुहोस् &rarr;" data-en="Read Blog &rarr;">ब्लग पढ्नुहोस् &rarr;</a>
     </div>
 
-    <!-- ==========================================
-         ४. प्रविधि: PWA र बाल पाठशाला
-         ========================================== -->
+    <!-- ४. प्रविधि: PWA र बाल पाठशाला -->
     <div class="card">
       <div class="card-header">
         <i class="fa-solid fa-graduation-cap"></i>
@@ -548,9 +549,7 @@
       <a href="tech.html#post-1" class="card-btn" data-np="पुरा लेख पढ्नुहोस् &rarr;" data-en="Read Full Article &rarr;">पुरा लेख पढ्नुहोस् &rarr;</a>
     </div>
 
-    <!-- ==========================================
-         ५. प्रविधि: WPA AI प्रोजेक्ट
-         ========================================== -->
+    <!-- ५. प्रविधि: WPA AI प्रोजेक्ट -->
     <div class="card">
       <div class="card-header">
         <i class="fa-solid fa-robot"></i>
@@ -562,9 +561,7 @@
       <a href="tech.html#post-2" class="card-btn" data-np="पुरा लेख पढ्नुहोस् &rarr;" data-en="Read Full Article &rarr;">पुरा लेख पढ्नुहोस् &rarr;</a>
     </div>
 
-    <!-- ==========================================
-         ६. मेरो परिचय र बायो (About Me)
-         ========================================== -->
+    <!-- ६. मेरो परिचय र बायो -->
     <div class="card">
       <div class="card-header">
         <i class="fa-solid fa-user-gear"></i>
@@ -575,9 +572,6 @@
       </div>
       <a href="about.html" class="card-btn" data-np="विस्तृत हेर्नुहोस् &rarr;" data-en="Read More &rarr;">विस्तृत हेर्नुहोस् &rarr;</a>
     </div>
-
-    <!-- 💡 [सुझाव - ७]: पछि भ्लग (Blog) वा प्रविधि (Tech) मा नयाँ कुरा थप्नु परेमा, 
-         यही ठाउँमा नयाँ `<div class="card">...</div>` बनाएर सजिलै थप्न सक्नुहुनेछ। -->
 
   </main>
 
@@ -592,7 +586,7 @@
     </div>
   </div>
 
-  <!-- Profile Save Modal Box (ठूलो साइज, ग्यालरीबाट फोटो फेर्न मिल्ने) -->
+  <!-- Profile Save Modal Box -->
   <div class="modal-overlay" id="profile-modal">
     <div class="modal-box">
       <div class="modal-header">
@@ -600,10 +594,9 @@
         <i class="fa-solid fa-xmark close-btn" onclick="closeProfileModal()"></i>
       </div>
       
-      <!-- Profile Picture Section (अझ ठूलो साइज) -->
       <div class="profile-img-container">
         <img src="mylogo.png" id="modal-profile-img" class="profile-img-preview" alt="Profile Photo">
-        <label for="profile-upload" class="change-photo-btn" title="ગ्यालरीबाट फोटो फेर्नुहोस्">
+        <label for="profile-upload" class="change-photo-btn" title="ग्यालरीबाट फोटो फेर्नुहोस्">
           <i class="fa-solid fa-camera"></i>
         </label>
         <input type="file" id="profile-upload" accept="image/*" style="display: none;" onchange="handleImageUpload(event)">
@@ -631,27 +624,59 @@
   </footer>
 
   <script>
+    // ==========================================
+    // PREVENT ZOOM IN / ZOOM OUT (JS EVENT LOCK)
+    // ==========================================
+    // Pinch to Zoom रोक्न
+    document.addEventListener('touchmove', function (event) {
+      if (event.touches.length > 1) {
+        event.preventDefault();
+      }
+    }, { passive: false });
+
+    // Double Tap Zoom रोक्न
+    let lastTouchEnd = 0;
+    document.addEventListener('touchend', function (event) {
+      const now = (new Date()).getTime();
+      if (now - lastTouchEnd <= 300) {
+        event.preventDefault();
+      }
+      lastTouchEnd = now;
+    }, false);
+
+
     let currentLang = 'NP';
 
     // Real-Time Clock
     function updateClock() {
       const now = new Date();
       document.getElementById('real-time').innerText = now.toLocaleTimeString();
+      setNepaliDate();
     }
     setInterval(updateClock, 1000);
     updateClock();
 
-    // Nepali Date
+    // Fast Nepali Date Logic
     function setNepaliDate() {
-      if (typeof NepaliFunctions !== 'undefined') {
-        const now = new Date();
-        const bsDate = NepaliFunctions.AD2BS({ year: now.getFullYear(), month: now.getMonth() + 1, day: now.getDate() });
-        document.getElementById('nepali-date').innerText = `${bsDate.year}/${bsDate.month}/${bsDate.day}`;
-      } else {
-        document.getElementById('nepali-date').innerText = "२०८३/०५/३१";
+      const dateEl = document.getElementById('nepali-date');
+      if (!dateEl) return;
+
+      try {
+        if (typeof NepaliDate !== 'undefined') {
+          const npDate = new NepaliDate(new Date());
+          const year = npDate.getYear();
+          const month = String(npDate.getMonth() + 1).padStart(2, '0');
+          const day = String(npDate.getDate()).padStart(2, '0');
+          dateEl.innerText = `${year}/${month}/${day}`;
+        } else {
+          const today = new Date();
+          const estYear = today.getFullYear() + 57;
+          dateEl.innerText = `${estYear}/--/--`;
+        }
+      } catch (e) {
+        console.error(e);
       }
     }
-    setNepaliDate();
 
     // Location & Weather API
     function getLiveLocationAndWeather() {
@@ -703,7 +728,7 @@
       });
     }
 
-    // --- Dynamic Search Logic ---
+    // Dynamic Search Logic
     function openSearchModal() {
       document.getElementById('search-modal').style.display = 'flex';
       document.getElementById('search-input').focus();
@@ -727,7 +752,7 @@
       });
     }
 
-    // --- Profile LocalStorage & Gallery Image Upload Logic ---
+    // Profile LocalStorage & Gallery Image Upload Logic
     function openProfileModal() {
       document.getElementById('profile-modal').style.display = 'flex';
       
@@ -747,7 +772,6 @@
       document.getElementById('profile-modal').style.display = 'none';
     }
 
-    // मोबाइलको ग्यालरीबाट फोटो छानेर ठूलो साइजमा राख्ने र सेभ गर्ने
     function handleImageUpload(event) {
       const file = event.target.files[0];
       if (file) {
@@ -776,7 +800,6 @@
       }
     }
 
-    // पेज लोड हुँदा सेभ भएको फोटो देखाउने
     window.onload = function() {
       const savedImg = localStorage.getItem('kamal_portal_user_img');
       if (savedImg) {
