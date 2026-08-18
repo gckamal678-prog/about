@@ -15,7 +15,7 @@ if ('serviceWorker' in navigator) {
 let currentLang = 'NP';
 
 // ==========================================
-// 2. Live Real-time Clock
+// 2. Live Real-time Clock & Auto Date Refresh
 // ==========================================
 function updateClock() {
   const now = new Date();
@@ -24,29 +24,45 @@ function updateClock() {
   if (clockEl) {
     clockEl.innerText = timeString;
   }
+  
+  // घडीसँगै नेपाली पात्रो पनि अपडेट गराइराख्ने
+  setNepaliDate();
 }
 setInterval(updateClock, 1000);
 updateClock();
 
 // ==========================================
-// 3. Dynamic Nepali Date
+// 3. Dynamic Fast Nepali Date
 // ==========================================
 function setNepaliDate() {
   const dateEl = document.getElementById('nepali-date');
   if (!dateEl) return;
 
-  if (typeof bikramSambat !== 'undefined' || typeof NepaliFunctions !== 'undefined') {
-    const now = new Date();
-    const year = now.getFullYear();
-    const month = now.getMonth() + 1;
-    const day = now.getDate();
-    const bsDate = NepaliFunctions.AD2BS({ year: year, month: month, day: day });
-    dateEl.innerText = `${bsDate.year}-${bsDate.month}-${bsDate.day} वि.सं.`;
-  } else {
-    dateEl.innerText = "२०८२/११/०४"; // Fallback
+  try {
+    // nepali.functions लाइब्रेरी लोड भएको छ कि छैन जाँच गर्ने
+    if (typeof NepaliFunctions !== 'undefined' && typeof NepaliFunctions.AD2BS === 'function') {
+      const now = new Date();
+      const year = now.getFullYear();
+      const month = now.getMonth() + 1;
+      const day = now.getDate();
+      
+      const bsDate = NepaliFunctions.AD2BS({ year: year, month: month, day: day });
+      
+      // महिना र गते २ अंकको बनाउने (उदा: ०१, ०५)
+      const formattedMonth = String(bsDate.month).padStart(2, '0');
+      const formattedDay = String(bsDate.day).padStart(2, '0');
+
+      dateEl.innerText = `${bsDate.year}-${formattedMonth}-${formattedDay} वि.सं.`;
+    } else {
+      // CDN लोड हुन समय लागेमा वा नभएमा सुरक्षित Fallback
+      const today = new Date();
+      const estBSYear = today.getFullYear() + 57;
+      dateEl.innerText = `${estBSYear} वि.सं. (लोड हुँदै...)`;
+    }
+  } catch (err) {
+    console.error("Nepali Date Conversion Error:", err);
   }
 }
-setNepaliDate();
 
 // ==========================================
 // 4. Automatic Location & Weather API (GPS बेस्ट)
