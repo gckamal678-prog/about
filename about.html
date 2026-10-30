@@ -2,583 +2,253 @@
 <!DOCTYPE html>
 <html lang="ne">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#07111f">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#07111f">
+<title>About Me | KAMAL G.C.</title>
+<meta name="description" content="Kamal G.C. को व्यक्तिगत परिचय, अनुभव र डिजिटल परियोजनाहरू।">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-  <title>About Me | KAMAL G.C.</title>
-  <meta name="description" content="Kamal G.C. को व्यक्तिगत परिचय, कार्य अनुभव, प्रविधि र AI प्रतिको रुचि।">
-
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Segoe UI', Arial, sans-serif;
-      background: #07111f;
-      color: #f8fafc;
-      padding: 18px 14px 40px;
-      line-height: 1.7;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .container {
-      max-width: 760px;
-      margin: auto;
-    }
-
-    .topbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-    }
-
-    .topbar a {
-      color: #38bdf8;
-      font-size: 14px;
-      font-weight: 600;
-    }
-
-    .hero {
-      position: relative;
-      overflow: hidden;
-      text-align: center;
-      padding: 42px 20px 35px;
-      border-radius: 20px;
-      background: linear-gradient(135deg, #12365a, #172554, #1e293b);
-      border: 1px solid #334155;
-      margin-bottom: 20px;
-    }
-
-    .hero::before {
-      content: "";
-      position: absolute;
-      width: 220px;
-      height: 220px;
-      border-radius: 50%;
-      background: rgba(56,189,248,.10);
-      top: -100px;
-      right: -60px;
-    }
-
-    .hero-icon {
-      position: relative;
-      width: 82px;
-      height: 82px;
-      display: grid;
-      place-items: center;
-      margin: 0 auto 17px;
-      border-radius: 50%;
-      background: rgba(56,189,248,.15);
-      border: 2px solid #38bdf8;
-      color: #7dd3fc;
-      font-size: 34px;
-    }
-
-    .hero h1 {
-      position: relative;
-      font-size: 30px;
-      color: #ffffff;
-      margin-bottom: 5px;
-    }
-
-    .hero .subtitle {
-      position: relative;
-      color: #7dd3fc;
-      font-size: 15px;
-      font-weight: 600;
-    }
-
-    .hero .intro {
-      position: relative;
-      color: #cbd5e1;
-      font-size: 14px;
-      max-width: 520px;
-      margin: 15px auto 0;
-    }
-
-    .section {
-      background: #111f32;
-      border: 1px solid #263b53;
-      border-radius: 17px;
-      padding: 22px;
-      margin-bottom: 17px;
-      box-shadow: 0 7px 22px rgba(0,0,0,.18);
-    }
-
-    .section-title {
-      display: flex;
-      align-items: center;
-      gap: 11px;
-      color: #7dd3fc;
-      font-size: 19px;
-      margin-bottom: 16px;
-    }
-
-    .section-title i {
-      width: 39px;
-      height: 39px;
-      display: grid;
-      place-items: center;
-      border-radius: 11px;
-      background: #123452;
-      color: #38bdf8;
-      font-size: 17px;
-    }
-
-    .section p {
-      color: #cbd5e1;
-      font-size: 14.5px;
-      margin-bottom: 12px;
-    }
-
-    .section p:last-child {
-      margin-bottom: 0;
-    }
-
-    .section strong {
-      color: #fbbf24;
-    }
-
-    .highlight {
-      background: #0b192a;
-      border-left: 4px solid #38bdf8;
-      padding: 14px 15px;
-      border-radius: 9px;
-      margin-top: 13px;
-      color: #cbd5e1;
-      font-size: 14px;
-    }
-
-    .experience-list {
-      display: grid;
-      gap: 12px;
-      margin-top: 12px;
-    }
-
-    .experience-item {
-      display: flex;
-      gap: 12px;
-      align-items: flex-start;
-      background: #0b192a;
-      border: 1px solid #263b53;
-      border-radius: 11px;
-      padding: 14px;
-    }
-
-    .experience-item i {
-      color: #38bdf8;
-      font-size: 19px;
-      margin-top: 3px;
-      min-width: 22px;
-    }
-
-    .experience-item h3 {
-      color: #f1f5f9;
-      font-size: 14px;
-      margin-bottom: 4px;
-    }
-
-    .experience-item p {
-      font-size: 13px;
-      margin: 0;
-    }
-
-    .project-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
-      margin-top: 14px;
-    }
-
-    .project-card {
-      background: #0b192a;
-      border: 1px solid #263b53;
-      border-radius: 12px;
-      padding: 16px 13px;
-      text-align: center;
-      transition: .2s ease;
-    }
-
-    .project-card:hover {
-      border-color: #38bdf8;
-      transform: translateY(-3px);
-    }
-
-    .project-card i {
-      font-size: 25px;
-      color: #38bdf8;
-      margin-bottom: 10px;
-    }
-
-    .project-card h3 {
-      font-size: 14px;
-      color: #f8fafc;
-      margin-bottom: 6px;
-    }
-
-    .project-card p {
-      font-size: 12px;
-      margin-bottom: 10px;
-    }
-
-    .project-card span {
-      display: inline-block;
-      color: #7dd3fc;
-      font-size: 12px;
-      font-weight: bold;
-    }
-
-    .goal-box {
-      background: linear-gradient(135deg, #102b46, #172554);
-      border: 1px solid #2563a5;
-      border-radius: 14px;
-      padding: 18px;
-      margin-top: 12px;
-    }
-
-    .goal-box h3 {
-      color: #7dd3fc;
-      font-size: 16px;
-      margin-bottom: 8px;
-    }
-
-    .goal-box p {
-      margin: 0;
-    }
-
-    .share-section {
-      text-align: center;
-      padding: 20px 10px;
-      border-top: 1px solid #263b53;
-      margin-top: 8px;
-    }
-
-    .share-section p {
-      color: #94a3b8;
-      font-size: 13px;
-      margin-bottom: 13px;
-    }
-
-    .share-links {
-      display: flex;
-      justify-content: center;
-      gap: 22px;
-    }
-
-    .share-links a {
-      font-size: 15px;
-      font-weight: bold;
-    }
-
-    .whatsapp {
-      color: #25d366;
-    }
-
-    .facebook {
-      color: #60a5fa;
-    }
-
-    footer {
-      text-align: center;
-      color: #64748b;
-      font-size: 12px;
-      margin-top: 25px;
-    }
-
-    @media (max-width: 480px) {
-      .hero {
-        padding: 32px 15px;
-      }
-
-      .hero h1 {
-        font-size: 26px;
-      }
-
-      .section {
-        padding: 17px;
-      }
-
-      .project-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-  </style>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#07111f;color:#f8fafc;padding:18px 14px 40px;line-height:1.7}
+a{color:inherit;text-decoration:none}
+.container{max-width:760px;margin:auto}
+.topbar{display:flex;justify-content:flex-start;margin-bottom:20px}
+.topbar a{color:#38bdf8;font-size:14px;font-weight:700}
+.hero{position:relative;overflow:hidden;text-align:center;padding:38px 20px;border-radius:20px;background:linear-gradient(135deg,#12365a,#172554,#1e293b);border:1px solid #334155;margin-bottom:20px}
+.avatar-wrap{position:relative;width:116px;height:116px;margin:0 auto 15px}
+.avatar{width:116px;height:116px;border-radius:50%;object-fit:cover;border:3px solid #38bdf8;background:#123452}
+.avatar-edit{position:absolute;bottom:0;right:0;width:37px;height:37px;border:2px solid #07111f;border-radius:50%;background:#0284c7;color:white;display:grid;place-items:center;cursor:pointer}
+.avatar-edit:hover{background:#0369a1}
+#avatarInput{display:none}
+#avatarStatus{font-size:12px;color:#bae6fd;margin-top:8px;min-height:18px}
+.hero h1{font-size:30px;color:white;margin-bottom:5px}
+.subtitle{color:#7dd3fc;font-weight:700}
+.intro{color:#cbd5e1;font-size:14px;max-width:520px;margin:15px auto 0}
+.section{background:#111f32;border:1px solid #263b53;border-radius:17px;padding:22px;margin-bottom:17px;box-shadow:0 7px 22px #0003}
+.section-title{display:flex;align-items:center;gap:11px;color:#7dd3fc;font-size:19px;margin-bottom:16px}
+.section-title i{width:39px;height:39px;display:grid;place-items:center;border-radius:11px;background:#123452;color:#38bdf8}
+.section p{color:#cbd5e1;font-size:14.5px;margin-bottom:12px}
+.section p:last-child{margin-bottom:0}
+.section strong{color:#fbbf24}
+.highlight{background:#0b192a;border-left:4px solid #38bdf8;padding:14px 15px;border-radius:9px;margin-top:13px;color:#cbd5e1;font-size:14px}
+.experience-list{display:grid;gap:12px;margin-top:12px}
+.experience-item{display:flex;gap:12px;align-items:flex-start;background:#0b192a;border:1px solid #263b53;border-radius:11px;padding:14px}
+.experience-item i{color:#38bdf8;font-size:19px;margin-top:3px;min-width:22px}
+.experience-item h3{color:#f1f5f9;font-size:14px;margin-bottom:4px}
+.experience-item p{font-size:13px;margin:0}
+.project-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:14px}
+.project-card{background:#0b192a;border:1px solid #263b53;border-radius:12px;padding:16px 13px;text-align:center;transition:.2s}
+.project-card:hover{border-color:#38bdf8;transform:translateY(-3px)}
+.project-card i{font-size:25px;color:#38bdf8;margin-bottom:10px}
+.project-card h3{font-size:14px;color:#f8fafc;margin-bottom:6px}
+.project-card p{font-size:12px;margin-bottom:10px}
+.project-card span{color:#7dd3fc;font-size:12px;font-weight:bold}
+.goal-box{background:linear-gradient(135deg,#102b46,#172554);border:1px solid #2563a5;border-radius:14px;padding:18px;margin-top:12px}
+.goal-box h3{color:#7dd3fc;font-size:16px;margin-bottom:8px}
+.goal-box p{margin:0}
+.share-section{text-align:center;padding:20px 10px;border-top:1px solid #263b53;margin-top:8px}
+.share-section p{color:#94a3b8;font-size:13px;margin-bottom:13px}
+.share-links{display:flex;justify-content:center;gap:22px}
+.share-links a{font-size:15px;font-weight:bold}
+.whatsapp{color:#25d366}.facebook{color:#60a5fa}
+footer{text-align:center;color:#64748b;font-size:12px;margin-top:25px}
+@media(max-width:480px){.hero{padding:30px 15px}.hero h1{font-size:26px}.section{padding:17px}.project-grid{grid-template-columns:1fr 1fr}}
+</style>
 </head>
 
 <body>
+<main class="container">
 
-  <main class="container">
+<div class="topbar">
+<a href="index.html"><i class="fa-solid fa-arrow-left"></i> मुख्य पृष्ठ</a>
+</div>
 
-    <div class="topbar">
-      <a href="index.html">
-        <i class="fa-solid fa-arrow-left"></i>
-        मुख्य पृष्ठ
-      </a>
+<header class="hero">
+<div class="avatar-wrap">
+<img id="profileAvatar" class="avatar"
+src="https://ui-avatars.com/api/?name=Kamal+GC&background=123452&color=ffffff&size=240"
+alt="Kamal G.C. Profile Photo">
+<label class="avatar-edit" for="avatarInput" title="फोटो बदल्नुहोस्">
+<i class="fa-solid fa-camera"></i>
+</label>
+<input type="file" id="avatarInput" accept="image/*">
+</div>
 
-      <a href="blog.html">
-        Blog <i class="fa-solid fa-arrow-right"></i>
-      </a>
-    </div>
+<h1>KAMAL G.C.</h1>
+<div class="subtitle">Learning · Working · Growing</div>
+<p class="intro">
+नमस्कार! मेरो व्यक्तिगत वेबसाइटमा स्वागत छ।
+यहाँ मेरो परिचय, कामको अनुभव, रुचि, सिकाइ र प्रविधिसँग
+जोडिएका केही प्रयासहरू प्रस्तुत गरेको छु।
+</p>
+<div id="avatarStatus" aria-live="polite"></div>
+</header>
 
-    <!-- INTRODUCTION -->
-    <header class="hero">
-      <div class="hero-icon">
-        <i class="fa-solid fa-user"></i>
-      </div>
+<section class="section">
+<h2 class="section-title"><i class="fa-solid fa-user-astronaut"></i> मेरो परिचय</h2>
+<p>म <strong>कमल जी.सी.</strong>, स्थायी घर शिवराज नगरपालिका–९, शिवगढी, कपिलवस्तु हो। हाल कामको सिलसिलामा भारतको नयाँ दिल्लीमा बस्दै आएको छु।</p>
+<p>हाल म <strong>Kosher India Pvt. Ltd.</strong> मा कार्यरत छु। कामसँगै नयाँ कुरा सिक्ने, आफ्नो क्षमता विकास गर्ने र प्रविधिलाई व्यवहारमा प्रयोग गर्ने मेरो रुचि छ।</p>
+<div class="highlight"><i class="fa-solid fa-lightbulb"></i> मेरो विश्वास छ—निरन्तर सिकाइ, मेहनत र सही सोचले जीवनमा नयाँ सम्भावनाहरू खोल्न सक्छ।</div>
+</section>
 
-      <h1>KAMAL G.C.</h1>
-      <div class="subtitle">Learning · Working · Growing</div>
+<section class="section">
+<h2 class="section-title"><i class="fa-solid fa-briefcase"></i> कार्य अनुभव र अनुशासन</h2>
+<p><strong>Kosher India Pvt. Ltd.</strong> मा काम गर्दा कोशर (Kosher) नियम, सरसफाइ, गुणस्तर र कार्य-अनुशासनको महत्त्वलाई नजिकबाट अनुभव गर्ने अवसर पाएको छु।</p>
+<div class="experience-list">
+<div class="experience-item"><i class="fa-solid fa-shield-halved"></i><div><h3>अनुशासन र जिम्मेवारी</h3><p>तोकिएका नियम र मापदण्डलाई इमानदारीपूर्वक पालना गर्ने बानी र जिम्मेवारीबोध।</p></div></div>
+<div class="experience-item"><i class="fa-solid fa-award"></i><div><h3>गुणस्तर र सरसफाइ</h3><p>काममा स्वच्छता, गुणस्तर र सावधानीलाई प्राथमिकता दिने अनुभव।</p></div></div>
+<div class="experience-item"><i class="fa-solid fa-handshake"></i><div><h3>आतिथ्यता र व्यवहार</h3><p>विदेशी पाहुना तथा ग्राहकहरूसँग काम गर्दा राम्रो व्यवहार र सेवाको महत्त्व बुझ्ने अवसर।</p></div></div>
+</div>
+<div class="highlight">कार्यस्थल: <a href="https://www.indiakoshertravel.com" target="_blank" rel="noopener">indiakoshertravel.com <i class="fa-solid fa-arrow-up-right-from-square"></i></a></div>
+</section>
 
-      <p class="intro">
-        नमस्कार! मेरो व्यक्तिगत वेबसाइटमा स्वागत छ।
-        यहाँ मेरो परिचय, कामको अनुभव, रुचि, सिकाइ र प्रविधिसँग
-        जोडिएका केही प्रयासहरू प्रस्तुत गरेको छु।
-      </p>
-    </header>
+<section class="section">
+<h2 class="section-title"><i class="fa-solid fa-microchip"></i> प्रविधि र AI प्रतिको रुचि</h2>
+<p>मेरो विशेष रुचि आधुनिक प्रविधि, वेब विकास र कृत्रिम बुद्धिमत्ता (AI) मा रहेको छ। नयाँ प्रविधि सिकेर दैनिक जीवन, काम र व्यवसायलाई अझ सहज, छिटो र प्रभावकारी बनाउन सकिन्छ भन्ने मेरो सोच छ।</p>
+<div class="experience-list">
+<div class="experience-item"><i class="fa-solid fa-brain"></i><div><h3>Artificial Intelligence</h3><p>AI का नयाँ सम्भावना बुझ्ने र व्यवहारमा उपयोग गर्ने निरन्तर प्रयास।</p></div></div>
+<div class="experience-item"><i class="fa-solid fa-code"></i><div><h3>Web Technology</h3><p>वेबसाइट, डिजिटल प्लेटफर्म र मोबाइलमैत्री वेब एपहरूबारे सिक्ने र निर्माण गर्ने रुचि।</p></div></div>
+<div class="experience-item"><i class="fa-solid fa-chart-line"></i><div><h3>Digital Solutions</h3><p>दैनिक काम र व्यवसायका समस्या समाधान गर्न डिजिटल औजारहरूको प्रयोग।</p></div></div>
+</div>
+</section>
 
-    <!-- ABOUT -->
-    <section class="section">
-      <h2 class="section-title">
-        <i class="fa-solid fa-user-astronaut"></i>
-        मेरो परिचय
-      </h2>
+<section class="section">
+<h2 class="section-title"><i class="fa-solid fa-laptop-code"></i> मेरा डिजिटल परियोजनाहरू</h2>
+<p>सिक्ने र नयाँ कुरा प्रयोग गर्ने क्रममा तयार गरिएका केही डिजिटल परियोजनाहरू:</p>
+<div class="project-grid">
+<a class="project-card" href="https://kids.kamalgc.com.np" target="_blank" rel="noopener">
+<i class="fa-solid fa-graduation-cap"></i><h3>बाल पाठशाला</h3>
+<p>बालबालिकाका लागि डिजिटल सिकाइ प्लेटफर्म।</p>
+<span>Visit Project <i class="fa-solid fa-arrow-up-right-from-square"></i></span>
+</a>
+<a class="project-card" href="https://dn.kamalgc.com.np" target="_blank" rel="noopener">
+<i class="fa-solid fa-book-bookmark"></i><h3>Digital Notebook</h3>
+<p>व्यक्तिगत तथा व्यावसायिक हिसाबकिताब व्यवस्थापन।</p>
+<span>Visit Project <i class="fa-solid fa-arrow-up-right-from-square"></i></span>
+</a>
+</div>
+</section>
 
-      <p>
-        म <strong>कमल जी.सी.</strong>, स्थायी घर शिवराज नगरपालिका–९,
-        शिवगढी, कपिलवस्तु हो। हाल कामको सिलसिलामा भारतको नयाँ
-        दिल्लीमा बस्दै आएको छु।
-      </p>
+<section class="section">
+<h2 class="section-title"><i class="fa-solid fa-bullseye"></i> मेरो सोच र भविष्यको लक्ष्य</h2>
+<p>निरन्तर सिक्दै जाने, नयाँ सीप विकास गर्ने र आफूले सिकेका कुरालाई व्यवहारमा लागू गर्ने मेरो उद्देश्य हो।</p>
+<div class="goal-box">
+<h3><i class="fa-solid fa-rocket"></i> मेरो लक्ष्य</h3>
+<p>मेहनतबाट प्राप्त अनुभव, आधुनिक प्रविधि र AI को क्षमतालाई जोडेर उपयोगी डिजिटल समाधानहरू निर्माण गर्नु र आफ्नो काम तथा व्यवसायलाई अझ प्रभावकारी बनाउनु।</p>
+</div>
+</section>
 
-      <p>
-        हाल म <strong>Kosher India Pvt. Ltd.</strong> मा कार्यरत छु।
-        कामसँगै नयाँ कुरा सिक्ने, आफ्नो क्षमता विकास गर्ने र
-        प्रविधिलाई व्यवहारमा प्रयोग गर्ने मेरो रुचि छ।
-      </p>
+<div class="share-section">
+<p>मेरो परिचय साथीहरूसँग शेयर गर्नुहोस्</p>
+<div class="share-links">
+<a class="whatsapp" href="https://api.whatsapp.com/send?text=Kamal%20G.C.%20-%20https%3A%2F%2Fkamalgc.com.np%2Fabout.html" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+<a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://kamalgc.com.np/about.html" target="_blank" rel="noopener"><i class="fa-brands fa-facebook"></i> Facebook</a>
+</div>
+</div>
 
-      <div class="highlight">
-        <i class="fa-solid fa-lightbulb"></i>
-        मेरो विश्वास छ—निरन्तर सिकाइ, मेहनत र सही सोचले
-        जीवनमा नयाँ सम्भावनाहरू खोल्न सक्छ।
-      </div>
-    </section>
+<footer>© <span id="year"></span> KAMAL G.C. · All Rights Reserved</footer>
+</main>
 
-    <!-- WORK EXPERIENCE -->
-    <section class="section">
-      <h2 class="section-title">
-        <i class="fa-solid fa-briefcase"></i>
-        कार्य अनुभव र अनुशासन
-      </h2>
+<script>
+document.getElementById("year").textContent = new Date().getFullYear();
 
-      <p>
-        <strong>Kosher India Pvt. Ltd.</strong> मा काम गर्दा
-        कोशर (Kosher) नियम, सरसफाइ, गुणस्तर र कार्य-अनुशासनको
-        महत्त्वलाई नजिकबाट अनुभव गर्ने अवसर पाएको छु।
-      </p>
+/* Supabase profile photo settings */
+const SUPABASE_URL = "https://zbyntmyybhdcwmttkuys.supabase.co";
+const SUPABASE_KEY = "sb_publishable_N8U3og_Ntm-ImrtM8c1NGA_-Rqb3dSy";
+const ADMIN_EMAIL = "gckamal67@gmail.com";
+const BUCKET = "blog-images";
+const AVATAR_PATH = "profile/avatar.jpg";
 
-      <div class="experience-list">
+const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+const avatar = document.getElementById("profileAvatar");
+const avatarInput = document.getElementById("avatarInput");
+const avatarStatus = document.getElementById("avatarStatus");
 
-        <div class="experience-item">
-          <i class="fa-solid fa-shield-halved"></i>
-          <div>
-            <h3>अनुशासन र जिम्मेवारी</h3>
-            <p>
-              तोकिएका नियम र मापदण्डलाई इमानदारीपूर्वक पालना गर्ने
-              बानी र जिम्मेवारीबोध।
-            </p>
-          </div>
-        </div>
+function showStatus(message) {
+  avatarStatus.textContent = message;
+}
 
-        <div class="experience-item">
-          <i class="fa-solid fa-award"></i>
-          <div>
-            <h3>गुणस्तर र सरसफाइ</h3>
-            <p>
-              काममा स्वच्छता, गुणस्तर र सावधानीलाई प्राथमिकता दिने
-              अनुभव।
-            </p>
-          </div>
-        </div>
+function loadAvatar() {
+  const publicUrl = `${SUPABASE_URL}/storage/v1/object/public/${BUCKET}/${AVATAR_PATH}`;
+  avatar.src = `${publicUrl}?v=${Date.now()}`;
+}
 
-        <div class="experience-item">
-          <i class="fa-solid fa-handshake"></i>
-          <div>
-            <h3>आतिथ्यता र व्यवहार</h3>
-            <p>
-              विदेशी पाहुना तथा ग्राहकहरूसँग काम गर्दा राम्रो व्यवहार
-              र सेवाको महत्त्व बुझ्ने अवसर।
-            </p>
-          </div>
-        </div>
+loadAvatar();
 
-      </div>
+avatarInput.addEventListener("change", async function () {
+  const file = this.files && this.files[0];
+  if (!file) return;
 
-      <div class="highlight">
-        कार्यस्थल:
-        <a href="https://www.indiakoshertravel.com"
-           target="_blank" rel="noopener">
-          indiakoshertravel.com
-          <i class="fa-solid fa-arrow-up-right-from-square"></i>
-        </a>
-      </div>
-    </section>
+  if (!file.type.startsWith("image/")) {
+    showStatus("कृपया फोटो फाइल मात्र छान्नुहोस्।");
+    this.value = "";
+    return;
+  }
 
-    <!-- TECHNOLOGY -->
-    <section class="section">
-      <h2 class="section-title">
-        <i class="fa-solid fa-microchip"></i>
-        प्रविधि र AI प्रतिको रुचि
-      </h2>
+  if (file.size > 8 * 1024 * 1024) {
+    showStatus("फोटो ८ MB भन्दा सानो हुनुपर्छ।");
+    this.value = "";
+    return;
+  }
 
-      <p>
-        मेरो विशेष रुचि आधुनिक प्रविधि, वेब विकास र
-        कृत्रिम बुद्धिमत्ता (AI) मा रहेको छ।
-        नयाँ प्रविधि सिकेर दैनिक जीवन, काम र व्यवसायलाई
-        अझ सहज, छिटो र प्रभावकारी बनाउन सकिन्छ भन्ने मेरो सोच छ।
-      </p>
+  const email = prompt("Admin Email लेख्नुहोस्:");
+  if (!email) {
+    showStatus("फोटो परिवर्तन रद्द गरियो।");
+    this.value = "";
+    return;
+  }
 
-      <div class="experience-list">
+  if (email.trim().toLowerCase() !== ADMIN_EMAIL) {
+    showStatus("यो Admin Email मिलेन।");
+    this.value = "";
+    return;
+  }
 
-        <div class="experience-item">
-          <i class="fa-solid fa-brain"></i>
-          <div>
-            <h3>Artificial Intelligence</h3>
-            <p>
-              AI का नयाँ सम्भावना बुझ्ने र व्यवहारमा उपयोग गर्ने
-              निरन्तर प्रयास।
-            </p>
-          </div>
-        </div>
+  const password = prompt("Admin Password लेख्नुहोस्:");
+  if (!password) {
+    showStatus("पासवर्ड नदिइएकाले फोटो परिवर्तन भएन।");
+    this.value = "";
+    return;
+  }
 
-        <div class="experience-item">
-          <i class="fa-solid fa-code"></i>
-          <div>
-            <h3>Web Technology</h3>
-            <p>
-              वेबसाइट, डिजिटल प्लेटफर्म र मोबाइलमैत्री
-              वेब एपहरूबारे सिक्ने र निर्माण गर्ने रुचि।
-            </p>
-          </div>
-        </div>
+  showStatus("फोटो सुरक्षित हुँदैछ...");
 
-        <div class="experience-item">
-          <i class="fa-solid fa-chart-line"></i>
-          <div>
-            <h3>Digital Solutions</h3>
-            <p>
-              दैनिक काम र व्यवसायका समस्या समाधान गर्न
-              डिजिटल औजारहरूको प्रयोग।
-            </p>
-          </div>
-        </div>
+  try {
+    const { data: loginData, error: loginError } =
+      await supabaseClient.auth.signInWithPassword({
+        email: email.trim(),
+        password
+      });
 
-      </div>
-    </section>
+    if (loginError) throw new Error("लगइन असफल भयो। Email वा Password जाँच्नुहोस्।");
+    if (loginData.user.email.toLowerCase() !== ADMIN_EMAIL) {
+      await supabaseClient.auth.signOut();
+      throw new Error("यो खातालाई फोटो परिवर्तन गर्ने अनुमति छैन।");
+    }
 
-    <!-- PROJECTS -->
-    <section class="section">
-      <h2 class="section-title">
-        <i class="fa-solid fa-laptop-code"></i>
-        मेरा डिजिटल परियोजनाहरू
-      </h2>
+    const { error: uploadError } = await supabaseClient.storage
+      .from(BUCKET)
+      .upload(AVATAR_PATH, file, {
+        upsert: true,
+        contentType: file.type,
+        cacheControl: "0"
+      });
 
-      <p>
-        सिक्ने र नयाँ कुरा प्रयोग गर्ने क्रममा तयार गरिएका
-        केही डिजिटल परियोजनाहरू:
-      </p>
+    if (uploadError) throw uploadError;
 
-      <div class="project-grid">
+    await supabaseClient.auth.signOut();
+    loadAvatar();
+    showStatus("नयाँ प्रोफाइल फोटो सफलतापूर्वक सुरक्षित भयो! 💗");
 
-        <a class="project-card"
-           href="https://kids.kamalgc.com.np"
-           target="_blank" rel="noopener">
-          <i class="fa-solid fa-graduation-cap"></i>
-          <h3>बाल पाठशाला</h3>
-          <p>
-            बालबालिकाका लागि डिजिटल सिकाइ प्लेटफर्म।
-          </p>
-          <span>Visit Project <i class="fa-solid fa-arrow-up-right-from-square"></i></span>
-        </a>
+  } catch (error) {
+    showStatus(error.message || "फोटो अपलोड हुन सकेन। फेरि प्रयास गर्नुहोस्।");
+  }
 
-        <a class="project-card"
-           href="https://dn.kamalgc.com.np"
-           target="_blank" rel="noopener">
-          <i class="fa-solid fa-book-bookmark"></i>
-          <h3>Digital Notebook</h3>
-          <p>
-            व्यक्तिगत तथा व्यावसायिक हिसाबकिताब व्यवस्थापन।
-          </p>
-          <span>Visit Project <i class="fa-solid fa-arrow-up-right-from-square"></i></span>
-        </a>
-
-      </div>
-    </section>
-
-    <!-- FUTURE GOAL -->
-    <section class="section">
-      <h2 class="section-title">
-        <i class="fa-solid fa-bullseye"></i>
-        मेरो सोच र भविष्यको लक्ष्य
-      </h2>
-
-      <p>
-        निरन्तर सिक्दै जाने, नयाँ सीप विकास गर्ने र आफूले सिकेका
-        कुरालाई व्यवहारमा लागू गर्ने मेरो उद्देश्य हो।
-      </p>
-
-      <div class="goal-box">
-        <h3>
-          <i class="fa-solid fa-rocket"></i>
-          मेरो लक्ष्य
-        </h3>
-
-        <p>
-          मेहनतबाट प्राप्त अनुभव, आधुनिक प्रविधि र AI को
-          क्षमतालाई जोडेर उपयोगी डिजिटल समाधानहरू निर्माण गर्नु
-          र आफ्नो काम तथा व्यवसायलाई अझ प्रभावकारी बनाउनु।
-        </p>
-      </div>
-    </section>
-
-    <!-- SHARE -->
-    <div class="share-section">
-      <p>मेरो परिचय साथीहरूसँग शेयर गर्नुहोस्</p>
-
-      <div class="share-links">
-        <a class="whatsapp"
-           href="https://api.whatsapp.com/send?text=Kamal%20G.C.%20-%20https%3A%2F%2Fkamalgc.com.np%2Fabout.html"
-           target="_blank" rel="noopener">
-          <i class="fa-brands fa-whatsapp"></i> WhatsApp
-        </a>
-
-        <a class="facebook"
-           href="https://www.facebook.com/sharer/sharer.php?u=https://kamalgc.com.np/about.html"
-           target="_blank" rel="noopener">
-          <i class="fa-brands fa-facebook"></i> Facebook
-        </a>
-      </div>
-    </div>
-
-    <footer>
-      © <span id="year"></span> KAMAL G.C. · All Rights Reserved
-    </footer>
-
-  </main>
-
-  <script>
-    document.getElementById("year").textContent =
-      new Date().getFullYear();
-  </script>
-
+  this.value = "";
+});
+</script>
 </body>
 </html>
