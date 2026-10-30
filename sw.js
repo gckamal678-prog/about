@@ -1,57 +1,142 @@
-const CACHE_NAME = 'kamalgc-cache-v4';
 
-// अफलाइन सेभ गरिने फाइलहरू (Exact Root-Relative Paths)
-const filesToCache = [
-  '/',
-  '/index.html',
-  '/tech.html',
-  '/about.html',
-  '/blog.html',
-  '/emergency.html',
-  '/style.css',
-  '/script.js',
-  '/manifest.json'
+/* KAMAL G.C. PORTAL — SERVICE WORKER
+   Version 5: Fix stale cache and broken page fallback
+*/
+
+const CACHE_NAME = "kamalgc-cache-v5";
+
+const CORE_FILES = [
+  "./",
+  "./index.html",
+  "./style.css",
+  "./manifest.json"
 ];
 
-// १. Install Event: सबै फाइलहरू क्यास गर्ने
-self.addEventListener('install', (e) => {
+// INSTALL
+self.addEventListener("install", event => {
   self.skipWaiting();
-  e.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(filesToCache);
-    })
-  );
-});
 
-// २. Activate Event: पुरानो क्यास फालेर नयाँ लागू गर्ने
-self.addEventListener('activate', (e) => {
-  e.waitUntil(
-    caches.keys().then((keys) => {
-      return Promise.all(
-        keys.map((key) => {
-          if (key !== CACHE_NAME) {
-            return caches.delete(key);
+  event.waitUntil(
+    (async () => {
+      const cache = await caches.open(CACHE_NAME);
+
+      await Promise.all(
+        CORE_FILES.map(async file => {
+          try {
+            const response = await fetch(file, {
+              cache: "reload"
+            });
+
+            if (response.ok) {
+              await cache.put(file, response);
+            }
+          } catch (error) {
+            console.warn("Cache skipped:", file);
           }
         })
       );
-    }).then(() => self.clients.claim())
+    })()
   );
 });
 
-// ३. Fetch Event: अफलाइन हुँदा क्यासबाट फाइल देखाउने
-self.addEventListener('fetch', (e) => {
-  // केवल GET Request मात्र क्यास गर्ने
-  if (e.request.method !== 'GET') return;
+// ACTIVATE — DELETE OLD CACHE
+self.addEventListener("activate", event => {
+  event.waitUntil(
+    (async () => {
+      const keys = await caches.keys();
 
-  e.respondWith(
-    caches.match(e.request, { ignoreSearch: true }).then((cachedResponse) => {
-      if (cachedResponse) {
-        return cachedResponse;
+      await Promise.all(
+        keys
+          .filter(key =>
+            key.startsWith("kamalgc-cache-") &&
+            key !== CACHE_NAME
+          )
+          .map(key => caches.delete(key))
+      );
+
+      await self.clients.claim();
+    })()
+  );
+});
+
+// FETCH
+self.addEventListener("fetch", event => {
+  const request = event.request;
+
+  if (request.method !== "GET") return;
+
+  const url = new URL(request.url);
+
+  if (url.origin !== self.location.origin) return;
+
+  const isPageOrCode =
+    request.mode === "navigate" ||
+    request.destination === "document" ||
+    /\.(html|css|js|json)$/i.test(url.pathname);
+
+  // HTML, CSS, JS: NETWORK FIRST
+  if (isPageOrCode) {
+    event.respondWith(
+      (async () => {
+        try {
+          const response = await fetch(request, {
+            cache: "no-store"
+          });
+
+          if (response && response.ok) {
+            const cache = await caches.open(CACHE_NAME);
+            await cache.put(request, response.clone());
+          }
+
+          return response;
+
+        } catch (error) {
+          const cached = await caches.match(request);
+
+          if (cached) return cached;
+
+          if (request.mode === "navigate") {
+            const offlinePage =
+              await caches.match("./index.html");
+
+            if (offlinePage) return offlinePage;
+          }
+
+          return new Response("Offline", {
+            status: 503,
+            headers: {
+              "Content-Type": "text/plain; charset=utf-8"
+            }
+          });
+        }
+      })()
+    );
+
+    return;
+  }
+
+  // IMAGES AND OTHER ASSETS: CACHE FIRST
+  event.respondWith(
+    (async () => {
+      const cached = await caches.match(request);
+
+      if (cached) return cached;
+
+      try {
+        const response = await fetch(request);
+
+        if (response.ok) {
+          const cache = await caches.open(CACHE_NAME);
+          await cache.put(request, response.clone());
+        }
+
+        return response;
+
+      } catch (error) {
+        return new Response("Offline", {
+          status: 503
+        });
       }
-      return fetch(e.request).catch(() => {
-        // यदि इन्टरनेट छैन र फाइल क्यासमा भेटिएन भने index.html खोल्ने
-        return caches.match('/index.html');
-      });
-    })
+    })()
   );
 });
