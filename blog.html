@@ -1,144 +1,588 @@
+
 <!DOCTYPE html>
-<html lang="np">
+<html lang="ne">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Blogs - KAMAL G.C.</title>
+  <meta name="theme-color" content="#0f172a">
+  <title>Blog - KAMAL G.C.</title>
+  <meta name="description" content="Kamal G.C. का लेख, अनुभव, प्रविधि र जीवनका कथाहरू।">
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
   <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     body {
-      background-color: #0f172a;
-      color: #ffffff;
-      font-family: 'Segoe UI', sans-serif;
-      padding: 15px;
+      background: #0f172a;
+      color: #f8fafc;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      padding: 18px 13px 40px;
     }
-    .blog-container {
-      max-width: 600px;
-      margin: 0 auto;
+
+    .container {
+      max-width: 680px;
+      margin: auto;
     }
-    .blog-card {
-      background: #1e293b;
-      border-radius: 12px;
-      padding: 15px;
-      margin-bottom: 25px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      gap: 10px;
+    }
+
+    .topbar a {
+      color: #38bdf8;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 25px 15px;
+      margin-bottom: 22px;
+      border-radius: 17px;
+      background: linear-gradient(135deg, #1e3a5f, #1e293b);
       border: 1px solid #334155;
     }
-    .blog-header {
-      text-align: center;
-      margin-bottom: 12px;
-    }
-    .blog-number {
-      background: #007bff;
-      color: #fff;
-      font-weight: bold;
-      padding: 2px 10px;
-      border-radius: 15px;
-      font-size: 14px;
-      display: inline-block;
-      margin-bottom: 6px;
-    }
-    .blog-title {
-      font-size: 18px;
+
+    .hero h1 {
       color: #38bdf8;
+      font-size: 29px;
       margin-bottom: 8px;
     }
-    .blog-card img {
-      width: 100%;
-      border-radius: 8px;
-      margin-bottom: 12px;
-    }
-    .blog-caption p {
-      font-size: 14px;
-      line-height: 1.6;
+
+    .hero p {
       color: #cbd5e1;
-      margin-bottom: 8px;
+      font-size: 14px;
+      line-height: 1.7;
     }
-    .share-box {
-      margin-top: 15px;
-      padding-top: 10px;
+
+    .section-heading {
+      color: #38bdf8;
+      font-size: 18px;
+      margin: 25px 3px 14px;
+    }
+
+    .post-card {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 15px;
+      padding: 17px;
+      margin-bottom: 20px;
+      box-shadow: 0 5px 18px rgba(0,0,0,.22);
+      overflow: hidden;
+    }
+
+    .post-title {
+      color: #38bdf8;
+      font-size: 19px;
+      line-height: 1.5;
+      margin-bottom: 9px;
+      overflow-wrap: anywhere;
+    }
+
+    .post-date {
+      color: #94a3b8;
+      font-size: 12px;
+      margin-bottom: 13px;
+    }
+
+    .post-image {
+      width: 100%;
+      max-height: 430px;
+      object-fit: contain;
+      border-radius: 10px;
+      margin-bottom: 13px;
+      background: #0f172a;
+    }
+
+    .post-content {
+      color: #cbd5e1;
+      font-size: 15px;
+      line-height: 1.85;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
+
+    .share-area {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 15px;
       border-top: 1px solid #334155;
+      padding-top: 14px;
+      margin-top: 17px;
+    }
+
+    .share-area span {
+      color: #94a3b8;
+      font-size: 13px;
+    }
+
+    .share-area a {
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .whatsapp {
+      color: #25d366;
+    }
+
+    .facebook {
+      color: #60a5fa;
+    }
+
+    .legacy-link {
+      color: #38bdf8;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .legacy-card p {
+      color: #cbd5e1;
+      font-size: 14px;
+      line-height: 1.8;
+      margin-top: 10px;
+    }
+
+    .legacy-card h3 {
+      color: #f59e0b;
+      font-size: 16px;
+      margin-top: 17px;
+    }
+
+    .legacy-card ul,
+    .legacy-card ol {
+      color: #cbd5e1;
+      padding-left: 22px;
+      margin-top: 10px;
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .legacy-card li {
+      margin-bottom: 7px;
+    }
+
+    .legacy-card img {
+      width: 100%;
+      border-radius: 10px;
+      margin: 13px 0;
+    }
+
+    .app-link {
+      display: block;
       text-align: center;
+      background: #0f172a;
+      border: 1px solid #0284c7;
+      padding: 13px;
+      border-radius: 9px;
+      margin-top: 17px;
+      color: #38bdf8;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .status {
+      text-align: center;
+      color: #94a3b8;
+      font-size: 14px;
+      padding: 20px 10px;
+    }
+
+    .admin-link {
+      display: inline-block;
+      background: #0f172a;
+      border: 1px solid #334155;
+      padding: 8px 12px;
+      border-radius: 8px;
+    }
+
+    footer {
+      text-align: center;
+      color: #64748b;
+      font-size: 12px;
+      margin-top: 35px;
+    }
+
+    @media (max-width: 420px) {
+      .hero h1 {
+        font-size: 25px;
+      }
+
+      .post-card {
+        padding: 13px;
+      }
     }
   </style>
 </head>
+
 <body>
+  <main class="container">
 
-  <div class="blog-container">
+    <div class="topbar">
+      <a href="index.html">
+        <i class="fa-solid fa-arrow-left"></i> मुख्य पृष्ठ
+      </a>
 
-    <!-- १. पहिलो ब्लग -->
-    <div class="blog-card">
-      <div class="blog-header">
-        <span class="blog-number">१.</span>
-        <h3 class="blog-title" data-np="जिन्दगीको गोरेटोमा अलि पछाडि फर्केर हेर्दा... 🍃" data-en="Looking back a little bit on the path of life... 🍃">
-          जिन्दगीको गोरेटोमा अलि पछाडि फर्केर हेर्दा... 🍃
-        </h3>
-        <hr style="border: none; height: 3px; background: #007bff; width: 60px; margin: 0 auto;">
-      </div>
+      <a href="admin.html" class="admin-link">
+        <i class="fa-solid fa-user-lock"></i> Admin
+      </a>
+    </div>
 
-      <img src="16year.png" alt="16 years old photo">
+    <header class="hero">
+      <h1><i class="fa-solid fa-book-open"></i> My Blog</h1>
+      <p>
+        मेरा अनुभव, जीवनका कथा, नयाँ विचार, प्रविधि र सिकाइका कुराहरू।
+        पढ्नुहोस् र आफ्नो साथीहरूसँग शेयर गर्नुहोस्।
+      </p>
+    </header>
 
-      <div class="blog-caption">
-        <div class="lang-np">
-          <p>यो फोटो मेरो १५–१६ वर्षको उमेरको हो। टोपी ढल्काएर खिचिएको यो तस्बिरले मलाई मेरो बाल्यकाल र किशोरावस्थाको सङ्गमको याद दिलाउँछ। प्रकृतिको काखमा खिचिएको यो फोटोमा देखिने त्यो उमेरको सादगी, निर्दोषपना र निर्भीक रूप साँच्चै नै अनमोल छ।</p>
-          <p style="margin-top: 10px;">
-            <a href="https://youtu.be/Dh4344mVZ4w?si=_NXNLRwOGD7bA4v9" target="_blank" style="color: #007bff; text-decoration: none; font-weight: bold;">
-              ▶ युट्युबमा भिडियो हेर्नुहोस्
-            </a>
-          </p>
-        </div>
-        <div class="lang-en" style="display: none;">
-          <p>This photo is from when I was 15-16 years old. This picture, taken with a tilted cap, reminds me of the confluence of my childhood and adolescence. The simplicity, innocence, and fearless look of that age captured in the lap of nature are truly priceless.</p>
-          <p style="margin-top: 10px;">
-            <a href="https://youtu.be/Dh4344mVZ4w?si=_NXNLRwOGD7bA4v9" target="_blank" style="color: #007bff; text-decoration: none; font-weight: bold;">
-              ▶ Watch video on YouTube
-            </a>
-          </p>
-        </div>
-      </div>
+    <h2 class="section-heading">
+      <i class="fa-solid fa-newspaper"></i> नयाँ पोस्टहरू
+    </h2>
 
-      <div class="share-box">
-        <span style="font-size: 13px; color: #94a3b8; display: block; margin-bottom: 8px; font-weight: bold;" class="share-text" data-np="यो पोस्ट शेयर गर्नुहोस्:" data-en="Share this post:">यो पोस्ट शेयर गर्नुहोस्:</span>
-        <a href="https://api.whatsapp.com/send?text=%E0%A4%9C%E0%A4%BF%E0%A4%A8%E0%A5%8D%E0%A4%A6%E0%A4%97%E0%A5%80%E0%A4%95%E0%A5%8B%20%E0%A4%97%E0%A5%8B%E0%A4%B0%E0%A5%87%E0%A4%9F%E0%A5%8B%E0%A4%AE%E0%A4%BE...%20https://kamalgc.com.np" target="_blank" style="margin: 0 10px; text-decoration: none; font-size: 15px; color: #25D366; font-weight: bold;"> WhatsApp</a>
-        <a href="https://www.facebook.com/sharer/sharer.php?u=https://kamalgc.com.np" target="_blank" style="margin: 0 10px; text-decoration: none; font-size: 15px; color: #1877F2; font-weight: bold;"> Facebook</a>
+    <div id="posts">
+      <div class="status">
+        <i class="fa-solid fa-spinner fa-spin"></i>
+        पोस्टहरू लोड हुँदैछन्...
       </div>
     </div>
 
-    <!-- २. दोस्रो ब्लग -->
-    <div class="blog-card">
-      <div class="blog-header">
-        <span class="blog-number">२.</span>
-        <h3 class="blog-title" data-np="एउटा नौलो यात्रा, जसले मलाई धेरै कुरा सिकायो" data-en="A New Journey That Taught Me Many Things">
-          एउटा नौलो यात्रा, जसले मलाई धेरै कुरा सिकायो
-        </h3>
-        <hr style="border: none; height: 3px; background: #007bff; width: 60px; margin: 0 auto;">
+    <h2 class="section-heading">
+      <i class="fa-solid fa-book"></i> पुराना लेखहरू
+    </h2>
+
+    <!-- पुरानो Blog पोस्ट १ -->
+    <article class="post-card legacy-card">
+      <h2 class="post-title">
+        जिन्दगीको गोरेटोमा अलि पछाडि फर्केर हेर्दा... 🍃
+      </h2>
+
+      <img src="16year.png" alt="पुरानो सम्झना" class="post-image">
+
+      <p>
+        यो फोटो मेरो १५–१६ वर्षको उमेरको हो। टोपी ढल्काएर खिचिएको
+        यो तस्बिरले मलाई मेरो बाल्यकाल र किशोरावस्थाको सङ्गमको याद
+        दिलाउँछ। प्रकृतिको काखमा खिचिएको यो फोटोमा देखिने त्यो उमेरको
+        सादगी, निर्दोषपना र निर्भीक रूप साँच्चै नै अनमोल छ।
+      </p>
+
+      <p>
+        <a class="legacy-link"
+           href="https://youtu.be/Dh4344mVZ4w?si=_NXNLRwOGD7bA4v9"
+           target="_blank" rel="noopener">
+          <i class="fa-brands fa-youtube"></i> युट्युबमा भिडियो हेर्नुहोस्
+        </a>
+      </p>
+
+      <div class="share-area">
+        <span>यो पोस्ट शेयर गर्नुहोस्:</span>
+        <a class="whatsapp"
+           href="https://api.whatsapp.com/send?text=https%3A%2F%2Fkamalgc.com.np%2Fblog.html"
+           target="_blank" rel="noopener">WhatsApp</a>
+        <a class="facebook"
+           href="https://www.facebook.com/sharer/sharer.php?u=https://kamalgc.com.np/blog.html"
+           target="_blank" rel="noopener">Facebook</a>
       </div>
+    </article>
 
-      <img src="keral.png" alt="Kerala Journey">
+    <!-- पुरानो Blog पोस्ट २ -->
+    <article class="post-card legacy-card">
+      <h2 class="post-title">
+        एउटा नौलो यात्रा, जसले मलाई धेरै कुरा सिकायो
+      </h2>
 
-      <div class="blog-caption">
-        <div class="lang-np">
-          <p>जीवनमा केही यस्ता अध्यायहरू हुन्छन्, जसका पाना पल्टाउँदा मुटुको एउटा कुनामा अनौठो किसिमको सिहरन र मिठास महसुस हुन्छ। आज जति नै समय घर्किए पनि, जब म १७ वर्षको त्यो कलिलो उमेरलाई फर्केर हेर्छु, लाग्छ त्यो हिजोको मात्र कुरा हो। घरभित्रका पारिवारिक समस्याहरू, जिम्मेवारीको भारी र केही गरेर देखाउने हुटहुटीले मलाई घरमै बस्न दिएन। सानै उमेरमा संसारको ठूलो जिम्मेवारी काँधमा बोकेर पहिलो पटक साथीहरूसँग घर छोडेर परदेशतिर लाग्दै, गन्तव्य केरलातर्फ पाइला टेकेँ।</p>
-          <p>यात्रारम्भ निकै कष्टकर थियो। पुस महिनाको चिमचिम जाडो, बाक्लो हुस्सुले पूरै बाटो ढाकेको थियो। घरदेखि जिप र बस चढेर गोरखपुरसम्म पुग्दाको त्यो यात्रा निकै खतरनाक र डरलाग्दो थियो। गोरखपुर पुगेर केरला जाने ट्रेन समातियो। त्यो ट्रेन यात्रा मेरो जीवनको सबसे लामो र थकाउने यात्रा थियो, जहाँ भोक, प्यास र थकाइ सहँदै हामीले अनन्त बाटो काट्यौँ।</p>
-          <p>अन्ततः केरला पुगेर कडा मेहनतपछि काम भेटियो। पहिलो पटक आफ्नै पसिनाको कमाइ हात पर्दाको खुसी शब्दमा वर्णन गर्नै सकिन्न। त्यही कमाइबाट मैले आफ्नो लागि एउटा नयाँ मोबाइल पनि किनेँ। तर, विदेशी भूमिमा सिम कार्ड पाउनुचाहिँ फलामको चिउरा चपाए सरह भयो, जसको लागि धेरै सास्ती भोग्नुपर्‍यो। त्यहाँको प्रसिद्ध लुलु मल र KFC को स्वाद आज पनि मेरो सम्झनामा ताजै छ। कामको धपेडीका बीच एक महिना नपुग्दै साथीसँग केरलाका केही सुन्दर ठाउँहरू घुम्यौँ। नयाँ ठाउँले मेरा मनका पीडाहरूलाई केही क्षणका लागि भए पनि भुलाइदिएको थियो।</p>
-          <p>अन्ततः संघर्षका ती अमूल्य दिनहरूसँगै मेरो यात्रा फेरि दिल्लीतर्फ मोडियो। आज फर्केर हेर्दा लाग्छ, त्यो १७ वर्षको ठिटो जसले परिवारको जिम्मेवारी बोकेर हिँडेको थियो, उसले जीवनका धेरै कठोर पाठ त्यही एउटै यात्रामा सिकिसकेको थियो।</p>
-        </div>
-        <div class="lang-en" style="display: none;">
-          <p>There are some chapters in life that, when turning their pages, bring a unique thrill and sweetness to the heart. No matter how much time passes, when I look back at that tender age of 17, it feels like just yesterday. Family issues at home, the burden of responsibilities, and the urge to prove something wouldn't let me stay at home. Taking the huge responsibility of the world on my shoulders at a young age, I left home with friends for a foreign land and stepped towards my destination, Kerala.</p>
-          <p>The journey was very painful. The chilly cold of Poush and thick fog covered the entire path. Traveling from home by jeep and bus to Gorakhpur was very dangerous and scary. Reaching Gorakhpur, we caught the train to Kerala. That train journey was the longest and most exhausting journey of my life, where we covered an endless path enduring hunger, thirst, and fatigue.</p>
-          <p>Finally, after reaching Kerala and working hard, I got a job. The happiness of getting my first self-earned money is indescribable. With that money, I bought a new mobile for myself. However, getting a SIM card in a foreign land was like chewing iron pellets, for which I had to endure a lot of trouble. The taste of the famous Lulu Mall and KFC there is still fresh in my memory. Amidst the hustle and bustle of work, within a month, we explored some beautiful places in Kerala with friends. That new place made me forget my sorrows for a while.</p>
-          <p>Finally, along with those precious days of struggle, my journey turned back towards Delhi. Looking back today, it feels like that 17-year-old boy who carried the family's responsibility had already learned many harsh lessons of life on that very journey.</p>
-        </div>
+      <img src="keral.png" alt="Kerala यात्रा" class="post-image">
+
+      <p>
+        जीवनमा केही यस्ता अध्यायहरू हुन्छन्, जसका पाना पल्टाउँदा
+        मुटुको एउटा कुनामा अनौठो किसिमको सिहरन र मिठास महसुस हुन्छ।
+        आज जति नै समय घर्किए पनि, जब म १७ वर्षको त्यो कलिलो उमेरलाई
+        फर्केर हेर्छु, लाग्छ त्यो हिजोको मात्र कुरा हो। घरभित्रका
+        पारिवारिक समस्याहरू, जिम्मेवारीको भारी र केही गरेर देखाउने
+        हुटहुटीले मलाई घरमै बस्न दिएन। सानै उमेरमा संसारको ठूलो
+        जिम्मेवारी काँधमा बोकेर पहिलो पटक साथीहरूसँग घर छोडेर
+        परदेशतिर लाग्दै, गन्तव्य केरलातर्फ पाइला टेकेँ।
+      </p>
+
+      <p>
+        यात्रारम्भ निकै कष्टकर थियो। पुस महिनाको चिमचिम जाडो,
+        बाक्लो हुस्सुले पूरै बाटो ढाकेको थियो। घरदेखि जिप र बस चढेर
+        गोरखपुरसम्म पुग्दाको त्यो यात्रा निकै खतरनाक र डरलाग्दो थियो।
+        गोरखपुर पुगेर केरला जाने ट्रेन समातियो। त्यो ट्रेन यात्रा
+        मेरो जीवनको सबैभन्दा लामो र थकाउने यात्रा थियो, जहाँ भोक,
+        प्यास र थकाइ सहँदै हामीले अनन्त बाटो काट्यौँ।
+      </p>
+
+      <p>
+        अन्ततः केरला पुगेर कडा मेहनतपछि काम भेटियो। पहिलो पटक आफ्नै
+        पसिनाको कमाइ हात पर्दाको खुसी शब्दमा वर्णन गर्नै सकिन्न।
+        त्यही कमाइबाट मैले आफ्नो लागि एउटा नयाँ मोबाइल पनि किनेँ।
+        त्यहाँको प्रसिद्ध लुलु मल र KFC को स्वाद आज पनि मेरो
+        सम्झनामा ताजै छ। कामको धपेडीका बीच साथीसँग केरलाका केही
+        सुन्दर ठाउँहरू घुम्यौँ। नयाँ ठाउँले मेरा मनका पीडाहरूलाई
+        केही क्षणका लागि भए पनि भुलाइदिएको थियो।
+      </p>
+
+      <p>
+        अन्ततः संघर्षका ती अमूल्य दिनहरूसँगै मेरो यात्रा फेरि
+        दिल्लीतर्फ मोडियो। आज फर्केर हेर्दा लाग्छ, त्यो १७ वर्षको
+        ठिटो जसले परिवारको जिम्मेवारी बोकेर हिँडेको थियो, उसले
+        जीवनका धेरै कठोर पाठ त्यही एउटै यात्रामा सिकिसकेको थियो।
+      </p>
+
+      <div class="share-area">
+        <span>यो पोस्ट शेयर गर्नुहोस्:</span>
+        <a class="whatsapp"
+           href="https://api.whatsapp.com/send?text=https%3A%2F%2Fkamalgc.com.np%2Fblog.html"
+           target="_blank" rel="noopener">WhatsApp</a>
+        <a class="facebook"
+           href="https://www.facebook.com/sharer/sharer.php?u=https://kamalgc.com.np/blog.html"
+           target="_blank" rel="noopener">Facebook</a>
       </div>
+    </article>
 
-      <div class="share-box">
-        <span style="font-size: 13px; color: #94a3b8; display: block; margin-bottom: 8px; font-weight: bold;" class="share-text" data-np="यो पोस्ट शेयर गर्नुहोस्:" data-en="Share this post:">यो पोस्ट शेयर गर्नुहोस्:</span>
-        <a href="https://api.whatsapp.com/send?text=%E0%A4%8F%E0%A4%9F%E0%A4%BE%20%E0%A4%A8%E0%A5%8C%E0%A4%B2%E0%A5%8B%20%E0%A4%AF%E0%A4%BE%E0%A4%A4%E0%A5%8D%E0%A4%B0%E0%A4%BE%20https://kamalgc.com.np" target="_blank" style="margin: 0 10px; text-decoration: none; font-size: 15px; color: #25D366; font-weight: bold;"> WhatsApp</a>
-        <a href="https://www.facebook.com/sharer/sharer.php?u=https://kamalgc.com.np" target="_blank" style="margin: 0 10px; text-decoration: none; font-size: 15px; color: #1877F2; font-weight: bold;"> Facebook</a>
+    <!-- पुरानो Technology पोस्ट १ -->
+    <article class="post-card legacy-card">
+      <h2 class="post-title">
+        प्रविधिमा नयाँ फड्को: Progressive Web App (PWA) र बालबालिकाको आधुनिक सिकाइ!
+      </h2>
+
+      <img src="kids.png" alt="बाल पाठशाला PWA" class="post-image">
+
+      <p>
+        आजको डिजिटल युगमा प्रविधि र कृत्रिम बौद्धिकता (AI) ले
+        शिक्षा क्षेत्रलाई झन् सहज, रमाइलो र प्रभावकारी बनाइरहेका छन्।
+        बालबालिकालाई डिजिटल माध्यमबाट सजिलै सिकाउन आधुनिक वेब विकासको
+        उत्कृष्ट प्रविधि PWA (Progressive Web App) प्रयोग गरी हामीले
+        बाल पाठशाला निर्माण गरेका छौँ।
+      </p>
+
+      <h3>PWA भनेको के हो?</h3>
+      <p>
+        सजिलो भाषामा भन्नुपर्दा, PWA एउटा यस्तो प्रविधि हो जसले
+        वेबसाइटलाई नै सक्कली मोबाइल एप जस्तै बनाइदिन्छ। यसलाई
+        मोबाइलको Home Screen मा सेभ गरेर एप जसरी नै चलाउन सकिन्छ।
+      </p>
+
+      <h3>PWA का प्रमुख विशेषता र फाइदाहरू</h3>
+      <ul>
+        <li>Play Store बिना नै मोबाइलमा इन्स्टल गर्न सकिने।</li>
+        <li>मोबाइलको मेमोरी र डाटा बचत गर्ने।</li>
+        <li>इन्टरनेट नभएको अवस्थामा पनि उपलब्ध सामग्री चलाउन सकिने।</li>
+        <li>नयाँ सामग्री र सुविधाहरू स्वतः अपडेट हुने।</li>
+        <li>मोबाइल, ट्याब्लेट र कम्प्युटरमा चल्ने।</li>
+      </ul>
+
+      <h3>बाल पाठशालामा उपलब्ध सामग्री</h3>
+      <ul>
+        <li>नेपाली कखरा, अङ्ग्रेजी वर्णमाला र गणित पहाडा।</li>
+        <li>दिमाग तिखार्ने सजिला Quiz।</li>
+        <li>डिजिटल चित्र कोर्ने बोर्ड।</li>
+      </ul>
+
+      <a class="app-link"
+         href="https://kids.kamalgc.com.np"
+         target="_blank" rel="noopener">
+        <i class="fa-solid fa-graduation-cap"></i>
+        बाल पाठशाला प्रयोग गर्नुहोस्
+      </a>
+
+      <div class="share-area">
+        <span>यो पोस्ट शेयर गर्नुहोस्:</span>
+        <a class="whatsapp"
+           href="https://api.whatsapp.com/send?text=https%3A%2F%2Fkamalgc.com.np%2Fblog.html"
+           target="_blank" rel="noopener">WhatsApp</a>
+        <a class="facebook"
+           href="https://www.facebook.com/sharer/sharer.php?u=https://kamalgc.com.np/blog.html"
+           target="_blank" rel="noopener">Facebook</a>
       </div>
-    </div>
+    </article>
 
-  </div>
+    <!-- पुरानो Technology पोस्ट २ -->
+    <article class="post-card legacy-card">
+      <h2 class="post-title">
+        डिजिटल नोटबुक: सुरक्षित र सजिलो हिसाबकिताब
+      </h2>
 
+      <img src="bannerlogo.png" alt="Digital Notebook" class="post-image">
+
+      <p>
+        डिजिटल नोटबुक दैनिक व्यक्तिगत तथा व्यावसायिक हिसाबकिताब
+        सुरक्षित, सरल र खल्तीमै व्यवस्थापन गर्न बनाइएको एक आधुनिक
+        डिजिटल प्लेटफर्म हो। अब आफ्नो सम्पूर्ण दैनिक हिसाबकिताब
+        सजिलै ट्र्याक गर्नुहोस्।
+      </p>
+
+      <a class="app-link"
+         href="https://dn.kamalgc.com.np"
+         target="_blank" rel="noopener">
+        <i class="fa-solid fa-book"></i>
+        डिजिटल नोटबुक प्रयोग गर्नुहोस्
+      </a>
+
+      <div class="share-area">
+        <span>यो पोस्ट शेयर गर्नुहोस्:</span>
+        <a class="whatsapp"
+           href="https://api.whatsapp.com/send?text=https%3A%2F%2Fkamalgc.com.np%2Fblog.html"
+           target="_blank" rel="noopener">WhatsApp</a>
+        <a class="facebook"
+           href="https://www.facebook.com/sharer/sharer.php?u=https://kamalgc.com.np/blog.html"
+           target="_blank" rel="noopener">Facebook</a>
+      </div>
+    </article>
+
+    <footer>
+      © <span id="year"></span> KAMAL G.C. · All Rights Reserved
+    </footer>
+
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script>
+    const SUPABASE_URL = "https://zbyntmyybhdcwmttkuys.supabase.co";
+    const SUPABASE_KEY = "sb_publishable_N8U3og_Ntm-ImrtM8c1NGA_-Rqb3dSy";
+
+    const db = window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_KEY
+    );
+
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+
+    function makeShareLinks(title) {
+      const pageUrl = window.location.href;
+      const message = title + " - " + pageUrl;
+
+      const share = document.createElement("div");
+      share.className = "share-area";
+
+      const label = document.createElement("span");
+      label.textContent = "यो पोस्ट शेयर गर्नुहोस्:";
+      share.appendChild(label);
+
+      const wa = document.createElement("a");
+      wa.className = "whatsapp";
+      wa.textContent = "WhatsApp";
+      wa.href = "https://api.whatsapp.com/send?text=" +
+        encodeURIComponent(message);
+      wa.target = "_blank";
+      wa.rel = "noopener";
+      share.appendChild(wa);
+
+      const fb = document.createElement("a");
+      fb.className = "facebook";
+      fb.textContent = "Facebook";
+      fb.href = "https://www.facebook.com/sharer/sharer.php?u=" +
+        encodeURIComponent(pageUrl);
+      fb.target = "_blank";
+      fb.rel = "noopener";
+      share.appendChild(fb);
+
+      return share;
+    }
+
+    function createPost(post) {
+      const card = document.createElement("article");
+      card.className = "post-card";
+
+      const title = document.createElement("h2");
+      title.className = "post-title";
+      title.textContent = post.title || "शीर्षक छैन";
+      card.appendChild(title);
+
+      if (post.created_at) {
+        const date = document.createElement("div");
+        date.className = "post-date";
+
+        const parsedDate = new Date(post.created_at);
+
+        date.textContent = Number.isNaN(parsedDate.getTime())
+          ? ""
+          : parsedDate.toLocaleString("ne-NP", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+              hour: "2-digit",
+              minute: "2-digit"
+            });
+
+        card.appendChild(date);
+      }
+
+      if (post.image_url) {
+        const image = document.createElement("img");
+        image.className = "post-image";
+        image.src = post.image_url;
+        image.alt = post.title || "Blog image";
+        image.loading = "lazy";
+        image.onerror = function() {
+          image.style.display = "none";
+        };
+        card.appendChild(image);
+      }
+
+      const content = document.createElement("div");
+      content.className = "post-content";
+      content.textContent = post.content || "";
+      card.appendChild(content);
+
+      card.appendChild(makeShareLinks(post.title || "Blog Post"));
+
+      return card;
+    }
+
+    async function loadPosts() {
+      const postsContainer = document.getElementById("posts");
+
+      try {
+        const { data, error } = await db
+          .from("blog_posts")
+          .select("id,title,content,image_url,created_at")
+          .order("created_at", { ascending: false });
+
+        if (error) throw error;
+
+        postsContainer.innerHTML = "";
+
+        if (!data || data.length === 0) {
+          const empty = document.createElement("div");
+          empty.className = "status";
+          empty.textContent =
+            "अहिलेसम्म नयाँ पोस्ट प्रकाशित भएको छैन।";
+          postsContainer.appendChild(empty);
+          return;
+        }
+
+        data.forEach(function(post) {
+          postsContainer.appendChild(createPost(post));
+        });
+
+      } catch (error) {
+        console.error("Blog loading error:", error);
+
+        const message = document.createElement("div");
+        message.className = "status";
+        message.textContent =
+          "पोस्ट लोड हुन सकेन। केही समयपछि फेरि प्रयास गर्नुहोस्।";
+        postsContainer.innerHTML = "";
+        postsContainer.appendChild(message);
+      }
+    }
+
+    loadPosts();
+  </script>
 </body>
 </html>
