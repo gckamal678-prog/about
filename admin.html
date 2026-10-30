@@ -1,0 +1,530 @@
+
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#07111f">
+  <title>Admin Dashboard | KAMAL G.C.</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --bg:#07111f; --panel:#101e31; --panel2:#16263c;
+      --text:#f1f5f9; --muted:#a5b4c7; --blue:#38bdf8;
+      --border:rgba(148,163,184,.2); --red:#fb4568;
+      --green:#22c55e;
+    }
+    * { box-sizing:border-box; }
+    body {
+      margin:0; padding:20px 13px 45px;
+      background:radial-gradient(ellipse at top,#12304a,var(--bg) 55%);
+      color:var(--text); font-family:Segoe UI,Arial,sans-serif;
+      min-height:100vh;
+    }
+    .container { width:100%; max-width:720px; margin:auto; }
+    .top {
+      display:flex; align-items:center; justify-content:space-between;
+      gap:12px; margin-bottom:22px;
+    }
+    h1 { margin:0; font-size:22px; color:var(--blue); }
+    .sub { color:var(--muted); font-size:13px; margin-top:5px; }
+    .panel {
+      background:var(--panel); border:1px solid var(--border);
+      border-radius:17px; padding:20px; margin-bottom:18px;
+      box-shadow:0 12px 30px rgba(0,0,0,.2);
+    }
+    h2 { font-size:17px; margin:0 0 16px; color:var(--blue); }
+    label {
+      display:block; font-size:13px; color:var(--muted);
+      margin:13px 0 7px;
+    }
+    input, textarea {
+      width:100%; padding:13px; border-radius:10px;
+      border:1px solid var(--border); background:#07111f;
+      color:var(--text); font:inherit; font-size:14px;
+      outline:none;
+    }
+    input:focus, textarea:focus { border-color:var(--blue); }
+    textarea { min-height:170px; resize:vertical; line-height:1.7; }
+    input[type=file] { padding:10px; }
+    button, .button-link {
+      border:0; border-radius:10px; padding:12px 16px;
+      background:#0284c7; color:white; font-weight:700;
+      font-size:13px; cursor:pointer; text-decoration:none;
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:8px;
+    }
+    button:disabled { opacity:.55; cursor:not-allowed; }
+    .full { width:100%; margin-top:16px; }
+    .secondary { background:var(--panel2); border:1px solid var(--border); }
+    .danger { background:#be123c; }
+    .green { background:#15803d; }
+    .hidden { display:none !important; }
+    .status {
+      padding:11px 13px; border-radius:9px; margin-top:13px;
+      font-size:13px; line-height:1.6; display:none;
+      background:var(--panel2); color:var(--muted);
+      overflow-wrap:anywhere;
+    }
+    .status.show { display:block; }
+    .status.error { color:#fecaca; border:1px solid #9f1239; }
+    .status.success { color:#bbf7d0; border:1px solid #166534; }
+    .preview {
+      display:block; max-width:100%; max-height:280px;
+      object-fit:contain; margin:13px auto 0;
+      border-radius:12px;
+    }
+    .post-item {
+      padding:14px; border:1px solid var(--border);
+      background:#0b192b; border-radius:13px; margin-top:12px;
+    }
+    .post-item img {
+      display:block; width:100%; max-height:230px;
+      object-fit:cover; border-radius:9px; margin:10px 0;
+    }
+    .post-title { font-weight:750; line-height:1.5; }
+    .post-date { color:var(--muted); font-size:11px; margin:7px 0; }
+    .post-content {
+      color:#cbd5e1; font-size:13px; line-height:1.65;
+      white-space:pre-wrap; overflow-wrap:anywhere;
+    }
+    .actions { display:flex; gap:8px; margin-top:12px; }
+    .actions button { flex:1; padding:10px; }
+    .count { color:var(--muted); font-size:12px; }
+    .note { font-size:12px; color:var(--muted); line-height:1.7; }
+    @media(max-width:420px) {
+      h1 { font-size:19px; }
+      .panel { padding:16px; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <header class="top">
+    <div>
+      <h1><i class="fa-solid fa-shield-halved"></i> Admin Dashboard</h1>
+      <div class="sub">KAMAL G.C. — Blog Management</div>
+    </div>
+    <a class="button-link secondary" href="index.html">
+      <i class="fa-solid fa-house"></i> Home
+    </a>
+  </header>
+
+  <section class="panel" id="login-panel">
+    <h2><i class="fa-solid fa-lock"></i> Admin Login</h2>
+    <form id="login-form">
+      <label for="email">Admin Email</label>
+      <input id="email" type="email" value="gckamal67@gmail.com"
+             autocomplete="username" required>
+      <label for="password">Password</label>
+      <input id="password" type="password" autocomplete="current-password"
+             placeholder="आफ्नो Admin Password" required>
+      <button class="full" id="login-button" type="submit">
+        <i class="fa-solid fa-right-to-bracket"></i> Login
+      </button>
+    </form>
+    <div class="status" id="login-status" role="status"></div>
+    <p class="note">यो Admin पेज हो। आफ्नो Password अरूलाई नदिनुहोस्।</p>
+  </section>
+
+  <section id="dashboard" class="hidden">
+    <div class="panel">
+      <div class="top">
+        <div>
+          <h2 style="margin-bottom:4px">नयाँ Blog पोस्ट</h2>
+          <div class="sub" id="admin-email"></div>
+        </div>
+        <button type="button" class="danger" id="logout-button">
+          <i class="fa-solid fa-right-from-bracket"></i> Logout
+        </button>
+      </div>
+
+      <form id="post-form">
+        <label for="post-title">पोस्टको शीर्षक</label>
+        <input id="post-title" type="text" maxlength="180"
+               placeholder="यहाँ शीर्षक लेख्नुहोस्..." required>
+
+        <label for="post-content">पोस्टको लेख / विवरण</label>
+        <textarea id="post-content" maxlength="30000"
+          placeholder="आफ्नो लेख यहाँ लेख्नुहोस्..." required></textarea>
+
+        <label for="post-image">फोटो छान्नुहोस् (वैकल्पिक)</label>
+        <input id="post-image" type="file"
+               accept="image/jpeg,image/png,image/webp,image/gif">
+
+        <img id="image-preview" class="preview hidden" alt="Image preview">
+
+        <div class="note" style="margin-top:8px">
+          JPG, PNG, WEBP वा GIF फोटो छान्नुहोस्। अधिकतम आकार 8 MB।
+        </div>
+
+        <button class="full" id="publish-button" type="submit">
+          <i class="fa-solid fa-paper-plane"></i> Publish Post
+        </button>
+        <button class="full secondary hidden" id="cancel-edit" type="button">
+          <i class="fa-solid fa-xmark"></i> सम्पादन रद्द गर्नुहोस्
+        </button>
+      </form>
+      <div class="status" id="form-status" role="status"></div>
+    </div>
+
+    <div class="panel">
+      <div class="top">
+        <h2 style="margin:0">तपाईंका पोस्टहरू</h2>
+        <span class="count" id="post-count">लोड हुँदैछ...</span>
+      </div>
+      <div id="posts-list"></div>
+      <div class="status" id="list-status" role="status"></div>
+    </div>
+  </section>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+"use strict";
+
+const SUPABASE_URL = "https://zbyntmyybhdcwmttkuys.supabase.co";
+const SUPABASE_KEY = "sb_publishable_N8U3og_Ntm-ImrtM8c1NGA_-Rqb3dSy";
+const ADMIN_EMAIL = "gckamal67@gmail.com";
+const BUCKET = "blog-images";
+
+const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+const $ = id => document.getElementById(id);
+let editingPost = null;
+let currentImageUrl = null;
+let posts = [];
+
+function showStatus(id, message, type = "") {
+  const el = $(id);
+  el.textContent = message;
+  el.className = "status show " + type;
+}
+
+function clearStatus(id) {
+  $(id).textContent = "";
+  $(id).className = "status";
+}
+
+function setBusy(button, busy, text) {
+  button.disabled = busy;
+  if (text) button.innerHTML = text;
+}
+
+function formatDate(value) {
+  return new Date(value).toLocaleString("ne-NP", {
+    dateStyle:"medium", timeStyle:"short"
+  });
+}
+
+function escapeHTML(value) {
+  return String(value ?? "").replace(/[&<>"']/g, char => ({
+    "&":"&amp;", "<":"&lt;", ">":"&gt;",
+    '"':"&quot;", "'":"&#39;"
+  })[char]);
+}
+
+function showDashboard(user) {
+  $("login-panel").classList.add("hidden");
+  $("dashboard").classList.remove("hidden");
+  $("admin-email").textContent = user.email || ADMIN_EMAIL;
+  loadPosts();
+}
+
+function showLogin() {
+  $("dashboard").classList.add("hidden");
+  $("login-panel").classList.remove("hidden");
+}
+
+async function checkSession() {
+  const { data, error } = await db.auth.getSession();
+  if (error) {
+    showStatus("login-status", error.message, "error");
+    return;
+  }
+  const user = data.session?.user;
+  if (user && user.email?.toLowerCase() === ADMIN_EMAIL) {
+    showDashboard(user);
+  } else {
+    if (user) await db.auth.signOut();
+    showLogin();
+  }
+}
+
+$("login-form").addEventListener("submit", async event => {
+  event.preventDefault();
+  clearStatus("login-status");
+
+  const button = $("login-button");
+  setBusy(button, true, "Login हुँदैछ...");
+
+  try {
+    const email = $("email").value.trim().toLowerCase();
+    const password = $("password").value;
+
+    if (email !== ADMIN_EMAIL) {
+      throw new Error("यो Email Admin Account होइन।");
+    }
+
+    const { data, error } = await db.auth.signInWithPassword({
+      email, password
+    });
+
+    if (error) throw error;
+
+    if (data.user?.email?.toLowerCase() !== ADMIN_EMAIL) {
+      await db.auth.signOut();
+      throw new Error("Admin अनुमति छैन।");
+    }
+
+    $("password").value = "";
+    showStatus("login-status", "सफलतापूर्वक Login भयो।", "success");
+    showDashboard(data.user);
+  } catch (error) {
+    showStatus("login-status", error.message || "Login हुन सकेन।", "error");
+  } finally {
+    setBusy(button, false, '<i class="fa-solid fa-right-to-bracket"></i> Login');
+  }
+});
+
+$("logout-button").addEventListener("click", async () => {
+  await db.auth.signOut();
+  showLogin();
+  clearStatus("login-status");
+});
+
+$("post-image").addEventListener("change", () => {
+  const file = $("post-image").files[0];
+  const preview = $("image-preview");
+
+  if (!file) {
+    preview.src = "";
+    preview.classList.add("hidden");
+    return;
+  }
+
+  if (!file.type.startsWith("image/")) {
+    $("post-image").value = "";
+    showStatus("form-status", "कृपया फोटो फाइल छान्नुहोस्।", "error");
+    return;
+  }
+
+  if (file.size > 8 * 1024 * 1024) {
+    $("post-image").value = "";
+    showStatus("form-status", "फोटो 8 MB भन्दा सानो हुनुपर्छ।", "error");
+    return;
+  }
+
+  preview.src = URL.createObjectURL(file);
+  preview.classList.remove("hidden");
+  clearStatus("form-status");
+});
+
+async function uploadImage(file) {
+  if (!file) return null;
+
+  const safeName = file.name
+    .toLowerCase()
+    .replace(/[^a-z0-9._-]/g, "-")
+    .slice(-70);
+
+  const path = `${Date.now()}-${crypto.randomUUID()}-${safeName}`;
+
+  const { error } = await db.storage
+    .from(BUCKET)
+    .upload(path, file, {
+      cacheControl:"3600",
+      upsert:false,
+      contentType:file.type
+    });
+
+  if (error) throw error;
+
+  const { data } = db.storage.from(BUCKET).getPublicUrl(path);
+  return data.publicUrl;
+}
+
+function resetEditor() {
+  editingPost = null;
+  currentImageUrl = null;
+  $("post-form").reset();
+  $("image-preview").src = "";
+  $("image-preview").classList.add("hidden");
+  $("publish-button").innerHTML =
+    '<i class="fa-solid fa-paper-plane"></i> Publish Post';
+  $("cancel-edit").classList.add("hidden");
+  clearStatus("form-status");
+}
+
+$("cancel-edit").addEventListener("click", resetEditor);
+
+$("post-form").addEventListener("submit", async event => {
+  event.preventDefault();
+  clearStatus("form-status");
+
+  const title = $("post-title").value.trim();
+  const content = $("post-content").value.trim();
+  const file = $("post-image").files[0];
+  const button = $("publish-button");
+
+  if (!title || !content) {
+    showStatus("form-status", "शीर्षक र लेख दुवै आवश्यक छन्।", "error");
+    return;
+  }
+
+  if (file && file.size > 8 * 1024 * 1024) {
+    showStatus("form-status", "फोटो 8 MB भन्दा सानो हुनुपर्छ।", "error");
+    return;
+  }
+
+  setBusy(button, true, "पोस्ट सुरक्षित हुँदैछ...");
+
+  try {
+    let imageUrl = currentImageUrl;
+    if (file) imageUrl = await uploadImage(file);
+
+    if (editingPost) {
+      const { error } = await db.from("blog_posts")
+        .update({
+          title, content, image_url:imageUrl,
+          updated_at:new Date().toISOString()
+        })
+        .eq("id", editingPost);
+
+      if (error) throw error;
+      showStatus("form-status", "पोस्ट सफलतापूर्वक सम्पादन भयो।", "success");
+    } else {
+      const { error } = await db.from("blog_posts")
+        .insert([{ title, content, image_url:imageUrl }]);
+
+      if (error) throw error;
+      showStatus("form-status", "पोस्ट सफलतापूर्वक Publish भयो।", "success");
+    }
+
+    resetEditor();
+    await loadPosts();
+    showStatus("form-status",
+      editingPost ? "पोस्ट सुरक्षित भयो।" : "पोस्ट सुरक्षित भयो।", "success");
+  } catch (error) {
+    showStatus("form-status", error.message || "पोस्ट सुरक्षित हुन सकेन।", "error");
+  } finally {
+    button.disabled = false;
+    if (!editingPost) {
+      button.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Publish Post';
+    }
+  }
+});
+
+async function loadPosts() {
+  showStatus("list-status", "पोस्टहरू लोड हुँदैछन्...");
+
+  try {
+    const { data, error } = await db.from("blog_posts")
+      .select("*")
+      .order("created_at", { ascending:false });
+
+    if (error) throw error;
+
+    posts = data || [];
+    $("post-count").textContent = `${posts.length} पोस्ट`;
+    renderPosts();
+    clearStatus("list-status");
+  } catch (error) {
+    showStatus("list-status", error.message || "पोस्ट लोड भएन।", "error");
+  }
+}
+
+function renderPosts() {
+  const list = $("posts-list");
+
+  if (!posts.length) {
+    list.innerHTML = '<p class="note">अहिलेसम्म कुनै नयाँ पोस्ट छैन। माथिबाट पहिलो पोस्ट राख्नुहोस्।</p>';
+    return;
+  }
+
+  list.innerHTML = posts.map(post => `
+    <article class="post-item">
+      <div class="post-title">${escapeHTML(post.title)}</div>
+      <div class="post-date">${escapeHTML(formatDate(post.created_at))}</div>
+      ${post.image_url
+        ? `<img src="${escapeHTML(post.image_url)}" alt="Blog image" loading="lazy">`
+        : ""}
+      <div class="post-content">${escapeHTML(post.content)}</div>
+      <div class="actions">
+        <button type="button" class="green" data-edit="${escapeHTML(post.id)}">
+          <i class="fa-solid fa-pen"></i> Edit
+        </button>
+        <button type="button" class="danger" data-delete="${escapeHTML(post.id)}">
+          <i class="fa-solid fa-trash"></i> Delete
+        </button>
+      </div>
+    </article>
+  `).join("");
+}
+
+$("posts-list").addEventListener("click", async event => {
+  const editButton = event.target.closest("[data-edit]");
+  const deleteButton = event.target.closest("[data-delete]");
+
+  if (editButton) {
+    const post = posts.find(item => item.id === editButton.dataset.edit);
+    if (!post) return;
+
+    editingPost = post.id;
+    currentImageUrl = post.image_url || null;
+    $("post-title").value = post.title;
+    $("post-content").value = post.content;
+    $("post-image").value = "";
+
+    if (currentImageUrl) {
+      $("image-preview").src = currentImageUrl;
+      $("image-preview").classList.remove("hidden");
+    } else {
+      $("image-preview").classList.add("hidden");
+    }
+
+    $("publish-button").innerHTML =
+      '<i class="fa-solid fa-floppy-disk"></i> Update Post';
+    $("cancel-edit").classList.remove("hidden");
+    clearStatus("form-status");
+    window.scrollTo({ top:0, behavior:"smooth" });
+  }
+
+  if (deleteButton) {
+    const id = deleteButton.dataset.delete;
+    const post = posts.find(item => item.id === id);
+    if (!post) return;
+
+    if (!confirm(`"${post.title}" पोस्ट हटाउने निश्चित हो?`)) return;
+
+    deleteButton.disabled = true;
+
+    try {
+      const { error } = await db.from("blog_posts").delete().eq("id", id);
+      if (error) throw error;
+
+      // Remove the uploaded image from storage when possible.
+      if (post.image_url) {
+        const marker = "/storage/v1/object/public/blog-images/";
+        const index = post.image_url.indexOf(marker);
+        if (index !== -1) {
+          const path = decodeURIComponent(post.image_url.slice(index + marker.length));
+          await db.storage.from(BUCKET).remove([path]);
+        }
+      }
+
+      if (editingPost === id) resetEditor();
+      await loadPosts();
+      showStatus("list-status", "पोस्ट हटाइयो।", "success");
+    } catch (error) {
+      showStatus("list-status", error.message || "पोस्ट हटाउन सकिएन।", "error");
+      deleteButton.disabled = false;
+    }
+  }
+});
+
+checkSession();
+</script>
+</body>
+</html>
