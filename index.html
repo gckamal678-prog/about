@@ -1,826 +1,1110 @@
+
 <!DOCTYPE html>
-<html lang="np">
+<html lang="ne">
 <head>
-  <link rel="manifest" href="manifest.json">
-  <link rel="icon" type="image/png" sizes="192x192" href="mylogo.png">
-  <link rel="apple-touch-icon" href="mylogo.png">
   <meta charset="UTF-8">
-  
-  <!-- ZOOM LOCK META TAG -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  
-  <title>KAMAL G.C. Portal</title>
-  
-  <!-- FontAwesome Icons for Search, App & Profile -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
-  <!-- Nepali Date Functions Engine -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>KAMAL G.C. | Personal Portal</title>
+  <meta name="description" content="Kamal G.C. को व्यक्तिगत पोर्टल। परिचय, ब्लग, प्रविधि, आपत्कालीन सम्पर्क र उपयोगी सेवाहरू।">
+  <meta name="theme-color" content="#07111f">
+  <meta name="author" content="Kamal G.C.">
+
+  <link rel="canonical" href="https://kamalgc.com.np/">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/png" href="mylogo.png">
+  <link rel="apple-touch-icon" href="mylogo.png">
+
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <link rel="stylesheet" href="style.css">
+
   <script src="https://cdn.jsdelivr.net/npm/nepali-date-converter@2.0.1/dist/nepali-date-converter.umd.js"></script>
-
-  <style>
-    /* ZOOM PREVENT CSS */
-    html, body {
-      touch-action: manipulation;
-      -ms-touch-action: manipulation;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-
-    body {
-      display: flex;
-      flex-direction: column;
-      height: 100vh;
-      overflow: hidden;
-      background-color: #0b132b;
-      color: #f8fafc;
-      transition: background-color 0.3s ease, color 0.3s ease;
-    }
-
-    body.light-mode {
-      background-color: #f1f5f9;
-      color: #0f172a;
-    }
-
-    /* Fixed Top Section Header */
-    .top-header {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      z-index: 1000;
-      background: linear-gradient(180deg, #1c2541 0%, #0b132b 100%);
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.7);
-      border-bottom: 2px solid #3a506b;
-      padding: 8px;
-    }
-
-    body.light-mode .top-header {
-      background: linear-gradient(180deg, #ffffff 0%, #e2e8f0 100%);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-      border-bottom: 2px solid #cbd5e1;
-    }
-
-    /* Row 1: Brand Title, Search & Profile Icons */
-    .brand-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 4px 8px 8px 8px;
-    }
-
-    .brand-title-container {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .brand-logo-icon {
-      font-size: 1.3rem;
-      color: #f59e0b;
-      text-shadow: 0 0 10px rgba(245, 158, 11, 0.5);
-    }
-
-    .brand-name {
-      font-weight: 800;
-      font-size: 1.25rem;
-      letter-spacing: 1px;
-      color: #38bdf8;
-      text-shadow: 0 2px 5px rgba(0,0,0,0.6);
-    }
-
-    body.light-mode .brand-name {
-      color: #0284c7;
-      text-shadow: none;
-    }
-
-    .brand-icons {
-      display: flex;
-      gap: 16px;
-      font-size: 1.2rem;
-      color: #cbd5e1;
-      align-items: center;
-    }
-
-    body.light-mode .brand-icons {
-      color: #334155;
-    }
-
-    .brand-icons i, .profile-nav-avatar {
-      cursor: pointer;
-      transition: transform 0.2s ease, color 0.2s ease;
-    }
-
-    .brand-icons i:hover, .profile-nav-avatar:hover {
-      transform: scale(1.15);
-      color: #38bdf8;
-    }
-
-    .profile-nav-avatar {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 2px solid #38bdf8;
-    }
-
-    /* Row 2: 5 Main 3D Buttons */
-    .nav-row {
-      display: flex;
-      justify-content: space-between;
-      gap: 6px;
-      margin-bottom: 8px;
-    }
-
-    .btn-3d {
-      flex: 1;
-      padding: 9px 2px;
-      font-size: 11.5px;
-      font-weight: bold;
-      border: 1px solid #38bdf8;
-      border-radius: 8px;
-      background: linear-gradient(145deg, #0284c7, #0369a1);
-      color: #ffffff;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.3), 0 4px 0 #075985, 0 6px 10px rgba(0,0,0,0.4);
-      cursor: pointer;
-      transition: all 0.1s ease;
-      text-align: center;
-      white-space: nowrap;
-      text-shadow: 0 1px 2px rgba(0,0,0,0.6);
-    }
-
-    .btn-3d:active {
-      transform: translateY(3px);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.3), 0 1px 0 #075985, 0 2px 4px rgba(0,0,0,0.4);
-    }
-
-    .btn-emergency {
-      border-color: #f43f5e;
-      background: linear-gradient(145deg, #e11d48, #be123c);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.3), 0 4px 0 #881337, 0 6px 10px rgba(0,0,0,0.4);
-    }
-
-    .btn-emergency:active {
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.3), 0 1px 0 #881337;
-    }
-
-    .lang-btn {
-      background: linear-gradient(145deg, #d97706, #b45309);
-      border-color: #fbbf24;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.3), 0 4px 0 #78350f, 0 6px 10px rgba(0,0,0,0.4);
-    }
-
-    /* Row 3: Dynamic Info Bar */
-    .info-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: rgba(15, 23, 42, 0.75);
-      padding: 6px 8px;
-      border-radius: 6px;
-      font-size: 11px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
-    }
-
-    body.light-mode .info-row {
-      background: rgba(0, 0, 0, 0.05);
-      border: 1px solid rgba(0, 0, 0, 0.1);
-      box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
-    }
-
-    .info-item {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-
-    .info-item i {
-      color: #f59e0b;
-    }
-
-    .theme-toggle {
-      cursor: pointer;
-      background: #1e293b;
-      color: #fff;
-      padding: 3px 8px;
-      border-radius: 12px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.4);
-      border: 1px solid #475569;
-    }
-
-    body.light-mode .theme-toggle {
-      background: #cbd5e1;
-      color: #0f172a;
-      border-color: #94a3b8;
-    }
-
-    /* Middle Scrollable Section with Headline Cards */
-    .middle-content {
-      margin-top: 140px;
-      margin-bottom: 55px;
-      flex: 1;
-      overflow-y: auto;
-      padding: 15px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .card {
-      background: #1e293b;
-      border: 1px solid #334155;
-      border-radius: 10px;
-      padding: 12px 15px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-      transition: transform 0.2s ease, border-color 0.2s ease;
-    }
-
-    body.light-mode .card {
-      background: #ffffff;
-      border-color: #cbd5e1;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-    }
-
-    .card:hover {
-      border-color: #38bdf8;
-      transform: translateY(-2px);
-    }
-
-    .card-header {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 15px;
-      font-weight: 700;
-      color: #38bdf8;
-      margin-bottom: 6px;
-    }
-
-    body.light-mode .card-header {
-      color: #0284c7;
-    }
-
-    .card-desc {
-      font-size: 12px;
-      color: #94a3b8;
-      margin-bottom: 10px;
-      line-height: 1.4;
-    }
-
-    body.light-mode .card-desc {
-      color: #475569;
-    }
-
-    .card-btn {
-      display: inline-block;
-      font-size: 11px;
-      font-weight: 600;
-      color: #ffffff;
-      background: #0284c7;
-      padding: 5px 12px;
-      border-radius: 6px;
-      text-decoration: none;
-      transition: background 0.2s ease;
-    }
-
-    .card-btn:hover {
-      background: #0369a1;
-    }
-
-    .emergency-card .card-header {
-      color: #f43f5e;
-    }
-
-    .emergency-card .card-btn {
-      background: #e11d48;
-    }
-
-    .emergency-card .card-btn:hover {
-      background: #be123c;
-    }
-
-    /* Modal Styles (Search & Profile) */
-    .modal-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.7);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 2000;
-    }
-
-    .modal-box {
-      background: #1e293b;
-      border: 1px solid #475569;
-      width: 90%;
-      max-width: 360px;
-      border-radius: 12px;
-      padding: 20px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.6);
-      text-align: center;
-    }
-
-    body.light-mode .modal-box {
-      background: #ffffff;
-      border-color: #cbd5e1;
-    }
-
-    .modal-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 15px;
-      font-weight: bold;
-      margin-bottom: 15px;
-    }
-
-    .close-btn {
-      cursor: pointer;
-      color: #f43f5e;
-      font-size: 1.2rem;
-    }
-
-    /* प्रोफाइल फोटो */
-    .profile-img-container {
-      position: relative;
-      width: 110px;
-      height: 110px;
-      margin: 0 auto 15px auto;
-    }
-
-    .profile-img-preview {
-      width: 110px;
-      height: 110px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 3px solid #38bdf8;
-      background: #0f172a;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    }
-
-    .change-photo-btn {
-      position: absolute;
-      bottom: 2px;
-      right: 2px;
-      background: #0284c7;
-      color: white;
-      border-radius: 50%;
-      width: 34px;
-      height: 34px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
-      font-size: 14px;
-      border: 2px solid #1e293b;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.4);
-      transition: transform 0.2s;
-    }
-
-    .change-photo-btn:hover {
-      transform: scale(1.1);
-      background: #0369a1;
-    }
-
-    .input-field {
-      width: 100%;
-      padding: 10px;
-      border-radius: 6px;
-      border: 1px solid #475569;
-      background: #0f172a;
-      color: #fff;
-      font-size: 13px;
-      margin-bottom: 12px;
-      text-align: left;
-    }
-
-    body.light-mode .input-field {
-      background: #f8fafc;
-      color: #0f172a;
-      border-color: #cbd5e1;
-    }
-
-    .submit-btn {
-      width: 100%;
-      padding: 10px;
-      background: #0284c7;
-      color: #fff;
-      border: none;
-      border-radius: 6px;
-      font-weight: bold;
-      cursor: pointer;
-      font-size: 13px;
-    }
-
-    .submit-btn:hover {
-      background: #0369a1;
-    }
-
-    /* Locked Footer */
-    .bottom-footer {
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-      background: #020617;
-      color: white;
-      text-align: center;
-      padding: 8px 5px;
-      font-size: 11px;
-      border-top: 1px solid #1e293b;
-      box-shadow: 0 -4px 12px rgba(0,0,0,0.6);
-      z-index: 1000;
-    }
-
-    .footer-contact {
-      display: flex;
-      justify-content: center;
-      gap: 18px;
-      margin-bottom: 4px;
-    }
-
-    .footer-contact a {
-      color: #38bdf8;
-      text-decoration: none;
-      font-weight: 500;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-
-    .footer-copyright {
-      color: #94a3b8;
-      font-size: 10px;
-      font-weight: 500;
-    }
-  </style>
 </head>
+
 <body class="dark-mode">
 
-  <!-- Fixed Top Header -->
+  <!-- ==============================
+       HEADER
+  =============================== -->
   <header class="top-header">
+
     <div class="brand-row">
+
       <div class="brand-title-container">
-        <i class="fa-solid fa-gem brand-logo-icon"></i>
+        <i class="fa-solid fa-gem brand-logo-icon" aria-hidden="true"></i>
         <span class="brand-name">KAMAL G.C.</span>
       </div>
+
       <div class="brand-icons">
-        <i class="fa-solid fa-magnifying-glass" title="Search" onclick="openSearchModal()"></i>
-        <img src="mylogo.png" id="nav-profile-img" class="profile-nav-avatar" title="Profile" onclick="openProfileModal()" alt="Profile">
+
+        <button type="button"
+                aria-label="Search"
+                title="Search"
+                onclick="openSearchModal()">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+
+        <button type="button"
+                aria-label="Open profile"
+                title="Profile"
+                onclick="openProfileModal()">
+          <img src="mylogo.png"
+               id="nav-profile-img"
+               class="profile-nav-avatar"
+               alt="Profile">
+        </button>
+
       </div>
     </div>
 
-    <!-- Row 2: 5 Navigation Buttons -->
-    <nav class="nav-row">
-      <button class="btn-3d" onclick="location.href='blog.html'" data-np="ब्लग" data-en="Blog">ब्लग</button>
-      <button class="btn-3d btn-emergency" onclick="location.href='emergency.html'" data-np="आपत्कालीन" data-en="Emergency">आपत्कालीन</button>
-      <button class="btn-3d" onclick="location.href='tech.html'" data-np="प्रविधि" data-en="Technology">प्रविधि</button>
-      <button class="btn-3d" onclick="location.href='about.html'" data-np="मेरो बारेमा" data-en="About Me">मेरो बारेमा</button>
-      <button class="btn-3d lang-btn" id="lang-toggle" onclick="toggleLanguage()">EN</button>
+    <!-- NAVIGATION -->
+    <nav class="nav-row" aria-label="Main navigation">
+
+      <button class="btn-3d"
+              onclick="location.href='blog.html'"
+              data-np="ब्लग"
+              data-en="Blog">
+        ब्लग
+      </button>
+
+      <button class="btn-3d btn-emergency"
+              onclick="location.href='emergency.html'"
+              data-np="आपत्कालीन"
+              data-en="Emergency">
+        आपत्कालीन
+      </button>
+
+      <button class="btn-3d"
+              onclick="location.href='tech.html'"
+              data-np="प्रविधि"
+              data-en="Technology">
+        प्रविधि
+      </button>
+
+      <button class="btn-3d"
+              onclick="location.href='about.html'"
+              data-np="मेरो बारेमा"
+              data-en="About Me">
+        मेरो बारेमा
+      </button>
+
+      <button class="btn-3d lang-btn"
+              id="lang-toggle"
+              type="button"
+              onclick="toggleLanguage()">
+        EN
+      </button>
+
     </nav>
 
-    <!-- Row 3: Dynamic Info Bar -->
+    <!-- LIVE INFORMATION -->
     <div class="info-row">
-      <div class="info-item"><i class="fa-solid fa-location-dot"></i> <span id="user-location">Locating...</span></div>
-      <div class="info-item"><i class="fa-regular fa-clock"></i> <span id="real-time">--:--:--</span></div>
-      <div class="info-item"><i class="fa-regular fa-calendar-alt"></i> <span id="nepali-date">----/--/--</span></div>
-      <div class="info-item"><i class="fa-solid fa-cloud-sun"></i> <span id="weather-temp">--°C</span></div>
-      <div class="info-item theme-toggle" onclick="toggleTheme()">
-        <i class="fa-solid fa-moon" id="theme-icon"></i> <span id="theme-text">Dark</span>
+
+      <div class="info-item">
+        <i class="fa-solid fa-location-dot"></i>
+        <span id="user-location">Location...</span>
       </div>
+
+      <div class="info-item">
+        <i class="fa-regular fa-clock"></i>
+        <span id="real-time">--:--:--</span>
+      </div>
+
+      <div class="info-item">
+        <i class="fa-regular fa-calendar"></i>
+        <span id="nepali-date">----/--/--</span>
+      </div>
+
+      <div class="info-item">
+        <i class="fa-solid fa-cloud-sun"></i>
+        <span id="weather-temp">--°C</span>
+      </div>
+
+      <button type="button"
+              class="info-item theme-toggle"
+              onclick="toggleTheme()"
+              aria-label="Change theme">
+
+        <i class="fa-solid fa-moon" id="theme-icon"></i>
+        <span id="theme-text">Dark</span>
+
+      </button>
+
     </div>
+
   </header>
 
-  <!-- Middle Scrollable Area -->
+
+  <!-- ==============================
+       MAIN CONTENT
+  =============================== -->
   <main class="middle-content" id="content-container">
-    
-    <!-- १. आपत्कालीन सम्पर्क सेवा -->
-    <div class="card emergency-card">
+
+    <!-- EMERGENCY -->
+    <article class="card emergency-card">
+
       <div class="card-header">
         <i class="fa-solid fa-phone-volume"></i>
-        <span data-np="१. आपत्कालीन सम्पर्क सेवा" data-en="1. Emergency Contact Services">१. आपत्कालीन सम्पर्क सेवा</span>
+
+        <span data-np="१. आपत्कालीन सम्पर्क सेवा"
+              data-en="1. Emergency Contact Services">
+          १. आपत्कालीन सम्पर्क सेवा
+        </span>
       </div>
-      <div class="card-desc" data-np="प्रहरी, एम्बुलेन्स, र दमकल जस्ता जरुरी हेल्पलाइन नम्बरहरूको पहुँच।" data-en="Access to necessary helpline numbers like police, ambulance, and fire brigade.">
-        प्रहरी, एम्बुलेन्स, र दमकल जस्ता जरुरी हेल्पलाइन नम्बरहरूको पहुँच।
-      </div>
-      <a href="emergency.html" class="card-btn" data-np="नम्बरहरू हेर्नुहोस् &rarr;" data-en="View Numbers &rarr;">नम्बरहरू हेर्नुहोस् &rarr;</a>
-    </div>
-  
-    <!-- २. पहिलो ब्लग -->
-    <div class="card">
+
+      <p class="card-desc"
+         data-np="प्रहरी, एम्बुलेन्स र दमकल जस्ता जरुरी हेल्पलाइन नम्बरहरूको पहुँच।"
+         data-en="Access important emergency helplines such as police, ambulance and fire services.">
+
+        प्रहरी, एम्बुलेन्स र दमकल जस्ता जरुरी हेल्पलाइन नम्बरहरूको पहुँच।
+
+      </p>
+
+      <a href="emergency.html"
+         class="card-btn"
+         data-np="नम्बरहरू हेर्नुहोस् →"
+         data-en="View Numbers →">
+
+        नम्बरहरू हेर्नुहोस् →
+
+      </a>
+
+    </article>
+
+
+    <!-- BLOG 1 -->
+    <article class="card">
+
       <div class="card-header">
         <i class="fa-solid fa-newspaper"></i>
-        <span data-np="२. जिन्दगीको गोरेटोमा अलि पछाडि फर्केर हेर्दा..." data-en="2. Looking back on the path of life...">२. जिन्दगीको गोरेटोमा अलि पछाडि फर्केर हेर्दा...</span>
-      </div>
-      <div class="card-desc" data-np="१५–१६ वर्षको उमेरको फोटो र किशोरावस्थाको सादगी, निर्दोषपना सम्बन्धी संस्मरण।" data-en="Memoirs and photos from the age of 15-16 years old.">
-        १५–१६ वर्षको उमेरको फोटो र किशोरावस्थाको सादगी, निर्दोषपना सम्बन्धी संस्मरण।
-      </div>
-      <a href="blog.html#blog-1" class="card-btn" data-np="ब्लग पढ्नुहोस् &rarr;" data-en="Read Blog &rarr;">ब्लग पढ्नुहोस् &rarr;</a>
-    </div>
 
-    <!-- ३. दोस्रो ब्लग -->
-    <div class="card">
+        <span data-np="२. जिन्दगीको गोरेटोमा अलि पछाडि फर्केर हेर्दा..."
+              data-en="2. Looking Back on the Path of Life">
+
+          २. जिन्दगीको गोरेटोमा अलि पछाडि फर्केर हेर्दा...
+
+        </span>
+      </div>
+
+      <p class="card-desc"
+         data-np="१५–१६ वर्षको उमेरका फोटो र किशोरावस्थाको सादगी तथा निर्दोषपनासम्बन्धी संस्मरण।"
+         data-en="Memories and photographs from adolescence, reflecting on simplicity and innocence.">
+
+        १५–१६ वर्षको उमेरका फोटो र किशोरावस्थाको सादगी तथा निर्दोषपनासम्बन्धी संस्मरण।
+
+      </p>
+
+      <a href="blog.html#blog-1"
+         class="card-btn"
+         data-np="ब्लग पढ्नुहोस् →"
+         data-en="Read Blog →">
+
+        ब्लग पढ्नुहोस् →
+
+      </a>
+
+    </article>
+
+
+    <!-- BLOG 2 -->
+    <article class="card">
+
       <div class="card-header">
         <i class="fa-solid fa-book-open"></i>
-        <span data-np="३. एउटा नौलो यात्रा, जसले मलाई धेरै कुरा सिकायो" data-en="3. A New Journey That Taught Me Many Things">३. एउटा नौलो यात्रा, जसले मलाई धेरै कुरा सिकायो</span>
-      </div>
-      <div class="card-desc" data-np="१७ वर्षको उमेरमा घर छाडेर केरलातर्फ गरिएको संघर्षमय र सिकाइले भरिएको यात्राको कथा।" data-en="The story of a struggling and educational journey to Kerala at the age of 17.">
-        १७ वर्षको उमेरमा घर छाडेर केरलातर्फ गरिएको संघर्षमय र सिकाइले भरिएको यात्राको कथा।
-      </div>
-      <a href="blog.html#blog-2" class="card-btn" data-np="ब्लग पढ्नुहोस् &rarr;" data-en="Read Blog &rarr;">ब्लग पढ्नुहोस् &rarr;</a>
-    </div>
 
-    <!-- ४. प्रविधि: PWA र बाल पाठशाला -->
-    <div class="card">
+        <span data-np="३. एउटा नौलो यात्रा, जसले मलाई धेरै कुरा सिकायो"
+              data-en="3. A New Journey That Taught Me Many Things">
+
+          ३. एउटा नौलो यात्रा, जसले मलाई धेरै कुरा सिकायो
+
+        </span>
+      </div>
+
+      <p class="card-desc"
+         data-np="१७ वर्षको उमेरमा घर छाडेर केरलातर्फ गरिएको संघर्षमय र सिकाइले भरिएको यात्राको कथा।"
+         data-en="The story of a challenging and educational journey to Kerala at the age of 17.">
+
+        १७ वर्षको उमेरमा घर छाडेर केरलातर्फ गरिएको संघर्षमय र सिकाइले भरिएको यात्राको कथा।
+
+      </p>
+
+      <a href="blog.html#blog-2"
+         class="card-btn"
+         data-np="ब्लग पढ्नुहोस् →"
+         data-en="Read Blog →">
+
+        ब्लग पढ्नुहोस् →
+
+      </a>
+
+    </article>
+
+
+    <!-- KIDS LEARNING -->
+    <article class="card">
+
       <div class="card-header">
         <i class="fa-solid fa-graduation-cap"></i>
-        <span data-np="४. PWA र बाल पाठशाला" data-en="4. PWA and Kids Learning Platform">४. PWA र बाल पाठशाला</span>
-      </div>
-      <div class="card-desc" data-np="बालबालिकाका लागि AI र Progressive Web App (PWA) प्रविधि प्रयोग गरी बनाइएको आधुनिक सिकाइ प्लेटफर्म (kids.kamalgc.com.np)।" data-en="Modern learning platform built for children using AI and Progressive Web App (PWA) technology.">
-        बालबालिकाका लागि AI र Progressive Web App (PWA) प्रविधि प्रयोग गरी बनाइएको आधुनिक सिकाइ प्लेटफर्म (kids.kamalgc.com.np)।
-      </div>
-      <a href="tech.html#post-1" class="card-btn" data-np="पुरा लेख पढ्नुहोस् &rarr;" data-en="Read Full Article &rarr;">पुरा लेख पढ्नुहोस् &rarr;</a>
-    </div>
 
-        <!-- ५. प्रविधि: डिजिटल नोटबुक (Digital Notebook) -->
-    <div class="card">
+        <span data-np="४. PWA र बाल पाठशाला"
+              data-en="4. PWA and Kids Learning Platform">
+
+          ४. PWA र बाल पाठशाला
+
+        </span>
+      </div>
+
+      <p class="card-desc"
+         data-np="बालबालिकाका लागि AI र Progressive Web App (PWA) प्रविधि प्रयोग गरी बनाइएको आधुनिक सिकाइ प्लेटफर्म।"
+         data-en="A modern learning platform for children using AI and Progressive Web App technology.">
+
+        बालबालिकाका लागि AI र Progressive Web App (PWA) प्रविधि प्रयोग गरी बनाइएको आधुनिक सिकाइ प्लेटफर्म (kids.kamalgc.com.np)।
+
+      </p>
+
+      <a href="tech.html#post-1"
+         class="card-btn"
+         data-np="पूरा लेख पढ्नुहोस् →"
+         data-en="Read Full Article →">
+
+        पूरा लेख पढ्नुहोस् →
+
+      </a>
+
+    </article>
+
+
+    <!-- DIGITAL NOTEBOOK -->
+    <article class="card">
+
       <div class="card-header">
         <i class="fa-solid fa-book-bookmark"></i>
-        <span data-np="५. डिजिटल नोटबुक" data-en="5. Digital Notebook">५. डिजिटल नोटबुक</span>
+
+        <span data-np="५. डिजिटल नोटबुक"
+              data-en="5. Digital Notebook">
+
+          ५. डिजिटल नोटबुक
+
+        </span>
       </div>
-      <div class="card-desc" data-np="अब सबै हिसाबकिताब खल्तीमै, सुरक्षित र सजिलो! दैनिक आय-व्यय व्यवस्थापन गर्ने आधुनिक प्लेटफर्म।" data-en="Keep all your income and expense records safe and easy in your pocket with Digital Notebook.">
-        अब सबै हिसाबकिताब खल्तीमै, सुरक्षित र सजिलो! दैनिक आय-व्यय व्यवस्थापन गर्ने आधुनिक प्लेटफर्म।
-      </div>
-      <a href="tech.html#post-2" class="card-btn" data-np="पुरा लेख पढ्नुहोस् &rarr;" data-en="Read Full Article &rarr;">पुरा लेख पढ्नुहोस् &rarr;</a>
+
+      <p class="card-desc"
+         data-np="अब सबै हिसाबकिताब खल्तीमै, सुरक्षित र सजिलो! दैनिक आय–व्यय व्यवस्थापन गर्ने आधुनिक प्लेटफर्म।"
+         data-en="Keep your income and expense records safe and organized with a modern digital platform.">
+
+        अब सबै हिसाबकिताब खल्तीमै, सुरक्षित र सजिलो! दैनिक आय–व्यय व्यवस्थापन गर्ने आधुनिक प्लेटफर्म।
+
+      </p>
+
+      <a href="tech.html#post-2"
+         class="card-btn"
+         data-np="पूरा लेख पढ्नुहोस् →"
+         data-en="Read Full Article →">
+
+        पूरा लेख पढ्नुहोस् →
+
+      </a>
+
+    </article>
+
+
+    <!-- BANNER ADVERTISEMENT -->
+    <div id="custom-banner-ad">
+
+      <a href="https://dn.kamalgc.com.np"
+         target="_blank"
+         rel="noopener noreferrer">
+
+        <video
+          src="bannerads.mp4"
+          autoplay
+          loop
+          muted
+          playsinline
+          preload="metadata"
+          aria-label="Kamal G.C. promotional banner">
+
+        </video>
+
+      </a>
+
     </div>
 
-<!-- BANNER ADS SECTION -->
-<div id="custom-banner-ad" style="width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; margin-top: 5px; margin-bottom: 5px; background: #0f172a; overflow: hidden;">
-    <a href="https://dn.kamalgc.com.np" target="_blank" style="display: block; width: 100%;">
-        <video 
-            src="bannerads.mp4" 
-            autoplay 
-            loop 
-            muted 
-            playsinline 
-            style="width: 100%; height: auto; max-height: 170px; object-fit: contain; display: block; margin: 0 auto; pointer-events: none;">
-        </video>
-    </a>
-</div>
 
-    <!-- ६. मेरो परिचय र बायो -->
-    <div class="card">
+    <!-- ABOUT -->
+    <article class="card">
+
       <div class="card-header">
         <i class="fa-solid fa-user-gear"></i>
-        <span data-np="६. परिचय र बायो" data-en="6. About Me & Bio">६. परिचय र बायो</span>
+
+        <span data-np="६. परिचय र बायो"
+              data-en="6. About Me and Bio">
+
+          ६. परिचय र बायो
+
+        </span>
       </div>
-      <div class="card-desc" data-np="व्यक्तिगत पृष्ठभूमि, काम, र उद्देश्यको विवरण।" data-en="Details of personal background, work, and objectives.">
-        व्यक्तिगत पृष्ठभूमि, काम, र उद्देश्यको विवरण।
-      </div>
-      <a href="about.html" class="card-btn" data-np="विस्तृत हेर्नुहोस् &rarr;" data-en="Read More &rarr;">विस्तृत हेर्नुहोस् &rarr;</a>
-    </div>
+
+      <p class="card-desc"
+         data-np="व्यक्तिगत पृष्ठभूमि, काम, अनुभव र उद्देश्यको विवरण।"
+         data-en="Information about personal background, work, experience and goals.">
+
+        व्यक्तिगत पृष्ठभूमि, काम, अनुभव र उद्देश्यको विवरण।
+
+      </p>
+
+      <a href="about.html"
+         class="card-btn"
+         data-np="विस्तृत हेर्नुहोस् →"
+         data-en="Read More →">
+
+        विस्तृत हेर्नुहोस् →
+
+      </a>
+
+    </article>
 
   </main>
 
-  <!-- Search Modal Box -->
-  <div class="modal-overlay" id="search-modal">
+
+  <!-- ==============================
+       SEARCH MODAL
+  =============================== -->
+  <div class="modal-overlay"
+       id="search-modal"
+       role="dialog"
+       aria-modal="true"
+       aria-label="Search Portal"
+       onclick="closeModalOnBackdrop(event, 'search-modal')">
+
     <div class="modal-box">
+
       <div class="modal-header">
-        <span data-np="खोजी गर्नुहोस्" data-en="Search Portal">खोजी गर्नुहोस्</span>
-        <i class="fa-solid fa-xmark close-btn" onclick="closeSearchModal()"></i>
+
+        <span data-np="खोजी गर्नुहोस्"
+              data-en="Search Portal">
+
+          खोजी गर्नुहोस्
+
+        </span>
+
+        <button type="button"
+                class="close-btn"
+                aria-label="Close search"
+                onclick="closeSearchModal()">
+
+          <i class="fa-solid fa-xmark"></i>
+
+        </button>
+
       </div>
-      <input type="text" id="search-input" class="input-field" placeholder="खोज्ने शब्द टाइप गर्नुहोस्..." onkeyup="filterCards()">
+
+      <input
+        type="search"
+        id="search-input"
+        class="input-field"
+        placeholder="खोज्ने शब्द टाइप गर्नुहोस्..."
+        oninput="filterCards()"
+        autocomplete="off">
+
+      <p id="search-status" class="card-desc" aria-live="polite"></p>
+
     </div>
+
   </div>
 
-  <!-- Profile Save Modal Box -->
-  <div class="modal-overlay" id="profile-modal">
+
+  <!-- ==============================
+       PROFILE MODAL
+  =============================== -->
+  <div class="modal-overlay"
+       id="profile-modal"
+       role="dialog"
+       aria-modal="true"
+       aria-label="User Profile"
+       onclick="closeModalOnBackdrop(event, 'profile-modal')">
+
     <div class="modal-box">
+
       <div class="modal-header">
-        <span data-np="प्रोफाइल सुरक्षित गर्नुहोस्" data-en="Save Profile">प्रोफाइल सुरक्षित गर्नुहोस्</span>
-        <i class="fa-solid fa-xmark close-btn" onclick="closeProfileModal()"></i>
+
+        <span data-np="प्रोफाइल सुरक्षित गर्नुहोस्"
+              data-en="Save Profile">
+
+          प्रोफाइल सुरक्षित गर्नुहोस्
+
+        </span>
+
+        <button type="button"
+                class="close-btn"
+                aria-label="Close profile"
+                onclick="closeProfileModal()">
+
+          <i class="fa-solid fa-xmark"></i>
+
+        </button>
+
       </div>
-      
+
+
       <div class="profile-img-container">
-        <img src="mylogo.png" id="modal-profile-img" class="profile-img-preview" alt="Profile Photo">
-        <label for="profile-upload" class="change-photo-btn" title="ग्यालरीबाट फोटो फेर्नुहोस्">
+
+        <img src="mylogo.png"
+             id="modal-profile-img"
+             class="profile-img-preview"
+             alt="Profile Photo">
+
+        <label for="profile-upload"
+               class="change-photo-btn"
+               title="Change profile photo">
+
           <i class="fa-solid fa-camera"></i>
+
         </label>
-        <input type="file" id="profile-upload" accept="image/*" style="display: none;" onchange="handleImageUpload(event)">
+
+        <input
+          type="file"
+          id="profile-upload"
+          accept="image/jpeg,image/png,image/webp"
+          hidden
+          onchange="handleImageUpload(event)">
+
       </div>
 
-      <input type="text" id="user-name-input" class="input-field" placeholder="तपाईंको नाम (Full Name)">
-      <input type="email" id="user-email-input" class="input-field" placeholder="तपाईंको इमेल (Email Address)">
-      <button class="submit-btn" onclick="saveUserProfile()" data-np="सेभ गर्नुहोस्" data-en="Save">सेभ गर्नुहोस्</button>
+
+      <input
+        type="text"
+        id="user-name-input"
+        class="input-field"
+        placeholder="तपाईंको नाम (Full Name)"
+        maxlength="80"
+        autocomplete="name">
+
+      <input
+        type="email"
+        id="user-email-input"
+        class="input-field"
+        placeholder="तपाईंको इमेल (Email Address)"
+        maxlength="120"
+        autocomplete="email">
+
+      <button type="button"
+              class="submit-btn"
+              onclick="saveUserProfile()"
+              data-np="सेभ गर्नुहोस्"
+              data-en="Save Profile">
+
+        सेभ गर्नुहोस्
+
+      </button>
+
     </div>
+
   </div>
 
-  <!-- Locked Bottom Footer -->
+
+  <!-- ==============================
+       FOOTER
+  =============================== -->
   <footer class="bottom-footer">
+
     <div class="footer-contact">
-      <a href="https://kids.kamalgc.com.np" target="_blank">
-        <i class="fa-solid fa-mobile-screen-button"></i> kids.kamalgc.com.np
+
+      <a href="https://kids.kamalgc.com.np"
+         target="_blank"
+         rel="noopener noreferrer">
+
+        <i class="fa-solid fa-mobile-screen-button"></i>
+        kids.kamalgc.com.np
+
       </a>
+
       <a href="mailto:Support@kamalgc.com.np">
-        <i class="fa-solid fa-headset"></i> Support@kamalgc.com.np
+
+        <i class="fa-solid fa-headset"></i>
+        Support@kamalgc.com.np
+
       </a>
+
     </div>
+
     <div class="footer-copyright">
+
       &copy; 2026 KAMAL G.C. ALL RIGHTS RESERVED.
+
     </div>
+
   </footer>
 
+
+  <!-- ==============================
+       JAVASCRIPT
+  =============================== -->
   <script>
-    // ==========================================
-    // PREVENT ZOOM IN / ZOOM OUT (JS EVENT LOCK)
-    // ==========================================
-    // Pinch to Zoom रोक्न
-    document.addEventListener('touchmove', function (event) {
-      if (event.touches.length > 1) {
-        event.preventDefault();
+
+    "use strict";
+
+    let currentLang = "NP";
+
+    const PROFILE_KEYS = {
+      name: "kamal_portal_user_name",
+      email: "kamal_portal_user_email",
+      image: "kamal_portal_user_img",
+      theme: "kamal_portal_theme"
+    };
+
+
+    // SAFE STORAGE HELPERS
+    function storageGet(key) {
+      try {
+        return localStorage.getItem(key);
+      } catch (error) {
+        console.warn("Storage unavailable:", error);
+        return null;
       }
-    }, { passive: false });
+    }
 
-    // Double Tap Zoom रोक्न
-    let lastTouchEnd = 0;
-    document.addEventListener('touchend', function (event) {
-      const now = (new Date()).getTime();
-      if (now - lastTouchEnd <= 300) {
-        event.preventDefault();
+    function storageSet(key, value) {
+      try {
+        localStorage.setItem(key, value);
+        return true;
+      } catch (error) {
+        console.error("Could not save data:", error);
+        return false;
       }
-      lastTouchEnd = now;
-    }, false);
+    }
 
 
-    let currentLang = 'NP';
-
-    // Real-Time Clock
+    // CLOCK
     function updateClock() {
-      const now = new Date();
-      document.getElementById('real-time').innerText = now.toLocaleTimeString();
+
+      const clock = document.getElementById("real-time");
+
+      if (clock) {
+        clock.textContent = new Date().toLocaleTimeString();
+      }
+
       setNepaliDate();
     }
-    setInterval(updateClock, 1000);
-    updateClock();
 
-    // Fast Nepali Date Logic
+
+    // NEPALI DATE
     function setNepaliDate() {
-      const dateEl = document.getElementById('nepali-date');
+
+      const dateEl = document.getElementById("nepali-date");
+
       if (!dateEl) return;
 
       try {
-        if (typeof NepaliDate !== 'undefined') {
-          const npDate = new NepaliDate(new Date());
-          const year = npDate.getYear();
-          const month = String(npDate.getMonth() + 1).padStart(2, '0');
-          const day = String(npDate.getDate()).padStart(2, '0');
-          dateEl.innerText = `${year}/${month}/${day}`;
+
+        if (typeof NepaliDate !== "undefined") {
+
+          const nepaliDate = new NepaliDate(new Date());
+
+          const year = nepaliDate.getYear();
+
+          const month = String(
+            nepaliDate.getMonth() + 1
+          ).padStart(2, "0");
+
+          const day = String(
+            nepaliDate.getDate()
+          ).padStart(2, "0");
+
+          dateEl.textContent = `${year}/${month}/${day}`;
+
         } else {
-          const today = new Date();
-          const estYear = today.getFullYear() + 57;
-          dateEl.innerText = `${estYear}/--/--`;
+
+          dateEl.textContent = "--/--/--";
+
         }
-      } catch (e) {
-        console.error(e);
+
+      } catch (error) {
+
+        console.warn("Nepali date unavailable:", error);
+
+        dateEl.textContent = "--/--/--";
+
       }
     }
 
-    // Location & Weather API
-    function getLiveLocationAndWeather() {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(position => {
+
+    // THEME
+    function applyTheme(theme) {
+
+      const isLight = theme === "light";
+
+      document.body.classList.toggle("light-mode", isLight);
+
+      const icon = document.getElementById("theme-icon");
+      const label = document.getElementById("theme-text");
+
+      if (icon) {
+        icon.className = isLight
+          ? "fa-solid fa-sun"
+          : "fa-solid fa-moon";
+      }
+
+      if (label) {
+        label.textContent = isLight ? "Light" : "Dark";
+      }
+
+      document.querySelector('meta[name="theme-color"]')
+        ?.setAttribute("content", isLight ? "#f1f5f9" : "#07111f");
+    }
+
+
+    function toggleTheme() {
+
+      const isLight = document.body.classList.contains("light-mode");
+
+      const nextTheme = isLight ? "dark" : "light";
+
+      applyTheme(nextTheme);
+
+      storageSet(PROFILE_KEYS.theme, nextTheme);
+    }
+
+
+    // LANGUAGE
+    function toggleLanguage() {
+
+      currentLang = currentLang === "NP" ? "EN" : "NP";
+
+      document.querySelectorAll("[data-np]").forEach(element => {
+
+        const translation = currentLang === "NP"
+          ? element.getAttribute("data-np")
+          : element.getAttribute("data-en");
+
+        if (translation !== null) {
+          element.textContent = translation;
+        }
+
+      });
+
+      const langButton = document.getElementById("lang-toggle");
+
+      if (langButton) {
+        langButton.textContent = currentLang === "NP" ? "EN" : "NP";
+      }
+
+      const searchInput = document.getElementById("search-input");
+
+      if (searchInput) {
+        searchInput.placeholder = currentLang === "NP"
+          ? "खोज्ने शब्द टाइप गर्नुहोस्..."
+          : "Type a word to search...";
+      }
+    }
+
+
+    // LOCATION AND WEATHER
+    async function getLiveLocationAndWeather() {
+
+      const locationEl = document.getElementById("user-location");
+      const weatherEl = document.getElementById("weather-temp");
+
+      if (!navigator.geolocation) {
+
+        locationEl.textContent = "GPS unavailable";
+        return;
+
+      }
+
+      navigator.geolocation.getCurrentPosition(
+
+        async position => {
+
           const lat = position.coords.latitude;
           const lon = position.coords.longitude;
 
-          fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`)
-            .then(res => res.json())
-            .then(data => {
-              document.getElementById('weather-temp').innerText = `${data.current_weather.temperature}°C`;
-            })
-            .catch(() => {
-              document.getElementById('weather-temp').innerText = "--°C";
-            });
+          // WEATHER
+          try {
 
-          fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`)
-            .then(res => res.json())
-            .then(data => {
-              const city = data.address.city || data.address.town || data.address.state || "Location";
-              document.getElementById('user-location').innerText = city;
-            })
-            .catch(() => {
-              document.getElementById('user-location').innerText = "Delhi";
-            });
-        }, () => {
-          document.getElementById('user-location').innerText = "Delhi";
-        });
-      }
+            const weatherResponse = await fetch(
+              `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`
+            );
+
+            if (!weatherResponse.ok) {
+              throw new Error("Weather request failed");
+            }
+
+            const weatherData = await weatherResponse.json();
+
+            const temperature = weatherData.current_weather?.temperature;
+
+            weatherEl.textContent =
+              typeof temperature === "number"
+                ? `${temperature}°C`
+                : "--°C";
+
+          } catch (error) {
+
+            weatherEl.textContent = "--°C";
+
+            console.warn("Weather unavailable:", error);
+
+          }
+
+
+          // REVERSE GEOCODING
+          try {
+
+            const locationResponse = await fetch(
+              `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lon}&accept-language=ne`
+            );
+
+            if (!locationResponse.ok) {
+              throw new Error("Location request failed");
+            }
+
+            const locationData = await locationResponse.json();
+
+            const address = locationData.address || {};
+
+            const city =
+              address.city ||
+              address.town ||
+              address.village ||
+              address.municipality ||
+              address.state ||
+              "Location found";
+
+            locationEl.textContent = city;
+
+          } catch (error) {
+
+            locationEl.textContent = "Location found";
+
+            console.warn("Address unavailable:", error);
+
+          }
+
+        },
+
+        error => {
+
+          locationEl.textContent =
+            error.code === 1 ? "Location denied" : "Location unavailable";
+
+        },
+
+        {
+          enableHighAccuracy: false,
+          timeout: 12000,
+          maximumAge: 300000
+        }
+
+      );
+
     }
-    getLiveLocationAndWeather();
 
-    // Theme Toggle
-    function toggleTheme() {
-      document.body.classList.toggle('light-mode');
-      const isLight = document.body.classList.contains('light-mode');
-      document.getElementById('theme-icon').className = isLight ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
-      document.getElementById('theme-text').innerText = isLight ? 'Light' : 'Dark';
-    }
 
-    // Language Engine
-    function toggleLanguage() {
-      currentLang = currentLang === 'NP' ? 'EN' : 'NP';
-      document.getElementById('lang-toggle').innerText = currentLang === 'NP' ? 'EN' : 'NP';
-
-      document.querySelectorAll('[data-np]').forEach(el => {
-        el.innerText = currentLang === 'NP' ? el.getAttribute('data-np') : el.getAttribute('data-en');
-      });
-    }
-
-    // Dynamic Search Logic
+    // SEARCH MODAL
     function openSearchModal() {
-      document.getElementById('search-modal').style.display = 'flex';
-      document.getElementById('search-input').focus();
+
+      const modal = document.getElementById("search-modal");
+
+      modal.style.display = "flex";
+
+      setTimeout(() => {
+        document.getElementById("search-input").focus();
+      }, 100);
+
     }
+
 
     function closeSearchModal() {
-      document.getElementById('search-modal').style.display = 'none';
+
+      document.getElementById("search-modal").style.display = "none";
+
+      const input = document.getElementById("search-input");
+
+      input.value = "";
+
+      filterCards();
+
     }
 
+
+    // SEARCH FILTER
     function filterCards() {
-      const query = document.getElementById('search-input').value.toLowerCase();
-      const cards = document.querySelectorAll('.card');
-      
+
+      const input = document.getElementById("search-input");
+
+      const query = input.value.trim().toLocaleLowerCase();
+
+      const cards = document.querySelectorAll(
+        "#content-container .card"
+      );
+
+      let visibleCount = 0;
+
       cards.forEach(card => {
-        const text = card.innerText.toLowerCase();
-        if (text.includes(query)) {
-          card.style.display = 'block';
-        } else {
-          card.style.display = 'none';
-        }
+
+        const text = card.textContent.toLocaleLowerCase();
+
+        const matched = text.includes(query);
+
+        card.style.display = matched ? "" : "none";
+
+        if (matched) visibleCount++;
+
       });
-    }
 
-    // Profile LocalStorage & Gallery Image Upload Logic
-    function openProfileModal() {
-      document.getElementById('profile-modal').style.display = 'flex';
-      
-      const savedName = localStorage.getItem('kamal_portal_user_name') || '';
-      const savedEmail = localStorage.getItem('kamal_portal_user_email') || '';
-      const savedImg = localStorage.getItem('kamal_portal_user_img');
+      const status = document.getElementById("search-status");
 
-      document.getElementById('user-name-input').value = savedName;
-      document.getElementById('user-email-input').value = savedEmail;
+      if (status) {
 
-      if (savedImg) {
-        document.getElementById('modal-profile-img').src = savedImg;
+        if (!query) {
+          status.textContent = "";
+        } else {
+          status.textContent = currentLang === "NP"
+            ? `${visibleCount} वटा नतिजा भेटिए।`
+            : `${visibleCount} result(s) found.`;
+        }
+
       }
+
     }
+
+
+    // PROFILE MODAL
+    function openProfileModal() {
+
+      document.getElementById("profile-modal").style.display = "flex";
+
+      document.getElementById("user-name-input").value =
+        storageGet(PROFILE_KEYS.name) || "";
+
+      document.getElementById("user-email-input").value =
+        storageGet(PROFILE_KEYS.email) || "";
+
+      const savedImage = storageGet(PROFILE_KEYS.image);
+
+      if (savedImage) {
+        document.getElementById("modal-profile-img").src = savedImage;
+      }
+
+    }
+
 
     function closeProfileModal() {
-      document.getElementById('profile-modal').style.display = 'none';
+
+      document.getElementById("profile-modal").style.display = "none";
+
     }
 
+
+    // IMAGE UPLOAD
     function handleImageUpload(event) {
-      const file = event.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-          const imgData = e.target.result;
-          document.getElementById('modal-profile-img').src = imgData;
-          document.getElementById('nav-profile-img').src = imgData;
-          localStorage.setItem('kamal_portal_user_img', imgData);
-        };
-        reader.readAsDataURL(file);
+
+      const file = event.target.files?.[0];
+
+      if (!file) return;
+
+      const allowedTypes = [
+        "image/jpeg",
+        "image/png",
+        "image/webp"
+      ];
+
+      if (!allowedTypes.includes(file.type)) {
+
+        alert("JPG, PNG वा WEBP फोटो मात्र छान्नुहोस्।");
+
+        event.target.value = "";
+
+        return;
+
       }
+
+      const maxSize = 1.5 * 1024 * 1024;
+
+      if (file.size > maxSize) {
+
+        alert("फोटोको आकार 1.5 MB भन्दा कम हुनुपर्छ।");
+
+        event.target.value = "";
+
+        return;
+
+      }
+
+      const reader = new FileReader();
+
+      reader.onload = function(e) {
+
+        const imageData = e.target.result;
+
+        if (!storageSet(PROFILE_KEYS.image, imageData)) {
+
+          alert("फोटो सुरक्षित गर्न सकिएन। Browser storage खाली गरेर पुनः प्रयास गर्नुहोस्।");
+
+          return;
+
+        }
+
+        document.getElementById("modal-profile-img").src = imageData;
+
+        document.getElementById("nav-profile-img").src = imageData;
+
+      };
+
+      reader.onerror = function() {
+
+        alert("फोटो पढ्न सकिएन। फेरि प्रयास गर्नुहोस्।");
+
+      };
+
+      reader.readAsDataURL(file);
+
     }
 
+
+    // SAVE PROFILE
     function saveUserProfile() {
-      const name = document.getElementById('user-name-input').value;
-      const email = document.getElementById('user-email-input').value;
 
-      if (name.trim() !== "") {
-        localStorage.setItem('kamal_portal_user_name', name);
-        localStorage.setItem('kamal_portal_user_email', email);
-        alert(currentLang === 'NP' ? "प्रोफाइल सफलतापूर्वक सेभ भयो!" : "Profile Saved Successfully!");
-        closeProfileModal();
-      } else {
-        alert(currentLang === 'NP' ? "कृपया नाम भर्नुहोस्।" : "Please enter your name.");
+      const name = document
+        .getElementById("user-name-input")
+        .value.trim();
+
+      const email = document
+        .getElementById("user-email-input")
+        .value.trim();
+
+      if (!name) {
+
+        alert(currentLang === "NP"
+          ? "कृपया आफ्नो नाम भर्नुहोस्।"
+          : "Please enter your name.");
+
+        return;
+
       }
+
+      if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+
+        alert(currentLang === "NP"
+          ? "कृपया सही इमेल ठेगाना राख्नुहोस्।"
+          : "Please enter a valid email address.");
+
+        return;
+
+      }
+
+      const nameSaved = storageSet(PROFILE_KEYS.name, name);
+
+      const emailSaved = storageSet(PROFILE_KEYS.email, email);
+
+      if (!nameSaved || !emailSaved) {
+
+        alert(currentLang === "NP"
+          ? "प्रोफाइल सुरक्षित हुन सकेन।"
+          : "Profile could not be saved.");
+
+        return;
+
+      }
+
+      alert(currentLang === "NP"
+        ? "प्रोफाइल सफलतापूर्वक सुरक्षित भयो!"
+        : "Profile saved successfully!");
+
+      closeProfileModal();
+
     }
 
-    window.onload = function() {
-      const savedImg = localStorage.getItem('kamal_portal_user_img');
-      if (savedImg) {
-        document.getElementById('nav-profile-img').src = savedImg;
-        document.getElementById('modal-profile-img').src = savedImg;
+
+    // MODAL BACKDROP
+    function closeModalOnBackdrop(event, modalId) {
+
+      if (event.target.id !== modalId) return;
+
+      if (modalId === "search-modal") {
+        closeSearchModal();
       }
-    };
+
+      if (modalId === "profile-modal") {
+        closeProfileModal();
+      }
+
+    }
+
+
+    // ESCAPE KEY
+    document.addEventListener("keydown", event => {
+
+      if (event.key === "Escape") {
+
+        closeSearchModal();
+
+        closeProfileModal();
+
+      }
+
+    });
+
+
+    // LOAD SAVED SETTINGS
+    function loadSavedSettings() {
+
+      const savedImage = storageGet(PROFILE_KEYS.image);
+
+      if (savedImage) {
+
+        document.getElementById("nav-profile-img").src = savedImage;
+
+        document.getElementById("modal-profile-img").src = savedImage;
+
+      }
+
+      const savedTheme = storageGet(PROFILE_KEYS.theme) || "dark";
+
+      applyTheme(savedTheme);
+
+    }
+
+
+    // SERVICE WORKER
+    function registerServiceWorker() {
+
+      if (!("serviceWorker" in navigator)) return;
+
+      window.addEventListener("load", () => {
+
+        navigator.serviceWorker.register("./sw.js")
+          .then(() => {
+            console.log("Service Worker registered.");
+          })
+          .catch(error => {
+            console.warn("Service Worker registration failed:", error);
+          });
+
+      });
+
+    }
+
+
+    // INITIALIZE
+    document.addEventListener("DOMContentLoaded", () => {
+
+      loadSavedSettings();
+
+      updateClock();
+
+      setInterval(updateClock, 1000);
+
+      getLiveLocationAndWeather();
+
+      registerServiceWorker();
+
+    });
+
   </script>
+
 </body>
 </html>
