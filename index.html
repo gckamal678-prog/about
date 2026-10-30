@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>KAMAL G.C. | Personal Portal</title>
-  <meta name="description" content="Kamal G.C. को व्यक्तिगत पोर्टल। परिचय, ब्लग, प्रविधि, आपत्कालीन सम्पर्क र उपयोगी सेवाहरू।">
+  <meta name="description" content="Kamal G.C. को व्यक्तिगत पोर्टल। परिचय, ब्लग, आपत्कालीन सम्पर्क र उपयोगी सेवाहरू।">
   <meta name="theme-color" content="#07111f">
   <meta name="author" content="Kamal G.C.">
 
@@ -25,9 +25,7 @@
 
 <body class="dark-mode">
 
-  <!-- ==============================
-       HEADER
-  =============================== -->
+  <!-- HEADER -->
   <header class="top-header">
 
     <div class="brand-row">
@@ -59,7 +57,7 @@
       </div>
     </div>
 
-    <!-- NAVIGATION -->
+    <!-- MAIN NAVIGATION -->
     <nav class="nav-row" aria-label="Main navigation">
 
       <button class="btn-3d"
@@ -74,13 +72,6 @@
               data-np="आपत्कालीन"
               data-en="Emergency">
         आपत्कालीन
-      </button>
-
-      <button class="btn-3d"
-              onclick="location.href='tech.html'"
-              data-np="प्रविधि"
-              data-en="Technology">
-        प्रविधि
       </button>
 
       <button class="btn-3d"
@@ -137,9 +128,7 @@
   </header>
 
 
-  <!-- ==============================
-       MAIN CONTENT
-  =============================== -->
+  <!-- MAIN CONTENT -->
   <main class="middle-content" id="content-container">
 
     <!-- EMERGENCY -->
@@ -264,7 +253,7 @@
 
       </p>
 
-      <a href="tech.html#post-1"
+      <a href="blog.html#post-1"
          class="card-btn"
          data-np="पूरा लेख पढ्नुहोस् →"
          data-en="Read Full Article →">
@@ -298,7 +287,7 @@
 
       </p>
 
-      <a href="tech.html#post-2"
+      <a href="blog.html#post-2"
          class="card-btn"
          data-np="पूरा लेख पढ्नुहोस् →"
          data-en="Read Full Article →">
@@ -325,7 +314,6 @@
           playsinline
           preload="metadata"
           aria-label="Kamal G.C. promotional banner">
-
         </video>
 
       </a>
@@ -369,9 +357,7 @@
   </main>
 
 
-  <!-- ==============================
-       SEARCH MODAL
-  =============================== -->
+  <!-- SEARCH MODAL -->
   <div class="modal-overlay"
        id="search-modal"
        role="dialog"
@@ -416,9 +402,7 @@
   </div>
 
 
-  <!-- ==============================
-       PROFILE MODAL
-  =============================== -->
+  <!-- PROFILE MODAL -->
   <div class="modal-overlay"
        id="profile-modal"
        role="dialog"
@@ -448,7 +432,6 @@
 
       </div>
 
-
       <div class="profile-img-container">
 
         <img src="mylogo.png"
@@ -472,7 +455,6 @@
           onchange="handleImageUpload(event)">
 
       </div>
-
 
       <input
         type="text"
@@ -505,9 +487,7 @@
   </div>
 
 
-  <!-- ==============================
-       FOOTER
-  =============================== -->
+  <!-- FOOTER -->
   <footer class="bottom-footer">
 
     <div class="footer-contact">
@@ -539,9 +519,7 @@
   </footer>
 
 
-  <!-- ==============================
-       JAVASCRIPT
-  =============================== -->
+  <!-- JAVASCRIPT -->
   <script>
 
     "use strict";
@@ -708,10 +686,8 @@
       const weatherEl = document.getElementById("weather-temp");
 
       if (!navigator.geolocation) {
-
         locationEl.textContent = "GPS unavailable";
         return;
-
       }
 
       navigator.geolocation.getCurrentPosition(
