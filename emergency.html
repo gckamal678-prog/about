@@ -1,265 +1,1010 @@
+
 <!DOCTYPE html>
-<html lang="np">
+<html lang="ne">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Emergency Services - KAMAL G.C.</title>
-  
-  <!-- FontAwesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
+  <meta name="theme-color" content="#101827">
+  <meta name="description" content="नेपालका महत्वपूर्ण आपत्कालीन सम्पर्क नम्बरहरू। प्रहरी, एम्बुलेन्स, दमकल, विपद्, महिला तथा बालबालिका सहायता र अन्य हेल्पलाइन।">
+  <title>Emergency Help Center | KAMAL G.C.</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
   <style>
+    :root {
+      --bg: #0b1220;
+      --surface: #131f31;
+      --surface2: #1b2a40;
+      --text: #f1f5fb;
+      --muted: #a5b3c7;
+      --line: rgba(255,255,255,.09);
+      --blue: #63b7ff;
+      --red: #ff626d;
+      --green: #42d69b;
+      --yellow: #ffc766;
+      --shadow: 0 15px 40px rgba(0,0,0,.22);
+    }
+
     * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
+
+    html { scroll-behavior: smooth; }
 
     body {
-      background-color: #0f172a;
-      color: #f8fafc;
-      padding: 20px 15px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      font-family: "DM Sans", "Noto Sans Devanagari", sans-serif;
+      background:
+        radial-gradient(circle at 10% 0%, rgba(60,130,220,.14), transparent 30%),
+        var(--bg);
+      color: var(--text);
       min-height: 100vh;
+      line-height: 1.7;
     }
 
-    .main-container {
-      width: 100%;
-      max-width: 700px;
-      margin: 0 auto;
+    a { color: inherit; text-decoration: none; }
+    button, input { font: inherit; }
+
+    .container {
+      width: min(1050px, calc(100% - 30px));
+      margin: auto;
     }
 
-    .section-box {
-      background: #1e293b;
-      border-radius: 16px;
-      padding: 24px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-      border: 1px solid #334155;
+    /* HEADER */
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(11,18,32,.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--line);
     }
 
-    h2 {
-      color: #38bdf8;
-      font-size: 1.3rem;
-      margin-bottom: 8px;
-      text-align: center;
-    }
-
-    p {
-      font-size: 13.5px;
-      line-height: 1.6;
-      color: #cbd5e1;
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-    h3 {
-      font-size: 1rem;
-      color: #f59e0b;
-      margin-top: 25px;
-      margin-bottom: 12px;
-      border-left: 4px solid #f59e0b;
-      padding-left: 8px;
-    }
-
-    /* Emergency Grid Layout */
-    .emergency-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 12px;
-    }
-
-    /* Card Styling */
-    .emergency-card {
-      background: rgba(15, 23, 42, 0.7);
-      border: 1px solid #334155;
-      border-radius: 10px;
-      padding: 12px 15px;
+    .topbar-inner {
+      min-height: 66px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      transition: all 0.2s ease;
+      gap: 15px;
     }
 
-    .emergency-card:hover {
-      border-color: #38bdf8;
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(56, 189, 248, 0.15);
-    }
-
-    .emergency-info h4 {
-      font-size: 14px;
-      font-weight: 600;
-      color: #e2e8f0;
-    }
-
-    /* Call Button / Number Styling */
-    .emergency-number {
-      background: linear-gradient(145deg, #2563eb, #1d4ed8);
-      color: #ffffff !important;
-      text-decoration: none;
-      font-weight: bold;
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
       font-size: 15px;
-      padding: 6px 14px;
-      border-radius: 20px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+      font-weight: 800;
+      letter-spacing: .5px;
+    }
+
+    .brand-icon {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #ff5964, #d92e48);
+      color: white;
+      font-size: 19px;
+    }
+
+    .home-link {
+      color: var(--muted);
+      border: 1px solid var(--line);
+      background: var(--surface);
+      padding: 8px 13px;
+      border-radius: 10px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .home-link:hover {
+      color: var(--blue);
+      border-color: var(--blue);
+    }
+
+    /* HERO */
+
+    .hero {
+      padding: 42px 0 24px;
+    }
+
+    .hero-panel {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(25px, 5vw, 48px);
+      border-radius: 24px;
+      border: 1px solid rgba(255,98,109,.2);
+      background:
+        radial-gradient(circle at 90% 15%, rgba(255,98,109,.2), transparent 35%),
+        linear-gradient(130deg, #1b2639, #111c2e);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #ff8991;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1.4px;
+      margin-bottom: 15px;
+    }
+
+    .live-dot {
+      width: 8px;
+      height: 8px;
+      background: #ff626d;
+      border-radius: 50%;
+      box-shadow: 0 0 0 5px rgba(255,98,109,.13);
+    }
+
+    .hero h1 {
+      font-size: clamp(29px, 5vw, 45px);
+      line-height: 1.35;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .hero h1 span { color: #ff7b85; }
+
+    .hero-description {
+      color: #c0cada;
+      font-size: 14px;
+      max-width: 680px;
+      line-height: 1.9;
+    }
+
+    .hero-note {
+      margin-top: 22px;
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      color: white;
+      background: rgba(255,98,109,.13);
+      border: 1px solid rgba(255,98,109,.25);
+      border-radius: 11px;
+      padding: 10px 14px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    /* QUICK CALLS */
+
+    .quick-section { padding: 18px 0 25px; }
+
+    .section-title {
+      font-size: 19px;
+      font-weight: 800;
+      margin-bottom: 14px;
+    }
+
+    .quick-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .quick-card {
+      min-height: 112px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 15px;
+      border-radius: 16px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      transition: .2s;
+    }
+
+    .quick-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--red);
+    }
+
+    .quick-card .emoji { font-size: 23px; }
+    .quick-card .quick-name {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .quick-card strong {
+      font-size: 23px;
+      line-height: 1.2;
+      color: white;
+    }
+
+    .quick-card.police { border-top: 3px solid #579dff; }
+    .quick-card.ambulance { border-top: 3px solid #ff626d; }
+    .quick-card.fire { border-top: 3px solid #ff9d52; }
+    .quick-card.traffic { border-top: 3px solid #ffc766; }
+
+    /* SEARCH */
+
+    .directory { padding: 24px 0 55px; }
+
+    .directory-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .directory-heading p {
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 3px;
+    }
+
+    .total-count {
+      color: var(--blue);
+      font-size: 12px;
       white-space: nowrap;
-      transition: transform 0.1s ease, background 0.2s ease;
     }
 
-    .emergency-number:active {
-      transform: scale(0.95);
+    .search-box {
+      position: relative;
+      margin-bottom: 17px;
     }
 
-    .emergency-number:hover {
-      background: linear-gradient(145deg, #1d4ed8, #1e40af);
+    .search-box span {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+      font-size: 18px;
     }
 
-    @media (max-width: 480px) {
-      .emergency-grid {
-        grid-template-columns: 1fr;
-      }
+    .search-box input {
+      width: 100%;
+      height: 49px;
+      padding: 0 15px 0 44px;
+      border-radius: 13px;
+      border: 1px solid var(--line);
+      outline: none;
+      background: var(--surface);
+      color: var(--text);
+      font-size: 13px;
+    }
+
+    .search-box input:focus { border-color: var(--blue); }
+
+    /* FILTERS */
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+
+    .filter-btn {
+      border: 1px solid var(--line);
+      background: var(--surface);
+      color: var(--muted);
+      border-radius: 30px;
+      padding: 8px 13px;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: .2s;
+    }
+
+    .filter-btn.active,
+    .filter-btn:hover {
+      color: #081321;
+      background: var(--blue);
+      border-color: var(--blue);
+    }
+
+    /* CATEGORY */
+
+    .category {
+      margin-bottom: 27px;
+    }
+
+    .category-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 16px;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .category-title::before {
+      content: "";
+      width: 4px;
+      height: 22px;
+      border-radius: 5px;
+      background: var(--blue);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 11px;
+    }
+
+    .contact-card {
+      min-width: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding: 14px;
+      border-radius: 14px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      transition: .2s;
+    }
+
+    .contact-card:hover {
+      border-color: rgba(99,183,255,.5);
+      transform: translateY(-2px);
+    }
+
+    .contact-info {
+      min-width: 0;
+      display: flex;
+      align-items: center;
+      gap: 11px;
+    }
+
+    .contact-icon {
+      flex: 0 0 39px;
+      width: 39px;
+      height: 39px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      background: var(--surface2);
+      font-size: 19px;
+    }
+
+    .contact-name {
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.5;
+      overflow-wrap: anywhere;
+    }
+
+    .contact-detail {
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.5;
+      margin-top: 2px;
+    }
+
+    .call-button {
+      flex: 0 0 auto;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      min-width: 75px;
+      padding: 9px 11px;
+      border-radius: 10px;
+      background: #1766b7;
+      color: white;
+      font-size: 12px;
+      font-weight: 800;
+      white-space: nowrap;
+      transition: .2s;
+    }
+
+    .call-button:hover { background: #2586df; }
+
+    .call-button.secondary {
+      background: #26364c;
+      border: 1px solid var(--line);
+    }
+
+    .call-button.secondary:hover {
+      background: #344c69;
+    }
+
+    .call-button small {
+      font-size: 10px;
+      font-weight: 500;
+    }
+
+    .no-results {
+      display: none;
+      text-align: center;
+      padding: 35px 15px;
+      color: var(--muted);
+      background: var(--surface);
+      border: 1px dashed var(--line);
+      border-radius: 15px;
+      font-size: 13px;
+    }
+
+    /* SAFETY TIPS */
+
+    .safety-panel {
+      margin: 5px 0 35px;
+      padding: 23px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,199,102,.2);
+      background: rgba(255,199,102,.055);
+    }
+
+    .safety-panel h2 {
+      color: var(--yellow);
+      font-size: 17px;
+      margin-bottom: 12px;
+    }
+
+    .safety-list {
+      padding-left: 20px;
+      color: #d2dbe8;
+      font-size: 12px;
+      line-height: 2;
+    }
+
+    /* SOURCES */
+
+    .sources {
+      padding: 20px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      margin-bottom: 35px;
+    }
+
+    .sources h3 {
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+
+    .source-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px 16px;
+    }
+
+    .source-links a {
+      color: var(--blue);
+      font-size: 11px;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .disclaimer {
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.8;
+      margin-top: 13px;
+    }
+
+    /* FOOTER */
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 23px 0;
+      color: var(--muted);
+      font-size: 11px;
+      text-align: center;
+    }
+
+    footer a { color: var(--blue); }
+
+    @media (max-width: 700px) {
+      .quick-grid { grid-template-columns: repeat(2, 1fr); }
+      .contact-grid { grid-template-columns: 1fr; }
+      .hero { padding-top: 25px; }
+      .hero-panel { border-radius: 19px; }
+    }
+
+    @media (max-width: 370px) {
+      .contact-card { padding: 11px; gap: 7px; }
+      .contact-icon { width: 34px; height: 34px; flex-basis: 34px; }
+      .contact-name { font-size: 12px; }
+      .call-button { min-width: 65px; padding: 8px; font-size: 11px; }
     }
   </style>
 </head>
+
 <body>
 
-  <main class="main-container">
-    <div class="section-box">
-      
-      <!-- Page Header -->
-      <h2 data-en="Nepal Emergency & Helpline Services" data-np="नेपालका मुख्य आपत्कालीन तथा हेल्पलाइन सेवाहरू">नेपालका मुख्य आपत्कालीन तथा हेल्पलाइन सेवाहरू</h2>
-      <p data-en="Important contact numbers for emergency assistance, safety, and public services in Nepal. Click on any number to call directly." data-np="नेपालमा आइपर्ने विभिन्न आपत्कालीन अवस्था, सुरक्षा र सेवाहरूको लागि चाहिने महत्त्वपूर्ण सम्पर्क नम्बरहरू। नम्बरमा क्लिक गरेर सीधा फोन गर्न सकिन्छ।">
-        नेपालमा आइपर्ने विभिन्न आपत्कालीन अवस्था, सुरक्षा र सेवाहरूको लागि चाहिने महत्त्वपूर्ण सम्पर्क नम्बरहरू। नम्बरमा क्लिक गरेर सीधा फोन गर्न सकिन्छ।
-      </p>
-
-      <!-- Section 1: Core Emergency Services -->
-      <h3 data-en="Core Emergency Services" data-np="मुख्य आपत्कालीन सेवाहरू">मुख्य आपत्कालीन सेवाहरू</h3>
-      <div class="emergency-grid">
-        <div class="emergency-card">
-          <div class="emergency-info">
-            <h4 data-en="🚓 Police Emergency" data-np="🚓 नेपाल प्रहरी (Police)">🚓 नेपाल प्रहरी (Police)</h4>
-          </div>
-          <a href="tel:100" class="emergency-number">१००</a>
-        </div>
-        <div class="emergency-card">
-          <div class="emergency-info">
-            <h4 data-en="🚒 Fire Brigade" data-np="🚒 दमकल (Fire Brigade)">🚒 दमकल (Fire Brigade)</h4>
-          </div>
-          <a href="tel:101" class="emergency-number">१०१</a>
-        </div>
-        <div class="emergency-card">
-          <div class="emergency-info">
-            <h4 data-en="🚑 Ambulance Service" data-np="🚑 एम्बुलेन्स (Ambulance)">🚑 एम्बुलेन्स (Ambulance)</h4>
-          </div>
-          <a href="tel:102" class="emergency-number">१०२</a>
-        </div>
-        <div class="emergency-card">
-          <div class="emergency-info">
-            <h4 data-en="🚔 Traffic Police" data-np="🚔 ट्राफिक प्रहरी (Traffic)">🚔 ट्राफिक प्रहरी (Traffic)</h4>
-          </div>
-          <a href="tel:103" class="emergency-number">१०३</a>
-        </div>
-        <div class="emergency-card">
-          <div class="emergency-info">
-            <h4 data-en="🔍 Missing Child Search" data-np="🔍 हराएका बालबालिका खोजतलास">🔍 हराएका बालबालिका खोजतलास</h4>
-          </div>
-          <a href="tel:104" class="emergency-number">१०४</a>
-        </div>
-        <div class="emergency-card">
-          <div class="emergency-info">
-            <h4 data-en="🪖 Armed Police Force" data-np="🪖 सशस्त्र प्रहरी बल (APF)">🪖 सशस्त्र प्रहरी बल (APF)</h4>
-          </div>
-          <a href="tel:1114" class="emergency-number">१११४</a>
-        </div>
-      </div>
-
-      <!-- Section 2: Social & Grievance Helplines -->
-      <h3 data-en="Social & Grievance Helplines" data-np="सामाजिक, सुरक्षा तथा गुनासो हेल्पलाइन">सामाजिक, सुरक्षा तथा गुनासो हेल्पलाइन</h3>
-      <div class="emergency-grid">
-        <div class="emergency-card">
-          <div class="emergency-info">
-            <h4 data-en="👶 Child Helpline" data-np="👶 बाल हेल्पलाइन (Child Helpline)">👶 बाल हेल्पलाइन (Child Helpline)</h4>
-          </div>
-          <a href="tel:1098" class="emergency-number">१०९८</a>
-        </div>
-        <div class="emergency-card">
-          <div class="emergency-info">
-            <h4 data-en="📞 Hello Sarkar (Grievance)" data-np="📞 हेलो सरकार (Government Grievance)">📞 हेलो सरकार (Government Grievance)</h4>
-          </div>
-          <a href="tel:1111" class="emergency-number">११११</a>
-        </div>
-        <div class="emergency-card">
-          <div class="emergency-info">
-            <h4 data-en="👩 Women Violence Helpline" data-np="👩 महिला हिंसा हेल्पलाइन">👩 महिला हिंसा हेल्पलाइन</h4>
-          </div>
-          <a href="tel:1145" class="emergency-number">११४५</a>
-        </div>
-        <div class="emergency-card">
-          <div class="emergency-info">
-            <h4 data-en="🧠 Mental Health Counseling" data-np="🧠 मानसिक स्वास्थ्य परामर्श">🧠 मानसिक स्वास्थ्य परामर्श</h4>
-          </div>
-          <a href="tel:1166" class="emergency-number">११६६</a>
-        </div>
-        <div class="emergency-card">
-          <div class="emergency-info">
-            <h4 data-en="🧳 Tourist Police" data-np="🧳 पर्यटक प्रहरी (Tourist Police)">🧳 पर्यटक प्रहरी (Tourist Police)</h4>
-          </div>
-          <a href="tel:1144" class="emergency-number">११४४</a>
-        </div>
-        <div class="emergency-card">
-          <div class="emergency-info">
-            <h4 data-en="🕵️ CIAA (Anti-Corruption)" data-np="🕵️ अख्तियार दुरुपयोग अनुसन्धान">🕵️ अख्तियार दुरुपयोग अनुसन्धान</h4>
-          </div>
-          <a href="tel:107" class="emergency-number">१०७</a>
-        </div>
-      </div>
-
-      <!-- Section 3: Disaster, Health & Utility Services -->
-      <h3 data-en="Disaster, Health & Utility Services" data-np="विपद्, स्वास्थ्य तथा सेवा सम्बन्धी">विपद्, स्वास्थ्य तथा सेवा सम्बन्धी</h3>
-      <div class="emergency-grid">
-        <div class="emergency-card">
-          <div class="emergency-info">
-            <h4 data-en="🩸 Blood Bank (Red Cross)" data-np="🩸 रक्तसञ्चार सेवा (Blood Bank)">🩸 रक्तसञ्चार सेवा (Blood Bank)</h4>
-          </div>
-          <a href="tel:015231816" class="emergency-number" style="font-size: 13px;">०१-५२३१८१६</a>
-        </div>
-        <div class="emergency-card">
-          <div class="emergency-info">
-            <h4 data-en="🌪️ Disaster Management" data-np="🌪️ विपद् व्यवस्थापन (Disaster)">🌪️ विपद् व्यवस्थापन (Disaster)</h4>
-          </div>
-          <a href="tel:1234" class="emergency-number">१२३४</a>
-        </div>
-        <div class="emergency-card">
-          <div class="emergency-info">
-            <h4 data-en="🏥 Health Emergency" data-np="🏥 स्वास्थ्य आपत्कालीन सेवा">🏥 स्वास्थ्य आपत्कालीन सेवा</h4>
-          </div>
-          <a href="tel:1115" class="emergency-number">१११५</a>
-        </div>
-        <div class="emergency-card">
-          <div class="emergency-info">
-            <h4 data-en="🏠 Ministry of Home Affairs" data-np="🏠 गृह मन्त्रालय (Home Ministry)">🏠 गृह मन्त्रालय (Home Ministry)</h4>
-          </div>
-          <a href="tel:1112" class="emergency-number">१११२</a>
-        </div>
-        <div class="emergency-card">
-          <div class="emergency-info">
-            <h4 data-en="⚡ Electricity Authority (NEA)" data-np="⚡ नेपाल विद्युत् प्राधिकरण (NEA)">⚡ नेपाल विद्युत् प्राधिकरण (NEA)</h4>
-          </div>
-          <a href="tel:1150" class="emergency-number" style="font-size: 13px;">११५० / ११५१</a>
-        </div>
-        <div class="emergency-card">
-          <div class="emergency-info">
-            <h4 data-en="ℹ️ Telecom Inquiry" data-np="ℹ️ नेपाल टेलिकम सोधपुछ (Inquiry)">ℹ️ नेपाल टेलिकम सोधपुछ (Inquiry)</h4>
-          </div>
-          <a href="tel:197" class="emergency-number">१९७</a>
-        </div>
-      </div>
-
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a class="brand" href="index.html">
+        <span class="brand-icon">✚</span>
+        <span>KAMAL G.C. <span style="color:#ff7b85">HELP CENTER</span></span>
+      </a>
+      <a class="home-link" href="index.html">← Home</a>
     </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="hero-panel">
+          <div class="hero-tag"><span class="live-dot"></span> NEPAL EMERGENCY DIRECTORY</div>
+          <h1>आपत्कालमा <span>सही सम्पर्क</span>,<br>सही समयमा।</h1>
+          <p class="hero-description">
+            नेपालमा आइपर्न सक्ने दुर्घटना, स्वास्थ्य समस्या, प्राकृतिक विपद्,
+            सुरक्षा समस्या तथा अन्य आपत्कालीन अवस्थाका लागि उपयोगी सम्पर्क नम्बरहरू।
+            नम्बरमा थिचेर सिधै फोन गर्न सक्नुहुन्छ।
+          </p>
+          <div class="hero-note">⚠️ ज्यान जोखिममा भए तुरुन्त सम्बन्धित आपत्कालीन सेवामा सम्पर्क गर्नुहोस्।</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="quick-section">
+      <div class="container">
+        <h2 class="section-title">🚨 तुरुन्त चाहिने नम्बरहरू</h2>
+        <div class="quick-grid">
+          <a class="quick-card police" href="tel:100">
+            <span class="emoji">🚓</span>
+            <span class="quick-name">नेपाल प्रहरी</span>
+            <strong>१००</strong>
+          </a>
+          <a class="quick-card ambulance" href="tel:102">
+            <span class="emoji">🚑</span>
+            <span class="quick-name">एम्बुलेन्स</span>
+            <strong>१०२</strong>
+          </a>
+          <a class="quick-card fire" href="tel:101">
+            <span class="emoji">🚒</span>
+            <span class="quick-name">दमकल</span>
+            <strong>१०१</strong>
+          </a>
+          <a class="quick-card traffic" href="tel:103">
+            <span class="emoji">🚦</span>
+            <span class="quick-name">ट्राफिक प्रहरी</span>
+            <strong>१०३</strong>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="directory">
+      <div class="container">
+
+        <div class="directory-heading">
+          <div>
+            <h2 class="section-title" style="margin-bottom:0">📞 सम्पर्क निर्देशिका</h2>
+            <p>आफूलाई चाहिएको सेवा खोज्नुहोस्।</p>
+          </div>
+          <span class="total-count" id="total-count"></span>
+        </div>
+
+        <div class="search-box">
+          <span>⌕</span>
+          <input
+            type="search"
+            id="contact-search"
+            placeholder="सेवा वा नम्बर खोज्नुहोस्..."
+            autocomplete="off">
+        </div>
+
+        <div class="filters">
+          <button class="filter-btn active" data-filter="all">सबै</button>
+          <button class="filter-btn" data-filter="emergency">आपत्कालीन</button>
+          <button class="filter-btn" data-filter="safety">सुरक्षा</button>
+          <button class="filter-btn" data-filter="health">स्वास्थ्य</button>
+          <button class="filter-btn" data-filter="disaster">विपद्</button>
+          <button class="filter-btn" data-filter="public">अन्य सेवा</button>
+        </div>
+
+        <div id="directory-content">
+
+          <!-- MAIN EMERGENCY -->
+          <section class="category" data-category="emergency">
+            <h3 class="category-title">🚨 मुख्य आपत्कालीन सेवाहरू</h3>
+            <div class="contact-grid">
+
+              <article class="contact-card" data-search="नेपाल प्रहरी police 100">
+                <div class="contact-info">
+                  <span class="contact-icon">🚓</span>
+                  <div>
+                    <div class="contact-name">नेपाल प्रहरी</div>
+                    <div class="contact-detail">प्रहरी सहायता तथा सुरक्षा</div>
+                  </div>
+                </div>
+                <a class="call-button" href="tel:100">☎ १००</a>
+              </article>
+
+              <article class="contact-card" data-search="दमकल आगलागी fire 101">
+                <div class="contact-info">
+                  <span class="contact-icon">🚒</span>
+                  <div>
+                    <div class="contact-name">दमकल सेवा</div>
+                    <div class="contact-detail">आगलागी तथा आगो नियन्त्रण</div>
+                  </div>
+                </div>
+                <a class="call-button" href="tel:101">☎ १०१</a>
+              </article>
+
+              <article class="contact-card" data-search="एम्बुलेन्स ambulance health 102">
+                <div class="contact-info">
+                  <span class="contact-icon">🚑</span>
+                  <div>
+                    <div class="contact-name">एम्बुलेन्स सेवा</div>
+                    <div class="contact-detail">स्वास्थ्य आपत्कालीन यातायात</div>
+                  </div>
+                </div>
+                <a class="call-button" href="tel:102">☎ १०२</a>
+              </article>
+
+              <article class="contact-card" data-search="ट्राफिक प्रहरी दुर्घटना जाम traffic 103">
+                <div class="contact-info">
+                  <span class="contact-icon">🚦</span>
+                  <div>
+                    <div class="contact-name">ट्राफिक प्रहरी</div>
+                    <div class="contact-detail">सडक दुर्घटना तथा ट्राफिक समस्या</div>
+                  </div>
+                </div>
+                <a class="call-button" href="tel:103">☎ १०३</a>
+              </article>
+
+              <article class="contact-card" data-search="हराएका बालबालिका missing child 104">
+                <div class="contact-info">
+                  <span class="contact-icon">🧒</span>
+                  <div>
+                    <div class="contact-name">हराएका बालबालिका खोजतलास</div>
+                    <div class="contact-detail">बालबालिका सम्बन्धी सूचना</div>
+                  </div>
+                </div>
+                <a class="call-button" href="tel:104">☎ १०४</a>
+              </article>
+
+              <article class="contact-card" data-search="सशस्त्र प्रहरी बल apf 1114">
+                <div class="contact-info">
+                  <span class="contact-icon">🛡️</span>
+                  <div>
+                    <div class="contact-name">सशस्त्र प्रहरी बल</div>
+                    <div class="contact-detail">सशस्त्र प्रहरी सहायता</div>
+                  </div>
+                </div>
+                <a class="call-button" href="tel:1114">☎ १११४</a>
+              </article>
+
+              <article class="contact-card" data-search="नेपाल सेना उद्धार rescue army 1191">
+                <div class="contact-info">
+                  <span class="contact-icon">🪖</span>
+                  <div>
+                    <div class="contact-name">नेपाली सेना उद्धार सहायता</div>
+                    <div class="contact-detail">खोज तथा उद्धारसम्बन्धी सहायता</div>
+                  </div>
+                </div>
+                <a class="call-button" href="tel:1191">☎ ११९१</a>
+              </article>
+
+            </div>
+          </section>
+
+          <!-- HEALTH -->
+          <section class="category" data-category="health">
+            <h3 class="category-title">🏥 स्वास्थ्य तथा रक्तसञ्चार सेवा</h3>
+            <div class="contact-grid">
+
+              <article class="contact-card" data-search="मानसिक स्वास्थ्य आत्महत्या रोकथाम counseling 1166">
+                <div class="contact-info">
+                  <span class="contact-icon">🧠</span>
+                  <div>
+                    <div class="contact-name">राष्ट्रिय आत्महत्या रोकथाम हेल्पलाइन</div>
+                    <div class="contact-detail">मानसिक स्वास्थ्य सहयोग</div>
+                  </div>
+                </div>
+                <a class="call-button" href="tel:1166">☎ ११६६</a>
+              </article>
+
+              <article class="contact-card" data-search="रक्तदान रक्त बैंक blood red cross 1130">
+                <div class="contact-info">
+                  <span class="contact-icon">🩸</span>
+                  <div>
+                    <div class="contact-name">रक्तसञ्चार सेवा सहायता</div>
+                    <div class="contact-detail">रक्त उपलब्धता तथा रक्तदान जानकारी</div>
+                  </div>
+                </div>
+                <a class="call-button" href="tel:1130">☎ ११३०</a>
+              </article>
+
+              <article class="contact-card" data-search="केन्द्रीय रक्तसञ्चार सेवा blood bank Kathmandu">
+                <div class="contact-info">
+                  <span class="contact-icon">🏥</span>
+                  <div>
+                    <div class="contact-name">केन्द्रीय रक्तसञ्चार सेवा, काठमाडौं</div>
+                    <div class="contact-detail">कार्यालय सम्पर्क नम्बर</div>
+                  </div>
+                </div>
+                <a class="call-button secondary" href="tel:015388485">☎ ०१-५३८८४८५</a>
+              </article>
+
+              <article class="contact-card" data-search="रक्तसञ्चार सेवा दोस्रो नम्बर blood">
+                <div class="contact-info">
+                  <span class="contact-icon">➕</span>
+                  <div>
+                    <div class="contact-name">केन्द्रीय रक्तसञ्चार सेवा</div>
+                    <div class="contact-detail">वैकल्पिक कार्यालय नम्बर</div>
+                  </div>
+                </div>
+                <a class="call-button secondary" href="tel:015388486">☎ ०१-५३८८४८६</a>
+              </article>
+
+            </div>
+          </section>
+
+          <!-- SAFETY -->
+          <section class="category" data-category="safety">
+            <h3 class="category-title">🛡️ सुरक्षा, महिला तथा बालबालिका सहायता</h3>
+            <div class="contact-grid">
+
+              <article class="contact-card" data-search="बाल हेल्पलाइन child children abuse 1098">
+                <div class="contact-info">
+                  <span class="contact-icon">👶</span>
+                  <div>
+                    <div class="contact-name">बाल हेल्पलाइन</div>
+                    <div class="contact-detail">बाल हिंसा, दुर्व्यवहार तथा जोखिममा परेका बालबालिका</div>
+                  </div>
+                </div>
+                <a class="call-button" href="tel:1098">☎ १०९८</a>
+              </article>
+
+              <article class="contact-card" data-search="महिला हिंसा घरेलु हिंसा women violence 1145">
+                <div class="contact-info">
+                  <span class="contact-icon">👩</span>
+                  <div>
+                    <div class="contact-name">राष्ट्रिय महिला आयोग हेल्पलाइन</div>
+                    <div class="contact-detail">महिला हिंसा तथा लैङ्गिक हिंसा सहायता</div>
+                  </div>
+                </div>
+                <a class="call-button" href="tel:1145">☎ ११४५</a>
+              </article>
+
+              <article class="contact-card" data-search="पर्यटक प्रहरी tourist police 1144">
+                <div class="contact-info">
+                  <span class="contact-icon">🧳</span>
+                  <div>
+                    <div class="contact-name">पर्यटक प्रहरी</div>
+                    <div class="contact-detail">पर्यटक सुरक्षा तथा सहयोग</div>
+                  </div>
+                </div>
+                <a class="call-button" href="tel:1144">☎ ११४४</a>
+              </article>
+
+              <article class="contact-card" data-search="साइबर अपराध cyber bureau online fraud hacking 9851286770">
+                <div class="contact-info">
+                  <span class="contact-icon">💻</span>
+                  <div>
+                    <div class="contact-name">नेपाल प्रहरी साइबर ब्यूरो</div>
+                    <div class="contact-detail">अनलाइन ठगी, ह्याकिङ तथा साइबर अपराध</div>
+                  </div>
+                </div>
+                <a class="call-button secondary" href="tel:9851286770">☎ ९८५१२८६७७०</a>
+              </article>
+
+              <article class="contact-card" data-search="साइबर ब्यूरो कार्यालय फोन cyber bureau Kathmandu">
+                <div class="contact-info">
+                  <span class="contact-icon">☎️</span>
+                  <div>
+                    <div class="contact-name">साइबर ब्यूरो कार्यालय</div>
+                    <div class="contact-detail">काठमाडौं कार्यालय नम्बर</div>
+                  </div>
+                </div>
+                <a class="call-button secondary" href="tel:015319044">☎ ०१-५३१९०४४</a>
+              </article>
+
+              <article class="contact-card" data-search="प्रहरी उजुरी गुनासो complaint police 1113">
+                <div class="contact-info">
+                  <span class="contact-icon">📢</span>
+                  <div>
+                    <div class="contact-name">नेपाल प्रहरी उजुरी तथा गुनासो</div>
+                    <div class="contact-detail">प्रहरी सेवासम्बन्धी गुनासो</div>
+                  </div>
+                </div>
+                <a class="call-button" href="tel:1113">☎ १११३</a>
+              </article>
+
+              <article class="contact-card" data-search="अख्तियार भ्रष्टाचार CIAA corruption 107">
+                <div class="contact-info">
+                  <span class="contact-icon">⚖️</span>
+                  <div>
+                    <div class="contact-name">अख्तियार दुरुपयोग अनुसन्धान आयोग</div>
+                    <div class="contact-detail">भ्रष्टाचारसम्बन्धी उजुरी</div>
+                  </div>
+                </div>
+                <a class="call-button" href="tel:107">☎ १०७</a>
+              </article>
+
+            </div>
+          </section>
+
+          <!-- DISASTER -->
+          <section class="category" data-category="disaster">
+            <h3 class="category-title">🌧️ विपद्, मौसम तथा उद्धार</h3>
+            <div class="contact-grid">
+
+              <article class="contact-card" data-search="विपद् व्यवस्थापन बाढी पहिरो भूकम्प disaster 1234">
+                <div class="contact-info">
+                  <span class="contact-icon">🌪️</span>
+                  <div>
+                    <div class="contact-name">विपद् आपत्कालीन हेल्पलाइन</div>
+                    <div class="contact-detail">विपद् तथा उद्धारसम्बन्धी सहायता</div>
+                  </div>
+                </div>
+                <a class="call-button" href="tel:1234">☎ १२३४</a>
+              </article>
+
+              <article class="contact-card" data-search="मौसम बाढी पूर्वसूचना जल तथा मौसम विज्ञान 1155">
+                <div class="contact-info">
+                  <span class="contact-icon">🌦️</span>
+                  <div>
+                    <div class="contact-name">मौसम तथा बाढी पूर्वसूचना</div>
+                    <div class="contact-detail">मौसम पूर्वानुमान र बाढी चेतावनी</div>
+                  </div>
+                </div>
+                <a class="call-button" href="tel:1155">☎ ११५५</a>
+              </article>
+
+              <article class="contact-card" data-search="गृह मन्त्रालय home affairs 1112">
+                <div class="contact-info">
+                  <span class="contact-icon">🏛️</span>
+                  <div>
+                    <div class="contact-name">गृह मन्त्रालय</div>
+                    <div class="contact-detail">गृह प्रशासनसम्बन्धी सम्पर्क</div>
+                  </div>
+                </div>
+                <a class="call-button" href="tel:1112">☎ १११२</a>
+              </article>
+
+            </div>
+          </section>
+
+          <!-- PUBLIC SERVICES -->
+          <section class="category" data-category="public">
+            <h3 class="category-title">🏢 सार्वजनिक सेवा तथा गुनासो</h3>
+            <div class="contact-grid">
+
+              <article class="contact-card" data-search="हेलो सरकार सरकारी गुनासो hello sarkar 1111">
+                <div class="contact-info">
+                  <span class="contact-icon">📞</span>
+                  <div>
+                    <div class="contact-name">हेलो सरकार</div>
+                    <div class="contact-detail">सरकारी सेवा तथा गुनासो</div>
+                  </div>
+                </div>
+                <a class="call-button" href="tel:1111">☎ ११११</a>
+              </article>
+
+            </div>
+          </section>
+
+        </div>
+
+        <div class="no-results" id="no-results">
+          🔎 तपाईंले खोज्नुभएको सम्पर्क भेटिएन। अर्को शब्द वा नम्बर प्रयोग गर्नुहोस्।
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SAFETY TIPS -->
+    <section class="container">
+      <div class="safety-panel">
+        <h2>⚠️ आपत्कालीन अवस्थामा ध्यान दिनुपर्ने कुरा</h2>
+        <ul class="safety-list">
+          <li>फोन गर्दा आफ्नो नाम, स्थान र समस्या स्पष्ट रूपमा बताउनुहोस्।</li>
+          <li>दुर्घटना वा विपद् भएको ठाउँको नजिकको चिनिने स्थान पनि बताउनुहोस्।</li>
+          <li>एम्बुलेन्स बोलाउँदा बिरामीको अवस्था र सम्पर्क गर्ने व्यक्तिको नम्बर दिनुहोस्।</li>
+          <li>आगलागी, बाढी, पहिरो वा भूकम्पको समयमा आफ्नो सुरक्षा पहिलो प्राथमिकता बनाउनुहोस्।</li>
+          <li>आपत्कालीन नम्बरहरूमा अनावश्यक वा परीक्षणका लागि फोन नगर्नुहोस्।</li>
+          <li>सम्भव भए नजिकको प्रहरी कार्यालय, अस्पताल वा स्थानीय निकायको सहयोग पनि लिनुहोस्।</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- OFFICIAL SOURCES -->
+    <section class="container">
+      <div class="sources">
+        <h3>🔗 आधिकारिक जानकारी तथा स्रोतहरू</h3>
+        <div class="source-links">
+          <a href="https://www.nepalpolice.gov.np/" target="_blank" rel="noopener">नेपाल प्रहरी</a>
+          <a href="https://traffic.nepalpolice.gov.np/" target="_blank" rel="noopener">ट्राफिक प्रहरी</a>
+          <a href="https://cyberbureau.nepalpolice.gov.np/" target="_blank" rel="noopener">साइबर ब्यूरो</a>
+          <a href="https://www.ncell.com.np/en/individual/emergency-services-information" target="_blank" rel="noopener">आपत्कालीन नम्बर सूची</a>
+          <a href="https://www.dhm.gov.np/" target="_blank" rel="noopener">मौसम तथा बाढी पूर्वसूचना</a>
+          <a href="https://www.tourismnpl.gov.np/EmergencyContact" target="_blank" rel="noopener">नेपाल पर्यटन बोर्ड</a>
+          <a href="https://nrcs.org/" target="_blank" rel="noopener">नेपाल रेडक्रस</a>
+        </div>
+        <p class="disclaimer">
+          सूचना: यो पेज जनचेतना तथा छिटो सम्पर्कका लागि तयार गरिएको हो।
+          नम्बर, सेवा उपलब्धता, शुल्क तथा नेटवर्कअनुसार पहुँच फरक हुन सक्छ।
+          कुनै नम्बरमा सम्पर्क हुन नसके नजिकको प्रहरी कार्यालय, अस्पताल वा सम्बन्धित सरकारी निकायमा सम्पर्क गर्नुहोस्।
+          स्थानीय अस्पताल र एम्बुलेन्सको नम्बर पनि आफ्नो क्षेत्रमा छुट्टै सुरक्षित राख्नुहोस्।
+        </p>
+      </div>
+    </section>
+
   </main>
+
+  <footer>
+    <div class="container">
+      © 2026 KAMAL G.C. · Emergency Help Center
+      <br>
+      <a href="index.html">मुख्य पेजमा फर्कनुहोस्</a>
+    </div>
+  </footer>
+
+  <script>
+    "use strict";
+
+    const searchInput = document.getElementById("contact-search");
+    const categories = [...document.querySelectorAll(".category")];
+    const filterButtons = [...document.querySelectorAll(".filter-btn")];
+    const noResults = document.getElementById("no-results");
+    const totalCount = document.getElementById("total-count");
+
+    let activeFilter = "all";
+
+    function normalizeText(value) {
+      return String(value || "").toLocaleLowerCase("ne");
+    }
+
+    function filterDirectory() {
+      const query = normalizeText(searchInput.value.trim());
+      let visibleTotal = 0;
+
+      categories.forEach(category => {
+        const categoryType = category.dataset.category;
+        const filterMatches =
+          activeFilter === "all" || activeFilter === categoryType;
+
+        const cards = [...category.querySelectorAll(".contact-card")];
+        let visibleInCategory = 0;
+
+        cards.forEach(card => {
+          const searchableText = normalizeText(
+            card.innerText + " " + (card.dataset.search || "")
+          );
+
+          const searchMatches = !query || searchableText.includes(query);
+          const visible = filterMatches && searchMatches;
+
+          card.style.display = visible ? "flex" : "none";
+
+          if (visible) {
+            visibleInCategory++;
+            visibleTotal++;
+          }
+        });
+
+        category.style.display = visibleInCategory ? "block" : "none";
+      });
+
+      totalCount.textContent = visibleTotal + " सेवा";
+      noResults.style.display = visibleTotal ? "none" : "block";
+    }
+
+    searchInput.addEventListener("input", filterDirectory);
+
+    filterButtons.forEach(button => {
+      button.addEventListener("click", () => {
+        activeFilter = button.dataset.filter;
+
+        filterButtons.forEach(item => {
+          item.classList.toggle("active", item === button);
+        });
+
+        filterDirectory();
+      });
+    });
+
+    filterDirectory();
+  </script>
 
 </body>
 </html>
