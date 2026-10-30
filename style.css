@@ -1,77 +1,578 @@
-let currentLang = 'NP';
+/* =========================================
+   KAMAL G.C. PORTAL — PROFESSIONAL UI
+   Version 1.0
+========================================= */
 
-// 1. Live Real-time Clock
-function updateClock() {
-  const now = new Date();
-  const timeString = now.toLocaleTimeString();
-  document.getElementById('real-time').innerText = timeString;
+:root {
+  --bg: #07111f;
+  --surface: #101e31;
+  --surface-2: #16263c;
+  --primary: #38bdf8;
+  --primary-dark: #0284c7;
+  --text: #f1f5f9;
+  --muted: #a5b4c7;
+  --border: rgba(148, 163, 184, .18);
+  --danger: #fb4568;
+  --gold: #fbbf24;
+  --shadow: 0 12px 35px rgba(0, 0, 0, .22);
+  --radius: 18px;
 }
-setInterval(updateClock, 1000);
-updateClock();
 
-// 2. Dynamic Nepali Date
-function setNepaliDate() {
-  if (typeof bikramSambat !== 'undefined' || typeof NepaliFunctions !== 'undefined') {
-    const now = new Date();
-    const year = now.getFullYear();
-    const month = now.getMonth() + 1;
-    const day = now.getDate();
-    const bsDate = NepaliFunctions.AD2BS({ year: year, month: month, day: day });
-    document.getElementById('nepali-date').innerText = `${bsDate.year}-${bsDate.month}-${bsDate.day} वि.सं.`;
-  } else {
-    document.getElementById('nepali-date').innerText = "२०८२/११/०४"; // Fallback
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  touch-action: auto;
+}
+
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  height: auto !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  background:
+    radial-gradient(ellipse at top left, rgba(14, 116, 144, .16), transparent 38%),
+    var(--bg) !important;
+  color: var(--text);
+  font-family: "Segoe UI", Arial, sans-serif;
+  line-height: 1.55;
+  transition: background .3s ease, color .3s ease;
+}
+
+/* LIGHT MODE */
+
+body.light-mode {
+  --bg: #f1f5f9;
+  --surface: #ffffff;
+  --surface-2: #eaf2f9;
+  --text: #172033;
+  --muted: #64748b;
+  --border: rgba(15, 23, 42, .12);
+  --shadow: 0 12px 30px rgba(15, 23, 42, .08);
+
+  background:
+    radial-gradient(ellipse at top left, rgba(56, 189, 248, .12), transparent 40%),
+    var(--bg) !important;
+  color: var(--text);
+}
+
+/* HEADER */
+
+.top-header {
+  position: sticky !important;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: 12px clamp(12px, 3vw, 30px) 14px !important;
+  background: rgba(9, 21, 38, .94) !important;
+  border-bottom: 1px solid var(--border) !important;
+  box-shadow: var(--shadow) !important;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+body.light-mode .top-header {
+  background: rgba(255, 255, 255, .94) !important;
+  border-bottom-color: var(--border) !important;
+}
+
+/* BRAND */
+
+.brand-row {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2px 0 13px !important;
+}
+
+.brand-title-container {
+  gap: 11px;
+}
+
+.brand-logo-icon {
+  font-size: 1.65rem !important;
+  color: var(--gold) !important;
+  text-shadow: 0 0 18px rgba(251, 191, 36, .35);
+}
+
+.brand-name {
+  font-size: clamp(1.15rem, 3vw, 1.55rem) !important;
+  font-weight: 850 !important;
+  letter-spacing: 1.4px;
+  color: var(--primary) !important;
+  text-shadow: none !important;
+}
+
+.brand-icons {
+  gap: 19px !important;
+  font-size: 1.2rem !important;
+}
+
+.brand-icons i {
+  padding: 8px;
+  border-radius: 50%;
+  transition: .25s ease;
+}
+
+.brand-icons i:hover {
+  background: var(--surface-2);
+  color: var(--primary);
+}
+
+.profile-nav-avatar {
+  width: 38px !important;
+  height: 38px !important;
+  border: 2px solid var(--primary) !important;
+  box-shadow: 0 0 0 4px rgba(56, 189, 248, .10);
+}
+
+/* NAVIGATION */
+
+.nav-row {
+  max-width: 1200px;
+  margin: 0 auto 12px !important;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center !important;
+  gap: 9px !important;
+}
+
+.btn-3d {
+  flex: 1 1 130px;
+  min-height: 42px;
+  padding: 10px 14px !important;
+  border: 1px solid rgba(56, 189, 248, .35) !important;
+  border-radius: 11px !important;
+  background: linear-gradient(135deg, #087eb7, #075985) !important;
+  color: #fff !important;
+  box-shadow: 0 4px 12px rgba(2, 132, 199, .18) !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  text-shadow: none !important;
+  transition: transform .2s ease, box-shadow .2s ease !important;
+}
+
+.btn-3d:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(2, 132, 199, .28) !important;
+}
+
+.btn-3d:active {
+  transform: scale(.97);
+}
+
+.btn-emergency {
+  background: linear-gradient(135deg, #e11d48, #9f1239) !important;
+  border-color: rgba(251, 69, 104, .5) !important;
+}
+
+.lang-btn {
+  flex: 0 1 75px;
+  background: linear-gradient(135deg, #d97706, #92400e) !important;
+  border-color: rgba(251, 191, 36, .5) !important;
+}
+
+/* INFORMATION BAR */
+
+.info-row {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 10px 13px !important;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center !important;
+  gap: 12px 20px !important;
+  background: var(--surface) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 13px !important;
+  box-shadow: none !important;
+  color: var(--muted);
+  font-size: 12px !important;
+}
+
+.info-item {
+  gap: 7px !important;
+  white-space: nowrap;
+}
+
+.info-item i {
+  color: var(--primary) !important;
+}
+
+.theme-toggle {
+  padding: 5px 11px !important;
+  background: var(--surface-2) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 20px !important;
+  color: var(--text) !important;
+  cursor: pointer;
+}
+
+/* MAIN CONTENT */
+
+.middle-content {
+  width: min(1200px, 100%);
+  margin: 0 auto !important;
+  padding: 28px clamp(14px, 3vw, 30px) 35px !important;
+  flex: 1;
+  overflow: visible !important;
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-content: start;
+  gap: 20px !important;
+}
+
+/* CARDS */
+
+.card {
+  position: relative;
+  min-width: 0;
+  padding: 23px !important;
+  overflow: hidden;
+  background: var(--surface) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius) !important;
+  box-shadow: var(--shadow) !important;
+  transition: transform .25s ease, border-color .25s ease,
+              box-shadow .25s ease !important;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(180deg, var(--primary), transparent);
+  opacity: .8;
+}
+
+.card:hover {
+  transform: translateY(-4px) !important;
+  border-color: rgba(56, 189, 248, .45) !important;
+  box-shadow: 0 18px 38px rgba(0, 0, 0, .20) !important;
+}
+
+.card-header {
+  display: flex;
+  align-items: flex-start !important;
+  gap: 11px !important;
+  margin-bottom: 12px !important;
+  color: var(--primary) !important;
+  font-size: 16px !important;
+  line-height: 1.5;
+  font-weight: 750 !important;
+}
+
+.card-header i {
+  margin-top: 3px;
+  font-size: 18px;
+}
+
+.card-desc {
+  margin-bottom: 17px !important;
+  color: var(--muted) !important;
+  font-size: 13px !important;
+  line-height: 1.8 !important;
+}
+
+.card-btn {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 9px 16px !important;
+  border-radius: 9px !important;
+  background: var(--primary-dark) !important;
+  color: #fff !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  text-decoration: none !important;
+  transition: .2s ease;
+}
+
+.card-btn:hover {
+  background: #0369a1 !important;
+  transform: translateY(-2px);
+}
+
+.emergency-card {
+  border-color: rgba(251, 69, 104, .28) !important;
+}
+
+.emergency-card::before {
+  background: linear-gradient(180deg, var(--danger), transparent);
+}
+
+.emergency-card .card-header {
+  color: var(--danger) !important;
+}
+
+.emergency-card .card-btn {
+  background: #e11d48 !important;
+}
+
+.emergency-card .card-btn:hover {
+  background: #be123c !important;
+}
+
+/* BANNER */
+
+#custom-banner-ad {
+  grid-column: 1 / -1;
+  width: 100% !important;
+  position: static !important;
+  left: auto !important;
+  right: auto !important;
+  margin: 0 !important;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--surface) !important;
+}
+
+#custom-banner-ad a,
+#custom-banner-ad video {
+  display: block;
+  width: 100%;
+}
+
+#custom-banner-ad video {
+  max-height: 210px;
+  object-fit: contain;
+}
+
+/* MODALS */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  padding: 18px;
+  background: rgba(2, 6, 23, .78) !important;
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
+}
+
+.modal-box {
+  width: min(420px, 100%) !important;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 25px !important;
+  background: var(--surface) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 20px !important;
+  box-shadow: 0 25px 70px rgba(0, 0, 0, .4) !important;
+  color: var(--text);
+}
+
+.modal-header {
+  margin-bottom: 20px !important;
+  color: var(--text);
+  font-size: 17px !important;
+}
+
+.close-btn {
+  padding: 5px;
+  color: var(--danger) !important;
+}
+
+.profile-img-preview {
+  border: 3px solid var(--primary) !important;
+}
+
+.change-photo-btn {
+  border: 2px solid var(--surface) !important;
+}
+
+.input-field {
+  width: 100%;
+  padding: 12px 14px !important;
+  margin-bottom: 13px !important;
+  background: var(--bg) !important;
+  color: var(--text) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 10px !important;
+  outline: none;
+  font-size: 14px !important;
+}
+
+.input-field:focus {
+  border-color: var(--primary) !important;
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, .12);
+}
+
+.submit-btn {
+  padding: 12px !important;
+  border-radius: 10px !important;
+  background: linear-gradient(135deg, #0284c7, #0369a1) !important;
+  font-size: 14px !important;
+  transition: .2s ease;
+}
+
+.submit-btn:hover {
+  filter: brightness(1.12);
+}
+
+/* FOOTER */
+
+.bottom-footer {
+  position: static !important;
+  width: 100%;
+  margin-top: auto;
+  padding: 20px 14px !important;
+  background: #050d19 !important;
+  border-top: 1px solid var(--border) !important;
+  box-shadow: none !important;
+  color: #e2e8f0;
+}
+
+.footer-contact {
+  flex-wrap: wrap;
+  gap: 10px 24px !important;
+  margin-bottom: 12px !important;
+}
+
+.footer-contact a {
+  color: var(--primary) !important;
+  font-size: 12px;
+}
+
+.footer-contact a:hover {
+  color: #7dd3fc !important;
+}
+
+.footer-copyright {
+  color: #94a3b8 !important;
+  font-size: 10px !important;
+  letter-spacing: .5px;
+}
+
+/* ACCESSIBILITY */
+
+button,
+a,
+input,
+.theme-toggle,
+.brand-icons i {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 3px;
+}
+
+/* TABLET */
+
+@media (max-width: 760px) {
+  .middle-content {
+    gap: 15px !important;
+    padding-top: 20px !important;
+  }
+
+  .card {
+    padding: 19px !important;
+  }
+
+  .info-row {
+    gap: 9px 14px !important;
   }
 }
-setNepaliDate();
 
-// 3. Automatic Location & Weather API (GPS बेस्ड)
-function getLiveLocationAndWeather() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(position => {
-      const lat = position.coords.latitude;
-      const lon = position.coords.longitude;
+/* MOBILE */
 
-      // Fetch Weather & City via Open-Meteo & Reverse Geocoding API
-      fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`)
-        .then(res => res.json())
-        .then(data => {
-          document.getElementById('weather-temp').innerText = `${data.current_weather.temperature}°C`;
-        })
-        .catch(() => {
-          document.getElementById('weather-temp').innerText = "--°C";
-        });
+@media (max-width: 560px) {
+  .top-header {
+    padding: 9px 10px 11px !important;
+  }
 
-      fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`)
-        .then(res => res.json())
-        .then(data => {
-          const city = data.address.city || data.address.town || data.address.state || "Nepal";
-          document.getElementById('user-location').innerText = city;
-        })
-        .catch(() => {
-          document.getElementById('user-location').innerText = "Nepal";
-        });
-    }, () => {
-      document.getElementById('user-location').innerText = "Location Off";
-    });
+  .brand-row {
+    padding-bottom: 10px !important;
+  }
+
+  .brand-name {
+    font-size: 1.1rem !important;
+  }
+
+  .brand-logo-icon {
+    font-size: 1.35rem !important;
+  }
+
+  .nav-row {
+    gap: 7px !important;
+    margin-bottom: 10px !important;
+  }
+
+  .btn-3d {
+    flex: 1 1 calc(33.333% - 7px);
+    min-height: 39px;
+    padding: 8px 5px !important;
+    font-size: 11px !important;
+  }
+
+  .lang-btn {
+    flex: 1 1 calc(25% - 7px);
+  }
+
+  .info-row {
+    justify-content: space-around !important;
+    gap: 8px 10px !important;
+    padding: 9px 6px !important;
+    font-size: 10px !important;
+  }
+
+  .info-item {
+    gap: 4px !important;
+  }
+
+  .middle-content {
+    grid-template-columns: 1fr !important;
+    padding: 17px 13px 25px !important;
+    gap: 14px !important;
+  }
+
+  .card {
+    padding: 19px !important;
+    border-radius: 15px !important;
+  }
+
+  .card-header {
+    font-size: 15px !important;
+  }
+
+  .card-desc {
+    font-size: 12px !important;
+  }
+
+  #custom-banner-ad {
+    grid-column: 1;
+  }
+
+  #custom-banner-ad video {
+    max-height: 160px;
+  }
+
+  .footer-contact {
+    flex-direction: column;
+    align-items: center;
+    gap: 9px !important;
   }
 }
-getLiveLocationAndWeather();
 
-// 4. Dark / Light Mode Switch
-function toggleTheme() {
-  document.body.classList.toggle('light-mode');
-  const isLight = document.body.classList.contains('light-mode');
-  document.getElementById('theme-icon').className = isLight ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
-  document.getElementById('theme-text').innerText = isLight ? 'Light' : 'Dark';
-}
+/* REDUCED MOTION */
 
-// 5. English / Nepali Language Toggle Engine
-function toggleLanguage() {
-  currentLang = currentLang === 'NP' ? 'EN' : 'NP';
-  document.getElementById('lang-toggle').innerText = currentLang === 'NP' ? 'EN' : 'NP';
-
-  // Translate all dynamic data attributes
-  document.querySelectorAll('[data-np]').forEach(el => {
-    el.innerText = currentLang === 'NP' ? el.getAttribute('data-np') : el.getAttribute('data-en');
-  });
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
 }
