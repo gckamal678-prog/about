@@ -5,9 +5,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>KAMAL G.C. | Personal Portal</title>
-  <meta name="description" content="Kamal G.C. को व्यक्तिगत पोर्टल। परिचय, ब्लग, आपत्कालीन सम्पर्क र उपयोगी सेवाहरू।">
-  <meta name="theme-color" content="#07111f">
+  <title>KAMAL G.C. | Personal Journal</title>
+  <meta name="description" content="Kamal G.C. का अनुभव, विचार, यात्रा, प्रविधि र जीवनका कथाहरू।">
+  <meta name="theme-color" content="#0b1220">
   <meta name="author" content="Kamal G.C.">
 
   <link rel="canonical" href="https://kamalgc.com.np/">
@@ -15,1070 +15,1299 @@
   <link rel="icon" type="image/png" href="mylogo.png">
   <link rel="apple-touch-icon" href="mylogo.png">
 
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-  <script src="https://cdn.jsdelivr.net/npm/nepali-date-converter@2.0.1/dist/nepali-date-converter.umd.js"></script>
+  <style>
+    :root {
+      --bg: #0b1220;
+      --surface: #111c2e;
+      --surface2: #17243a;
+      --text: #edf3fc;
+      --muted: #9aaac0;
+      --line: rgba(255,255,255,.09);
+      --accent: #69b7ff;
+      --accent2: #9b8cff;
+      --shadow: 0 18px 55px rgba(0,0,0,.22);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "DM Sans", "Noto Sans Devanagari", sans-serif;
+      background:
+        radial-gradient(circle at 10% 0%, rgba(66,125,210,.13), transparent 30%),
+        var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.7;
+    }
+
+    body.light-mode {
+      --bg: #f3f6fb;
+      --surface: #ffffff;
+      --surface2: #edf2f9;
+      --text: #142238;
+      --muted: #64748b;
+      --line: rgba(15,35,60,.12);
+      --accent: #176bc0;
+      --accent2: #7054d8;
+      --shadow: 0 18px 50px rgba(24,45,75,.09);
+      background: #f3f6fb;
+    }
+
+    button, input {
+      font: inherit;
+    }
+
+    button, a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .container {
+      width: min(1120px, calc(100% - 36px));
+      margin: auto;
+    }
+
+    /* HEADER */
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: color-mix(in srgb, var(--bg) 88%, transparent);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .header-inner {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .brand img {
+      width: 43px;
+      height: 43px;
+      border-radius: 14px;
+      object-fit: cover;
+      border: 1px solid var(--line);
+    }
+
+    .brand-name {
+      font-size: 17px;
+      font-weight: 800;
+      letter-spacing: .7px;
+    }
+
+    .brand-subtitle {
+      color: var(--muted);
+      font-size: 11px;
+      margin-top: -3px;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .nav-link, .icon-button {
+      border: 1px solid transparent;
+      color: var(--muted);
+      background: transparent;
+      border-radius: 11px;
+      padding: 9px 13px;
+      font-size: 13px;
+      font-weight: 600;
+      transition: .2s;
+    }
+
+    .nav-link:hover, .icon-button:hover {
+      color: var(--text);
+      background: var(--surface2);
+      border-color: var(--line);
+    }
+
+    .nav-link.active {
+      color: var(--accent);
+      background: var(--surface2);
+    }
+
+    .icon-button {
+      width: 40px;
+      height: 40px;
+      padding: 0;
+      font-size: 17px;
+    }
+
+    /* HERO */
+
+    .hero {
+      padding: 76px 0 50px;
+    }
+
+    .hero-panel {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 27px;
+      padding: clamp(28px, 6vw, 62px);
+      background:
+        radial-gradient(circle at 85% 20%, rgba(105,183,255,.2), transparent 32%),
+        linear-gradient(125deg, var(--surface), var(--surface2));
+      box-shadow: var(--shadow);
+    }
+
+    .hero-panel::after {
+      content: "";
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      right: -100px;
+      bottom: -160px;
+      border-radius: 50%;
+      border: 1px solid rgba(105,183,255,.25);
+      box-shadow: 0 0 0 25px rgba(105,183,255,.035),
+                  0 0 0 55px rgba(105,183,255,.025);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--accent);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1.7px;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 22px;
+      height: 2px;
+      background: var(--accent);
+      border-radius: 5px;
+    }
+
+    .hero h1 {
+      max-width: 720px;
+      font-size: clamp(34px, 6vw, 61px);
+      line-height: 1.17;
+      letter-spacing: -1.8px;
+      font-weight: 800;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-description {
+      max-width: 620px;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.9;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 27px;
+    }
+
+    .primary-button, .secondary-button {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 9px;
+      min-height: 45px;
+      border-radius: 12px;
+      padding: 0 19px;
+      font-size: 13px;
+      font-weight: 700;
+      transition: .2s;
+    }
+
+    .primary-button {
+      color: #07111f;
+      background: linear-gradient(110deg, #79c5ff, #a99bff);
+      border: 0;
+    }
+
+    .primary-button:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.08);
+    }
+
+    .secondary-button {
+      color: var(--text);
+      background: var(--surface);
+      border: 1px solid var(--line);
+    }
+
+    .secondary-button:hover {
+      border-color: var(--accent);
+    }
+
+    /* SECTION */
+
+    .section {
+      padding: 25px 0 65px;
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 25px;
+    }
+
+    .section-kicker {
+      color: var(--accent);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1.6px;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+    }
+
+    .section-heading h2 {
+      font-size: clamp(23px, 4vw, 31px);
+      line-height: 1.3;
+      font-weight: 800;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 5px;
+    }
+
+    .post-count {
+      color: var(--muted);
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    /* SEARCH */
+
+    .feed-tools {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .search-wrap {
+      flex: 1;
+      position: relative;
+    }
+
+    .search-wrap span {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+    }
+
+    .search-input {
+      width: 100%;
+      height: 47px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      color: var(--text);
+      border-radius: 13px;
+      padding: 0 15px 0 43px;
+      outline: none;
+      font-size: 13px;
+    }
+
+    .search-input:focus {
+      border-color: var(--accent);
+    }
+
+    /* POST GRID */
+
+    .post-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .post-card {
+      overflow: hidden;
+      min-width: 0;
+      border-radius: 19px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      transition: transform .22s, border-color .22s;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .post-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(105,183,255,.5);
+    }
+
+    .post-image-wrap {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: var(--surface2);
+      overflow: hidden;
+    }
+
+    .post-image {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      transition: transform .4s;
+    }
+
+    .post-card:hover .post-image {
+      transform: scale(1.035);
+    }
+
+    .no-image {
+      height: 100%;
+      display: grid;
+      place-items: center;
+      color: var(--accent);
+      font-size: 42px;
+      background:
+        radial-gradient(circle at 30% 20%, rgba(105,183,255,.18), transparent 50%),
+        var(--surface2);
+    }
+
+    .post-body {
+      padding: 21px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .post-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 11px;
+      margin-bottom: 10px;
+    }
+
+    .post-meta .dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    .post-title {
+      font-size: 19px;
+      line-height: 1.5;
+      font-weight: 800;
+      margin-bottom: 9px;
+      overflow-wrap: anywhere;
+    }
+
+    .post-excerpt {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.85;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      overflow-wrap: anywhere;
+    }
+
+    .read-more {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 800;
+      margin-top: 18px;
+    }
+
+    .empty-state {
+      grid-column: 1 / -1;
+      padding: 55px 20px;
+      border: 1px dashed var(--line);
+      border-radius: 18px;
+      text-align: center;
+      background: var(--surface);
+    }
+
+    .empty-state .empty-icon {
+      font-size: 34px;
+      margin-bottom: 12px;
+    }
+
+    .empty-state h3 {
+      font-size: 17px;
+      margin-bottom: 7px;
+    }
+
+    .empty-state p {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .status-message {
+      color: var(--muted);
+      font-size: 13px;
+      padding: 20px 0;
+      text-align: center;
+    }
+
+    /* ABOUT STRIP */
+
+    .about-strip {
+      margin: 10px 0 65px;
+      padding: 28px;
+      border-radius: 20px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .about-strip h3 {
+      font-size: 19px;
+      margin-bottom: 5px;
+    }
+
+    .about-strip p {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    /* FOOTER */
+
+    .footer {
+      border-top: 1px solid var(--line);
+      padding: 27px 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 17px;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent);
+    }
+
+    /* ARTICLE READING VIEW */
+
+    .reader-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      overflow-y: auto;
+      padding: 25px 14px;
+      background: rgba(3,8,17,.88);
+      backdrop-filter: blur(10px);
+    }
+
+    .reader-overlay.open {
+      display: block;
+    }
+
+    .reader {
+      width: min(790px, 100%);
+      margin: 0 auto;
+      background: var(--bg);
+      border: 1px solid var(--line);
+      border-radius: 21px;
+      overflow: hidden;
+      box-shadow: 0 25px 90px rgba(0,0,0,.4);
+    }
+
+    .reader-toolbar {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 13px 18px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .reader-toolbar strong {
+      font-size: 12px;
+      letter-spacing: .5px;
+    }
+
+    .reader-close {
+      width: 37px;
+      height: 37px;
+      border: 1px solid var(--line);
+      border-radius: 11px;
+      color: var(--text);
+      background: var(--surface2);
+      font-size: 20px;
+    }
+
+    .reader-content {
+      padding: clamp(20px, 5vw, 43px);
+    }
+
+    .reader-date {
+      color: var(--accent);
+      font-size: 12px;
+      margin-bottom: 12px;
+    }
+
+    .reader-title {
+      font-size: clamp(25px, 5vw, 38px);
+      line-height: 1.4;
+      font-weight: 800;
+      overflow-wrap: anywhere;
+      margin-bottom: 22px;
+    }
+
+    .reader-image {
+      width: 100%;
+      max-height: 480px;
+      object-fit: contain;
+      border-radius: 15px;
+      background: var(--surface2);
+      margin-bottom: 25px;
+    }
+
+    .reader-text {
+      color: var(--text);
+      font-size: 15px;
+      line-height: 2.05;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
+
+    .reader-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid var(--line);
+    }
+
+    /* RESPONSIVE */
+
+    @media (max-width: 700px) {
+      .header-inner {
+        min-height: 66px;
+      }
+
+      .brand img {
+        width: 38px;
+        height: 38px;
+      }
+
+      .brand-name {
+        font-size: 14px;
+      }
+
+      .brand-subtitle {
+        font-size: 9px;
+      }
+
+      .nav {
+        gap: 3px;
+      }
+
+      .nav-link {
+        padding: 8px 9px;
+        font-size: 11px;
+      }
+
+      .nav .icon-button {
+        width: 35px;
+        height: 35px;
+      }
+
+      .hero {
+        padding: 35px 0 28px;
+      }
+
+      .hero-panel {
+        border-radius: 20px;
+      }
+
+      .hero h1 {
+        letter-spacing: -1px;
+      }
+
+      .post-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .post-body {
+        padding: 18px;
+      }
+
+      .post-title {
+        font-size: 17px;
+      }
+
+      .about-strip {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 22px;
+      }
+    }
+
+    @media (max-width: 390px) {
+      .container {
+        width: calc(100% - 24px);
+      }
+
+      .brand-subtitle {
+        display: none;
+      }
+
+      .nav-link {
+        padding: 7px;
+        font-size: 10px;
+      }
+    }
+  </style>
 </head>
 
-<body class="dark-mode">
+<body>
 
   <!-- HEADER -->
-  <header class="top-header">
+  <header class="site-header">
+    <div class="container header-inner">
 
-    <div class="brand-row">
+      <a class="brand" href="index.html" aria-label="Kamal G.C. Home">
+        <img src="mylogo.png" alt="Kamal G.C. logo">
+        <div>
+          <div class="brand-name">KAMAL G.C.</div>
+          <div class="brand-subtitle">Personal Journal & Digital Space</div>
+        </div>
+      </a>
 
-      <div class="brand-title-container">
-        <i class="fa-solid fa-gem brand-logo-icon" aria-hidden="true"></i>
-        <span class="brand-name">KAMAL G.C.</span>
-      </div>
-
-      <div class="brand-icons">
-
-        <button type="button"
-                aria-label="Search"
-                title="Search"
-                onclick="openSearchModal()">
-          <i class="fa-solid fa-magnifying-glass"></i>
-        </button>
-
-        <button type="button"
-                aria-label="Open profile"
-                title="Profile"
-                onclick="openProfileModal()">
-          <img src="mylogo.png"
-               id="nav-profile-img"
-               class="profile-nav-avatar"
-               alt="Profile">
-        </button>
-
-      </div>
-    </div>
-
-    <!-- MAIN NAVIGATION -->
-    <nav class="nav-row" aria-label="Main navigation">
-
-      <button class="btn-3d"
-              onclick="location.href='blog.html'"
-              data-np="ब्लग"
-              data-en="Blog">
-        ब्लग
-      </button>
-
-      <button class="btn-3d btn-emergency"
-              onclick="location.href='emergency.html'"
-              data-np="आपत्कालीन"
-              data-en="Emergency">
-        आपत्कालीन
-      </button>
-
-      <button class="btn-3d"
-              onclick="location.href='about.html'"
-              data-np="मेरो बारेमा"
-              data-en="About Me">
-        मेरो बारेमा
-      </button>
-
-      <button class="btn-3d lang-btn"
-              id="lang-toggle"
-              type="button"
-              onclick="toggleLanguage()">
-        EN
-      </button>
-
-    </nav>
-
-    <!-- LIVE INFORMATION -->
-    <div class="info-row">
-
-      <div class="info-item">
-        <i class="fa-solid fa-location-dot"></i>
-        <span id="user-location">Location...</span>
-      </div>
-
-      <div class="info-item">
-        <i class="fa-regular fa-clock"></i>
-        <span id="real-time">--:--:--</span>
-      </div>
-
-      <div class="info-item">
-        <i class="fa-regular fa-calendar"></i>
-        <span id="nepali-date">----/--/--</span>
-      </div>
-
-      <div class="info-item">
-        <i class="fa-solid fa-cloud-sun"></i>
-        <span id="weather-temp">--°C</span>
-      </div>
-
-      <button type="button"
-              class="info-item theme-toggle"
-              onclick="toggleTheme()"
-              aria-label="Change theme">
-
-        <i class="fa-solid fa-moon" id="theme-icon"></i>
-        <span id="theme-text">Dark</span>
-
-      </button>
+      <nav class="nav" aria-label="Main navigation">
+        <a class="nav-link active" href="index.html">Home</a>
+        <a class="nav-link" href="about.html">About</a>
+        <a class="nav-link" href="emergency.html">Emergency</a>
+        <button class="icon-button" id="theme-toggle" type="button" aria-label="Change theme">☀</button>
+      </nav>
 
     </div>
-
   </header>
 
 
-  <!-- MAIN CONTENT -->
-  <main class="middle-content" id="content-container">
+  <!-- HERO -->
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="hero-panel">
 
-    <!-- EMERGENCY -->
-    <article class="card emergency-card">
+          <div class="eyebrow">WELCOME TO MY WORLD</div>
 
-      <div class="card-header">
-        <i class="fa-solid fa-phone-volume"></i>
+          <h1>
+            विचार, अनुभव र<br>
+            <span>जीवनका कथाहरू।</span>
+          </h1>
 
-        <span data-np="१. आपत्कालीन सम्पर्क सेवा"
-              data-en="1. Emergency Contact Services">
-          १. आपत्कालीन सम्पर्क सेवा
-        </span>
+          <p class="hero-description">
+            नमस्कार! म कमल जी.सी.। यहाँ मेरा जीवनका अनुभव,
+            यात्रा, सिकाइ, प्रविधि र समयसँगै बटुलेका विचारहरू
+            साझा गर्नेछु। पढ्नुहोस्, बुझ्नुहोस् र आफ्नो विचार पनि बाँड्नुहोस्।
+          </p>
+
+          <div class="hero-actions">
+            <a href="#posts" class="primary-button">
+              <span>✦</span> पोस्टहरू पढ्नुहोस्
+            </a>
+
+            <a href="about.html" class="secondary-button">
+              मेरो परिचय →
+            </a>
+          </div>
+
+        </div>
       </div>
-
-      <p class="card-desc"
-         data-np="प्रहरी, एम्बुलेन्स र दमकल जस्ता जरुरी हेल्पलाइन नम्बरहरूको पहुँच।"
-         data-en="Access important emergency helplines such as police, ambulance and fire services.">
-
-        प्रहरी, एम्बुलेन्स र दमकल जस्ता जरुरी हेल्पलाइन नम्बरहरूको पहुँच।
-
-      </p>
-
-      <a href="emergency.html"
-         class="card-btn"
-         data-np="नम्बरहरू हेर्नुहोस् →"
-         data-en="View Numbers →">
-
-        नम्बरहरू हेर्नुहोस् →
-
-      </a>
-
-    </article>
+    </section>
 
 
-    <!-- BLOG 1 -->
-    <article class="card">
+    <!-- POSTS -->
+    <section class="section" id="posts">
+      <div class="container">
 
-      <div class="card-header">
-        <i class="fa-solid fa-newspaper"></i>
+        <div class="section-heading">
+          <div>
+            <div class="section-kicker">LATEST STORIES</div>
+            <h2>नयाँ पोस्टहरू</h2>
+            <p>नयाँ विचार र अनुभवहरू यहाँ पढ्नुहोस्।</p>
+          </div>
 
-        <span data-np="२. जिन्दगीको गोरेटोमा अलि पछाडि फर्केर हेर्दा..."
-              data-en="2. Looking Back on the Path of Life">
+          <div class="post-count" id="post-count">पोस्टहरू लोड हुँदैछन्...</div>
+        </div>
 
-          २. जिन्दगीको गोरेटोमा अलि पछाडि फर्केर हेर्दा...
+        <div class="feed-tools">
+          <div class="search-wrap">
+            <span>⌕</span>
+            <input
+              type="search"
+              id="post-search"
+              class="search-input"
+              placeholder="पोस्ट खोज्नुहोस्..."
+              autocomplete="off">
+          </div>
+        </div>
 
-        </span>
+        <div id="post-grid" class="post-grid">
+          <div class="status-message">पोस्टहरू लोड हुँदैछन्...</div>
+        </div>
+
       </div>
-
-      <p class="card-desc"
-         data-np="१५–१६ वर्षको उमेरका फोटो र किशोरावस्थाको सादगी तथा निर्दोषपनासम्बन्धी संस्मरण।"
-         data-en="Memories and photographs from adolescence, reflecting on simplicity and innocence.">
-
-        १५–१६ वर्षको उमेरका फोटो र किशोरावस्थाको सादगी तथा निर्दोषपनासम्बन्धी संस्मरण।
-
-      </p>
-
-      <a href="blog.html#blog-1"
-         class="card-btn"
-         data-np="ब्लग पढ्नुहोस् →"
-         data-en="Read Blog →">
-
-        ब्लग पढ्नुहोस् →
-
-      </a>
-
-    </article>
+    </section>
 
 
-    <!-- BLOG 2 -->
-    <article class="card">
+    <!-- ABOUT STRIP -->
+    <section class="container">
+      <div class="about-strip">
+        <div>
+          <h3>मेरो यात्राबारे थप जान्नुहोस्</h3>
+          <p>मेरो पृष्ठभूमि, काम, रुचि, अनुभव र भविष्यका उद्देश्यहरू।</p>
+        </div>
 
-      <div class="card-header">
-        <i class="fa-solid fa-book-open"></i>
-
-        <span data-np="३. एउटा नौलो यात्रा, जसले मलाई धेरै कुरा सिकायो"
-              data-en="3. A New Journey That Taught Me Many Things">
-
-          ३. एउटा नौलो यात्रा, जसले मलाई धेरै कुरा सिकायो
-
-        </span>
+        <a href="about.html" class="primary-button">
+          About Me →
+        </a>
       </div>
-
-      <p class="card-desc"
-         data-np="१७ वर्षको उमेरमा घर छाडेर केरलातर्फ गरिएको संघर्षमय र सिकाइले भरिएको यात्राको कथा।"
-         data-en="The story of a challenging and educational journey to Kerala at the age of 17.">
-
-        १७ वर्षको उमेरमा घर छाडेर केरलातर्फ गरिएको संघर्षमय र सिकाइले भरिएको यात्राको कथा।
-
-      </p>
-
-      <a href="blog.html#blog-2"
-         class="card-btn"
-         data-np="ब्लग पढ्नुहोस् →"
-         data-en="Read Blog →">
-
-        ब्लग पढ्नुहोस् →
-
-      </a>
-
-    </article>
-
-
-    <!-- KIDS LEARNING -->
-    <article class="card">
-
-      <div class="card-header">
-        <i class="fa-solid fa-graduation-cap"></i>
-
-        <span data-np="४. PWA र बाल पाठशाला"
-              data-en="4. PWA and Kids Learning Platform">
-
-          ४. PWA र बाल पाठशाला
-
-        </span>
-      </div>
-
-      <p class="card-desc"
-         data-np="बालबालिकाका लागि AI र Progressive Web App (PWA) प्रविधि प्रयोग गरी बनाइएको आधुनिक सिकाइ प्लेटफर्म।"
-         data-en="A modern learning platform for children using AI and Progressive Web App technology.">
-
-        बालबालिकाका लागि AI र Progressive Web App (PWA) प्रविधि प्रयोग गरी बनाइएको आधुनिक सिकाइ प्लेटफर्म (kids.kamalgc.com.np)।
-
-      </p>
-
-      <a href="blog.html#post-1"
-         class="card-btn"
-         data-np="पूरा लेख पढ्नुहोस् →"
-         data-en="Read Full Article →">
-
-        पूरा लेख पढ्नुहोस् →
-
-      </a>
-
-    </article>
-
-
-    <!-- DIGITAL NOTEBOOK -->
-    <article class="card">
-
-      <div class="card-header">
-        <i class="fa-solid fa-book-bookmark"></i>
-
-        <span data-np="५. डिजिटल नोटबुक"
-              data-en="5. Digital Notebook">
-
-          ५. डिजिटल नोटबुक
-
-        </span>
-      </div>
-
-      <p class="card-desc"
-         data-np="अब सबै हिसाबकिताब खल्तीमै, सुरक्षित र सजिलो! दैनिक आय–व्यय व्यवस्थापन गर्ने आधुनिक प्लेटफर्म।"
-         data-en="Keep your income and expense records safe and organized with a modern digital platform.">
-
-        अब सबै हिसाबकिताब खल्तीमै, सुरक्षित र सजिलो! दैनिक आय–व्यय व्यवस्थापन गर्ने आधुनिक प्लेटफर्म।
-
-      </p>
-
-      <a href="blog.html#post-2"
-         class="card-btn"
-         data-np="पूरा लेख पढ्नुहोस् →"
-         data-en="Read Full Article →">
-
-        पूरा लेख पढ्नुहोस् →
-
-      </a>
-
-    </article>
-
-
-    <!-- BANNER ADVERTISEMENT -->
-    <div id="custom-banner-ad">
-
-      <a href="https://dn.kamalgc.com.np"
-         target="_blank"
-         rel="noopener noreferrer">
-
-        <video
-          src="bannerads.mp4"
-          autoplay
-          loop
-          muted
-          playsinline
-          preload="metadata"
-          aria-label="Kamal G.C. promotional banner">
-        </video>
-
-      </a>
-
-    </div>
-
-
-    <!-- ABOUT -->
-    <article class="card">
-
-      <div class="card-header">
-        <i class="fa-solid fa-user-gear"></i>
-
-        <span data-np="६. परिचय र बायो"
-              data-en="6. About Me and Bio">
-
-          ६. परिचय र बायो
-
-        </span>
-      </div>
-
-      <p class="card-desc"
-         data-np="व्यक्तिगत पृष्ठभूमि, काम, अनुभव र उद्देश्यको विवरण।"
-         data-en="Information about personal background, work, experience and goals.">
-
-        व्यक्तिगत पृष्ठभूमि, काम, अनुभव र उद्देश्यको विवरण।
-
-      </p>
-
-      <a href="about.html"
-         class="card-btn"
-         data-np="विस्तृत हेर्नुहोस् →"
-         data-en="Read More →">
-
-        विस्तृत हेर्नुहोस् →
-
-      </a>
-
-    </article>
+    </section>
 
   </main>
 
 
-  <!-- SEARCH MODAL -->
-  <div class="modal-overlay"
-       id="search-modal"
-       role="dialog"
-       aria-modal="true"
-       aria-label="Search Portal"
-       onclick="closeModalOnBackdrop(event, 'search-modal')">
-
-    <div class="modal-box">
-
-      <div class="modal-header">
-
-        <span data-np="खोजी गर्नुहोस्"
-              data-en="Search Portal">
-
-          खोजी गर्नुहोस्
-
-        </span>
-
-        <button type="button"
-                class="close-btn"
-                aria-label="Close search"
-                onclick="closeSearchModal()">
-
-          <i class="fa-solid fa-xmark"></i>
-
-        </button>
-
-      </div>
-
-      <input
-        type="search"
-        id="search-input"
-        class="input-field"
-        placeholder="खोज्ने शब्द टाइप गर्नुहोस्..."
-        oninput="filterCards()"
-        autocomplete="off">
-
-      <p id="search-status" class="card-desc" aria-live="polite"></p>
-
-    </div>
-
-  </div>
-
-
-  <!-- PROFILE MODAL -->
-  <div class="modal-overlay"
-       id="profile-modal"
-       role="dialog"
-       aria-modal="true"
-       aria-label="User Profile"
-       onclick="closeModalOnBackdrop(event, 'profile-modal')">
-
-    <div class="modal-box">
-
-      <div class="modal-header">
-
-        <span data-np="प्रोफाइल सुरक्षित गर्नुहोस्"
-              data-en="Save Profile">
-
-          प्रोफाइल सुरक्षित गर्नुहोस्
-
-        </span>
-
-        <button type="button"
-                class="close-btn"
-                aria-label="Close profile"
-                onclick="closeProfileModal()">
-
-          <i class="fa-solid fa-xmark"></i>
-
-        </button>
-
-      </div>
-
-      <div class="profile-img-container">
-
-        <img src="mylogo.png"
-             id="modal-profile-img"
-             class="profile-img-preview"
-             alt="Profile Photo">
-
-        <label for="profile-upload"
-               class="change-photo-btn"
-               title="Change profile photo">
-
-          <i class="fa-solid fa-camera"></i>
-
-        </label>
-
-        <input
-          type="file"
-          id="profile-upload"
-          accept="image/jpeg,image/png,image/webp"
-          hidden
-          onchange="handleImageUpload(event)">
-
-      </div>
-
-      <input
-        type="text"
-        id="user-name-input"
-        class="input-field"
-        placeholder="तपाईंको नाम (Full Name)"
-        maxlength="80"
-        autocomplete="name">
-
-      <input
-        type="email"
-        id="user-email-input"
-        class="input-field"
-        placeholder="तपाईंको इमेल (Email Address)"
-        maxlength="120"
-        autocomplete="email">
-
-      <button type="button"
-              class="submit-btn"
-              onclick="saveUserProfile()"
-              data-np="सेभ गर्नुहोस्"
-              data-en="Save Profile">
-
-        सेभ गर्नुहोस्
-
-      </button>
-
-    </div>
-
-  </div>
-
-
   <!-- FOOTER -->
-  <footer class="bottom-footer">
+  <footer class="footer">
+    <div class="container footer-inner">
 
-    <div class="footer-contact">
+      <div>
+        © 2026 KAMAL G.C. ALL RIGHTS RESERVED.
+      </div>
 
-      <a href="https://kids.kamalgc.com.np"
-         target="_blank"
-         rel="noopener noreferrer">
-
-        <i class="fa-solid fa-mobile-screen-button"></i>
-        kids.kamalgc.com.np
-
-      </a>
-
-      <a href="mailto:Support@kamalgc.com.np">
-
-        <i class="fa-solid fa-headset"></i>
-        Support@kamalgc.com.np
-
-      </a>
+      <div class="footer-links">
+        <a href="about.html">About</a>
+        <a href="emergency.html">Emergency</a>
+        <a href="https://kids.kamalgc.com.np" target="_blank" rel="noopener noreferrer">Kids Learning</a>
+        <a href="https://dn.kamalgc.com.np" target="_blank" rel="noopener noreferrer">Digital Notebook</a>
+        <a href="admin.html">Admin</a>
+      </div>
 
     </div>
-
-    <div class="footer-copyright">
-
-      &copy; 2026 KAMAL G.C. ALL RIGHTS RESERVED.
-
-    </div>
-
   </footer>
 
 
-  <!-- JAVASCRIPT -->
-  <script>
+  <!-- FULL ARTICLE READER -->
+  <div class="reader-overlay" id="reader-overlay" aria-hidden="true">
+    <article class="reader" role="dialog" aria-modal="true" aria-label="Full blog post">
 
+      <div class="reader-toolbar">
+        <strong>KAMAL G.C. · JOURNAL</strong>
+        <button type="button" class="reader-close" id="reader-close" aria-label="Close article">×</button>
+      </div>
+
+      <div class="reader-content">
+
+        <div class="reader-date" id="reader-date"></div>
+
+        <h1 class="reader-title" id="reader-title"></h1>
+
+        <img class="reader-image" id="reader-image" alt="" hidden>
+
+        <div class="reader-text" id="reader-text"></div>
+
+        <div class="reader-actions">
+          <button type="button" class="secondary-button" id="share-post">
+            ↗ पोस्ट शेयर गर्नुहोस्
+          </button>
+
+          <button type="button" class="secondary-button" id="copy-post-link">
+            ⧉ लिंक कपी गर्नुहोस्
+          </button>
+        </div>
+
+      </div>
+    </article>
+  </div>
+
+
+  <script>
     "use strict";
 
-    let currentLang = "NP";
+    // SUPABASE CONFIGURATION
+    const SUPABASE_URL = "https://zbyntmyybhdcwmttkuys.supabase.co";
+    const SUPABASE_KEY = "sb_publishable_N8U3og_Ntm-ImrtM8c1NGA_-Rqb3dSy";
 
-    const PROFILE_KEYS = {
-      name: "kamal_portal_user_name",
-      email: "kamal_portal_user_email",
-      image: "kamal_portal_user_img",
-      theme: "kamal_portal_theme"
-    };
+    const db = window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_KEY
+    );
 
+    let allPosts = [];
+    let activePost = null;
 
-    // SAFE STORAGE HELPERS
-    function storageGet(key) {
-      try {
-        return localStorage.getItem(key);
-      } catch (error) {
-        console.warn("Storage unavailable:", error);
-        return null;
-      }
-    }
+    const postGrid = document.getElementById("post-grid");
+    const postCount = document.getElementById("post-count");
+    const searchInput = document.getElementById("post-search");
 
-    function storageSet(key, value) {
-      try {
-        localStorage.setItem(key, value);
-        return true;
-      } catch (error) {
-        console.error("Could not save data:", error);
-        return false;
-      }
-    }
+    const readerOverlay = document.getElementById("reader-overlay");
+    const readerTitle = document.getElementById("reader-title");
+    const readerDate = document.getElementById("reader-date");
+    const readerText = document.getElementById("reader-text");
+    const readerImage = document.getElementById("reader-image");
 
 
-    // CLOCK
-    function updateClock() {
+    // DATE FORMAT
+    function formatDate(dateValue) {
+      if (!dateValue) return "";
 
-      const clock = document.getElementById("real-time");
+      const date = new Date(dateValue);
 
-      if (clock) {
-        clock.textContent = new Date().toLocaleTimeString();
-      }
+      if (Number.isNaN(date.getTime())) return "";
 
-      setNepaliDate();
+      return date.toLocaleDateString("ne-NP", {
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+      });
     }
 
 
-    // NEPALI DATE
-    function setNepaliDate() {
+    // CREATE POST CARD
+    function createPostCard(post) {
 
-      const dateEl = document.getElementById("nepali-date");
+      const card = document.createElement("article");
+      card.className = "post-card";
+      card.tabIndex = 0;
+      card.setAttribute("role", "button");
+      card.setAttribute("aria-label", post.title || "Read post");
 
-      if (!dateEl) return;
+      const imageWrap = document.createElement("div");
+      imageWrap.className = "post-image-wrap";
 
-      try {
+      if (post.image_url) {
 
-        if (typeof NepaliDate !== "undefined") {
+        const image = document.createElement("img");
+        image.className = "post-image";
+        image.src = post.image_url;
+        image.alt = post.title || "Blog image";
+        image.loading = "lazy";
 
-          const nepaliDate = new NepaliDate(new Date());
+        image.onerror = () => {
+          image.remove();
 
-          const year = nepaliDate.getYear();
+          const placeholder = document.createElement("div");
+          placeholder.className = "no-image";
+          placeholder.textContent = "✦";
+          imageWrap.appendChild(placeholder);
+        };
 
-          const month = String(
-            nepaliDate.getMonth() + 1
-          ).padStart(2, "0");
+        imageWrap.appendChild(image);
 
-          const day = String(
-            nepaliDate.getDate()
-          ).padStart(2, "0");
+      } else {
 
-          dateEl.textContent = `${year}/${month}/${day}`;
+        const placeholder = document.createElement("div");
+        placeholder.className = "no-image";
+        placeholder.textContent = "✦";
+        imageWrap.appendChild(placeholder);
 
-        } else {
+      }
 
-          dateEl.textContent = "--/--/--";
+      const body = document.createElement("div");
+      body.className = "post-body";
 
+      const meta = document.createElement("div");
+      meta.className = "post-meta";
+
+      const date = document.createElement("span");
+      date.textContent = formatDate(post.created_at);
+
+      const dot = document.createElement("span");
+      dot.className = "dot";
+
+      const author = document.createElement("span");
+      author.textContent = "Kamal G.C.";
+
+      meta.append(date, dot, author);
+
+      const title = document.createElement("h3");
+      title.className = "post-title";
+      title.textContent = post.title || "शीर्षक नभएको पोस्ट";
+
+      const excerpt = document.createElement("p");
+      excerpt.className = "post-excerpt";
+
+      const content = post.content || "";
+      excerpt.textContent = content.length > 190
+        ? content.slice(0, 190).trim() + "..."
+        : content;
+
+      const readMore = document.createElement("div");
+      readMore.className = "read-more";
+      readMore.textContent = "पूरा लेख पढ्नुहोस् →";
+
+      body.append(meta, title, excerpt, readMore);
+      card.append(imageWrap, body);
+
+      card.addEventListener("click", () => openPost(post));
+
+      card.addEventListener("keydown", event => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          openPost(post);
         }
-
-      } catch (error) {
-
-        console.warn("Nepali date unavailable:", error);
-
-        dateEl.textContent = "--/--/--";
-
-      }
-    }
-
-
-    // THEME
-    function applyTheme(theme) {
-
-      const isLight = theme === "light";
-
-      document.body.classList.toggle("light-mode", isLight);
-
-      const icon = document.getElementById("theme-icon");
-      const label = document.getElementById("theme-text");
-
-      if (icon) {
-        icon.className = isLight
-          ? "fa-solid fa-sun"
-          : "fa-solid fa-moon";
-      }
-
-      if (label) {
-        label.textContent = isLight ? "Light" : "Dark";
-      }
-
-      document.querySelector('meta[name="theme-color"]')
-        ?.setAttribute("content", isLight ? "#f1f5f9" : "#07111f");
-    }
-
-
-    function toggleTheme() {
-
-      const isLight = document.body.classList.contains("light-mode");
-
-      const nextTheme = isLight ? "dark" : "light";
-
-      applyTheme(nextTheme);
-
-      storageSet(PROFILE_KEYS.theme, nextTheme);
-    }
-
-
-    // LANGUAGE
-    function toggleLanguage() {
-
-      currentLang = currentLang === "NP" ? "EN" : "NP";
-
-      document.querySelectorAll("[data-np]").forEach(element => {
-
-        const translation = currentLang === "NP"
-          ? element.getAttribute("data-np")
-          : element.getAttribute("data-en");
-
-        if (translation !== null) {
-          element.textContent = translation;
-        }
-
       });
 
-      const langButton = document.getElementById("lang-toggle");
-
-      if (langButton) {
-        langButton.textContent = currentLang === "NP" ? "EN" : "NP";
-      }
-
-      const searchInput = document.getElementById("search-input");
-
-      if (searchInput) {
-        searchInput.placeholder = currentLang === "NP"
-          ? "खोज्ने शब्द टाइप गर्नुहोस्..."
-          : "Type a word to search...";
-      }
+      return card;
     }
 
 
-    // LOCATION AND WEATHER
-    async function getLiveLocationAndWeather() {
+    // RENDER POSTS
+    function renderPosts(posts) {
 
-      const locationEl = document.getElementById("user-location");
-      const weatherEl = document.getElementById("weather-temp");
+      postGrid.replaceChildren();
 
-      if (!navigator.geolocation) {
-        locationEl.textContent = "GPS unavailable";
+      postCount.textContent = `${posts.length} पोस्ट`;
+
+      if (!posts.length) {
+
+        const empty = document.createElement("div");
+        empty.className = "empty-state";
+
+        const icon = document.createElement("div");
+        icon.className = "empty-icon";
+        icon.textContent = "✦";
+
+        const heading = document.createElement("h3");
+        heading.textContent = "अहिले पोस्ट भेटिएन";
+
+        const message = document.createElement("p");
+        message.textContent = "नयाँ पोस्ट प्रकाशित भएपछि यहाँ देखिनेछ।";
+
+        empty.append(icon, heading, message);
+        postGrid.appendChild(empty);
+
         return;
       }
 
-      navigator.geolocation.getCurrentPosition(
+      const fragment = document.createDocumentFragment();
 
-        async position => {
-
-          const lat = position.coords.latitude;
-          const lon = position.coords.longitude;
-
-          // WEATHER
-          try {
-
-            const weatherResponse = await fetch(
-              `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`
-            );
-
-            if (!weatherResponse.ok) {
-              throw new Error("Weather request failed");
-            }
-
-            const weatherData = await weatherResponse.json();
-
-            const temperature = weatherData.current_weather?.temperature;
-
-            weatherEl.textContent =
-              typeof temperature === "number"
-                ? `${temperature}°C`
-                : "--°C";
-
-          } catch (error) {
-
-            weatherEl.textContent = "--°C";
-
-            console.warn("Weather unavailable:", error);
-
-          }
-
-
-          // REVERSE GEOCODING
-          try {
-
-            const locationResponse = await fetch(
-              `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lon}&accept-language=ne`
-            );
-
-            if (!locationResponse.ok) {
-              throw new Error("Location request failed");
-            }
-
-            const locationData = await locationResponse.json();
-
-            const address = locationData.address || {};
-
-            const city =
-              address.city ||
-              address.town ||
-              address.village ||
-              address.municipality ||
-              address.state ||
-              "Location found";
-
-            locationEl.textContent = city;
-
-          } catch (error) {
-
-            locationEl.textContent = "Location found";
-
-            console.warn("Address unavailable:", error);
-
-          }
-
-        },
-
-        error => {
-
-          locationEl.textContent =
-            error.code === 1 ? "Location denied" : "Location unavailable";
-
-        },
-
-        {
-          enableHighAccuracy: false,
-          timeout: 12000,
-          maximumAge: 300000
-        }
-
-      );
-
-    }
-
-
-    // SEARCH MODAL
-    function openSearchModal() {
-
-      const modal = document.getElementById("search-modal");
-
-      modal.style.display = "flex";
-
-      setTimeout(() => {
-        document.getElementById("search-input").focus();
-      }, 100);
-
-    }
-
-
-    function closeSearchModal() {
-
-      document.getElementById("search-modal").style.display = "none";
-
-      const input = document.getElementById("search-input");
-
-      input.value = "";
-
-      filterCards();
-
-    }
-
-
-    // SEARCH FILTER
-    function filterCards() {
-
-      const input = document.getElementById("search-input");
-
-      const query = input.value.trim().toLocaleLowerCase();
-
-      const cards = document.querySelectorAll(
-        "#content-container .card"
-      );
-
-      let visibleCount = 0;
-
-      cards.forEach(card => {
-
-        const text = card.textContent.toLocaleLowerCase();
-
-        const matched = text.includes(query);
-
-        card.style.display = matched ? "" : "none";
-
-        if (matched) visibleCount++;
-
+      posts.forEach(post => {
+        fragment.appendChild(createPostCard(post));
       });
 
-      const status = document.getElementById("search-status");
+      postGrid.appendChild(fragment);
+    }
 
-      if (status) {
 
-        if (!query) {
-          status.textContent = "";
-        } else {
-          status.textContent = currentLang === "NP"
-            ? `${visibleCount} वटा नतिजा भेटिए।`
-            : `${visibleCount} result(s) found.`;
+    // LOAD POSTS FROM SUPABASE
+    async function loadPosts() {
+
+      postGrid.innerHTML = '<div class="status-message">पोस्टहरू लोड हुँदैछन्...</div>';
+
+      const { data, error } = await db
+        .from("blog_posts")
+        .select("id,title,content,image_url,created_at")
+        .order("created_at", { ascending: false });
+
+      if (error) {
+
+        console.error("Post loading error:", error);
+
+        postGrid.innerHTML = `
+          <div class="empty-state">
+            <div class="empty-icon">!</div>
+            <h3>पोस्ट लोड हुन सकेन</h3>
+            <p>इन्टरनेट जडान जाँच गरी पेज फेरि खोल्नुहोस्।</p>
+          </div>
+        `;
+
+        postCount.textContent = "समस्या";
+
+        return;
+      }
+
+      allPosts = data || [];
+      renderPosts(allPosts);
+
+      // Open a post directly when its ID is in the URL.
+      const postId = new URLSearchParams(location.search).get("post");
+
+      if (postId) {
+        const selectedPost = allPosts.find(
+          post => String(post.id) === postId
+        );
+
+        if (selectedPost) {
+          openPost(selectedPost, false);
         }
-
       }
-
     }
 
 
-    // PROFILE MODAL
-    function openProfileModal() {
+    // OPEN FULL ARTICLE
+    function openPost(post, updateAddress = true) {
 
-      document.getElementById("profile-modal").style.display = "flex";
+      activePost = post;
 
-      document.getElementById("user-name-input").value =
-        storageGet(PROFILE_KEYS.name) || "";
+      readerTitle.textContent = post.title || "";
+      readerDate.textContent = formatDate(post.created_at);
+      readerText.textContent = post.content || "";
 
-      document.getElementById("user-email-input").value =
-        storageGet(PROFILE_KEYS.email) || "";
-
-      const savedImage = storageGet(PROFILE_KEYS.image);
-
-      if (savedImage) {
-        document.getElementById("modal-profile-img").src = savedImage;
+      if (post.image_url) {
+        readerImage.src = post.image_url;
+        readerImage.alt = post.title || "Blog image";
+        readerImage.hidden = false;
+      } else {
+        readerImage.removeAttribute("src");
+        readerImage.hidden = true;
       }
 
+      readerOverlay.classList.add("open");
+      readerOverlay.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+
+      if (updateAddress) {
+        const url = new URL(location.href);
+        url.searchParams.set("post", post.id);
+        history.pushState({ postId: post.id }, "", url);
+      }
     }
 
 
-    function closeProfileModal() {
+    // CLOSE ARTICLE
+    function closePost(updateAddress = true) {
 
-      document.getElementById("profile-modal").style.display = "none";
+      readerOverlay.classList.remove("open");
+      readerOverlay.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
 
+      activePost = null;
+
+      if (updateAddress) {
+        const url = new URL(location.href);
+        url.searchParams.delete("post");
+        history.pushState({}, "", url);
+      }
     }
 
 
-    // IMAGE UPLOAD
-    function handleImageUpload(event) {
+    document.getElementById("reader-close").addEventListener("click", () => {
+      closePost();
+    });
 
-      const file = event.target.files?.[0];
-
-      if (!file) return;
-
-      const allowedTypes = [
-        "image/jpeg",
-        "image/png",
-        "image/webp"
-      ];
-
-      if (!allowedTypes.includes(file.type)) {
-
-        alert("JPG, PNG वा WEBP फोटो मात्र छान्नुहोस्।");
-
-        event.target.value = "";
-
-        return;
-
+    readerOverlay.addEventListener("click", event => {
+      if (event.target === readerOverlay) {
+        closePost();
       }
+    });
 
-      const maxSize = 1.5 * 1024 * 1024;
-
-      if (file.size > maxSize) {
-
-        alert("फोटोको आकार 1.5 MB भन्दा कम हुनुपर्छ।");
-
-        event.target.value = "";
-
-        return;
-
-      }
-
-      const reader = new FileReader();
-
-      reader.onload = function(e) {
-
-        const imageData = e.target.result;
-
-        if (!storageSet(PROFILE_KEYS.image, imageData)) {
-
-          alert("फोटो सुरक्षित गर्न सकिएन। Browser storage खाली गरेर पुनः प्रयास गर्नुहोस्।");
-
-          return;
-
-        }
-
-        document.getElementById("modal-profile-img").src = imageData;
-
-        document.getElementById("nav-profile-img").src = imageData;
-
-      };
-
-      reader.onerror = function() {
-
-        alert("फोटो पढ्न सकिएन। फेरि प्रयास गर्नुहोस्।");
-
-      };
-
-      reader.readAsDataURL(file);
-
-    }
-
-
-    // SAVE PROFILE
-    function saveUserProfile() {
-
-      const name = document
-        .getElementById("user-name-input")
-        .value.trim();
-
-      const email = document
-        .getElementById("user-email-input")
-        .value.trim();
-
-      if (!name) {
-
-        alert(currentLang === "NP"
-          ? "कृपया आफ्नो नाम भर्नुहोस्।"
-          : "Please enter your name.");
-
-        return;
-
-      }
-
-      if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-
-        alert(currentLang === "NP"
-          ? "कृपया सही इमेल ठेगाना राख्नुहोस्।"
-          : "Please enter a valid email address.");
-
-        return;
-
-      }
-
-      const nameSaved = storageSet(PROFILE_KEYS.name, name);
-
-      const emailSaved = storageSet(PROFILE_KEYS.email, email);
-
-      if (!nameSaved || !emailSaved) {
-
-        alert(currentLang === "NP"
-          ? "प्रोफाइल सुरक्षित हुन सकेन।"
-          : "Profile could not be saved.");
-
-        return;
-
-      }
-
-      alert(currentLang === "NP"
-        ? "प्रोफाइल सफलतापूर्वक सुरक्षित भयो!"
-        : "Profile saved successfully!");
-
-      closeProfileModal();
-
-    }
-
-
-    // MODAL BACKDROP
-    function closeModalOnBackdrop(event, modalId) {
-
-      if (event.target.id !== modalId) return;
-
-      if (modalId === "search-modal") {
-        closeSearchModal();
-      }
-
-      if (modalId === "profile-modal") {
-        closeProfileModal();
-      }
-
-    }
-
-
-    // ESCAPE KEY
     document.addEventListener("keydown", event => {
-
-      if (event.key === "Escape") {
-
-        closeSearchModal();
-
-        closeProfileModal();
-
+      if (event.key === "Escape" && readerOverlay.classList.contains("open")) {
+        closePost();
       }
+    });
 
+    window.addEventListener("popstate", () => {
+
+      const postId = new URLSearchParams(location.search).get("post");
+
+      if (postId) {
+        const post = allPosts.find(item => String(item.id) === postId);
+
+        if (post) {
+          openPost(post, false);
+        }
+      } else {
+        closePost(false);
+      }
     });
 
 
-    // LOAD SAVED SETTINGS
-    function loadSavedSettings() {
+    // SEARCH POSTS
+    searchInput.addEventListener("input", () => {
 
-      const savedImage = storageGet(PROFILE_KEYS.image);
+      const query = searchInput.value.trim().toLocaleLowerCase();
 
-      if (savedImage) {
+      const filtered = allPosts.filter(post => {
 
-        document.getElementById("nav-profile-img").src = savedImage;
+        const title = (post.title || "").toLocaleLowerCase();
+        const content = (post.content || "").toLocaleLowerCase();
 
-        document.getElementById("modal-profile-img").src = savedImage;
+        return title.includes(query) || content.includes(query);
+      });
 
+      renderPosts(filtered);
+    });
+
+
+    // SHARE POST
+    document.getElementById("share-post").addEventListener("click", async () => {
+
+      if (!activePost) return;
+
+      const shareUrl = new URL(location.href);
+      shareUrl.searchParams.set("post", activePost.id);
+
+      const shareData = {
+        title: activePost.title,
+        text: (activePost.content || "").slice(0, 150),
+        url: shareUrl.toString()
+      };
+
+      try {
+
+        if (navigator.share) {
+          await navigator.share(shareData);
+        } else {
+          await navigator.clipboard.writeText(shareUrl.toString());
+          alert("पोस्टको लिंक कपी भयो।");
+        }
+
+      } catch (error) {
+        if (error.name !== "AbortError") {
+          console.warn("Share failed:", error);
+        }
       }
+    });
 
-      const savedTheme = storageGet(PROFILE_KEYS.theme) || "dark";
 
-      applyTheme(savedTheme);
+    // COPY POST LINK
+    document.getElementById("copy-post-link").addEventListener("click", async () => {
 
+      if (!activePost) return;
+
+      const shareUrl = new URL(location.href);
+      shareUrl.searchParams.set("post", activePost.id);
+
+      try {
+        await navigator.clipboard.writeText(shareUrl.toString());
+        alert("पोस्टको लिंक कपी भयो।");
+      } catch (error) {
+        alert("लिंक कपी हुन सकेन।");
+      }
+    });
+
+
+    // THEME
+    const themeButton = document.getElementById("theme-toggle");
+
+    function setTheme(theme) {
+
+      document.body.classList.toggle("light-mode", theme === "light");
+
+      themeButton.textContent = theme === "light" ? "☾" : "☀";
+
+      document.querySelector('meta[name="theme-color"]')
+        .setAttribute("content", theme === "light" ? "#f3f6fb" : "#0b1220");
+
+      try {
+        localStorage.setItem("kamalgc_portal_theme", theme);
+      } catch (error) {
+        console.warn("Theme could not be saved.");
+      }
     }
+
+    themeButton.addEventListener("click", () => {
+
+      const isLight = document.body.classList.contains("light-mode");
+
+      setTheme(isLight ? "dark" : "light");
+    });
+
+
+    // INITIALIZE
+    try {
+      const savedTheme = localStorage.getItem("kamalgc_portal_theme") || "dark";
+      setTheme(savedTheme);
+    } catch (error) {
+      setTheme("dark");
+    }
+
+    loadPosts();
 
 
     // SERVICE WORKER
-    function registerServiceWorker() {
-
-      if (!("serviceWorker" in navigator)) return;
+    if ("serviceWorker" in navigator) {
 
       window.addEventListener("load", () => {
 
         navigator.serviceWorker.register("./sw.js")
-          .then(() => {
-            console.log("Service Worker registered.");
-          })
-          .catch(error => {
-            console.warn("Service Worker registration failed:", error);
-          });
+          .then(() => console.log("Service Worker registered."))
+          .catch(error => console.warn("Service Worker registration failed:", error));
 
       });
 
     }
-
-
-    // INITIALIZE
-    document.addEventListener("DOMContentLoaded", () => {
-
-      loadSavedSettings();
-
-      updateClock();
-
-      setInterval(updateClock, 1000);
-
-      getLiveLocationAndWeather();
-
-      registerServiceWorker();
-
-    });
 
   </script>
 
