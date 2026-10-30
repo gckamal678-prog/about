@@ -90,6 +90,20 @@
       margin: auto;
     }
 
+    /* LANGUAGE VISIBILITY */
+
+    .lang-en {
+      display: none !important;
+    }
+
+    body.lang-en .lang-ne {
+      display: none !important;
+    }
+
+    body.lang-en .lang-en {
+      display: initial !important;
+    }
+
     /* HEADER */
 
     .site-header {
@@ -170,6 +184,22 @@
       height: 40px;
       padding: 0;
       font-size: 17px;
+    }
+
+    .language-button {
+      min-width: 48px;
+      height: 40px;
+      padding: 0 11px;
+      border: 1px solid var(--line);
+      border-radius: 11px;
+      background: var(--surface2);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .language-button:hover {
+      border-color: var(--accent);
     }
 
     /* LIVE INFORMATION */
@@ -538,30 +568,6 @@
       text-align: center;
     }
 
-    /* ABOUT STRIP */
-
-    .about-strip {
-      margin: 10px 0 65px;
-      padding: 28px;
-      border-radius: 20px;
-      border: 1px solid var(--line);
-      background: var(--surface);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-    }
-
-    .about-strip h3 {
-      font-size: 19px;
-      margin-bottom: 5px;
-    }
-
-    .about-strip p {
-      color: var(--muted);
-      font-size: 13px;
-    }
-
     /* FOOTER */
 
     .footer {
@@ -573,20 +579,28 @@
 
     .footer-inner {
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: space-between;
-      gap: 15px;
-      flex-wrap: wrap;
+      justify-content: center;
+      text-align: center;
+      gap: 12px;
     }
 
     .footer-links {
       display: flex;
       flex-wrap: wrap;
-      gap: 17px;
+      justify-content: center;
+      align-items: center;
+      gap: 10px 20px;
     }
 
     .footer-links a:hover {
       color: var(--accent);
+    }
+
+    .footer-copyright {
+      text-align: center;
+      width: 100%;
     }
 
     /* ARTICLE READER */
@@ -745,9 +759,13 @@
         font-size: 11px;
       }
 
-      .nav .icon-button {
+      .nav .icon-button,
+      .nav .language-button {
         width: 35px;
+        min-width: 35px;
         height: 35px;
+        padding: 0;
+        font-size: 11px;
       }
 
       .live-info {
@@ -783,12 +801,6 @@
 
       .post-title {
         font-size: 17px;
-      }
-
-      .about-strip {
-        align-items: flex-start;
-        flex-direction: column;
-        padding: 22px;
       }
     }
 
@@ -836,9 +848,23 @@
       </a>
 
       <nav class="nav" aria-label="Main navigation">
-        <a class="nav-link active" href="index.html">Home</a>
-        <a class="nav-link" href="about.html">About</a>
-        <a class="nav-link" href="emergency.html">Emergency</a>
+        <a class="nav-link active" href="index.html">
+          <span class="lang-ne">गृहपृष्ठ</span>
+          <span class="lang-en">Home</span>
+        </a>
+
+        <a class="nav-link" href="emergency.html">
+          <span class="lang-ne">आपतकालीन</span>
+          <span class="lang-en">Emergency</span>
+        </a>
+
+        <button
+          class="language-button"
+          id="lang-toggle"
+          type="button"
+          aria-label="Change language"
+          title="Change language">NE</button>
+
         <button
           class="icon-button"
           id="theme-toggle"
@@ -849,7 +875,6 @@
 
     </div>
   </header>
-
 
   <!-- LIVE TIME, WEATHER AND LOCATION -->
   <section class="container live-info" aria-label="Live information">
@@ -876,7 +901,6 @@
 
   </section>
 
-
   <main>
 
     <!-- HERO -->
@@ -887,30 +911,40 @@
           <div class="eyebrow">WELCOME TO MY WORLD</div>
 
           <h1>
-            विचार, अनुभव र<br>
-            <span>जीवनका कथाहरू।</span>
+            <span class="lang-ne">
+              विचार, अनुभव र<br>
+              <span>जीवनका कथाहरू।</span>
+            </span>
+            <span class="lang-en">
+              Thoughts, Experiences &<br>
+              <span>Stories of Life.</span>
+            </span>
           </h1>
 
           <p class="hero-description">
-            नमस्कार! म कमल जी.सी.। यहाँ मेरा जीवनका अनुभव,
-            यात्रा, सिकाइ, प्रविधि र समयसँगै बटुलेका विचारहरू
-            साझा गर्नेछु। पढ्नुहोस्, बुझ्नुहोस् र आफ्नो विचार पनि बाँड्नुहोस्।
+            <span class="lang-ne">
+              नमस्कार! म कमल जी.सी.। यहाँ मेरा जीवनका अनुभव,
+              यात्रा, सिकाइ, प्रविधि र समयसँगै बटुलेका विचारहरू
+              साझा गर्नेछु। पढ्नुहोस्, बुझ्नुहोस् र आफ्नो विचार पनि बाँड्नुहोस्।
+            </span>
+            <span class="lang-en">
+              Hello! I am Kamal G.C. Here I share my life experiences,
+              journeys, learning, technology and thoughts gathered over time.
+              Read, explore and share your thoughts too.
+            </span>
           </p>
 
           <div class="hero-actions">
             <a href="#posts" class="primary-button">
-              <span>✦</span> पोस्टहरू पढ्नुहोस्
-            </a>
-
-            <a href="about.html" class="secondary-button">
-              मेरो परिचय →
+              <span>✦</span>
+              <span class="lang-ne">पोस्टहरू पढ्नुहोस्</span>
+              <span class="lang-en">Explore Posts</span>
             </a>
           </div>
 
         </div>
       </div>
     </section>
-
 
     <!-- POSTS -->
     <section class="section" id="posts">
@@ -919,12 +953,21 @@
         <div class="section-heading">
           <div>
             <div class="section-kicker">LATEST STORIES</div>
-            <h2>नयाँ पोस्टहरू</h2>
-            <p>नयाँ विचार र अनुभवहरू यहाँ पढ्नुहोस्।</p>
+
+            <h2>
+              <span class="lang-ne">नयाँ पोस्टहरू</span>
+              <span class="lang-en">Latest Posts</span>
+            </h2>
+
+            <p>
+              <span class="lang-ne">नयाँ विचार र अनुभवहरू यहाँ पढ्नुहोस्।</span>
+              <span class="lang-en">Read the latest thoughts and experiences here.</span>
+            </p>
           </div>
 
           <div class="post-count" id="post-count">
-            पोस्टहरू लोड हुँदैछन्...
+            <span class="lang-ne">पोस्टहरू लोड हुँदैछन्...</span>
+            <span class="lang-en">Loading posts...</span>
           </div>
         </div>
 
@@ -937,60 +980,54 @@
               class="search-input"
               placeholder="पोस्ट खोज्नुहोस्..."
               autocomplete="off"
-              aria-label="पोस्ट खोज्नुहोस्">
+              aria-label="Search posts">
           </div>
         </div>
 
         <div id="post-grid" class="post-grid">
-          <div class="status-message">पोस्टहरू लोड हुँदैछन्...</div>
+          <div class="status-message">
+            <span class="lang-ne">पोस्टहरू लोड हुँदैछन्...</span>
+            <span class="lang-en">Loading posts...</span>
+          </div>
         </div>
 
-      </div>
-    </section>
-
-
-    <!-- ABOUT STRIP -->
-    <section class="container">
-      <div class="about-strip">
-        <div>
-          <h3>मेरो यात्राबारे थप जान्नुहोस्</h3>
-          <p>मेरो पृष्ठभूमि, काम, रुचि, अनुभव र भविष्यका उद्देश्यहरू।</p>
-        </div>
-
-        <a href="about.html" class="primary-button">
-          About Me →
-        </a>
       </div>
     </section>
 
   </main>
 
-
-  <!-- FOOTER -->
+  <!-- FOOTER: TWO CENTERED LINES -->
   <footer class="footer">
     <div class="container footer-inner">
 
-      <div>
-        © <span id="current-year">2026</span> KAMAL G.C. ALL RIGHTS RESERVED.
-      </div>
-
       <div class="footer-links">
-        <a href="about.html">About</a>
-        <a href="emergency.html">Emergency</a>
+        <a href="emergency.html">
+          <span class="lang-ne">आपतकालीन</span>
+          <span class="lang-en">Emergency</span>
+        </a>
+
         <a
           href="https://kids.kamalgc.com.np"
           target="_blank"
           rel="noopener noreferrer">Kids Learning</a>
+
         <a
           href="https://dn.kamalgc.com.np"
           target="_blank"
           rel="noopener noreferrer">Digital Notebook</a>
+
         <a href="admin.html">Admin</a>
+      </div>
+
+      <div class="footer-copyright">
+        © <span id="current-year">2026</span>
+        KAMAL G.C. ·
+        <span class="lang-ne">सर्वाधिकार सुरक्षित।</span>
+        <span class="lang-en">All Rights Reserved.</span>
       </div>
 
     </div>
   </footer>
-
 
   <!-- FULL ARTICLE READER -->
   <div
@@ -1034,14 +1071,16 @@
             type="button"
             class="secondary-button"
             id="share-post">
-            ↗ पोस्ट शेयर गर्नुहोस्
+            ↗ <span class="lang-ne">पोस्ट शेयर गर्नुहोस्</span>
+            <span class="lang-en">Share Post</span>
           </button>
 
           <button
             type="button"
             class="secondary-button"
             id="copy-post-link">
-            ⧉ लिंक कपी गर्नुहोस्
+            ⧉ <span class="lang-ne">लिंक कपी गर्नुहोस्</span>
+            <span class="lang-en">Copy Link</span>
           </button>
 
         </div>
@@ -1050,14 +1089,12 @@
     </article>
   </div>
 
-
   <!-- WEBSITE TOAST MESSAGE -->
   <div
     id="site-toast"
     class="site-toast"
     role="status"
     aria-live="polite"></div>
-
 
   <!-- MAIN PAGE SCRIPT -->
   <script>
@@ -1078,7 +1115,6 @@
       SUPABASE_KEY
     );
 
-
     // ==========================================
     // GLOBAL VARIABLES
     // ==========================================
@@ -1098,7 +1134,60 @@
     const readerImage = document.getElementById("reader-image");
 
     const themeButton = document.getElementById("theme-toggle");
+    const languageButton = document.getElementById("lang-toggle");
 
+    // ==========================================
+    // LANGUAGE TOGGLE — SAVE AFTER REFRESH
+    // ==========================================
+
+    function setLanguage(language) {
+      const selectedLanguage = language === "EN" ? "EN" : "NE";
+
+      document.body.classList.toggle(
+        "lang-en",
+        selectedLanguage === "EN"
+      );
+
+      document.documentElement.lang =
+        selectedLanguage === "EN" ? "en" : "ne";
+
+      languageButton.textContent = selectedLanguage;
+
+      languageButton.setAttribute(
+        "aria-label",
+        selectedLanguage === "NE"
+          ? "Switch to English"
+          : "Switch to Nepali"
+      );
+
+      languageButton.title =
+        selectedLanguage === "NE"
+          ? "Switch to English"
+          : "Switch to Nepali";
+
+      const searchPlaceholder =
+        selectedLanguage === "NE"
+          ? "पोस्ट खोज्नुहोस्..."
+          : "Search posts...";
+
+      searchInput.placeholder = searchPlaceholder;
+      searchInput.setAttribute("aria-label", searchPlaceholder);
+
+      try {
+        localStorage.setItem(
+          "kamalgc_portal_language",
+          selectedLanguage
+        );
+      } catch (error) {
+        console.warn("Language preference could not be saved.");
+      }
+    }
+
+    languageButton.addEventListener("click", () => {
+      const isEnglish = document.body.classList.contains("lang-en");
+
+      setLanguage(isEnglish ? "NE" : "EN");
+    });
 
     // ==========================================
     // TOAST MESSAGE
@@ -1117,7 +1206,6 @@
         toast.classList.remove("show");
       }, 2600);
     }
-
 
     // ==========================================
     // COPY TEXT FALLBACK
@@ -1148,7 +1236,6 @@
       return true;
     }
 
-
     // ==========================================
     // DATE FORMAT FOR POSTS
     // ==========================================
@@ -1166,7 +1253,6 @@
         day: "numeric"
       });
     }
-
 
     // ==========================================
     // CREATE POST CARD
@@ -1247,7 +1333,11 @@
 
       const readMore = document.createElement("div");
       readMore.className = "read-more";
-      readMore.textContent = "पूरा लेख पढ्नुहोस् →";
+
+      readMore.textContent =
+        document.body.classList.contains("lang-en")
+          ? "Read Full Article →"
+          : "पूरा लेख पढ्नुहोस् →";
 
       body.append(meta, title, excerpt, readMore);
       card.append(imageWrap, body);
@@ -1266,7 +1356,6 @@
       return card;
     }
 
-
     // ==========================================
     // RENDER POSTS
     // ==========================================
@@ -1274,7 +1363,12 @@
     function renderPosts(posts) {
       postGrid.replaceChildren();
 
-      postCount.textContent = `${posts.length} पोस्ट`;
+      const isEnglish =
+        document.body.classList.contains("lang-en");
+
+      postCount.textContent = isEnglish
+        ? `${posts.length} posts`
+        : `${posts.length} पोस्ट`;
 
       if (!posts.length) {
         const empty = document.createElement("div");
@@ -1285,11 +1379,14 @@
         icon.textContent = "✦";
 
         const heading = document.createElement("h3");
-        heading.textContent = "अहिले पोस्ट भेटिएन";
+        heading.textContent = isEnglish
+          ? "No posts found"
+          : "अहिले पोस्ट भेटिएन";
 
         const message = document.createElement("p");
-        message.textContent =
-          "खोज परिवर्तन गर्नुहोस् वा नयाँ पोस्ट प्रकाशित भएपछि फेरि आउनुहोस्।";
+        message.textContent = isEnglish
+          ? "Change your search or check again later."
+          : "खोज परिवर्तन गर्नुहोस् वा पछि फेरि आउनुहोस्।";
 
         empty.append(icon, heading, message);
         postGrid.appendChild(empty);
@@ -1305,7 +1402,6 @@
 
       postGrid.appendChild(fragment);
     }
-
 
     // ==========================================
     // LOAD POSTS FROM SUPABASE
@@ -1326,7 +1422,6 @@
         allPosts = data || [];
         renderPosts(allPosts);
 
-        // Open a post directly from its URL.
         const postId =
           new URLSearchParams(location.search).get("post");
 
@@ -1354,7 +1449,6 @@
         postCount.textContent = "समस्या";
       }
     }
-
 
     // ==========================================
     // OPEN FULL ARTICLE
@@ -1393,7 +1487,6 @@
       }
     }
 
-
     // ==========================================
     // CLOSE ARTICLE
     // ==========================================
@@ -1413,20 +1506,17 @@
       }
     }
 
-
     document
       .getElementById("reader-close")
       .addEventListener("click", () => {
         closePost();
       });
 
-
     readerOverlay.addEventListener("click", event => {
       if (event.target === readerOverlay) {
         closePost();
       }
     });
-
 
     document.addEventListener("keydown", event => {
       if (
@@ -1436,7 +1526,6 @@
         closePost();
       }
     });
-
 
     window.addEventListener("popstate", () => {
       const postId =
@@ -1454,7 +1543,6 @@
         closePost(false);
       }
     });
-
 
     // ==========================================
     // SEARCH POSTS
@@ -1480,7 +1568,6 @@
       renderPosts(filtered);
     });
 
-
     // ==========================================
     // SHARE POST
     // ==========================================
@@ -1505,16 +1592,25 @@
             await navigator.share(shareData);
           } else {
             await copyText(shareUrl.toString());
-            showToast("पोस्टको लिंक कपी भयो।");
+
+            showToast(
+              document.body.classList.contains("lang-en")
+                ? "Post link copied."
+                : "पोस्टको लिंक कपी भयो।"
+            );
           }
         } catch (error) {
           if (error.name !== "AbortError") {
             console.warn("Share failed:", error);
-            showToast("शेयर गर्न सकिएन। फेरि प्रयास गर्नुहोस्।");
+
+            showToast(
+              document.body.classList.contains("lang-en")
+                ? "Could not share. Please try again."
+                : "शेयर गर्न सकिएन। फेरि प्रयास गर्नुहोस्।"
+            );
           }
         }
       });
-
 
     // ==========================================
     // COPY POST LINK
@@ -1531,13 +1627,22 @@
 
         try {
           await copyText(shareUrl.toString());
-          showToast("पोस्टको लिंक कपी भयो।");
+
+          showToast(
+            document.body.classList.contains("lang-en")
+              ? "Post link copied."
+              : "पोस्टको लिंक कपी भयो।"
+          );
         } catch (error) {
           console.warn("Copy failed:", error);
-          showToast("लिंक कपी हुन सकेन।");
+
+          showToast(
+            document.body.classList.contains("lang-en")
+              ? "Could not copy the link."
+              : "लिंक कपी हुन सकेन।"
+          );
         }
       });
-
 
     // ==========================================
     // DARK / LIGHT THEME
@@ -1572,7 +1677,6 @@
       }
     }
 
-
     themeButton.addEventListener("click", () => {
       const isLight =
         document.body.classList.contains("light-mode");
@@ -1580,11 +1684,21 @@
       setTheme(isLight ? "dark" : "light");
     });
 
-
     // ==========================================
     // INITIALIZE WEBSITE
     // ==========================================
 
+    // Restore saved language
+    try {
+      const savedLanguage =
+        localStorage.getItem("kamalgc_portal_language") || "NE";
+
+      setLanguage(savedLanguage);
+    } catch (error) {
+      setLanguage("NE");
+    }
+
+    // Restore saved theme
     try {
       const savedTheme =
         localStorage.getItem("kamalgc_portal_theme") || "dark";
