@@ -90,18 +90,18 @@
       margin: auto;
     }
 
-    /* LANGUAGE VISIBILITY */
+    /* LANGUAGE SYSTEM — FIXED */
 
     .lang-en {
       display: none !important;
     }
 
-    body.lang-en .lang-ne {
+    body.english-mode .lang-ne {
       display: none !important;
     }
 
-    body.lang-en .lang-en {
-      display: initial !important;
+    body.english-mode .lang-en {
+      display: inline !important;
     }
 
     /* HEADER */
@@ -157,7 +157,8 @@
       gap: 9px;
     }
 
-    .nav-link, .icon-button {
+    .nav-link,
+    .icon-button {
       border: 1px solid transparent;
       color: var(--muted);
       background: transparent;
@@ -168,7 +169,8 @@
       transition: .2s;
     }
 
-    .nav-link:hover, .icon-button:hover {
+    .nav-link:hover,
+    .icon-button:hover {
       color: var(--text);
       background: var(--surface2);
       border-color: var(--line);
@@ -196,6 +198,7 @@
       color: var(--accent);
       font-size: 12px;
       font-weight: 800;
+      transition: .2s;
     }
 
     .language-button:hover {
@@ -288,13 +291,13 @@
     .hero h1 {
       max-width: 720px;
       font-size: clamp(34px, 6vw, 61px);
-      line-height: 1.17;
+      line-height: 1.25;
       letter-spacing: -1.8px;
       font-weight: 800;
       margin-bottom: 18px;
     }
 
-    .hero h1 span {
+    .hero-highlight {
       background: linear-gradient(90deg, var(--accent), var(--accent2));
       -webkit-background-clip: text;
       background-clip: text;
@@ -315,7 +318,8 @@
       margin-top: 27px;
     }
 
-    .primary-button, .secondary-button {
+    .primary-button,
+    .secondary-button {
       display: inline-flex;
       justify-content: center;
       align-items: center;
@@ -568,7 +572,7 @@
       text-align: center;
     }
 
-    /* FOOTER */
+    /* FOOTER — CENTERED TWO LINES */
 
     .footer {
       border-top: 1px solid var(--line);
@@ -592,6 +596,8 @@
       justify-content: center;
       align-items: center;
       gap: 10px 20px;
+      width: 100%;
+      text-align: center;
     }
 
     .footer-links a:hover {
@@ -702,7 +708,7 @@
       border-top: 1px solid var(--line);
     }
 
-    /* TOAST MESSAGE */
+    /* TOAST */
 
     .site-toast {
       position: fixed;
@@ -824,7 +830,9 @@
     }
 
     @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
+      *,
+      *::before,
+      *::after {
         scroll-behavior: auto !important;
         animation-duration: .01ms !important;
         transition-duration: .01ms !important;
@@ -841,6 +849,7 @@
 
       <a class="brand" href="index.html" aria-label="Kamal G.C. Home">
         <img src="mylogo.png" alt="Kamal G.C. logo">
+
         <div>
           <div class="brand-name">KAMAL G.C.</div>
           <div class="brand-subtitle">Personal Journal & Digital Space</div>
@@ -848,6 +857,7 @@
       </a>
 
       <nav class="nav" aria-label="Main navigation">
+
         <a class="nav-link active" href="index.html">
           <span class="lang-ne">गृहपृष्ठ</span>
           <span class="lang-en">Home</span>
@@ -862,8 +872,8 @@
           class="language-button"
           id="lang-toggle"
           type="button"
-          aria-label="Change language"
-          title="Change language">NE</button>
+          aria-label="Switch language"
+          title="Switch language">NE</button>
 
         <button
           class="icon-button"
@@ -871,8 +881,8 @@
           type="button"
           aria-label="Change theme"
           title="Change theme">☀</button>
-      </nav>
 
+      </nav>
     </div>
   </header>
 
@@ -906,6 +916,7 @@
     <!-- HERO -->
     <section class="hero">
       <div class="container">
+
         <div class="hero-panel">
 
           <div class="eyebrow">WELCOME TO MY WORLD</div>
@@ -913,25 +924,29 @@
           <h1>
             <span class="lang-ne">
               विचार, अनुभव र<br>
-              <span>जीवनका कथाहरू।</span>
+              <span class="hero-highlight">जीवनका कथाहरू।</span>
             </span>
+
             <span class="lang-en">
               Thoughts, Experiences &<br>
-              <span>Stories of Life.</span>
+              <span class="hero-highlight">Stories of Life.</span>
             </span>
           </h1>
 
           <p class="hero-description">
+
             <span class="lang-ne">
               नमस्कार! म कमल जी.सी.। यहाँ मेरा जीवनका अनुभव,
               यात्रा, सिकाइ, प्रविधि र समयसँगै बटुलेका विचारहरू
               साझा गर्नेछु। पढ्नुहोस्, बुझ्नुहोस् र आफ्नो विचार पनि बाँड्नुहोस्।
             </span>
+
             <span class="lang-en">
               Hello! I am Kamal G.C. Here I share my life experiences,
               journeys, learning, technology and thoughts gathered over time.
               Read, explore and share your thoughts too.
             </span>
+
           </p>
 
           <div class="hero-actions">
@@ -951,6 +966,7 @@
       <div class="container">
 
         <div class="section-heading">
+
           <div>
             <div class="section-kicker">LATEST STORIES</div>
 
@@ -969,11 +985,13 @@
             <span class="lang-ne">पोस्टहरू लोड हुँदैछन्...</span>
             <span class="lang-en">Loading posts...</span>
           </div>
+
         </div>
 
         <div class="feed-tools">
           <div class="search-wrap">
             <span>⌕</span>
+
             <input
               type="search"
               id="post-search"
@@ -985,10 +1003,12 @@
         </div>
 
         <div id="post-grid" class="post-grid">
+
           <div class="status-message">
             <span class="lang-ne">पोस्टहरू लोड हुँदैछन्...</span>
             <span class="lang-en">Loading posts...</span>
           </div>
+
         </div>
 
       </div>
@@ -1001,6 +1021,7 @@
     <div class="container footer-inner">
 
       <div class="footer-links">
+
         <a href="emergency.html">
           <span class="lang-ne">आपतकालीन</span>
           <span class="lang-en">Emergency</span>
@@ -1017,6 +1038,7 @@
           rel="noopener noreferrer">Digital Notebook</a>
 
         <a href="admin.html">Admin</a>
+
       </div>
 
       <div class="footer-copyright">
@@ -1042,6 +1064,7 @@
       aria-label="Full blog post">
 
       <div class="reader-toolbar">
+
         <strong>KAMAL G.C. · JOURNAL</strong>
 
         <button
@@ -1049,6 +1072,7 @@
           class="reader-close"
           id="reader-close"
           aria-label="Close article">×</button>
+
       </div>
 
       <div class="reader-content">
@@ -1071,7 +1095,8 @@
             type="button"
             class="secondary-button"
             id="share-post">
-            ↗ <span class="lang-ne">पोस्ट शेयर गर्नुहोस्</span>
+            ↗
+            <span class="lang-ne">पोस्ट शेयर गर्नुहोस्</span>
             <span class="lang-en">Share Post</span>
           </button>
 
@@ -1079,7 +1104,8 @@
             type="button"
             class="secondary-button"
             id="copy-post-link">
-            ⧉ <span class="lang-ne">लिंक कपी गर्नुहोस्</span>
+            ⧉
+            <span class="lang-ne">लिंक कपी गर्नुहोस्</span>
             <span class="lang-en">Copy Link</span>
           </button>
 
@@ -1110,10 +1136,18 @@
     const SUPABASE_KEY =
       "sb_publishable_N8U3og_Ntm-ImrtM8c1NGA_-Rqb3dSy";
 
-    const db = window.supabase.createClient(
-      SUPABASE_URL,
-      SUPABASE_KEY
-    );
+    // ==========================================
+    // CHECK SUPABASE LIBRARY
+    // ==========================================
+
+    let db = null;
+
+    if (window.supabase && window.supabase.createClient) {
+      db = window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+      );
+    }
 
     // ==========================================
     // GLOBAL VARIABLES
@@ -1123,70 +1157,109 @@
     let activePost = null;
     let toastTimer = null;
 
-    const postGrid = document.getElementById("post-grid");
-    const postCount = document.getElementById("post-count");
-    const searchInput = document.getElementById("post-search");
+    const postGrid =
+      document.getElementById("post-grid");
 
-    const readerOverlay = document.getElementById("reader-overlay");
-    const readerTitle = document.getElementById("reader-title");
-    const readerDate = document.getElementById("reader-date");
-    const readerText = document.getElementById("reader-text");
-    const readerImage = document.getElementById("reader-image");
+    const postCount =
+      document.getElementById("post-count");
 
-    const themeButton = document.getElementById("theme-toggle");
-    const languageButton = document.getElementById("lang-toggle");
+    const searchInput =
+      document.getElementById("post-search");
+
+    const readerOverlay =
+      document.getElementById("reader-overlay");
+
+    const readerTitle =
+      document.getElementById("reader-title");
+
+    const readerDate =
+      document.getElementById("reader-date");
+
+    const readerText =
+      document.getElementById("reader-text");
+
+    const readerImage =
+      document.getElementById("reader-image");
+
+    const themeButton =
+      document.getElementById("theme-toggle");
+
+    const languageButton =
+      document.getElementById("lang-toggle");
 
     // ==========================================
-    // LANGUAGE TOGGLE — SAVE AFTER REFRESH
+    // LANGUAGE SYSTEM
     // ==========================================
 
-    function setLanguage(language) {
-      const selectedLanguage = language === "EN" ? "EN" : "NE";
+    function isEnglish() {
+      return document.body.classList.contains("english-mode");
+    }
 
+    function setLanguage(language, save = true) {
+      const selectedLanguage =
+        language === "EN" ? "EN" : "NE";
+
+      const englishSelected =
+        selectedLanguage === "EN";
+
+      // IMPORTANT: Do not use "lang-en" on body.
       document.body.classList.toggle(
-        "lang-en",
-        selectedLanguage === "EN"
+        "english-mode",
+        englishSelected
       );
 
       document.documentElement.lang =
-        selectedLanguage === "EN" ? "en" : "ne";
+        englishSelected ? "en" : "ne";
 
-      languageButton.textContent = selectedLanguage;
+      languageButton.textContent =
+        selectedLanguage;
 
       languageButton.setAttribute(
         "aria-label",
-        selectedLanguage === "NE"
-          ? "Switch to English"
-          : "Switch to Nepali"
+        englishSelected
+          ? "Switch to Nepali"
+          : "Switch to English"
       );
 
       languageButton.title =
-        selectedLanguage === "NE"
-          ? "Switch to English"
-          : "Switch to Nepali";
+        englishSelected
+          ? "Switch to Nepali"
+          : "Switch to English";
 
       const searchPlaceholder =
-        selectedLanguage === "NE"
-          ? "पोस्ट खोज्नुहोस्..."
-          : "Search posts...";
+        englishSelected
+          ? "Search posts..."
+          : "पोस्ट खोज्नुहोस्...";
 
       searchInput.placeholder = searchPlaceholder;
-      searchInput.setAttribute("aria-label", searchPlaceholder);
+      searchInput.setAttribute(
+        "aria-label",
+        searchPlaceholder
+      );
 
-      try {
-        localStorage.setItem(
-          "kamalgc_portal_language",
-          selectedLanguage
-        );
-      } catch (error) {
-        console.warn("Language preference could not be saved.");
+      if (save) {
+        try {
+          localStorage.setItem(
+            "kamalgc_portal_language",
+            selectedLanguage
+          );
+        } catch (error) {
+          console.warn("Could not save language preference.");
+        }
+      }
+
+      // Refresh dynamic labels without clearing search.
+      if (allPosts.length || postGrid.children.length) {
+        filterAndRenderPosts();
+      }
+
+      if (activePost) {
+        updateArticleButtonLabels();
       }
     }
 
     languageButton.addEventListener("click", () => {
-      const isEnglish = document.body.classList.contains("lang-en");
-
-      setLanguage(isEnglish ? "NE" : "EN");
+      setLanguage(isEnglish() ? "NE" : "EN");
     });
 
     // ==========================================
@@ -1194,7 +1267,9 @@
     // ==========================================
 
     function showToast(message) {
-      const toast = document.getElementById("site-toast");
+      const toast =
+        document.getElementById("site-toast");
+
       if (!toast) return;
 
       toast.textContent = message;
@@ -1208,7 +1283,7 @@
     }
 
     // ==========================================
-    // COPY TEXT FALLBACK
+    // COPY TEXT
     // ==========================================
 
     async function copyText(text) {
@@ -1217,7 +1292,9 @@
         return true;
       }
 
-      const textarea = document.createElement("textarea");
+      const textarea =
+        document.createElement("textarea");
+
       textarea.value = text;
       textarea.style.position = "fixed";
       textarea.style.opacity = "0";
@@ -1226,7 +1303,9 @@
       document.body.appendChild(textarea);
       textarea.select();
 
-      const copied = document.execCommand("copy");
+      const copied =
+        document.execCommand("copy");
+
       textarea.remove();
 
       if (!copied) {
@@ -1237,7 +1316,7 @@
     }
 
     // ==========================================
-    // DATE FORMAT FOR POSTS
+    // DATE FORMAT
     // ==========================================
 
     function formatDate(dateValue) {
@@ -1245,9 +1324,14 @@
 
       const date = new Date(dateValue);
 
-      if (Number.isNaN(date.getTime())) return "";
+      if (Number.isNaN(date.getTime())) {
+        return "";
+      }
 
-      return date.toLocaleDateString("ne-NP", {
+      const locale =
+        isEnglish() ? "en-IN" : "ne-NP";
+
+      return date.toLocaleDateString(locale, {
         year: "numeric",
         month: "long",
         day: "numeric"
@@ -1259,21 +1343,26 @@
     // ==========================================
 
     function createPostCard(post) {
-      const card = document.createElement("article");
+      const card =
+        document.createElement("article");
 
       card.className = "post-card";
       card.tabIndex = 0;
       card.setAttribute("role", "button");
+
       card.setAttribute(
         "aria-label",
         post.title || "Read post"
       );
 
-      const imageWrap = document.createElement("div");
+      const imageWrap =
+        document.createElement("div");
+
       imageWrap.className = "post-image-wrap";
 
       if (post.image_url) {
-        const image = document.createElement("img");
+        const image =
+          document.createElement("img");
 
         image.className = "post-image";
         image.src = post.image_url;
@@ -1283,7 +1372,9 @@
         image.onerror = () => {
           image.remove();
 
-          const placeholder = document.createElement("div");
+          const placeholder =
+            document.createElement("div");
+
           placeholder.className = "no-image";
           placeholder.textContent = "✦";
 
@@ -1291,8 +1382,10 @@
         };
 
         imageWrap.appendChild(image);
+
       } else {
-        const placeholder = document.createElement("div");
+        const placeholder =
+          document.createElement("div");
 
         placeholder.className = "no-image";
         placeholder.textContent = "✦";
@@ -1300,42 +1393,63 @@
         imageWrap.appendChild(placeholder);
       }
 
-      const body = document.createElement("div");
+      const body =
+        document.createElement("div");
+
       body.className = "post-body";
 
-      const meta = document.createElement("div");
+      const meta =
+        document.createElement("div");
+
       meta.className = "post-meta";
 
-      const date = document.createElement("span");
-      date.textContent = formatDate(post.created_at);
+      const date =
+        document.createElement("span");
 
-      const dot = document.createElement("span");
+      date.textContent =
+        formatDate(post.created_at);
+
+      const dot =
+        document.createElement("span");
+
       dot.className = "dot";
 
-      const author = document.createElement("span");
+      const author =
+        document.createElement("span");
+
       author.textContent = "Kamal G.C.";
 
       meta.append(date, dot, author);
 
-      const title = document.createElement("h3");
-      title.className = "post-title";
-      title.textContent = post.title || "शीर्षक नभएको पोस्ट";
+      const title =
+        document.createElement("h3");
 
-      const excerpt = document.createElement("p");
+      title.className = "post-title";
+      title.textContent =
+        post.title || (isEnglish()
+          ? "Untitled post"
+          : "शीर्षक नभएको पोस्ट");
+
+      const excerpt =
+        document.createElement("p");
+
       excerpt.className = "post-excerpt";
 
-      const content = post.content || "";
+      const content =
+        post.content || "";
 
       excerpt.textContent =
         content.length > 190
           ? content.slice(0, 190).trim() + "..."
           : content;
 
-      const readMore = document.createElement("div");
+      const readMore =
+        document.createElement("div");
+
       readMore.className = "read-more";
 
       readMore.textContent =
-        document.body.classList.contains("lang-en")
+        isEnglish()
           ? "Read Full Article →"
           : "पूरा लेख पढ्नुहोस् →";
 
@@ -1347,7 +1461,10 @@
       });
 
       card.addEventListener("keydown", event => {
-        if (event.key === "Enter" || event.key === " ") {
+        if (
+          event.key === "Enter" ||
+          event.key === " "
+        ) {
           event.preventDefault();
           openPost(post);
         }
@@ -1363,28 +1480,35 @@
     function renderPosts(posts) {
       postGrid.replaceChildren();
 
-      const isEnglish =
-        document.body.classList.contains("lang-en");
+      const english = isEnglish();
 
-      postCount.textContent = isEnglish
+      postCount.textContent = english
         ? `${posts.length} posts`
         : `${posts.length} पोस्ट`;
 
       if (!posts.length) {
-        const empty = document.createElement("div");
+        const empty =
+          document.createElement("div");
+
         empty.className = "empty-state";
 
-        const icon = document.createElement("div");
+        const icon =
+          document.createElement("div");
+
         icon.className = "empty-icon";
         icon.textContent = "✦";
 
-        const heading = document.createElement("h3");
-        heading.textContent = isEnglish
+        const heading =
+          document.createElement("h3");
+
+        heading.textContent = english
           ? "No posts found"
           : "अहिले पोस्ट भेटिएन";
 
-        const message = document.createElement("p");
-        message.textContent = isEnglish
+        const message =
+          document.createElement("p");
+
+        message.textContent = english
           ? "Change your search or check again later."
           : "खोज परिवर्तन गर्नुहोस् वा पछि फेरि आउनुहोस्।";
 
@@ -1394,13 +1518,40 @@
         return;
       }
 
-      const fragment = document.createDocumentFragment();
+      const fragment =
+        document.createDocumentFragment();
 
       posts.forEach(post => {
-        fragment.appendChild(createPostCard(post));
+        fragment.appendChild(
+          createPostCard(post)
+        );
       });
 
       postGrid.appendChild(fragment);
+    }
+
+    // ==========================================
+    // FILTER AND RENDER POSTS
+    // ==========================================
+
+    function filterAndRenderPosts() {
+      const query =
+        searchInput.value.trim().toLocaleLowerCase();
+
+      const filtered = allPosts.filter(post => {
+        const title =
+          (post.title || "").toLocaleLowerCase();
+
+        const content =
+          (post.content || "").toLocaleLowerCase();
+
+        return (
+          title.includes(query) ||
+          content.includes(query)
+        );
+      });
+
+      renderPosts(filtered);
     }
 
     // ==========================================
@@ -1408,27 +1559,47 @@
     // ==========================================
 
     async function loadPosts() {
-      postGrid.innerHTML =
-        '<div class="status-message">पोस्टहरू लोड हुँदैछन्...</div>';
+      if (!db) {
+        postGrid.innerHTML = `
+          <div class="empty-state">
+            <div class="empty-icon">!</div>
+            <h3>Supabase connection unavailable</h3>
+            <p>कृपया इन्टरनेट जडान जाँच गर्नुहोस्।</p>
+          </div>
+        `;
+
+        return;
+      }
+
+      postGrid.innerHTML = `
+        <div class="status-message">
+          पोस्टहरू लोड हुँदैछन्...
+        </div>
+      `;
 
       try {
         const { data, error } = await db
           .from("blog_posts")
           .select("id,title,content,image_url,created_at")
-          .order("created_at", { ascending: false });
+          .order("created_at", {
+            ascending: false
+          });
 
         if (error) throw error;
 
         allPosts = data || [];
-        renderPosts(allPosts);
+
+        filterAndRenderPosts();
 
         const postId =
-          new URLSearchParams(location.search).get("post");
+          new URLSearchParams(location.search)
+            .get("post");
 
         if (postId) {
-          const selectedPost = allPosts.find(
-            post => String(post.id) === postId
-          );
+          const selectedPost =
+            allPosts.find(post =>
+              String(post.id) === postId
+            );
 
           if (selectedPost) {
             openPost(selectedPost, false);
@@ -1446,8 +1617,29 @@
           </div>
         `;
 
-        postCount.textContent = "समस्या";
+        postCount.textContent =
+          isEnglish() ? "Error" : "समस्या";
       }
+    }
+
+    // ==========================================
+    // ARTICLE BUTTON LABELS
+    // ==========================================
+
+    function updateArticleButtonLabels() {
+      const shareButton =
+        document.getElementById("share-post");
+
+      const copyButton =
+        document.getElementById("copy-post-link");
+
+      shareButton.innerHTML = isEnglish()
+        ? "↗ Share Post"
+        : "↗ पोस्ट शेयर गर्नुहोस्";
+
+      copyButton.innerHTML = isEnglish()
+        ? "⧉ Copy Link"
+        : "⧉ लिंक कपी गर्नुहोस्";
     }
 
     // ==========================================
@@ -1457,27 +1649,45 @@
     function openPost(post, updateAddress = true) {
       activePost = post;
 
-      readerTitle.textContent = post.title || "";
-      readerDate.textContent = formatDate(post.created_at);
-      readerText.textContent = post.content || "";
+      readerTitle.textContent =
+        post.title || "";
+
+      readerDate.textContent =
+        formatDate(post.created_at);
+
+      readerText.textContent =
+        post.content || "";
 
       if (post.image_url) {
         readerImage.src = post.image_url;
-        readerImage.alt = post.title || "Blog image";
+        readerImage.alt =
+          post.title || "Blog image";
+
         readerImage.hidden = false;
+
       } else {
         readerImage.removeAttribute("src");
         readerImage.hidden = true;
       }
 
+      updateArticleButtonLabels();
+
       readerOverlay.classList.add("open");
-      readerOverlay.setAttribute("aria-hidden", "false");
+
+      readerOverlay.setAttribute(
+        "aria-hidden",
+        "false"
+      );
 
       document.body.style.overflow = "hidden";
 
       if (updateAddress) {
         const url = new URL(location.href);
-        url.searchParams.set("post", post.id);
+
+        url.searchParams.set(
+          "post",
+          post.id
+        );
 
         history.pushState(
           { postId: post.id },
@@ -1493,16 +1703,25 @@
 
     function closePost(updateAddress = true) {
       readerOverlay.classList.remove("open");
-      readerOverlay.setAttribute("aria-hidden", "true");
+
+      readerOverlay.setAttribute(
+        "aria-hidden",
+        "true"
+      );
 
       document.body.style.overflow = "";
       activePost = null;
 
       if (updateAddress) {
         const url = new URL(location.href);
+
         url.searchParams.delete("post");
 
-        history.pushState({}, "", url);
+        history.pushState(
+          {},
+          "",
+          url
+        );
       }
     }
 
@@ -1529,12 +1748,14 @@
 
     window.addEventListener("popstate", () => {
       const postId =
-        new URLSearchParams(location.search).get("post");
+        new URLSearchParams(location.search)
+          .get("post");
 
       if (postId) {
-        const post = allPosts.find(
-          item => String(item.id) === postId
-        );
+        const post =
+          allPosts.find(item =>
+            String(item.id) === postId
+          );
 
         if (post) {
           openPost(post, false);
@@ -1549,23 +1770,7 @@
     // ==========================================
 
     searchInput.addEventListener("input", () => {
-      const query =
-        searchInput.value.trim().toLocaleLowerCase();
-
-      const filtered = allPosts.filter(post => {
-        const title =
-          (post.title || "").toLocaleLowerCase();
-
-        const content =
-          (post.content || "").toLocaleLowerCase();
-
-        return (
-          title.includes(query) ||
-          content.includes(query)
-        );
-      });
-
-      renderPosts(filtered);
+      filterAndRenderPosts();
     });
 
     // ==========================================
@@ -1578,33 +1783,48 @@
 
         if (!activePost) return;
 
-        const shareUrl = new URL(location.href);
-        shareUrl.searchParams.set("post", activePost.id);
+        const shareUrl =
+          new URL(location.href);
+
+        shareUrl.searchParams.set(
+          "post",
+          activePost.id
+        );
 
         const shareData = {
-          title: activePost.title || "Kamal G.C. Journal",
-          text: (activePost.content || "").slice(0, 150),
+          title:
+            activePost.title ||
+            "Kamal G.C. Journal",
+
+          text:
+            (activePost.content || "")
+              .slice(0, 150),
+
           url: shareUrl.toString()
         };
 
         try {
           if (navigator.share) {
             await navigator.share(shareData);
+
           } else {
-            await copyText(shareUrl.toString());
+            await copyText(
+              shareUrl.toString()
+            );
 
             showToast(
-              document.body.classList.contains("lang-en")
+              isEnglish()
                 ? "Post link copied."
                 : "पोस्टको लिंक कपी भयो।"
             );
           }
+
         } catch (error) {
           if (error.name !== "AbortError") {
             console.warn("Share failed:", error);
 
             showToast(
-              document.body.classList.contains("lang-en")
+              isEnglish()
                 ? "Could not share. Please try again."
                 : "शेयर गर्न सकिएन। फेरि प्रयास गर्नुहोस्।"
             );
@@ -1622,22 +1842,30 @@
 
         if (!activePost) return;
 
-        const shareUrl = new URL(location.href);
-        shareUrl.searchParams.set("post", activePost.id);
+        const shareUrl =
+          new URL(location.href);
+
+        shareUrl.searchParams.set(
+          "post",
+          activePost.id
+        );
 
         try {
-          await copyText(shareUrl.toString());
+          await copyText(
+            shareUrl.toString()
+          );
 
           showToast(
-            document.body.classList.contains("lang-en")
+            isEnglish()
               ? "Post link copied."
               : "पोस्टको लिंक कपी भयो।"
           );
+
         } catch (error) {
           console.warn("Copy failed:", error);
 
           showToast(
-            document.body.classList.contains("lang-en")
+            isEnglish()
               ? "Could not copy the link."
               : "लिंक कपी हुन सकेन।"
           );
@@ -1648,16 +1876,23 @@
     // DARK / LIGHT THEME
     // ==========================================
 
-    function setTheme(theme) {
-      const isLight = theme === "light";
+    function setTheme(theme, save = true) {
+      const isLight =
+        theme === "light";
 
-      document.body.classList.toggle("light-mode", isLight);
+      document.body.classList.toggle(
+        "light-mode",
+        isLight
+      );
 
-      themeButton.textContent = isLight ? "☾" : "☀";
+      themeButton.textContent =
+        isLight ? "☾" : "☀";
 
       themeButton.setAttribute(
         "aria-label",
-        isLight ? "Switch to dark theme" : "Switch to light theme"
+        isLight
+          ? "Switch to dark theme"
+          : "Switch to light theme"
       );
 
       document
@@ -1667,13 +1902,15 @@
           isLight ? "#f3f6fb" : "#0b1220"
         );
 
-      try {
-        localStorage.setItem(
-          "kamalgc_portal_theme",
-          isLight ? "light" : "dark"
-        );
-      } catch (error) {
-        console.warn("Theme preference could not be saved.");
+      if (save) {
+        try {
+          localStorage.setItem(
+            "kamalgc_portal_theme",
+            isLight ? "light" : "dark"
+          );
+        } catch (error) {
+          console.warn("Could not save theme preference.");
+        }
       }
     }
 
@@ -1681,43 +1918,66 @@
       const isLight =
         document.body.classList.contains("light-mode");
 
-      setTheme(isLight ? "dark" : "light");
+      setTheme(
+        isLight ? "dark" : "light"
+      );
     });
 
     // ==========================================
-    // INITIALIZE WEBSITE
+    // RESTORE SAVED LANGUAGE
     // ==========================================
 
-    // Restore saved language
     try {
       const savedLanguage =
-        localStorage.getItem("kamalgc_portal_language") || "NE";
+        localStorage.getItem(
+          "kamalgc_portal_language"
+        ) || "NE";
 
-      setLanguage(savedLanguage);
+      setLanguage(
+        savedLanguage,
+        false
+      );
+
     } catch (error) {
-      setLanguage("NE");
+      setLanguage("NE", false);
     }
 
-    // Restore saved theme
+    // ==========================================
+    // RESTORE SAVED THEME
+    // ==========================================
+
     try {
       const savedTheme =
-        localStorage.getItem("kamalgc_portal_theme") || "dark";
+        localStorage.getItem(
+          "kamalgc_portal_theme"
+        ) || "dark";
 
-      setTheme(savedTheme);
+      setTheme(
+        savedTheme,
+        false
+      );
+
     } catch (error) {
-      setTheme("dark");
+      setTheme("dark", false);
     }
 
-    // Automatic footer year
-    document.getElementById("current-year").textContent =
-      new Date().getFullYear();
+    // ==========================================
+    // FOOTER YEAR
+    // ==========================================
 
-    // Load Supabase posts
+    document.getElementById(
+      "current-year"
+    ).textContent = new Date().getFullYear();
+
+    // ==========================================
+    // LOAD POSTS
+    // ==========================================
+
     loadPosts();
 
   </script>
 
-  <!-- COMMON FEATURES: CLOCK, WEATHER, LOCATION -->
+  <!-- CLOCK, WEATHER AND LOCATION -->
   <script src="script.js" defer></script>
 
 </body>
