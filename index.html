@@ -52,6 +52,7 @@
       color: var(--text);
       min-height: 100vh;
       line-height: 1.7;
+      overflow-x: hidden;
     }
 
     body.light-mode {
@@ -97,6 +98,7 @@
       z-index: 50;
       background: color-mix(in srgb, var(--bg) 88%, transparent);
       backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
       border-bottom: 1px solid var(--line);
     }
 
@@ -170,10 +172,40 @@
       font-size: 17px;
     }
 
+    /* LIVE INFORMATION */
+
+    .live-info {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 10px 22px;
+      margin-top: 18px;
+      padding: 13px 16px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+    }
+
+    .live-info-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .live-info-item strong {
+      color: var(--text);
+      font-weight: 700;
+    }
+
     /* HERO */
 
     .hero {
-      padding: 76px 0 50px;
+      padding: 48px 0 50px;
     }
 
     .hero-panel {
@@ -197,8 +229,10 @@
       bottom: -160px;
       border-radius: 50%;
       border: 1px solid rgba(105,183,255,.25);
-      box-shadow: 0 0 0 25px rgba(105,183,255,.035),
-                  0 0 0 55px rgba(105,183,255,.025);
+      box-shadow:
+        0 0 0 25px rgba(105,183,255,.035),
+        0 0 0 55px rgba(105,183,255,.025);
+      pointer-events: none;
     }
 
     .eyebrow {
@@ -262,6 +296,7 @@
       font-size: 13px;
       font-weight: 700;
       transition: .2s;
+      cursor: pointer;
     }
 
     .primary-button {
@@ -285,7 +320,7 @@
       border-color: var(--accent);
     }
 
-    /* SECTION */
+    /* POSTS SECTION */
 
     .section {
       padding: 25px 0 65px;
@@ -554,7 +589,7 @@
       color: var(--accent);
     }
 
-    /* ARTICLE READING VIEW */
+    /* ARTICLE READER */
 
     .reader-overlay {
       display: none;
@@ -653,6 +688,34 @@
       border-top: 1px solid var(--line);
     }
 
+    /* TOAST MESSAGE */
+
+    .site-toast {
+      position: fixed;
+      left: 50%;
+      bottom: 25px;
+      z-index: 9999;
+      transform: translate(-50%, 20px);
+      padding: 12px 20px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--surface2);
+      color: var(--text);
+      box-shadow: var(--shadow);
+      opacity: 0;
+      pointer-events: none;
+      transition: .25s ease;
+      font-size: 13px;
+      text-align: center;
+      width: max-content;
+      max-width: calc(100% - 30px);
+    }
+
+    .site-toast.show {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+
     /* RESPONSIVE */
 
     @media (max-width: 700px) {
@@ -685,6 +748,16 @@
       .nav .icon-button {
         width: 35px;
         height: 35px;
+      }
+
+      .live-info {
+        justify-content: flex-start;
+        gap: 10px 14px;
+        padding: 12px;
+      }
+
+      .live-info-item {
+        font-size: 11px;
       }
 
       .hero {
@@ -732,6 +805,18 @@
         padding: 7px;
         font-size: 10px;
       }
+
+      .live-info {
+        gap: 9px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+      }
     }
   </style>
 </head>
@@ -754,15 +839,47 @@
         <a class="nav-link active" href="index.html">Home</a>
         <a class="nav-link" href="about.html">About</a>
         <a class="nav-link" href="emergency.html">Emergency</a>
-        <button class="icon-button" id="theme-toggle" type="button" aria-label="Change theme">☀</button>
+        <button
+          class="icon-button"
+          id="theme-toggle"
+          type="button"
+          aria-label="Change theme"
+          title="Change theme">☀</button>
       </nav>
 
     </div>
   </header>
 
 
-  <!-- HERO -->
+  <!-- LIVE TIME, WEATHER AND LOCATION -->
+  <section class="container live-info" aria-label="Live information">
+
+    <div class="live-info-item">
+      <span>🕒</span>
+      <strong id="real-time">समय लोड हुँदै...</strong>
+    </div>
+
+    <div class="live-info-item">
+      <span>🌡️</span>
+      <strong id="weather-temp">--°C</strong>
+    </div>
+
+    <div class="live-info-item">
+      <span>🌤️</span>
+      <strong id="weather-condition">मौसम</strong>
+    </div>
+
+    <div class="live-info-item">
+      <span>📍</span>
+      <strong id="user-location">Location अनुमति आवश्यक</strong>
+    </div>
+
+  </section>
+
+
   <main>
+
+    <!-- HERO -->
     <section class="hero">
       <div class="container">
         <div class="hero-panel">
@@ -806,7 +923,9 @@
             <p>नयाँ विचार र अनुभवहरू यहाँ पढ्नुहोस्।</p>
           </div>
 
-          <div class="post-count" id="post-count">पोस्टहरू लोड हुँदैछन्...</div>
+          <div class="post-count" id="post-count">
+            पोस्टहरू लोड हुँदैछन्...
+          </div>
         </div>
 
         <div class="feed-tools">
@@ -817,7 +936,8 @@
               id="post-search"
               class="search-input"
               placeholder="पोस्ट खोज्नुहोस्..."
-              autocomplete="off">
+              autocomplete="off"
+              aria-label="पोस्ट खोज्नुहोस्">
           </div>
         </div>
 
@@ -851,14 +971,20 @@
     <div class="container footer-inner">
 
       <div>
-        © 2026 KAMAL G.C. ALL RIGHTS RESERVED.
+        © <span id="current-year">2026</span> KAMAL G.C. ALL RIGHTS RESERVED.
       </div>
 
       <div class="footer-links">
         <a href="about.html">About</a>
         <a href="emergency.html">Emergency</a>
-        <a href="https://kids.kamalgc.com.np" target="_blank" rel="noopener noreferrer">Kids Learning</a>
-        <a href="https://dn.kamalgc.com.np" target="_blank" rel="noopener noreferrer">Digital Notebook</a>
+        <a
+          href="https://kids.kamalgc.com.np"
+          target="_blank"
+          rel="noopener noreferrer">Kids Learning</a>
+        <a
+          href="https://dn.kamalgc.com.np"
+          target="_blank"
+          rel="noopener noreferrer">Digital Notebook</a>
         <a href="admin.html">Admin</a>
       </div>
 
@@ -867,12 +993,25 @@
 
 
   <!-- FULL ARTICLE READER -->
-  <div class="reader-overlay" id="reader-overlay" aria-hidden="true">
-    <article class="reader" role="dialog" aria-modal="true" aria-label="Full blog post">
+  <div
+    class="reader-overlay"
+    id="reader-overlay"
+    aria-hidden="true">
+
+    <article
+      class="reader"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Full blog post">
 
       <div class="reader-toolbar">
         <strong>KAMAL G.C. · JOURNAL</strong>
-        <button type="button" class="reader-close" id="reader-close" aria-label="Close article">×</button>
+
+        <button
+          type="button"
+          class="reader-close"
+          id="reader-close"
+          aria-label="Close article">×</button>
       </div>
 
       <div class="reader-content">
@@ -881,18 +1020,30 @@
 
         <h1 class="reader-title" id="reader-title"></h1>
 
-        <img class="reader-image" id="reader-image" alt="" hidden>
+        <img
+          class="reader-image"
+          id="reader-image"
+          alt=""
+          hidden>
 
         <div class="reader-text" id="reader-text"></div>
 
         <div class="reader-actions">
-          <button type="button" class="secondary-button" id="share-post">
+
+          <button
+            type="button"
+            class="secondary-button"
+            id="share-post">
             ↗ पोस्ट शेयर गर्नुहोस्
           </button>
 
-          <button type="button" class="secondary-button" id="copy-post-link">
+          <button
+            type="button"
+            class="secondary-button"
+            id="copy-post-link">
             ⧉ लिंक कपी गर्नुहोस्
           </button>
+
         </div>
 
       </div>
@@ -900,20 +1051,41 @@
   </div>
 
 
+  <!-- WEBSITE TOAST MESSAGE -->
+  <div
+    id="site-toast"
+    class="site-toast"
+    role="status"
+    aria-live="polite"></div>
+
+
+  <!-- MAIN PAGE SCRIPT -->
   <script>
     "use strict";
 
+    // ==========================================
     // SUPABASE CONFIGURATION
-    const SUPABASE_URL = "https://zbyntmyybhdcwmttkuys.supabase.co";
-    const SUPABASE_KEY = "sb_publishable_N8U3og_Ntm-ImrtM8c1NGA_-Rqb3dSy";
+    // ==========================================
+
+    const SUPABASE_URL =
+      "https://zbyntmyybhdcwmttkuys.supabase.co";
+
+    const SUPABASE_KEY =
+      "sb_publishable_N8U3og_Ntm-ImrtM8c1NGA_-Rqb3dSy";
 
     const db = window.supabase.createClient(
       SUPABASE_URL,
       SUPABASE_KEY
     );
 
+
+    // ==========================================
+    // GLOBAL VARIABLES
+    // ==========================================
+
     let allPosts = [];
     let activePost = null;
+    let toastTimer = null;
 
     const postGrid = document.getElementById("post-grid");
     const postCount = document.getElementById("post-count");
@@ -925,8 +1097,62 @@
     const readerText = document.getElementById("reader-text");
     const readerImage = document.getElementById("reader-image");
 
+    const themeButton = document.getElementById("theme-toggle");
 
-    // DATE FORMAT
+
+    // ==========================================
+    // TOAST MESSAGE
+    // ==========================================
+
+    function showToast(message) {
+      const toast = document.getElementById("site-toast");
+      if (!toast) return;
+
+      toast.textContent = message;
+      toast.classList.add("show");
+
+      clearTimeout(toastTimer);
+
+      toastTimer = setTimeout(() => {
+        toast.classList.remove("show");
+      }, 2600);
+    }
+
+
+    // ==========================================
+    // COPY TEXT FALLBACK
+    // ==========================================
+
+    async function copyText(text) {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+        return true;
+      }
+
+      const textarea = document.createElement("textarea");
+      textarea.value = text;
+      textarea.style.position = "fixed";
+      textarea.style.opacity = "0";
+      textarea.style.pointerEvents = "none";
+
+      document.body.appendChild(textarea);
+      textarea.select();
+
+      const copied = document.execCommand("copy");
+      textarea.remove();
+
+      if (!copied) {
+        throw new Error("Copy failed");
+      }
+
+      return true;
+    }
+
+
+    // ==========================================
+    // DATE FORMAT FOR POSTS
+    // ==========================================
+
     function formatDate(dateValue) {
       if (!dateValue) return "";
 
@@ -942,21 +1168,27 @@
     }
 
 
+    // ==========================================
     // CREATE POST CARD
-    function createPostCard(post) {
+    // ==========================================
 
+    function createPostCard(post) {
       const card = document.createElement("article");
+
       card.className = "post-card";
       card.tabIndex = 0;
       card.setAttribute("role", "button");
-      card.setAttribute("aria-label", post.title || "Read post");
+      card.setAttribute(
+        "aria-label",
+        post.title || "Read post"
+      );
 
       const imageWrap = document.createElement("div");
       imageWrap.className = "post-image-wrap";
 
       if (post.image_url) {
-
         const image = document.createElement("img");
+
         image.className = "post-image";
         image.src = post.image_url;
         image.alt = post.title || "Blog image";
@@ -968,18 +1200,18 @@
           const placeholder = document.createElement("div");
           placeholder.className = "no-image";
           placeholder.textContent = "✦";
+
           imageWrap.appendChild(placeholder);
         };
 
         imageWrap.appendChild(image);
-
       } else {
-
         const placeholder = document.createElement("div");
+
         placeholder.className = "no-image";
         placeholder.textContent = "✦";
-        imageWrap.appendChild(placeholder);
 
+        imageWrap.appendChild(placeholder);
       }
 
       const body = document.createElement("div");
@@ -1007,9 +1239,11 @@
       excerpt.className = "post-excerpt";
 
       const content = post.content || "";
-      excerpt.textContent = content.length > 190
-        ? content.slice(0, 190).trim() + "..."
-        : content;
+
+      excerpt.textContent =
+        content.length > 190
+          ? content.slice(0, 190).trim() + "..."
+          : content;
 
       const readMore = document.createElement("div");
       readMore.className = "read-more";
@@ -1018,7 +1252,9 @@
       body.append(meta, title, excerpt, readMore);
       card.append(imageWrap, body);
 
-      card.addEventListener("click", () => openPost(post));
+      card.addEventListener("click", () => {
+        openPost(post);
+      });
 
       card.addEventListener("keydown", event => {
         if (event.key === "Enter" || event.key === " ") {
@@ -1031,15 +1267,16 @@
     }
 
 
+    // ==========================================
     // RENDER POSTS
-    function renderPosts(posts) {
+    // ==========================================
 
+    function renderPosts(posts) {
       postGrid.replaceChildren();
 
       postCount.textContent = `${posts.length} पोस्ट`;
 
       if (!posts.length) {
-
         const empty = document.createElement("div");
         empty.className = "empty-state";
 
@@ -1051,7 +1288,8 @@
         heading.textContent = "अहिले पोस्ट भेटिएन";
 
         const message = document.createElement("p");
-        message.textContent = "नयाँ पोस्ट प्रकाशित भएपछि यहाँ देखिनेछ।";
+        message.textContent =
+          "खोज परिवर्तन गर्नुहोस् वा नयाँ पोस्ट प्रकाशित भएपछि फेरि आउनुहोस्।";
 
         empty.append(icon, heading, message);
         postGrid.appendChild(empty);
@@ -1069,18 +1307,40 @@
     }
 
 
+    // ==========================================
     // LOAD POSTS FROM SUPABASE
+    // ==========================================
+
     async function loadPosts() {
+      postGrid.innerHTML =
+        '<div class="status-message">पोस्टहरू लोड हुँदैछन्...</div>';
 
-      postGrid.innerHTML = '<div class="status-message">पोस्टहरू लोड हुँदैछन्...</div>';
+      try {
+        const { data, error } = await db
+          .from("blog_posts")
+          .select("id,title,content,image_url,created_at")
+          .order("created_at", { ascending: false });
 
-      const { data, error } = await db
-        .from("blog_posts")
-        .select("id,title,content,image_url,created_at")
-        .order("created_at", { ascending: false });
+        if (error) throw error;
 
-      if (error) {
+        allPosts = data || [];
+        renderPosts(allPosts);
 
+        // Open a post directly from its URL.
+        const postId =
+          new URLSearchParams(location.search).get("post");
+
+        if (postId) {
+          const selectedPost = allPosts.find(
+            post => String(post.id) === postId
+          );
+
+          if (selectedPost) {
+            openPost(selectedPost, false);
+          }
+        }
+
+      } catch (error) {
         console.error("Post loading error:", error);
 
         postGrid.innerHTML = `
@@ -1092,31 +1352,15 @@
         `;
 
         postCount.textContent = "समस्या";
-
-        return;
-      }
-
-      allPosts = data || [];
-      renderPosts(allPosts);
-
-      // Open a post directly when its ID is in the URL.
-      const postId = new URLSearchParams(location.search).get("post");
-
-      if (postId) {
-        const selectedPost = allPosts.find(
-          post => String(post.id) === postId
-        );
-
-        if (selectedPost) {
-          openPost(selectedPost, false);
-        }
       }
     }
 
 
+    // ==========================================
     // OPEN FULL ARTICLE
-    function openPost(post, updateAddress = true) {
+    // ==========================================
 
+    function openPost(post, updateAddress = true) {
       activePost = post;
 
       readerTitle.textContent = post.title || "";
@@ -1134,36 +1378,48 @@
 
       readerOverlay.classList.add("open");
       readerOverlay.setAttribute("aria-hidden", "false");
+
       document.body.style.overflow = "hidden";
 
       if (updateAddress) {
         const url = new URL(location.href);
         url.searchParams.set("post", post.id);
-        history.pushState({ postId: post.id }, "", url);
+
+        history.pushState(
+          { postId: post.id },
+          "",
+          url
+        );
       }
     }
 
 
+    // ==========================================
     // CLOSE ARTICLE
-    function closePost(updateAddress = true) {
+    // ==========================================
 
+    function closePost(updateAddress = true) {
       readerOverlay.classList.remove("open");
       readerOverlay.setAttribute("aria-hidden", "true");
-      document.body.style.overflow = "";
 
+      document.body.style.overflow = "";
       activePost = null;
 
       if (updateAddress) {
         const url = new URL(location.href);
         url.searchParams.delete("post");
+
         history.pushState({}, "", url);
       }
     }
 
 
-    document.getElementById("reader-close").addEventListener("click", () => {
-      closePost();
-    });
+    document
+      .getElementById("reader-close")
+      .addEventListener("click", () => {
+        closePost();
+      });
+
 
     readerOverlay.addEventListener("click", event => {
       if (event.target === readerOverlay) {
@@ -1171,18 +1427,25 @@
       }
     });
 
+
     document.addEventListener("keydown", event => {
-      if (event.key === "Escape" && readerOverlay.classList.contains("open")) {
+      if (
+        event.key === "Escape" &&
+        readerOverlay.classList.contains("open")
+      ) {
         closePost();
       }
     });
 
-    window.addEventListener("popstate", () => {
 
-      const postId = new URLSearchParams(location.search).get("post");
+    window.addEventListener("popstate", () => {
+      const postId =
+        new URLSearchParams(location.search).get("post");
 
       if (postId) {
-        const post = allPosts.find(item => String(item.id) === postId);
+        const post = allPosts.find(
+          item => String(item.id) === postId
+        );
 
         if (post) {
           openPost(post, false);
@@ -1193,123 +1456,155 @@
     });
 
 
+    // ==========================================
     // SEARCH POSTS
-    searchInput.addEventListener("input", () => {
+    // ==========================================
 
-      const query = searchInput.value.trim().toLocaleLowerCase();
+    searchInput.addEventListener("input", () => {
+      const query =
+        searchInput.value.trim().toLocaleLowerCase();
 
       const filtered = allPosts.filter(post => {
+        const title =
+          (post.title || "").toLocaleLowerCase();
 
-        const title = (post.title || "").toLocaleLowerCase();
-        const content = (post.content || "").toLocaleLowerCase();
+        const content =
+          (post.content || "").toLocaleLowerCase();
 
-        return title.includes(query) || content.includes(query);
+        return (
+          title.includes(query) ||
+          content.includes(query)
+        );
       });
 
       renderPosts(filtered);
     });
 
 
+    // ==========================================
     // SHARE POST
-    document.getElementById("share-post").addEventListener("click", async () => {
+    // ==========================================
 
-      if (!activePost) return;
+    document
+      .getElementById("share-post")
+      .addEventListener("click", async () => {
 
-      const shareUrl = new URL(location.href);
-      shareUrl.searchParams.set("post", activePost.id);
+        if (!activePost) return;
 
-      const shareData = {
-        title: activePost.title,
-        text: (activePost.content || "").slice(0, 150),
-        url: shareUrl.toString()
-      };
+        const shareUrl = new URL(location.href);
+        shareUrl.searchParams.set("post", activePost.id);
 
-      try {
+        const shareData = {
+          title: activePost.title || "Kamal G.C. Journal",
+          text: (activePost.content || "").slice(0, 150),
+          url: shareUrl.toString()
+        };
 
-        if (navigator.share) {
-          await navigator.share(shareData);
-        } else {
-          await navigator.clipboard.writeText(shareUrl.toString());
-          alert("पोस्टको लिंक कपी भयो।");
+        try {
+          if (navigator.share) {
+            await navigator.share(shareData);
+          } else {
+            await copyText(shareUrl.toString());
+            showToast("पोस्टको लिंक कपी भयो।");
+          }
+        } catch (error) {
+          if (error.name !== "AbortError") {
+            console.warn("Share failed:", error);
+            showToast("शेयर गर्न सकिएन। फेरि प्रयास गर्नुहोस्।");
+          }
         }
-
-      } catch (error) {
-        if (error.name !== "AbortError") {
-          console.warn("Share failed:", error);
-        }
-      }
-    });
+      });
 
 
+    // ==========================================
     // COPY POST LINK
-    document.getElementById("copy-post-link").addEventListener("click", async () => {
+    // ==========================================
 
-      if (!activePost) return;
+    document
+      .getElementById("copy-post-link")
+      .addEventListener("click", async () => {
 
-      const shareUrl = new URL(location.href);
-      shareUrl.searchParams.set("post", activePost.id);
+        if (!activePost) return;
 
-      try {
-        await navigator.clipboard.writeText(shareUrl.toString());
-        alert("पोस्टको लिंक कपी भयो।");
-      } catch (error) {
-        alert("लिंक कपी हुन सकेन।");
-      }
-    });
+        const shareUrl = new URL(location.href);
+        shareUrl.searchParams.set("post", activePost.id);
+
+        try {
+          await copyText(shareUrl.toString());
+          showToast("पोस्टको लिंक कपी भयो।");
+        } catch (error) {
+          console.warn("Copy failed:", error);
+          showToast("लिंक कपी हुन सकेन।");
+        }
+      });
 
 
-    // THEME
-    const themeButton = document.getElementById("theme-toggle");
+    // ==========================================
+    // DARK / LIGHT THEME
+    // ==========================================
 
     function setTheme(theme) {
+      const isLight = theme === "light";
 
-      document.body.classList.toggle("light-mode", theme === "light");
+      document.body.classList.toggle("light-mode", isLight);
 
-      themeButton.textContent = theme === "light" ? "☾" : "☀";
+      themeButton.textContent = isLight ? "☾" : "☀";
 
-      document.querySelector('meta[name="theme-color"]')
-        .setAttribute("content", theme === "light" ? "#f3f6fb" : "#0b1220");
+      themeButton.setAttribute(
+        "aria-label",
+        isLight ? "Switch to dark theme" : "Switch to light theme"
+      );
+
+      document
+        .querySelector('meta[name="theme-color"]')
+        .setAttribute(
+          "content",
+          isLight ? "#f3f6fb" : "#0b1220"
+        );
 
       try {
-        localStorage.setItem("kamalgc_portal_theme", theme);
+        localStorage.setItem(
+          "kamalgc_portal_theme",
+          isLight ? "light" : "dark"
+        );
       } catch (error) {
-        console.warn("Theme could not be saved.");
+        console.warn("Theme preference could not be saved.");
       }
     }
 
-    themeButton.addEventListener("click", () => {
 
-      const isLight = document.body.classList.contains("light-mode");
+    themeButton.addEventListener("click", () => {
+      const isLight =
+        document.body.classList.contains("light-mode");
 
       setTheme(isLight ? "dark" : "light");
     });
 
 
-    // INITIALIZE
+    // ==========================================
+    // INITIALIZE WEBSITE
+    // ==========================================
+
     try {
-      const savedTheme = localStorage.getItem("kamalgc_portal_theme") || "dark";
+      const savedTheme =
+        localStorage.getItem("kamalgc_portal_theme") || "dark";
+
       setTheme(savedTheme);
     } catch (error) {
       setTheme("dark");
     }
 
+    // Automatic footer year
+    document.getElementById("current-year").textContent =
+      new Date().getFullYear();
+
+    // Load Supabase posts
     loadPosts();
 
-
-    // SERVICE WORKER
-    if ("serviceWorker" in navigator) {
-
-      window.addEventListener("load", () => {
-
-        navigator.serviceWorker.register("./sw.js")
-          .then(() => console.log("Service Worker registered."))
-          .catch(error => console.warn("Service Worker registration failed:", error));
-
-      });
-
-    }
-
   </script>
+
+  <!-- COMMON FEATURES: CLOCK, WEATHER, LOCATION -->
+  <script src="script.js" defer></script>
 
 </body>
 </html>
