@@ -3,10 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>KAMAL G.C. | Personal Journal</title>
-  <meta name="description" content="Kamal G.C. का अनुभव, विचार, यात्रा, प्रविधि र जीवनका कथाहरू।">
-  <meta name="theme-color" content="#0b1220">
+  <title>KAMAL G.C. — Stories, Ideas & Community</title>
+  <meta name="description" content="KAMAL G.C. — विचार, अनुभव, प्रविधि, जीवनका कथा र समुदाय जोड्ने डिजिटल संसार।">
+  <meta name="theme-color" content="#080d19">
   <meta name="author" content="Kamal G.C.">
 
   <link rel="canonical" href="https://kamalgc.com.np/">
@@ -22,819 +21,656 @@
 
   <style>
     :root {
-      --bg: #0b1220;
-      --surface: #111c2e;
-      --surface2: #17243a;
-      --text: #edf3fc;
-      --muted: #9aaac0;
-      --line: rgba(255,255,255,.09);
-      --accent: #69b7ff;
-      --accent2: #9b8cff;
-      --shadow: 0 18px 55px rgba(0,0,0,.22);
+      --bg:#080d19;
+      --surface:#101a2b;
+      --surface2:#17253b;
+      --text:#f4f7ff;
+      --muted:#a5b2c7;
+      --line:rgba(163,190,230,.14);
+      --accent:#72d5ff;
+      --accent2:#a78bfa;
+      --shadow:0 22px 65px rgba(0,0,0,.28);
+      --radius:22px;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing:border-box; margin:0; padding:0; }
 
-    html {
-      scroll-behavior: smooth;
-    }
+    html { scroll-behavior:smooth; scroll-padding-top:90px; }
 
     body {
-      font-family: "DM Sans", "Noto Sans Devanagari", sans-serif;
+      font-family:"DM Sans","Noto Sans Devanagari",sans-serif;
       background:
-        radial-gradient(circle at 10% 0%, rgba(66,125,210,.13), transparent 30%),
+        radial-gradient(ellipse at 12% 8%,rgba(46,125,205,.18),transparent 34%),
+        radial-gradient(ellipse at 92% 25%,rgba(139,92,246,.13),transparent 30%),
         var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      line-height: 1.7;
-      overflow-x: hidden;
+      color:var(--text);
+      min-height:100vh;
+      line-height:1.7;
+      overflow-x:hidden;
     }
 
     body.light-mode {
-      --bg: #f3f6fb;
-      --surface: #ffffff;
-      --surface2: #edf2f9;
-      --text: #142238;
-      --muted: #64748b;
-      --line: rgba(15,35,60,.12);
-      --accent: #176bc0;
-      --accent2: #7054d8;
-      --shadow: 0 18px 50px rgba(24,45,75,.09);
-      background: #f3f6fb;
+      --bg:#f4f7fc;
+      --surface:#fff;
+      --surface2:#edf3fb;
+      --text:#14243b;
+      --muted:#64748b;
+      --line:rgba(36,66,105,.13);
+      --accent:#087fbd;
+      --accent2:#7255d7;
+      --shadow:0 20px 55px rgba(35,60,95,.10);
+      background:#f4f7fc;
     }
 
-    button, input {
-      font: inherit;
-    }
+    button,input { font:inherit; }
+    button,a { -webkit-tap-highlight-color:transparent; }
+    button { cursor:pointer; }
+    a { color:inherit; text-decoration:none; }
 
-    button, a {
-      -webkit-tap-highlight-color: transparent;
-    }
+    .container { width:min(1160px,calc(100% - 36px)); margin:auto; }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    button {
-      cursor: pointer;
-    }
-
-    .container {
-      width: min(1120px, calc(100% - 36px));
-      margin: auto;
-    }
-
-    /* LANGUAGE SYSTEM — FIXED */
-
-    .lang-en {
-      display: none !important;
-    }
-
-    body.english-mode .lang-ne {
-      display: none !important;
-    }
-
-    body.english-mode .lang-en {
-      display: inline !important;
-    }
+    .lang-en { display:none!important; }
+    body.english-mode .lang-ne { display:none!important; }
+    body.english-mode .lang-en { display:inline!important; }
 
     /* HEADER */
-
     .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      background: color-mix(in srgb, var(--bg) 88%, transparent);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      border-bottom: 1px solid var(--line);
+      position:sticky;
+      top:0;
+      z-index:50;
+      background:rgba(8,13,25,.84);
+      backdrop-filter:blur(18px);
+      -webkit-backdrop-filter:blur(18px);
+      border-bottom:1px solid var(--line);
     }
+
+    body.light-mode .site-header { background:rgba(244,247,252,.88); }
 
     .header-inner {
-      min-height: 76px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
+      min-height:78px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
     }
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      min-width: 0;
-    }
+    .brand { display:flex; align-items:center; gap:12px; min-width:0; }
 
     .brand img {
-      width: 43px;
-      height: 43px;
-      border-radius: 14px;
-      object-fit: cover;
-      border: 1px solid var(--line);
+      width:47px;
+      height:47px;
+      object-fit:cover;
+      border-radius:15px;
+      border:1px solid var(--line);
+      box-shadow:0 0 0 4px rgba(114,213,255,.08);
     }
 
-    .brand-name {
-      font-size: 17px;
-      font-weight: 800;
-      letter-spacing: .7px;
+    .brand-name { font-size:17px; font-weight:800; letter-spacing:1.1px; }
+    .brand-subtitle { color:var(--muted); font-size:10px; margin-top:-3px; }
+
+    .nav { display:flex; align-items:center; gap:6px; }
+
+    .nav-link,.icon-button,.language-button {
+      border:1px solid transparent;
+      color:var(--muted);
+      background:transparent;
+      border-radius:12px;
+      padding:9px 11px;
+      font-size:12px;
+      font-weight:700;
+      transition:.2s;
+      white-space:nowrap;
     }
 
-    .brand-subtitle {
-      color: var(--muted);
-      font-size: 11px;
-      margin-top: -3px;
-    }
-
-    .nav {
-      display: flex;
-      align-items: center;
-      gap: 9px;
-    }
-
-    .nav-link,
-    .icon-button {
-      border: 1px solid transparent;
-      color: var(--muted);
-      background: transparent;
-      border-radius: 11px;
-      padding: 9px 13px;
-      font-size: 13px;
-      font-weight: 600;
-      transition: .2s;
-    }
-
-    .nav-link:hover,
-    .icon-button:hover {
-      color: var(--text);
-      background: var(--surface2);
-      border-color: var(--line);
+    .nav-link:hover,.icon-button:hover {
+      color:var(--text);
+      background:var(--surface2);
+      border-color:var(--line);
     }
 
     .nav-link.active {
-      color: var(--accent);
-      background: var(--surface2);
+      color:var(--text);
+      background:linear-gradient(120deg,rgba(75,180,235,.16),rgba(167,139,250,.15));
+      border-color:var(--line);
     }
 
-    .icon-button {
-      width: 40px;
-      height: 40px;
-      padding: 0;
-      font-size: 17px;
+    .icon-button,.language-button {
+      width:39px;
+      height:39px;
+      padding:0;
+      display:grid;
+      place-items:center;
+      border:1px solid var(--line);
+      background:var(--surface);
+      color:var(--accent);
+      font-size:15px;
     }
 
-    .language-button {
-      min-width: 48px;
-      height: 40px;
-      padding: 0 11px;
-      border: 1px solid var(--line);
-      border-radius: 11px;
-      background: var(--surface2);
-      color: var(--accent);
-      font-size: 12px;
-      font-weight: 800;
-      transition: .2s;
-    }
+    .language-button { font-size:11px; font-weight:800; }
 
-    .language-button:hover {
-      border-color: var(--accent);
-    }
-
-    /* LIVE INFORMATION */
-
+    /* LIVE INFO */
     .live-info {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
-      gap: 10px 22px;
-      margin-top: 18px;
-      padding: 13px 16px;
-      background: var(--surface);
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      box-shadow: var(--shadow);
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      align-items:center;
+      gap:10px 22px;
+      margin-top:17px;
+      padding:14px 20px;
+      border:1px solid var(--line);
+      border-radius:18px;
+      background:var(--surface);
+      box-shadow:var(--shadow);
     }
 
     .live-info-item {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      color: var(--muted);
-      font-size: 12px;
-      font-weight: 600;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      color:var(--muted);
+      font-size:12px;
+      font-weight:600;
     }
 
-    .live-info-item strong {
-      color: var(--text);
-      font-weight: 700;
+    .live-info-item strong { color:var(--text); font-weight:700; }
+
+    .live-dot {
+      width:7px;
+      height:7px;
+      background:#39d98a;
+      border-radius:50%;
+      box-shadow:0 0 10px #39d98a;
     }
 
     /* HERO */
-
-    .hero {
-      padding: 48px 0 50px;
-    }
+    .hero { padding:35px 0 20px; }
 
     .hero-panel {
-      position: relative;
-      overflow: hidden;
-      border: 1px solid var(--line);
-      border-radius: 27px;
-      padding: clamp(28px, 6vw, 62px);
+      position:relative;
+      isolation:isolate;
+      overflow:hidden;
+      min-height:405px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      border:1px solid rgba(125,190,255,.22);
+      border-radius:30px;
+      padding:clamp(30px,7vw,76px);
       background:
-        radial-gradient(circle at 85% 20%, rgba(105,183,255,.2), transparent 32%),
-        linear-gradient(125deg, var(--surface), var(--surface2));
-      box-shadow: var(--shadow);
+        linear-gradient(112deg,rgba(8,16,31,.97) 4%,rgba(16,32,57,.92) 58%,rgba(50,39,91,.83)),
+        radial-gradient(circle at 85% 20%,rgba(114,213,255,.3),transparent 38%);
+      box-shadow:0 30px 90px rgba(0,0,0,.30),inset 0 1px rgba(255,255,255,.06);
+    }
+
+    body.light-mode .hero-panel {
+      background:linear-gradient(112deg,#fff,#e7f1fd 62%,#eee8ff);
+      border-color:rgba(55,120,190,.20);
+    }
+
+    .hero-panel::before {
+      content:"K";
+      position:absolute;
+      z-index:-1;
+      right:7%;
+      top:50%;
+      transform:translateY(-56%);
+      font-size:clamp(190px,32vw,390px);
+      line-height:1;
+      font-weight:800;
+      color:rgba(140,190,255,.055);
+      pointer-events:none;
     }
 
     .hero-panel::after {
-      content: "";
-      position: absolute;
-      width: 260px;
-      height: 260px;
-      right: -100px;
-      bottom: -160px;
-      border-radius: 50%;
-      border: 1px solid rgba(105,183,255,.25);
-      box-shadow:
-        0 0 0 25px rgba(105,183,255,.035),
-        0 0 0 55px rgba(105,183,255,.025);
-      pointer-events: none;
+      content:"";
+      position:absolute;
+      z-index:-1;
+      width:340px;
+      height:340px;
+      right:-115px;
+      bottom:-210px;
+      border-radius:50%;
+      border:1px solid rgba(114,213,255,.25);
+      box-shadow:0 0 0 35px rgba(114,213,255,.04),0 0 0 75px rgba(167,139,250,.035);
     }
 
     .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      color: var(--accent);
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: 1.7px;
-      text-transform: uppercase;
-      margin-bottom: 18px;
+      display:inline-flex;
+      align-items:center;
+      gap:9px;
+      color:var(--accent);
+      font-size:11px;
+      font-weight:800;
+      letter-spacing:2px;
+      margin-bottom:22px;
     }
 
     .eyebrow::before {
-      content: "";
-      width: 22px;
-      height: 2px;
-      background: var(--accent);
-      border-radius: 5px;
+      content:"";
+      width:23px;
+      height:2px;
+      background:var(--accent);
+      border-radius:5px;
     }
 
     .hero h1 {
-      max-width: 720px;
-      font-size: clamp(34px, 6vw, 61px);
-      line-height: 1.25;
-      letter-spacing: -1.8px;
-      font-weight: 800;
-      margin-bottom: 18px;
+      max-width:760px;
+      font-size:clamp(39px,7vw,76px);
+      line-height:1.22;
+      letter-spacing:-2.5px;
+      font-weight:800;
+      margin-bottom:20px;
     }
 
     .hero-highlight {
-      background: linear-gradient(90deg, var(--accent), var(--accent2));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
+      background:linear-gradient(95deg,#77ddff 5%,#9e9aff 55%,#d5a8ff);
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+    }
+
+    body.light-mode .hero-highlight {
+      background-image:linear-gradient(95deg,#087fbd,#7655d7);
+      -webkit-background-clip:text;
+      background-clip:text;
     }
 
     .hero-description {
-      max-width: 620px;
-      color: var(--muted);
-      font-size: 15px;
-      line-height: 1.9;
+      max-width:650px;
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.95;
     }
 
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 27px;
-    }
+    .hero-actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:28px; }
 
-    .primary-button,
-    .secondary-button {
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
-      gap: 9px;
-      min-height: 45px;
-      border-radius: 12px;
-      padding: 0 19px;
-      font-size: 13px;
-      font-weight: 700;
-      transition: .2s;
-      cursor: pointer;
+    .primary-button,.secondary-button {
+      display:inline-flex;
+      justify-content:center;
+      align-items:center;
+      gap:9px;
+      min-height:49px;
+      border-radius:14px;
+      padding:0 21px;
+      font-size:13px;
+      font-weight:800;
+      transition:.2s;
+      border:1px solid transparent;
     }
 
     .primary-button {
-      color: #07111f;
-      background: linear-gradient(110deg, #79c5ff, #a99bff);
-      border: 0;
+      color:#071322;
+      background:linear-gradient(110deg,#75ddff,#b5a2ff);
+      box-shadow:0 12px 28px rgba(89,167,235,.22);
     }
 
-    .primary-button:hover {
-      transform: translateY(-2px);
-      filter: brightness(1.08);
-    }
+    .primary-button:hover { transform:translateY(-3px); box-shadow:0 17px 34px rgba(89,167,235,.3); }
 
     .secondary-button {
-      color: var(--text);
-      background: var(--surface);
-      border: 1px solid var(--line);
+      color:var(--text);
+      background:var(--surface);
+      border-color:var(--line);
     }
 
-    .secondary-button:hover {
-      border-color: var(--accent);
+    .secondary-button:hover { border-color:var(--accent); }
+
+    /* QUICK LINKS */
+    .home-highlights {
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:14px;
+      margin-top:16px;
     }
 
-    /* POSTS SECTION */
-
-    .section {
-      padding: 25px 0 65px;
+    .highlight-card {
+      min-width:0;
+      display:flex;
+      align-items:center;
+      gap:13px;
+      padding:17px;
+      border:1px solid var(--line);
+      border-radius:18px;
+      background:var(--surface);
+      box-shadow:var(--shadow);
+      transition:transform .2s,border-color .2s;
     }
+
+    .highlight-card:hover { transform:translateY(-4px); border-color:rgba(114,213,255,.5); }
+
+    .highlight-icon {
+      flex:0 0 42px;
+      width:42px;
+      height:42px;
+      display:grid;
+      place-items:center;
+      border-radius:14px;
+      color:var(--accent);
+      font-size:21px;
+      background:linear-gradient(135deg,rgba(114,213,255,.16),rgba(167,139,250,.16));
+    }
+
+    .highlight-card strong { display:block; font-size:13px; }
+    .highlight-card small { display:block; margin-top:2px; color:var(--muted); font-size:10px; }
+    .highlight-arrow { margin-left:auto; color:var(--accent); font-size:18px; }
+
+    /* POSTS */
+    .section { padding:42px 0 65px; }
 
     .section-heading {
-      display: flex;
-      align-items: end;
-      justify-content: space-between;
-      gap: 20px;
-      margin-bottom: 25px;
+      display:flex;
+      align-items:end;
+      justify-content:space-between;
+      gap:20px;
+      margin-bottom:23px;
     }
 
     .section-kicker {
-      color: var(--accent);
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: 1.6px;
-      text-transform: uppercase;
-      margin-bottom: 5px;
+      color:var(--accent);
+      font-size:11px;
+      font-weight:800;
+      letter-spacing:2px;
+      margin-bottom:6px;
     }
 
-    .section-heading h2 {
-      font-size: clamp(23px, 4vw, 31px);
-      line-height: 1.3;
-      font-weight: 800;
-    }
+    .section-heading h2 { font-size:clamp(24px,4vw,33px); line-height:1.35; font-weight:800; }
+    .section-heading p { color:var(--muted); font-size:13px; margin-top:5px; }
+    .post-count { color:var(--muted); font-size:12px; white-space:nowrap; }
 
-    .section-heading p {
-      color: var(--muted);
-      font-size: 13px;
-      margin-top: 5px;
-    }
-
-    .post-count {
-      color: var(--muted);
-      font-size: 12px;
-      white-space: nowrap;
-    }
-
-    /* SEARCH */
-
-    .feed-tools {
-      display: flex;
-      gap: 12px;
-      margin-bottom: 24px;
-    }
-
-    .search-wrap {
-      flex: 1;
-      position: relative;
-    }
+    .feed-tools { display:flex; gap:12px; margin-bottom:24px; }
+    .search-wrap { flex:1; position:relative; }
 
     .search-wrap span {
-      position: absolute;
-      left: 15px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--muted);
+      position:absolute;
+      left:16px;
+      top:50%;
+      transform:translateY(-50%);
+      color:var(--muted);
+      font-size:19px;
     }
 
     .search-input {
-      width: 100%;
-      height: 47px;
-      border: 1px solid var(--line);
-      background: var(--surface);
-      color: var(--text);
-      border-radius: 13px;
-      padding: 0 15px 0 43px;
-      outline: none;
-      font-size: 13px;
+      width:100%;
+      height:53px;
+      border:1px solid var(--line);
+      background:var(--surface);
+      color:var(--text);
+      border-radius:15px;
+      padding:0 16px 0 45px;
+      outline:none;
+      font-size:13px;
     }
 
-    .search-input:focus {
-      border-color: var(--accent);
-    }
-
-    /* POST GRID */
+    .search-input:focus { border-color:var(--accent); box-shadow:0 0 0 3px rgba(114,213,255,.10); }
 
     .post-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 22px;
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:23px;
     }
 
     .post-card {
-      overflow: hidden;
-      min-width: 0;
-      border-radius: 19px;
-      background: var(--surface);
-      border: 1px solid var(--line);
-      box-shadow: var(--shadow);
-      transition: transform .22s, border-color .22s;
-      cursor: pointer;
-      display: flex;
-      flex-direction: column;
+      overflow:hidden;
+      min-width:0;
+      border-radius:22px;
+      background:var(--surface);
+      border:1px solid var(--line);
+      box-shadow:var(--shadow);
+      transition:transform .22s,border-color .22s;
+      cursor:pointer;
+      display:flex;
+      flex-direction:column;
     }
 
-    .post-card:hover {
-      transform: translateY(-5px);
-      border-color: rgba(105,183,255,.5);
-    }
+    .post-card:hover { transform:translateY(-5px); border-color:rgba(105,183,255,.5); }
+    .post-card:focus-visible { outline:2px solid var(--accent); outline-offset:3px; }
 
     .post-image-wrap {
-      position: relative;
-      width: 100%;
-      aspect-ratio: 16 / 9;
-      background: var(--surface2);
-      overflow: hidden;
+      position:relative;
+      width:100%;
+      aspect-ratio:16/9;
+      background:var(--surface2);
+      overflow:hidden;
     }
 
     .post-image {
-      width: 100%;
-      height: 100%;
-      display: block;
-      object-fit: cover;
-      transition: transform .4s;
+      width:100%;
+      height:100%;
+      display:block;
+      object-fit:cover;
+      transition:transform .4s;
     }
 
-    .post-card:hover .post-image {
-      transform: scale(1.035);
-    }
+    .post-card:hover .post-image { transform:scale(1.035); }
 
     .no-image {
-      height: 100%;
-      display: grid;
-      place-items: center;
-      color: var(--accent);
-      font-size: 42px;
-      background:
-        radial-gradient(circle at 30% 20%, rgba(105,183,255,.18), transparent 50%),
-        var(--surface2);
+      height:100%;
+      display:grid;
+      place-items:center;
+      color:var(--accent);
+      font-size:43px;
+      background:radial-gradient(circle at 30% 20%,rgba(105,183,255,.18),transparent 50%),var(--surface2);
     }
 
-    .post-body {
-      padding: 21px;
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-    }
+    .post-body { padding:23px; display:flex; flex-direction:column; flex:1; }
 
     .post-meta {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      color: var(--muted);
-      font-size: 11px;
-      margin-bottom: 10px;
+      display:flex;
+      align-items:center;
+      gap:9px;
+      color:var(--muted);
+      font-size:11px;
+      margin-bottom:11px;
     }
 
-    .post-meta .dot {
-      width: 4px;
-      height: 4px;
-      border-radius: 50%;
-      background: var(--accent);
-    }
-
-    .post-title {
-      font-size: 19px;
-      line-height: 1.5;
-      font-weight: 800;
-      margin-bottom: 9px;
-      overflow-wrap: anywhere;
-    }
+    .post-meta .dot { width:4px; height:4px; border-radius:50%; background:var(--accent); }
+    .post-title { font-size:19px; line-height:1.5; font-weight:800; margin-bottom:9px; overflow-wrap:anywhere; }
 
     .post-excerpt {
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.85;
-      display: -webkit-box;
-      -webkit-line-clamp: 3;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-      overflow-wrap: anywhere;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.85;
+      display:-webkit-box;
+      -webkit-line-clamp:3;
+      -webkit-box-orient:vertical;
+      overflow:hidden;
+      overflow-wrap:anywhere;
     }
 
     .read-more {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      color: var(--accent);
-      font-size: 12px;
-      font-weight: 800;
-      margin-top: 18px;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      color:var(--accent);
+      font-size:12px;
+      font-weight:800;
+      margin-top:19px;
     }
 
     .empty-state {
-      grid-column: 1 / -1;
-      padding: 55px 20px;
-      border: 1px dashed var(--line);
-      border-radius: 18px;
-      text-align: center;
-      background: var(--surface);
+      grid-column:1/-1;
+      padding:55px 20px;
+      border:1px dashed var(--line);
+      border-radius:18px;
+      text-align:center;
+      background:var(--surface);
     }
 
-    .empty-state .empty-icon {
-      font-size: 34px;
-      margin-bottom: 12px;
-    }
+    .empty-icon { font-size:34px; margin-bottom:12px; color:var(--accent); }
+    .empty-state h3 { font-size:17px; margin-bottom:7px; }
+    .empty-state p,.status-message { color:var(--muted); font-size:13px; }
+    .status-message { padding:25px 0; text-align:center; }
 
-    .empty-state h3 {
-      font-size: 17px;
-      margin-bottom: 7px;
-    }
-
-    .empty-state p {
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    .status-message {
-      color: var(--muted);
-      font-size: 13px;
-      padding: 20px 0;
-      text-align: center;
-    }
-
-    /* FOOTER — CENTERED TWO LINES */
-
-    .footer {
-      border-top: 1px solid var(--line);
-      padding: 27px 0;
-      color: var(--muted);
-      font-size: 12px;
-    }
+    /* FOOTER */
+    .footer { border-top:1px solid var(--line); padding:34px 0; color:var(--muted); font-size:12px; }
 
     .footer-inner {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      gap: 12px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      text-align:center;
+      gap:14px;
     }
 
     .footer-links {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
-      gap: 10px 20px;
-      width: 100%;
-      text-align: center;
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      align-items:center;
+      gap:9px 15px;
+      width:100%;
     }
 
-    .footer-links a:hover {
-      color: var(--accent);
-    }
-
-    .footer-copyright {
-      text-align: center;
-      width: 100%;
-    }
+    .footer-links a { padding:6px 9px; border-radius:9px; }
+    .footer-links a:hover { color:var(--accent); background:var(--surface2); }
+    .footer-copyright { text-align:center; width:100%; }
 
     /* ARTICLE READER */
-
     .reader-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      z-index: 100;
-      overflow-y: auto;
-      padding: 25px 14px;
-      background: rgba(3,8,17,.88);
-      backdrop-filter: blur(10px);
+      display:none;
+      position:fixed;
+      inset:0;
+      z-index:100;
+      overflow-y:auto;
+      padding:25px 14px;
+      background:rgba(3,8,17,.88);
+      backdrop-filter:blur(10px);
     }
 
-    .reader-overlay.open {
-      display: block;
-    }
+    .reader-overlay.open { display:block; }
 
     .reader {
-      width: min(790px, 100%);
-      margin: 0 auto;
-      background: var(--bg);
-      border: 1px solid var(--line);
-      border-radius: 21px;
-      overflow: hidden;
-      box-shadow: 0 25px 90px rgba(0,0,0,.4);
+      width:min(790px,100%);
+      margin:0 auto;
+      background:var(--bg);
+      border:1px solid var(--line);
+      border-radius:21px;
+      overflow:hidden;
+      box-shadow:0 25px 90px rgba(0,0,0,.4);
     }
 
     .reader-toolbar {
-      position: sticky;
-      top: 0;
-      z-index: 2;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 13px 18px;
-      background: var(--surface);
-      border-bottom: 1px solid var(--line);
+      position:sticky;
+      top:0;
+      z-index:2;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:13px 18px;
+      background:var(--surface);
+      border-bottom:1px solid var(--line);
     }
 
-    .reader-toolbar strong {
-      font-size: 12px;
-      letter-spacing: .5px;
-    }
+    .reader-toolbar strong { font-size:12px; letter-spacing:.5px; }
 
     .reader-close {
-      width: 37px;
-      height: 37px;
-      border: 1px solid var(--line);
-      border-radius: 11px;
-      color: var(--text);
-      background: var(--surface2);
-      font-size: 20px;
+      width:38px;
+      height:38px;
+      border:1px solid var(--line);
+      border-radius:11px;
+      color:var(--text);
+      background:var(--surface2);
+      font-size:21px;
     }
 
-    .reader-content {
-      padding: clamp(20px, 5vw, 43px);
-    }
-
-    .reader-date {
-      color: var(--accent);
-      font-size: 12px;
-      margin-bottom: 12px;
-    }
-
-    .reader-title {
-      font-size: clamp(25px, 5vw, 38px);
-      line-height: 1.4;
-      font-weight: 800;
-      overflow-wrap: anywhere;
-      margin-bottom: 22px;
-    }
+    .reader-content { padding:clamp(20px,5vw,43px); }
+    .reader-date { color:var(--accent); font-size:12px; margin-bottom:12px; }
+    .reader-title { font-size:clamp(25px,5vw,38px); line-height:1.4; font-weight:800; overflow-wrap:anywhere; margin-bottom:22px; }
 
     .reader-image {
-      width: 100%;
-      max-height: 480px;
-      object-fit: contain;
-      border-radius: 15px;
-      background: var(--surface2);
-      margin-bottom: 25px;
+      width:100%;
+      max-height:480px;
+      object-fit:contain;
+      border-radius:15px;
+      background:var(--surface2);
+      margin-bottom:25px;
     }
 
-    .reader-text {
-      color: var(--text);
-      font-size: 15px;
-      line-height: 2.05;
-      white-space: pre-wrap;
-      overflow-wrap: anywhere;
-    }
+    .reader-text { color:var(--text); font-size:15px; line-height:2.05; white-space:pre-wrap; overflow-wrap:anywhere; }
 
     .reader-actions {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-top: 30px;
-      padding-top: 20px;
-      border-top: 1px solid var(--line);
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:30px;
+      padding-top:20px;
+      border-top:1px solid var(--line);
     }
 
     /* TOAST */
-
     .site-toast {
-      position: fixed;
-      left: 50%;
-      bottom: 25px;
-      z-index: 9999;
-      transform: translate(-50%, 20px);
-      padding: 12px 20px;
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      background: var(--surface2);
-      color: var(--text);
-      box-shadow: var(--shadow);
-      opacity: 0;
-      pointer-events: none;
-      transition: .25s ease;
-      font-size: 13px;
-      text-align: center;
-      width: max-content;
-      max-width: calc(100% - 30px);
+      position:fixed;
+      left:50%;
+      bottom:25px;
+      z-index:9999;
+      transform:translate(-50%,20px);
+      padding:12px 20px;
+      border:1px solid var(--line);
+      border-radius:12px;
+      background:var(--surface2);
+      color:var(--text);
+      box-shadow:var(--shadow);
+      opacity:0;
+      pointer-events:none;
+      transition:.25s ease;
+      font-size:13px;
+      text-align:center;
+      width:max-content;
+      max-width:calc(100% - 30px);
     }
 
-    .site-toast.show {
-      opacity: 1;
-      transform: translate(-50%, 0);
-    }
+    .site-toast.show { opacity:1; transform:translate(-50%,0); }
 
     /* RESPONSIVE */
-
-    @media (max-width: 700px) {
-      .header-inner {
-        min-height: 66px;
-      }
-
-      .brand img {
-        width: 38px;
-        height: 38px;
-      }
-
-      .brand-name {
-        font-size: 14px;
-      }
-
-      .brand-subtitle {
-        font-size: 9px;
-      }
-
-      .nav {
-        gap: 3px;
-      }
-
-      .nav-link {
-        padding: 8px 9px;
-        font-size: 11px;
-      }
-
-      .nav .icon-button,
-      .nav .language-button {
-        width: 35px;
-        min-width: 35px;
-        height: 35px;
-        padding: 0;
-        font-size: 11px;
-      }
-
-      .live-info {
-        justify-content: flex-start;
-        gap: 10px 14px;
-        padding: 12px;
-      }
-
-      .live-info-item {
-        font-size: 11px;
-      }
-
-      .hero {
-        padding: 35px 0 28px;
-      }
-
-      .hero-panel {
-        border-radius: 20px;
-      }
-
-      .hero h1 {
-        letter-spacing: -1px;
-      }
-
-      .post-grid {
-        grid-template-columns: 1fr;
-        gap: 16px;
-      }
-
-      .post-body {
-        padding: 18px;
-      }
-
-      .post-title {
-        font-size: 17px;
-      }
+    @media(max-width:900px) {
+      .header-inner { flex-wrap:wrap; padding:12px 0; }
+      .nav { flex-wrap:wrap; justify-content:flex-end; }
+      .nav-link { font-size:11px; padding:8px 9px; }
     }
 
-    @media (max-width: 390px) {
-      .container {
-        width: calc(100% - 24px);
-      }
-
-      .brand-subtitle {
-        display: none;
-      }
-
-      .nav-link {
-        padding: 7px;
-        font-size: 10px;
-      }
-
-      .live-info {
-        gap: 9px;
-      }
+    @media(max-width:700px) {
+      .container { width:calc(100% - 28px); }
+      .header-inner { min-height:unset; gap:10px; }
+      .brand img { width:40px; height:40px; }
+      .brand-name { font-size:14px; }
+      .brand-subtitle { font-size:9px; }
+      .nav { width:100%; justify-content:flex-start; gap:5px; overflow-x:auto; flex-wrap:nowrap; padding:2px 0 5px; }
+      .nav-link { flex:0 0 auto; }
+      .nav .icon-button,.nav .language-button { flex:0 0 36px; width:36px; min-width:36px; height:36px; }
+      .live-info { justify-content:flex-start; gap:10px 14px; padding:12px; }
+      .live-info-item { font-size:10px; }
+      .hero { padding:25px 0 16px; }
+      .hero-panel { min-height:360px; padding:30px 23px; border-radius:23px; }
+      .hero-panel::before { right:0; top:35%; font-size:220px; }
+      .hero h1 { font-size:clamp(35px,9vw,52px); letter-spacing:-1.5px; }
+      .hero-description { font-size:13px; }
+      .home-highlights { grid-template-columns:1fr; gap:10px; }
+      .highlight-card { padding:13px 15px; border-radius:15px; }
+      .section { padding:30px 0 48px; }
+      .section-heading { align-items:flex-start; flex-direction:column; gap:8px; }
+      .post-grid { grid-template-columns:1fr; gap:16px; }
+      .post-body { padding:19px; }
+      .post-title { font-size:18px; }
+      .reader-overlay { padding:12px 8px; }
+      .reader { border-radius:16px; }
+      .reader-text { font-size:14px; }
+      .footer { padding-bottom:35px; }
     }
 
-    @media (prefers-reduced-motion: reduce) {
-      *,
-      *::before,
-      *::after {
-        scroll-behavior: auto !important;
-        animation-duration: .01ms !important;
-        transition-duration: .01ms !important;
+    @media(max-width:390px) {
+      .container { width:calc(100% - 22px); }
+      .brand-subtitle { display:none; }
+      .hero-panel { padding:27px 19px; }
+      .hero h1 { font-size:34px; }
+      .live-info { gap:9px; }
+      .live-info-item { font-size:9px; }
+    }
+
+    @media(prefers-reduced-motion:reduce) {
+      *,*::before,*::after {
+        scroll-behavior:auto!important;
+        animation-duration:.01ms!important;
+        transition-duration:.01ms!important;
       }
     }
   </style>
@@ -842,488 +678,214 @@
 
 <body>
 
-  <!-- HEADER -->
   <header class="site-header">
     <div class="container header-inner">
-
       <a class="brand" href="index.html" aria-label="Kamal G.C. Home">
         <img src="mylogo.png" alt="Kamal G.C. logo">
-
         <div>
           <div class="brand-name">KAMAL G.C.</div>
-          <div class="brand-subtitle">Personal Journal & Digital Space</div>
+          <div class="brand-subtitle">Ideas · Stories · Community</div>
         </div>
       </a>
 
       <nav class="nav" aria-label="Main navigation">
-
-        <a class="nav-link active" href="index.html">
-          <span class="lang-ne">गृहपृष्ठ</span>
-          <span class="lang-en">Home</span>
-        </a>
-
-        <a class="nav-link" href="community.html">
-          <span class="lang-ne">समुदाय</span>
-          <span class="lang-en">Community</span>
-        </a>
-
-        <a class="nav-link" href="messages.html">
-          <span class="lang-ne">सन्देशहरू</span>
-          <span class="lang-en">Messages</span>
-        </a>
-
-        <a class="nav-link" href="notifications.html">
-          <span class="lang-ne">सूचनाहरू</span>
-          <span class="lang-en">Notifications</span>
-        </a>
-
-        <a class="nav-link" href="profile.html">
-          <span class="lang-ne">प्रोफाइल</span>
-          <span class="lang-en">Profile</span>
-        </a>
-
-        <a class="nav-link" href="settings.html">
-          <span class="lang-ne">सेटिङहरू</span>
-          <span class="lang-en">Settings</span>
-        </a>
-
-        <a class="nav-link" href="emergency.html">
-          <span class="lang-ne">आपतकालीन</span>
-          <span class="lang-en">Emergency</span>
-        </a>
-
-        <button
-          class="language-button"
-          id="lang-toggle"
-          type="button"
-          aria-label="Switch language"
-          title="Switch language">NE</button>
-
-        <button
-          class="icon-button"
-          id="theme-toggle"
-          type="button"
-          aria-label="Change theme"
-          title="Change theme">☀</button>
-
+        <a class="nav-link active" href="index.html"><span class="lang-ne">गृहपृष्ठ</span><span class="lang-en">Home</span></a>
+        <a class="nav-link" href="community.html"><span class="lang-ne">समुदाय</span><span class="lang-en">Community</span></a>
+        <a class="nav-link" href="messages.html"><span class="lang-ne">सन्देश</span><span class="lang-en">Messages</span></a>
+        <a class="nav-link" href="notifications.html"><span class="lang-ne">सूचना</span><span class="lang-en">Notifications</span></a>
+        <a class="nav-link" href="profile.html"><span class="lang-ne">प्रोफाइल</span><span class="lang-en">Profile</span></a>
+        <a class="nav-link" href="settings.html"><span class="lang-ne">सेटिङ</span><span class="lang-en">Settings</span></a>
+        <a class="nav-link" href="emergency.html"><span class="lang-ne">आपतकालीन</span><span class="lang-en">Emergency</span></a>
+        <button class="language-button" id="lang-toggle" type="button" aria-label="Switch language">NE</button>
+        <button class="icon-button" id="theme-toggle" type="button" aria-label="Change theme">☀</button>
       </nav>
     </div>
   </header>
 
-  <!-- LIVE TIME, WEATHER AND LOCATION -->
   <section class="container live-info" aria-label="Live information">
-
-    <div class="live-info-item">
-      <span>🕒</span>
-      <strong id="real-time">समय लोड हुँदै...</strong>
-    </div>
-
-    <div class="live-info-item">
-      <span>🌡️</span>
-      <strong id="weather-temp">--°C</strong>
-    </div>
-
-    <div class="live-info-item">
-      <span>🌤️</span>
-      <strong id="weather-condition">मौसम</strong>
-    </div>
-
-    <div class="live-info-item">
-      <span>📍</span>
-      <strong id="user-location">Location अनुमति आवश्यक</strong>
-    </div>
-
+    <div class="live-info-item"><span class="live-dot"></span><strong id="real-time">समय लोड हुँदै...</strong></div>
+    <div class="live-info-item"><span>🌡️</span><strong id="weather-temp">--°C</strong></div>
+    <div class="live-info-item"><span>🌤️</span><strong id="weather-condition">मौसम</strong></div>
+    <div class="live-info-item"><span>📍</span><strong id="user-location">Location अनुमति आवश्यक</strong></div>
   </section>
 
   <main>
-
-    <!-- HERO -->
     <section class="hero">
       <div class="container">
-
         <div class="hero-panel">
-
-          <div class="eyebrow">WELCOME TO MY WORLD</div>
+          <div class="eyebrow">A PERSONAL SPACE TO EXPLORE</div>
 
           <h1>
-            <span class="lang-ne">
-              विचार, अनुभव र<br>
-              <span class="hero-highlight">जीवनका कथाहरू।</span>
-            </span>
-
-            <span class="lang-en">
-              Thoughts, Experiences &<br>
-              <span class="hero-highlight">Stories of Life.</span>
-            </span>
+            <span class="lang-ne">विचार, अनुभव र<br><span class="hero-highlight">जीवनका कथाहरू।</span></span>
+            <span class="lang-en">Thoughts, Experiences &<br><span class="hero-highlight">Stories of Life.</span></span>
           </h1>
 
           <p class="hero-description">
-
-            <span class="lang-ne">
-              नमस्कार! म कमल जी.सी.। यहाँ मेरा जीवनका अनुभव,
-              यात्रा, सिकाइ, प्रविधि र समयसँगै बटुलेका विचारहरू
-              साझा गर्नेछु। पढ्नुहोस्, बुझ्नुहोस् र आफ्नो विचार पनि बाँड्नुहोस्।
-            </span>
-
-            <span class="lang-en">
-              Hello! I am Kamal G.C. Here I share my life experiences,
-              journeys, learning, technology and thoughts gathered over time.
-              Read, explore and share your thoughts too.
-            </span>
-
+            <span class="lang-ne">नमस्कार! म कमल जी.सी.। यहाँ मेरा जीवनका अनुभव, यात्रा, सिकाइ, प्रविधि र समयसँगै बटुलेका विचारहरू साझा गर्नेछु। पढ्नुहोस्, बुझ्नुहोस् र आफ्नो विचार पनि बाँड्नुहोस्।</span>
+            <span class="lang-en">Hello! I am Kamal G.C. Here I share my life experiences, journeys, learning, technology and thoughts gathered over time. Read, explore and share your thoughts too.</span>
           </p>
 
           <div class="hero-actions">
-            <a href="#posts" class="primary-button">
-              <span>✦</span>
-              <span class="lang-ne">पोस्टहरू पढ्नुहोस्</span>
-              <span class="lang-en">Explore Posts</span>
-            </a>
+            <a href="#posts" class="primary-button"><span>✦</span><span class="lang-ne">पोस्टहरू पढ्नुहोस्</span><span class="lang-en">Explore Posts</span></a>
+            <a href="community.html" class="secondary-button"><span>◎</span><span class="lang-ne">समुदायमा जोडिनुहोस्</span><span class="lang-en">Join Community</span></a>
           </div>
+        </div>
 
+        <div class="home-highlights">
+          <a class="highlight-card" href="#posts">
+            <span class="highlight-icon">✦</span>
+            <span><strong>विचार र कथाहरू</strong><small>पढ्नुहोस् · Explore stories</small></span>
+            <span class="highlight-arrow">↗</span>
+          </a>
+          <a class="highlight-card" href="community.html">
+            <span class="highlight-icon">◎</span>
+            <span><strong>आफ्नो समुदाय</strong><small>जोडिनुहोस् · Connect</small></span>
+            <span class="highlight-arrow">↗</span>
+          </a>
+          <a class="highlight-card" href="emergency.html">
+            <span class="highlight-icon">＋</span>
+            <span><strong>आपतकालीन सहायता</strong><small>सहयोगी जानकारी · Help</small></span>
+            <span class="highlight-arrow">↗</span>
+          </a>
         </div>
       </div>
     </section>
 
-    <!-- POSTS -->
     <section class="section" id="posts">
       <div class="container">
-
         <div class="section-heading">
-
           <div>
             <div class="section-kicker">LATEST STORIES</div>
-
-            <h2>
-              <span class="lang-ne">नयाँ पोस्टहरू</span>
-              <span class="lang-en">Latest Posts</span>
-            </h2>
-
-            <p>
-              <span class="lang-ne">नयाँ विचार र अनुभवहरू यहाँ पढ्नुहोस्।</span>
-              <span class="lang-en">Read the latest thoughts and experiences here.</span>
-            </p>
+            <h2><span class="lang-ne">नयाँ पोस्टहरू</span><span class="lang-en">Latest Posts</span></h2>
+            <p><span class="lang-ne">नयाँ विचार र अनुभवहरू यहाँ पढ्नुहोस्।</span><span class="lang-en">Read the latest thoughts and experiences here.</span></p>
           </div>
-
-          <div class="post-count" id="post-count">
-            <span class="lang-ne">पोस्टहरू लोड हुँदैछन्...</span>
-            <span class="lang-en">Loading posts...</span>
-          </div>
-
+          <div class="post-count" id="post-count"><span class="lang-ne">पोस्टहरू लोड हुँदैछन्...</span><span class="lang-en">Loading posts...</span></div>
         </div>
 
         <div class="feed-tools">
           <div class="search-wrap">
             <span>⌕</span>
-
-            <input
-              type="search"
-              id="post-search"
-              class="search-input"
-              placeholder="पोस्ट खोज्नुहोस्..."
-              autocomplete="off"
-              aria-label="Search posts">
+            <input type="search" id="post-search" class="search-input" placeholder="पोस्ट खोज्नुहोस्..." autocomplete="off" aria-label="Search posts">
           </div>
         </div>
 
         <div id="post-grid" class="post-grid">
-
-          <div class="status-message">
-            <span class="lang-ne">पोस्टहरू लोड हुँदैछन्...</span>
-            <span class="lang-en">Loading posts...</span>
-          </div>
-
+          <div class="status-message"><span class="lang-ne">पोस्टहरू लोड हुँदैछन्...</span><span class="lang-en">Loading posts...</span></div>
         </div>
-
       </div>
     </section>
-
   </main>
 
-  <!-- FOOTER: TWO CENTERED LINES -->
   <footer class="footer">
     <div class="container footer-inner">
-
       <div class="footer-links">
-
-        <a href="community.html">
-          <span class="lang-ne">समुदाय</span>
-          <span class="lang-en">Community</span>
-        </a>
-
-        <a href="messages.html">
-          <span class="lang-ne">सन्देशहरू</span>
-          <span class="lang-en">Messages</span>
-        </a>
-
-        <a href="notifications.html">
-          <span class="lang-ne">सूचनाहरू</span>
-          <span class="lang-en">Notifications</span>
-        </a>
-
-        <a href="profile.html">
-          <span class="lang-ne">प्रोफाइल</span>
-          <span class="lang-en">Profile</span>
-        </a>
-
-        <a href="settings.html">
-          <span class="lang-ne">सेटिङहरू</span>
-          <span class="lang-en">Settings</span>
-        </a>
-
-        <a href="emergency.html">
-          <span class="lang-ne">आपतकालीन</span>
-          <span class="lang-en">Emergency</span>
-        </a>
-
-        <a
-          href="https://kids.kamalgc.com.np"
-          target="_blank"
-          rel="noopener noreferrer">Kids Learning</a>
-
-        <a
-          href="https://dn.kamalgc.com.np"
-          target="_blank"
-          rel="noopener noreferrer">Digital Notebook</a>
-
+        <a href="community.html"><span class="lang-ne">समुदाय</span><span class="lang-en">Community</span></a>
+        <a href="messages.html"><span class="lang-ne">सन्देशहरू</span><span class="lang-en">Messages</span></a>
+        <a href="notifications.html"><span class="lang-ne">सूचनाहरू</span><span class="lang-en">Notifications</span></a>
+        <a href="profile.html"><span class="lang-ne">प्रोफाइल</span><span class="lang-en">Profile</span></a>
+        <a href="settings.html"><span class="lang-ne">सेटिङहरू</span><span class="lang-en">Settings</span></a>
+        <a href="emergency.html"><span class="lang-ne">आपतकालीन</span><span class="lang-en">Emergency</span></a>
+        <a href="https://kids.kamalgc.com.np" target="_blank" rel="noopener noreferrer">Kids Learning</a>
+        <a href="https://dn.kamalgc.com.np" target="_blank" rel="noopener noreferrer">Digital Notebook</a>
         <a href="admin.html">Admin</a>
-
       </div>
-
       <div class="footer-copyright">
-        © <span id="current-year">2026</span>
-        KAMAL G.C. ·
+        © <span id="current-year">2026</span> KAMAL G.C. ·
         <span class="lang-ne">सर्वाधिकार सुरक्षित।</span>
         <span class="lang-en">All Rights Reserved.</span>
       </div>
-
     </div>
   </footer>
 
-  <!-- FULL ARTICLE READER -->
-  <div
-    class="reader-overlay"
-    id="reader-overlay"
-    aria-hidden="true">
-
-    <article
-      class="reader"
-      role="dialog"
-      aria-modal="true"
-      aria-label="Full blog post">
-
+  <div class="reader-overlay" id="reader-overlay" aria-hidden="true">
+    <article class="reader" role="dialog" aria-modal="true" aria-label="Full blog post">
       <div class="reader-toolbar">
-
         <strong>KAMAL G.C. · JOURNAL</strong>
-
-        <button
-          type="button"
-          class="reader-close"
-          id="reader-close"
-          aria-label="Close article">×</button>
-
+        <button type="button" class="reader-close" id="reader-close" aria-label="Close article">×</button>
       </div>
-
       <div class="reader-content">
-
         <div class="reader-date" id="reader-date"></div>
-
         <h1 class="reader-title" id="reader-title"></h1>
-
-        <img
-          class="reader-image"
-          id="reader-image"
-          alt=""
-          hidden>
-
+        <img class="reader-image" id="reader-image" alt="" hidden>
         <div class="reader-text" id="reader-text"></div>
-
         <div class="reader-actions">
-
-          <button
-            type="button"
-            class="secondary-button"
-            id="share-post">
-            ↗
-            <span class="lang-ne">पोस्ट शेयर गर्नुहोस्</span>
-            <span class="lang-en">Share Post</span>
-          </button>
-
-          <button
-            type="button"
-            class="secondary-button"
-            id="copy-post-link">
-            ⧉
-            <span class="lang-ne">लिंक कपी गर्नुहोस्</span>
-            <span class="lang-en">Copy Link</span>
-          </button>
-
+          <button type="button" class="secondary-button" id="share-post">↗ <span class="lang-ne">पोस्ट शेयर गर्नुहोस्</span><span class="lang-en">Share Post</span></button>
+          <button type="button" class="secondary-button" id="copy-post-link">⧉ <span class="lang-ne">लिंक कपी गर्नुहोस्</span><span class="lang-en">Copy Link</span></button>
         </div>
-
       </div>
     </article>
   </div>
 
-  <!-- WEBSITE TOAST MESSAGE -->
-  <div
-    id="site-toast"
-    class="site-toast"
-    role="status"
-    aria-live="polite"></div>
+  <div id="site-toast" class="site-toast" role="status" aria-live="polite"></div>
 
-  <!-- MAIN PAGE SCRIPT -->
   <script>
     "use strict";
 
-    // ==========================================
     // SUPABASE CONFIGURATION
-    // ==========================================
-
-    const SUPABASE_URL =
-      "https://zbyntmyybhdcwmttkuys.supabase.co";
-
-    const SUPABASE_KEY =
-      "sb_publishable_N8U3og_Ntm-ImrtM8c1NGA_-Rqb3dSy";
-
-    // ==========================================
-    // CHECK SUPABASE LIBRARY
-    // ==========================================
+    const SUPABASE_URL = "https://zbyntmyybhdcwmttkuys.supabase.co";
+    const SUPABASE_KEY = "sb_publishable_N8U3og_Ntm-ImrtM8c1NGA_-Rqb3dSy";
 
     let db = null;
-
     if (window.supabase && window.supabase.createClient) {
-      db = window.supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_KEY
-      );
+      db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
     }
-
-    // ==========================================
-    // GLOBAL VARIABLES
-    // ==========================================
 
     let allPosts = [];
     let activePost = null;
     let toastTimer = null;
 
-    const postGrid =
-      document.getElementById("post-grid");
-
-    const postCount =
-      document.getElementById("post-count");
-
-    const searchInput =
-      document.getElementById("post-search");
-
-    const readerOverlay =
-      document.getElementById("reader-overlay");
-
-    const readerTitle =
-      document.getElementById("reader-title");
-
-    const readerDate =
-      document.getElementById("reader-date");
-
-    const readerText =
-      document.getElementById("reader-text");
-
-    const readerImage =
-      document.getElementById("reader-image");
-
-    const themeButton =
-      document.getElementById("theme-toggle");
-
-    const languageButton =
-      document.getElementById("lang-toggle");
-
-    // ==========================================
-    // LANGUAGE SYSTEM
-    // ==========================================
+    const postGrid = document.getElementById("post-grid");
+    const postCount = document.getElementById("post-count");
+    const searchInput = document.getElementById("post-search");
+    const readerOverlay = document.getElementById("reader-overlay");
+    const readerTitle = document.getElementById("reader-title");
+    const readerDate = document.getElementById("reader-date");
+    const readerText = document.getElementById("reader-text");
+    const readerImage = document.getElementById("reader-image");
+    const themeButton = document.getElementById("theme-toggle");
+    const languageButton = document.getElementById("lang-toggle");
 
     function isEnglish() {
       return document.body.classList.contains("english-mode");
     }
 
     function setLanguage(language, save = true) {
-      const selectedLanguage =
-        language === "EN" ? "EN" : "NE";
+      const selected = language === "EN" ? "EN" : "NE";
+      const english = selected === "EN";
 
-      const englishSelected =
-        selectedLanguage === "EN";
+      document.body.classList.toggle("english-mode", english);
+      document.documentElement.lang = english ? "en" : "ne";
 
-      // IMPORTANT: Do not use "lang-en" on body.
-      document.body.classList.toggle(
-        "english-mode",
-        englishSelected
-      );
+      languageButton.textContent = selected;
+      languageButton.setAttribute("aria-label", english ? "Switch to Nepali" : "Switch to English");
+      languageButton.title = english ? "Switch to Nepali" : "Switch to English";
 
-      document.documentElement.lang =
-        englishSelected ? "en" : "ne";
-
-      languageButton.textContent =
-        selectedLanguage;
-
-      languageButton.setAttribute(
-        "aria-label",
-        englishSelected
-          ? "Switch to Nepali"
-          : "Switch to English"
-      );
-
-      languageButton.title =
-        englishSelected
-          ? "Switch to Nepali"
-          : "Switch to English";
-
-      const searchPlaceholder =
-        englishSelected
-          ? "Search posts..."
-          : "पोस्ट खोज्नुहोस्...";
-
-      searchInput.placeholder = searchPlaceholder;
-      searchInput.setAttribute(
-        "aria-label",
-        searchPlaceholder
-      );
+      const placeholder = english ? "Search posts..." : "पोस्ट खोज्नुहोस्...";
+      searchInput.placeholder = placeholder;
+      searchInput.setAttribute("aria-label", placeholder);
 
       if (save) {
         try {
-          localStorage.setItem(
-            "kamalgc_portal_language",
-            selectedLanguage
-          );
+          localStorage.setItem("kamalgc_portal_language", selected);
         } catch (error) {
-          console.warn("Could not save language preference.");
+          console.warn("Could not save language preference.", error);
         }
       }
 
-      // Refresh dynamic labels without clearing search.
-      if (allPosts.length || postGrid.children.length) {
-        filterAndRenderPosts();
-      }
-
-      if (activePost) {
-        updateArticleButtonLabels();
-      }
+      if (allPosts.length || postGrid.children.length) filterAndRenderPosts();
+      if (activePost) updateArticleButtonLabels();
     }
 
     languageButton.addEventListener("click", () => {
       setLanguage(isEnglish() ? "NE" : "EN");
     });
 
-    // ==========================================
-    // TOAST MESSAGE
-    // ==========================================
-
     function showToast(message) {
-      const toast =
-        document.getElementById("site-toast");
-
+      const toast = document.getElementById("site-toast");
       if (!toast) return;
 
       toast.textContent = message;
       toast.classList.add("show");
-
       clearTimeout(toastTimer);
 
       toastTimer = setTimeout(() => {
@@ -1331,88 +893,51 @@
       }, 2600);
     }
 
-    // ==========================================
-    // COPY TEXT
-    // ==========================================
-
     async function copyText(text) {
       if (navigator.clipboard && window.isSecureContext) {
         await navigator.clipboard.writeText(text);
         return true;
       }
 
-      const textarea =
-        document.createElement("textarea");
-
+      const textarea = document.createElement("textarea");
       textarea.value = text;
       textarea.style.position = "fixed";
       textarea.style.opacity = "0";
       textarea.style.pointerEvents = "none";
-
       document.body.appendChild(textarea);
       textarea.select();
 
-      const copied =
-        document.execCommand("copy");
-
+      const copied = document.execCommand("copy");
       textarea.remove();
 
-      if (!copied) {
-        throw new Error("Copy failed");
-      }
-
+      if (!copied) throw new Error("Copy failed");
       return true;
     }
 
-    // ==========================================
-    // DATE FORMAT
-    // ==========================================
+    function formatDate(value) {
+      if (!value) return "";
+      const date = new Date(value);
+      if (Number.isNaN(date.getTime())) return "";
 
-    function formatDate(dateValue) {
-      if (!dateValue) return "";
-
-      const date = new Date(dateValue);
-
-      if (Number.isNaN(date.getTime())) {
-        return "";
-      }
-
-      const locale =
-        isEnglish() ? "en-IN" : "ne-NP";
-
-      return date.toLocaleDateString(locale, {
-        year: "numeric",
-        month: "long",
-        day: "numeric"
+      return date.toLocaleDateString(isEnglish() ? "en-IN" : "ne-NP", {
+        year:"numeric",
+        month:"long",
+        day:"numeric"
       });
     }
 
-    // ==========================================
-    // CREATE POST CARD
-    // ==========================================
-
     function createPostCard(post) {
-      const card =
-        document.createElement("article");
-
+      const card = document.createElement("article");
       card.className = "post-card";
       card.tabIndex = 0;
       card.setAttribute("role", "button");
+      card.setAttribute("aria-label", post.title || "Read post");
 
-      card.setAttribute(
-        "aria-label",
-        post.title || "Read post"
-      );
-
-      const imageWrap =
-        document.createElement("div");
-
+      const imageWrap = document.createElement("div");
       imageWrap.className = "post-image-wrap";
 
       if (post.image_url) {
-        const image =
-          document.createElement("img");
-
+        const image = document.createElement("img");
         image.className = "post-image";
         image.src = post.image_url;
         image.alt = post.title || "Blog image";
@@ -1420,100 +945,57 @@
 
         image.onerror = () => {
           image.remove();
-
-          const placeholder =
-            document.createElement("div");
-
+          const placeholder = document.createElement("div");
           placeholder.className = "no-image";
           placeholder.textContent = "✦";
-
           imageWrap.appendChild(placeholder);
         };
 
         imageWrap.appendChild(image);
-
       } else {
-        const placeholder =
-          document.createElement("div");
-
+        const placeholder = document.createElement("div");
         placeholder.className = "no-image";
         placeholder.textContent = "✦";
-
         imageWrap.appendChild(placeholder);
       }
 
-      const body =
-        document.createElement("div");
-
+      const body = document.createElement("div");
       body.className = "post-body";
 
-      const meta =
-        document.createElement("div");
-
+      const meta = document.createElement("div");
       meta.className = "post-meta";
 
-      const date =
-        document.createElement("span");
+      const date = document.createElement("span");
+      date.textContent = formatDate(post.created_at);
 
-      date.textContent =
-        formatDate(post.created_at);
-
-      const dot =
-        document.createElement("span");
-
+      const dot = document.createElement("span");
       dot.className = "dot";
 
-      const author =
-        document.createElement("span");
-
+      const author = document.createElement("span");
       author.textContent = "Kamal G.C.";
 
       meta.append(date, dot, author);
 
-      const title =
-        document.createElement("h3");
-
+      const title = document.createElement("h3");
       title.className = "post-title";
-      title.textContent =
-        post.title || (isEnglish()
-          ? "Untitled post"
-          : "शीर्षक नभएको पोस्ट");
+      title.textContent = post.title || (isEnglish() ? "Untitled post" : "शीर्षक नभएको पोस्ट");
 
-      const excerpt =
-        document.createElement("p");
-
+      const excerpt = document.createElement("p");
       excerpt.className = "post-excerpt";
 
-      const content =
-        post.content || "";
+      const content = post.content || "";
+      excerpt.textContent = content.length > 190 ? content.slice(0,190).trim() + "..." : content;
 
-      excerpt.textContent =
-        content.length > 190
-          ? content.slice(0, 190).trim() + "..."
-          : content;
-
-      const readMore =
-        document.createElement("div");
-
+      const readMore = document.createElement("div");
       readMore.className = "read-more";
-
-      readMore.textContent =
-        isEnglish()
-          ? "Read Full Article →"
-          : "पूरा लेख पढ्नुहोस् →";
+      readMore.textContent = isEnglish() ? "Read Full Article →" : "पूरा लेख पढ्नुहोस् →";
 
       body.append(meta, title, excerpt, readMore);
       card.append(imageWrap, body);
 
-      card.addEventListener("click", () => {
-        openPost(post);
-      });
-
+      card.addEventListener("click", () => openPost(post));
       card.addEventListener("keydown", event => {
-        if (
-          event.key === "Enter" ||
-          event.key === " "
-        ) {
+        if (event.key === "Enter" || event.key === " ") {
           event.preventDefault();
           openPost(post);
         }
@@ -1522,90 +1004,50 @@
       return card;
     }
 
-    // ==========================================
-    // RENDER POSTS
-    // ==========================================
-
     function renderPosts(posts) {
       postGrid.replaceChildren();
 
-      const english = isEnglish();
-
-      postCount.textContent = english
+      postCount.textContent = isEnglish()
         ? `${posts.length} posts`
         : `${posts.length} पोस्ट`;
 
       if (!posts.length) {
-        const empty =
-          document.createElement("div");
-
+        const empty = document.createElement("div");
         empty.className = "empty-state";
 
-        const icon =
-          document.createElement("div");
-
+        const icon = document.createElement("div");
         icon.className = "empty-icon";
         icon.textContent = "✦";
 
-        const heading =
-          document.createElement("h3");
+        const heading = document.createElement("h3");
+        heading.textContent = isEnglish() ? "No posts found" : "अहिले पोस्ट भेटिएन";
 
-        heading.textContent = english
-          ? "No posts found"
-          : "अहिले पोस्ट भेटिएन";
-
-        const message =
-          document.createElement("p");
-
-        message.textContent = english
+        const message = document.createElement("p");
+        message.textContent = isEnglish()
           ? "Change your search or check again later."
           : "खोज परिवर्तन गर्नुहोस् वा पछि फेरि आउनुहोस्।";
 
         empty.append(icon, heading, message);
         postGrid.appendChild(empty);
-
         return;
       }
 
-      const fragment =
-        document.createDocumentFragment();
-
-      posts.forEach(post => {
-        fragment.appendChild(
-          createPostCard(post)
-        );
-      });
-
+      const fragment = document.createDocumentFragment();
+      posts.forEach(post => fragment.appendChild(createPostCard(post)));
       postGrid.appendChild(fragment);
     }
 
-    // ==========================================
-    // FILTER AND RENDER POSTS
-    // ==========================================
-
     function filterAndRenderPosts() {
-      const query =
-        searchInput.value.trim().toLocaleLowerCase();
+      const query = searchInput.value.trim().toLocaleLowerCase();
 
       const filtered = allPosts.filter(post => {
-        const title =
-          (post.title || "").toLocaleLowerCase();
-
-        const content =
-          (post.content || "").toLocaleLowerCase();
-
-        return (
-          title.includes(query) ||
-          content.includes(query)
-        );
+        const title = (post.title || "").toLocaleLowerCase();
+        const content = (post.content || "").toLocaleLowerCase();
+        return title.includes(query) || content.includes(query);
       });
 
       renderPosts(filtered);
     }
-
-    // ==========================================
-    // LOAD POSTS FROM SUPABASE
-    // ==========================================
 
     async function loadPosts() {
       if (!db) {
@@ -1614,106 +1056,62 @@
             <div class="empty-icon">!</div>
             <h3>Supabase connection unavailable</h3>
             <p>कृपया इन्टरनेट जडान जाँच गर्नुहोस्।</p>
-          </div>
-        `;
-
+          </div>`;
+        postCount.textContent = isEnglish() ? "Connection error" : "जडान समस्या";
         return;
       }
 
-      postGrid.innerHTML = `
-        <div class="status-message">
-          पोस्टहरू लोड हुँदैछन्...
-        </div>
-      `;
+      postGrid.innerHTML = `<div class="status-message">${isEnglish() ? "Loading posts..." : "पोस्टहरू लोड हुँदैछन्..."}</div>`;
 
       try {
         const { data, error } = await db
           .from("blog_posts")
           .select("id,title,content,image_url,created_at")
-          .order("created_at", {
-            ascending: false
-          });
+          .order("created_at", { ascending:false });
 
         if (error) throw error;
 
         allPosts = data || [];
-
         filterAndRenderPosts();
 
-        const postId =
-          new URLSearchParams(location.search)
-            .get("post");
-
+        const postId = new URLSearchParams(location.search).get("post");
         if (postId) {
-          const selectedPost =
-            allPosts.find(post =>
-              String(post.id) === postId
-            );
-
-          if (selectedPost) {
-            openPost(selectedPost, false);
-          }
+          const selectedPost = allPosts.find(post => String(post.id) === postId);
+          if (selectedPost) openPost(selectedPost, false);
         }
-
       } catch (error) {
         console.error("Post loading error:", error);
 
         postGrid.innerHTML = `
           <div class="empty-state">
             <div class="empty-icon">!</div>
-            <h3>पोस्ट लोड हुन सकेन</h3>
-            <p>इन्टरनेट जडान जाँच गरी पेज फेरि खोल्नुहोस्।</p>
-          </div>
-        `;
+            <h3>${isEnglish() ? "Could not load posts" : "पोस्ट लोड हुन सकेन"}</h3>
+            <p>${isEnglish() ? "Check your internet connection and try again." : "इन्टरनेट जडान जाँच गरी पेज फेरि खोल्नुहोस्।"}</p>
+          </div>`;
 
-        postCount.textContent =
-          isEnglish() ? "Error" : "समस्या";
+        postCount.textContent = isEnglish() ? "Error" : "समस्या";
       }
     }
 
-    // ==========================================
-    // ARTICLE BUTTON LABELS
-    // ==========================================
-
     function updateArticleButtonLabels() {
-      const shareButton =
-        document.getElementById("share-post");
+      const shareButton = document.getElementById("share-post");
+      const copyButton = document.getElementById("copy-post-link");
 
-      const copyButton =
-        document.getElementById("copy-post-link");
-
-      shareButton.innerHTML = isEnglish()
-        ? "↗ Share Post"
-        : "↗ पोस्ट शेयर गर्नुहोस्";
-
-      copyButton.innerHTML = isEnglish()
-        ? "⧉ Copy Link"
-        : "⧉ लिंक कपी गर्नुहोस्";
+      shareButton.textContent = isEnglish() ? "↗ Share Post" : "↗ पोस्ट शेयर गर्नुहोस्";
+      copyButton.textContent = isEnglish() ? "⧉ Copy Link" : "⧉ लिंक कपी गर्नुहोस्";
     }
-
-    // ==========================================
-    // OPEN FULL ARTICLE
-    // ==========================================
 
     function openPost(post, updateAddress = true) {
       activePost = post;
 
-      readerTitle.textContent =
-        post.title || "";
-
-      readerDate.textContent =
-        formatDate(post.created_at);
-
-      readerText.textContent =
-        post.content || "";
+      readerTitle.textContent = post.title || "";
+      readerDate.textContent = formatDate(post.created_at);
+      readerText.textContent = post.content || "";
 
       if (post.image_url) {
         readerImage.src = post.image_url;
-        readerImage.alt =
-          post.title || "Blog image";
-
+        readerImage.alt = post.title || "Blog image";
         readerImage.hidden = false;
-
       } else {
         readerImage.removeAttribute("src");
         readerImage.hidden = true;
@@ -1722,313 +1120,140 @@
       updateArticleButtonLabels();
 
       readerOverlay.classList.add("open");
-
-      readerOverlay.setAttribute(
-        "aria-hidden",
-        "false"
-      );
-
+      readerOverlay.setAttribute("aria-hidden", "false");
       document.body.style.overflow = "hidden";
 
       if (updateAddress) {
         const url = new URL(location.href);
-
-        url.searchParams.set(
-          "post",
-          post.id
-        );
-
-        history.pushState(
-          { postId: post.id },
-          "",
-          url
-        );
+        url.searchParams.set("post", post.id);
+        history.pushState({ postId:post.id }, "", url);
       }
     }
 
-    // ==========================================
-    // CLOSE ARTICLE
-    // ==========================================
-
     function closePost(updateAddress = true) {
       readerOverlay.classList.remove("open");
-
-      readerOverlay.setAttribute(
-        "aria-hidden",
-        "true"
-      );
-
+      readerOverlay.setAttribute("aria-hidden", "true");
       document.body.style.overflow = "";
       activePost = null;
 
       if (updateAddress) {
         const url = new URL(location.href);
-
         url.searchParams.delete("post");
-
-        history.pushState(
-          {},
-          "",
-          url
-        );
+        history.pushState({}, "", url);
       }
     }
 
-    document
-      .getElementById("reader-close")
-      .addEventListener("click", () => {
-        closePost();
-      });
+    document.getElementById("reader-close").addEventListener("click", () => closePost());
 
     readerOverlay.addEventListener("click", event => {
-      if (event.target === readerOverlay) {
-        closePost();
-      }
+      if (event.target === readerOverlay) closePost();
     });
 
     document.addEventListener("keydown", event => {
-      if (
-        event.key === "Escape" &&
-        readerOverlay.classList.contains("open")
-      ) {
-        closePost();
-      }
+      if (event.key === "Escape" && readerOverlay.classList.contains("open")) closePost();
     });
 
     window.addEventListener("popstate", () => {
-      const postId =
-        new URLSearchParams(location.search)
-          .get("post");
+      const postId = new URLSearchParams(location.search).get("post");
 
       if (postId) {
-        const post =
-          allPosts.find(item =>
-            String(item.id) === postId
-          );
-
-        if (post) {
-          openPost(post, false);
-        }
+        const post = allPosts.find(item => String(item.id) === postId);
+        if (post) openPost(post, false);
       } else {
         closePost(false);
       }
     });
 
-    // ==========================================
-    // SEARCH POSTS
-    // ==========================================
+    searchInput.addEventListener("input", filterAndRenderPosts);
 
-    searchInput.addEventListener("input", () => {
-      filterAndRenderPosts();
+    document.getElementById("share-post").addEventListener("click", async () => {
+      if (!activePost) return;
+
+      const shareUrl = new URL(location.href);
+      shareUrl.searchParams.set("post", activePost.id);
+
+      const shareData = {
+        title:activePost.title || "Kamal G.C. Journal",
+        text:(activePost.content || "").slice(0,150),
+        url:shareUrl.toString()
+      };
+
+      try {
+        if (navigator.share) {
+          await navigator.share(shareData);
+        } else {
+          await copyText(shareUrl.toString());
+          showToast(isEnglish() ? "Post link copied." : "पोस्टको लिंक कपी भयो।");
+        }
+      } catch (error) {
+        if (error.name !== "AbortError") {
+          console.warn("Share failed:", error);
+          showToast(isEnglish() ? "Could not share. Please try again." : "शेयर गर्न सकिएन। फेरि प्रयास गर्नुहोस्।");
+        }
+      }
     });
 
-    // ==========================================
-    // SHARE POST
-    // ==========================================
+    document.getElementById("copy-post-link").addEventListener("click", async () => {
+      if (!activePost) return;
 
-    document
-      .getElementById("share-post")
-      .addEventListener("click", async () => {
+      const shareUrl = new URL(location.href);
+      shareUrl.searchParams.set("post", activePost.id);
 
-        if (!activePost) return;
-
-        const shareUrl =
-          new URL(location.href);
-
-        shareUrl.searchParams.set(
-          "post",
-          activePost.id
-        );
-
-        const shareData = {
-          title:
-            activePost.title ||
-            "Kamal G.C. Journal",
-
-          text:
-            (activePost.content || "")
-              .slice(0, 150),
-
-          url: shareUrl.toString()
-        };
-
-        try {
-          if (navigator.share) {
-            await navigator.share(shareData);
-
-          } else {
-            await copyText(
-              shareUrl.toString()
-            );
-
-            showToast(
-              isEnglish()
-                ? "Post link copied."
-                : "पोस्टको लिंक कपी भयो।"
-            );
-          }
-
-        } catch (error) {
-          if (error.name !== "AbortError") {
-            console.warn("Share failed:", error);
-
-            showToast(
-              isEnglish()
-                ? "Could not share. Please try again."
-                : "शेयर गर्न सकिएन। फेरि प्रयास गर्नुहोस्।"
-            );
-          }
-        }
-      });
-
-    // ==========================================
-    // COPY POST LINK
-    // ==========================================
-
-    document
-      .getElementById("copy-post-link")
-      .addEventListener("click", async () => {
-
-        if (!activePost) return;
-
-        const shareUrl =
-          new URL(location.href);
-
-        shareUrl.searchParams.set(
-          "post",
-          activePost.id
-        );
-
-        try {
-          await copyText(
-            shareUrl.toString()
-          );
-
-          showToast(
-            isEnglish()
-              ? "Post link copied."
-              : "पोस्टको लिंक कपी भयो।"
-          );
-
-        } catch (error) {
-          console.warn("Copy failed:", error);
-
-          showToast(
-            isEnglish()
-              ? "Could not copy the link."
-              : "लिंक कपी हुन सकेन।"
-          );
-        }
-      });
-
-    // ==========================================
-    // DARK / LIGHT THEME
-    // ==========================================
+      try {
+        await copyText(shareUrl.toString());
+        showToast(isEnglish() ? "Post link copied." : "पोस्टको लिंक कपी भयो।");
+      } catch (error) {
+        console.warn("Copy failed:", error);
+        showToast(isEnglish() ? "Could not copy the link." : "लिंक कपी हुन सकेन।");
+      }
+    });
 
     function setTheme(theme, save = true) {
-      const isLight =
-        theme === "light";
+      const light = theme === "light";
 
-      document.body.classList.toggle(
-        "light-mode",
-        isLight
+      document.body.classList.toggle("light-mode", light);
+      themeButton.textContent = light ? "☾" : "☀";
+      themeButton.setAttribute("aria-label", light ? "Switch to dark theme" : "Switch to light theme");
+
+      document.querySelector('meta[name="theme-color"]').setAttribute(
+        "content",
+        light ? "#f4f7fc" : "#080d19"
       );
-
-      themeButton.textContent =
-        isLight ? "☾" : "☀";
-
-      themeButton.setAttribute(
-        "aria-label",
-        isLight
-          ? "Switch to dark theme"
-          : "Switch to light theme"
-      );
-
-      document
-        .querySelector('meta[name="theme-color"]')
-        .setAttribute(
-          "content",
-          isLight ? "#f3f6fb" : "#0b1220"
-        );
 
       if (save) {
         try {
-          localStorage.setItem(
-            "kamalgc_portal_theme",
-            isLight ? "light" : "dark"
-          );
+          localStorage.setItem("kamalgc_portal_theme", light ? "light" : "dark");
         } catch (error) {
-          console.warn("Could not save theme preference.");
+          console.warn("Could not save theme preference.", error);
         }
       }
     }
 
     themeButton.addEventListener("click", () => {
-      const isLight =
-        document.body.classList.contains("light-mode");
-
-      setTheme(
-        isLight ? "dark" : "light"
-      );
+      const light = document.body.classList.contains("light-mode");
+      setTheme(light ? "dark" : "light");
     });
 
-    // ==========================================
-    // RESTORE SAVED LANGUAGE
-    // ==========================================
-
     try {
-      const savedLanguage =
-        localStorage.getItem(
-          "kamalgc_portal_language"
-        ) || "NE";
-
-      setLanguage(
-        savedLanguage,
-        false
-      );
-
+      setLanguage(localStorage.getItem("kamalgc_portal_language") || "NE", false);
     } catch (error) {
       setLanguage("NE", false);
     }
 
-    // ==========================================
-    // RESTORE SAVED THEME
-    // ==========================================
-
     try {
-      const savedTheme =
-        localStorage.getItem(
-          "kamalgc_portal_theme"
-        ) || "dark";
-
-      setTheme(
-        savedTheme,
-        false
-      );
-
+      setTheme(localStorage.getItem("kamalgc_portal_theme") || "dark", false);
     } catch (error) {
       setTheme("dark", false);
     }
 
-    // ==========================================
-    // FOOTER YEAR
-    // ==========================================
-
-    document.getElementById(
-      "current-year"
-    ).textContent = new Date().getFullYear();
-
-    // ==========================================
-    // LOAD POSTS
-    // ==========================================
+    document.getElementById("current-year").textContent = new Date().getFullYear();
 
     loadPosts();
-
   </script>
 
   <!-- CLOCK, WEATHER AND LOCATION -->
   <script src="script.js" defer></script>
-<script src="site-nav.js"></script>
+  <script src="site-nav.js"></script>
 
 </body>
 </html>
