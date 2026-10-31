@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ne">
 <head>
@@ -234,7 +233,6 @@ body.light-mode .hero-panel{
 .empty-state h3{font-size:13px;margin-bottom:5px}
 .empty-state p,.status-message{color:var(--muted);font-size:11px}
 .status-message{text-align:center;padding:12px 5px}
-.post-count{font-size:10px;color:var(--muted)}
 
 /* NAVIGATION */
 #main-nav{
@@ -615,14 +613,43 @@ async function loadHeaderProfile(){
  }
 }
 
-/* Composer directs to profile; no login box on Home */
-function openProfileForPosting(){
- showToast("पोस्ट गर्न Profile मा गएर Login गर्नुहोस्।");
- setTimeout(()=>location.href="profile.html",700);
+/* Post composer: check the real Supabase session before routing */
+async function openPostComposer(){
+ const buttons=[
+  document.getElementById("open-composer"),
+  document.getElementById("add-photo"),
+  document.getElementById("write-post")
+ ].filter(Boolean);
+
+ buttons.forEach(button=>button.disabled=true);
+
+ try{
+  if(!db){
+   showToast("सेवा अहिले उपलब्ध छैन। कृपया केहीबेरपछि फेरि प्रयास गर्नुहोस्।");
+   return;
+  }
+
+  const {data,error}=await db.auth.getSession();
+  if(error)throw error;
+
+  const session=data?.session;
+  if(session?.user){
+   location.href="community.html#postForm";
+   return;
+  }
+
+  location.href="community.html#authSection";
+ }catch(error){
+  console.error("Post navigation/authentication check failed:",error);
+  showToast("Login अवस्था जाँच गर्न सकिएन। कृपया फेरि प्रयास गर्नुहोस्।");
+ }finally{
+  buttons.forEach(button=>button.disabled=false);
+ }
 }
-document.getElementById("open-composer").addEventListener("click",openProfileForPosting);
-document.getElementById("add-photo").addEventListener("click",openProfileForPosting);
-document.getElementById("write-post").addEventListener("click",openProfileForPosting);
+
+document.getElementById("open-composer").addEventListener("click",openPostComposer);
+document.getElementById("add-photo").addEventListener("click",openPostComposer);
+document.getElementById("write-post").addEventListener("click",openPostComposer);
 
 /* Blog posts */
 function formatDate(value){
