@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ne">
 <head>
@@ -9,16 +10,10 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
-:root {
-  --bg:#0b1220;--panel:#111c2e;--panel2:#17243a;
-  --text:#edf3fc;--muted:#9aaac0;--line:rgba(255,255,255,.1);
-  --blue:#69b7ff;--purple:#9b8cff;--danger:#fb7185;
-}
+:root{--bg:#0b1220;--panel:#111c2e;--panel2:#17243a;--text:#edf3fc;--muted:#9aaac0;--line:rgba(255,255,255,.1);--blue:#69b7ff;--purple:#9b8cff;--danger:#fb7185}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--text);font-family:"DM Sans","Noto Sans Devanagari",sans-serif;line-height:1.6}
-button,input,textarea{font:inherit}
-button{cursor:pointer}
-a{color:inherit;text-decoration:none}
+button,input,textarea{font:inherit}button{cursor:pointer}a{color:inherit;text-decoration:none}
 .topbar{position:sticky;top:0;z-index:20;background:#0b1220ed;backdrop-filter:blur(15px);border-bottom:1px solid var(--line)}
 .topinner{max-width:1150px;margin:auto;padding:12px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px}
 .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:19px}
@@ -27,55 +22,52 @@ a{color:inherit;text-decoration:none}
 .top-actions{display:flex;gap:8px;align-items:center}
 .btn{border:1px solid var(--line);border-radius:11px;padding:9px 14px;background:var(--panel2);color:var(--text);font-weight:700;font-size:13px}
 .btn.primary{background:linear-gradient(110deg,#79c5ff,#a99bff);color:#07111f;border:0}
-.btn.danger{color:#ff9aaa}
-.btn:disabled{opacity:.55;cursor:not-allowed}
+.btn.danger{color:#ff9aaa}.btn:disabled{opacity:.55;cursor:not-allowed}
 .wrap{width:min(1100px,calc(100% - 28px));margin:24px auto 60px}
 .hero{padding:24px;border:1px solid var(--line);border-radius:22px;background:linear-gradient(125deg,#14243a,#1b2944);margin-bottom:20px}
-.hero h1{font-size:clamp(25px,5vw,38px);line-height:1.3;margin:0 0 8px}
-.hero p{color:var(--muted);margin:0}
+.hero h1{font-size:clamp(25px,5vw,38px);line-height:1.3;margin:0 0 8px}.hero p{color:var(--muted);margin:0}
 .layout{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:20px;align-items:start}
 .panel{background:var(--panel);border:1px solid var(--line);border-radius:17px;padding:18px;margin-bottom:16px;min-width:0}
 .panel h2,.panel h3{margin:0 0 13px}
 .field{width:100%;padding:12px 13px;border-radius:11px;border:1px solid var(--line);background:var(--bg);color:var(--text);outline:none;margin:6px 0 12px}
-.field:focus{border-color:var(--blue)}
-textarea.field{min-height:115px;resize:vertical}
-.row{display:flex;gap:9px;align-items:center;flex-wrap:wrap}
-.row>*{min-width:0}
-.muted{color:var(--muted);font-size:12px}
-.status{font-size:13px;color:var(--muted);margin-top:10px;white-space:pre-wrap}
-.status.error{color:#ff9aaa}.status.success{color:#86efac}
-.hidden{display:none!important}
-.auth-box{max-width:460px;margin:40px auto}
-.tabs{display:flex;gap:8px;margin-bottom:16px}
-.tabs button{flex:1}
+.field:focus{border-color:var(--blue)}textarea.field{min-height:115px;resize:vertical}
+.row{display:flex;gap:9px;align-items:center;flex-wrap:wrap}.row>*{min-width:0}
+.muted{color:var(--muted);font-size:12px}.status{font-size:13px;color:var(--muted);margin-top:10px;white-space:pre-wrap}
+.status.error{color:#ff9aaa}.status.success{color:#86efac}.hidden{display:none!important}
+.auth-box{max-width:460px;margin:40px auto}.tabs{display:flex;gap:8px;margin-bottom:16px}.tabs button{flex:1}
 .post{background:var(--panel);border:1px solid var(--line);border-radius:17px;padding:18px;margin-bottom:15px;overflow:hidden}
 .post-head{display:flex;align-items:center;gap:10px;margin-bottom:12px}
-.avatar{width:42px;height:42px;flex:0 0 42px;border-radius:50%;object-fit:cover;background:var(--panel2);display:grid;place-items:center;font-weight:800;color:var(--blue)}
-.author{font-weight:800;font-size:14px}
-.post-date{font-size:11px;color:var(--muted)}
-.post-title{font-size:19px;font-weight:800;margin:8px 0}
-.post-content{white-space:pre-wrap;overflow-wrap:anywhere;font-size:14px;line-height:1.85}
+.avatar{width:42px;height:42px;flex:0 0 42px;border-radius:50%;object-fit:cover;background:var(--panel2);display:grid;place-items:center;font-weight:800;color:var(--blue);overflow:hidden}
+.avatar img{width:100%;height:100%;object-fit:cover}
+.author{font-weight:800;font-size:14px}.post-date{font-size:11px;color:var(--muted)}
+.post-title{font-size:19px;font-weight:800;margin:8px 0}.post-content{white-space:pre-wrap;overflow-wrap:anywhere;font-size:14px;line-height:1.85}
 .post-image{width:100%;max-height:440px;object-fit:contain;border-radius:13px;margin:10px 0;background:var(--panel2)}
 .post-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}
 .post-actions button{font-size:12px}
-.comments{border-top:1px solid var(--line);margin-top:13px;padding-top:12px}
-.comment{padding:8px 0;border-bottom:1px solid var(--line);font-size:13px;overflow-wrap:anywhere}
-.comment strong{color:var(--blue)}
+.reaction-bar{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}
+.reaction-btn{border:1px solid var(--line);border-radius:22px;background:var(--panel2);color:var(--text);padding:6px 10px;font-size:13px}
+.reaction-btn.selected{border-color:var(--blue);background:#173b5b}
+.reaction-details{margin-top:8px;color:var(--muted);font-size:11px;line-height:1.8}
+.comment-area{border-top:1px solid var(--line);margin-top:13px;padding-top:12px}
+.comment{padding:11px 0;border-bottom:1px solid var(--line);font-size:13px}
+.comment-head{display:flex;align-items:center;gap:8px;margin-bottom:5px}
+.comment-head .avatar{width:30px;height:30px;flex-basis:30px;font-size:12px}
+.comment-body{overflow-wrap:anywhere;white-space:pre-wrap;line-height:1.7}
+.comment-tools{display:flex;gap:12px;margin:5px 0 0 38px}
+.text-action{border:0;background:none;color:var(--blue);font-size:11px;padding:2px}
+.reply-list{margin:8px 0 0 36px;padding-left:12px;border-left:2px solid var(--line)}
+.reply-form{display:flex;gap:7px;margin:8px 0 8px 36px}
+.reply-form input,.comment-form input{flex:1;min-width:0}
 .comment-form{display:flex;gap:7px;margin-top:10px}
-.comment-form input{flex:1;min-width:0}
 .member{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)}
-.member:last-child{border:0}
-.member-info{flex:1;min-width:0}
-.member-info strong{display:block;font-size:13px;overflow-wrap:anywhere}
-.member-info small{color:var(--muted);font-size:11px}
+.member:last-child{border:0}.member-info{flex:1;min-width:0}
+.member-info strong{display:block;font-size:13px;overflow-wrap:anywhere}.member-info small{color:var(--muted);font-size:11px}
 .message-list{max-height:330px;overflow:auto}
 .message{max-width:85%;padding:9px 12px;border-radius:13px;background:var(--panel2);margin:8px 0;font-size:13px;white-space:pre-wrap;overflow-wrap:anywhere}
-.message.mine{margin-left:auto;background:#174a70}
-.message-time{font-size:10px;color:var(--muted);margin-top:3px}
+.message.mine{margin-left:auto;background:#174a70}.message-time{font-size:10px;color:var(--muted);margin-top:3px}
 .chat-box{border:1px solid var(--line);border-radius:12px;padding:10px;margin-top:10px}
 .empty{text-align:center;color:var(--muted);padding:30px 12px;font-size:13px}
-.profile-line{display:flex;align-items:center;gap:12px}
-.profile-line .avatar{width:54px;height:54px;flex-basis:54px}
+.profile-line{display:flex;align-items:center;gap:12px}.profile-line .avatar{width:54px;height:54px;flex-basis:54px}
 footer{text-align:center;color:var(--muted);font-size:11px;padding:25px}
 @media(max-width:780px){.layout{grid-template-columns:1fr}.sidebar{order:2}.maincol{order:1}.wrap{margin-top:15px}.hero{padding:19px}.topinner{padding:10px 12px}.brand{font-size:16px}}
 @media(max-width:420px){.btn{padding:8px 10px;font-size:12px}.panel,.post{padding:14px}.logo{width:37px;height:37px}}
@@ -84,10 +76,7 @@ footer{text-align:center;color:var(--muted);font-size:11px;padding:25px}
 <body>
 <header class="topbar">
   <div class="topinner">
-    <a class="brand" href="index.html">
-      <span class="logo">♡</span>
-      <span>मेरो साथी <small>My Friend · हाम्रो साझा चौतारी</small></span>
-    </a>
+    <a class="brand" href="index.html"><span class="logo">♡</span><span>मेरो साथी <small>My Friend · हाम्रो साझा चौतारी</small></span></a>
     <div class="top-actions">
       <a class="btn" href="index.html">वेबसाइट</a>
       <button class="btn hidden" id="logoutBtn">Logout</button>
@@ -108,14 +97,9 @@ footer{text-align:center;color:var(--muted);font-size:11px;padding:25px}
       <button class="btn" id="signupTab">नयाँ खाता खोल्नुहोस्</button>
     </div>
     <form id="authForm">
-      <div id="nameField" class="hidden">
-        <label>तपाईंको नाम</label>
-        <input class="field" id="authName" maxlength="60" placeholder="नाम लेख्नुहोस्">
-      </div>
-      <label>Email</label>
-      <input class="field" id="authEmail" type="email" autocomplete="email" required placeholder="आफ्नो Email">
-      <label>Password</label>
-      <input class="field" id="authPassword" type="password" minlength="6" autocomplete="current-password" required placeholder="कम्तीमा ६ अक्षर">
+      <div id="nameField" class="hidden"><label>तपाईंको नाम</label><input class="field" id="authName" maxlength="60" placeholder="नाम लेख्नुहोस्"></div>
+      <label>Email</label><input class="field" id="authEmail" type="email" autocomplete="email" required placeholder="आफ्नो Email">
+      <label>Password</label><input class="field" id="authPassword" type="password" minlength="6" autocomplete="current-password" required placeholder="कम्तीमा ६ अक्षर">
       <button class="btn primary" style="width:100%" id="authSubmit">Login गर्नुहोस्</button>
     </form>
     <div id="authStatus" class="status"></div>
@@ -137,11 +121,9 @@ footer{text-align:center;color:var(--muted);font-size:11px;padding:25px}
           </form>
           <div id="postStatus" class="status"></div>
         </section>
-
         <section>
           <div class="row" style="justify-content:space-between;margin:18px 2px">
-            <h2 style="margin:0">🌍 सबैका पोस्टहरू</h2>
-            <button class="btn" id="refreshBtn">↻ Refresh</button>
+            <h2 style="margin:0">🌍 सबैका पोस्टहरू</h2><button class="btn" id="refreshBtn">↻ Refresh</button>
           </div>
           <div id="feed"><div class="empty">पोस्टहरू लोड हुँदैछन्...</div></div>
         </section>
@@ -152,30 +134,21 @@ footer{text-align:center;color:var(--muted);font-size:11px;padding:25px}
           <h3>👤 मेरो Profile</h3>
           <div class="profile-line">
             <div class="avatar" id="myAvatar">M</div>
-            <div style="min-width:0">
-              <strong id="myName">सदस्य</strong>
-              <div class="muted" id="myEmail"></div>
-            </div>
+            <div style="min-width:0"><strong id="myName">सदस्य</strong><div class="muted" id="myEmail"></div></div>
           </div>
           <form id="profileForm" style="margin-top:14px">
-            <label class="muted">देखिने नाम</label>
-            <input class="field" id="displayName" maxlength="60" required>
+            <label class="muted">देखिने नाम</label><input class="field" id="displayName" maxlength="60" required>
             <button class="btn" type="submit">नाम सुरक्षित गर्नुहोस्</button>
           </form>
           <div id="profileStatus" class="status"></div>
         </section>
-
         <section class="panel">
           <h3>💬 साथीहरूसँग कुरा गर्नुहोस्</h3>
           <input class="field" id="memberSearch" placeholder="सदस्य खोज्नुहोस्...">
           <div id="members"><div class="empty">सदस्यहरू लोड हुँदैछन्...</div></div>
         </section>
-
         <section class="panel hidden" id="chatPanel">
-          <div class="row" style="justify-content:space-between">
-            <h3 id="chatTitle">Private Message</h3>
-            <button class="btn" id="closeChat">बन्द</button>
-          </div>
+          <div class="row" style="justify-content:space-between"><h3 id="chatTitle">Private Message</h3><button class="btn" id="closeChat">बन्द</button></div>
           <div class="muted">यो कुराकानी तपाईं र छानिएको सदस्यबीच मात्र देखिन्छ।</div>
           <div class="message-list" id="messages"></div>
           <form id="messageForm" class="chat-box">
@@ -194,407 +167,384 @@ footer{text-align:center;color:var(--muted);font-size:11px;padding:25px}
 <script>
 "use strict";
 
-const SUPABASE_URL = "https://zbyntmyybhdcwmttkuys.supabase.co";
-const SUPABASE_KEY = "sb_publishable_N8U3og_Ntm-ImrtM8c1NGA_-Rqb3dSy";
-const BUCKET = "blog-images";
-const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-const $ = id => document.getElementById(id);
+const SUPABASE_URL="https://zbyntmyybhdcwmttkuys.supabase.co";
+const SUPABASE_KEY="sb_publishable_N8U3og_Ntm-ImrtM8c1NGA_-Rqb3dSy";
+const BUCKET="blog-images";
+const db=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+const $=id=>document.getElementById(id);
 
-let currentUser = null;
-let authMode = "login";
-let activeChatUser = null;
-let membersCache = [];
-let profilesCache = {};
+const REACTIONS=[
+  {value:"👌",label:"सहमति"},
+  {value:"🤔",label:"सोच"},
+  {value:"😘",label:"माया"},
+  {value:"😰",label:"सहानुभूति"},
+  {value:"🤛",label:"समर्थन"}
+];
 
-function status(id, message, type="") {
-  const el = $(id);
-  if (!el) return;
-  el.textContent = message;
-  el.className = "status " + type;
+let currentUser=null,authMode="login",activeChatUser=null;
+let membersCache=[],profilesCache={};
+
+function status(id,message,type=""){
+  const el=$(id);if(!el)return;
+  el.textContent=message;el.className="status "+type;
 }
-function esc(value) {
-  return String(value ?? "").replace(/[&<>"']/g, c => ({
-    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
-  })[c]);
+function esc(value){
+  return String(value??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 }
-function dateText(value) {
-  if (!value) return "";
+function dateText(value){
+  if(!value)return "";
   return new Date(value).toLocaleString("ne-NP",{dateStyle:"medium",timeStyle:"short"});
 }
-function initials(name) {
-  return (String(name || "M").trim().charAt(0) || "M").toUpperCase();
+function initials(name){return (String(name||"M").trim().charAt(0)||"M").toUpperCase();}
+function profileName(profile){return profile?.display_name||"मेरो साथी सदस्य";}
+function avatarHTML(profile,size=""){
+  const name=profileName(profile);
+  return `<div class="avatar" ${size?`style="width:${size}px;height:${size}px;flex-basis:${size}px"`:""}>${profile?.avatar_url?`<img src="${esc(profile.avatar_url)}" alt="${esc(name)}">`:esc(initials(name))}</div>`;
 }
-function profileName(profile) {
-  return profile?.display_name || "मेरो साथी सदस्य";
-}
-function setAuthMode(mode) {
-  authMode = mode;
-  $("nameField").classList.toggle("hidden",mode !== "signup");
-  $("loginTab").classList.toggle("primary",mode === "login");
-  $("signupTab").classList.toggle("primary",mode === "signup");
-  $("authSubmit").textContent = mode === "login" ? "Login गर्नुहोस्" : "खाता खोल्नुहोस्";
-  $("authPassword").autocomplete = mode === "login" ? "current-password" : "new-password";
+function reactionLabel(value){return REACTIONS.find(r=>r.value===value)?.label||"प्रतिक्रिया";}
+
+function setAuthMode(mode){
+  authMode=mode;
+  $("nameField").classList.toggle("hidden",mode!=="signup");
+  $("loginTab").classList.toggle("primary",mode==="login");
+  $("signupTab").classList.toggle("primary",mode==="signup");
+  $("authSubmit").textContent=mode==="login"?"Login गर्नुहोस्":"खाता खोल्नुहोस्";
+  $("authPassword").autocomplete=mode==="login"?"current-password":"new-password";
   status("authStatus","");
 }
-$("loginTab").onclick = () => setAuthMode("login");
-$("signupTab").onclick = () => setAuthMode("signup");
+$("loginTab").onclick=()=>setAuthMode("login");
+$("signupTab").onclick=()=>setAuthMode("signup");
 
-async function loadMyProfile() {
-  const {data,error} = await db.from("profiles")
-    .select("id,display_name,avatar_url")
-    .eq("id",currentUser.id)
-    .maybeSingle();
-  if (error) throw error;
-
-  let profile = data;
-  if (!profile) {
-    const name = currentUser.user_metadata?.display_name ||
-      currentUser.email?.split("@")[0] || "नयाँ सदस्य";
-    const result = await db.from("profiles")
-      .upsert({id:currentUser.id,display_name:name},{onConflict:"id"})
-      .select("id,display_name,avatar_url").single();
-    if (result.error) throw result.error;
-    profile = result.data;
+async function loadMyProfile(){
+  const {data,error}=await db.from("profiles").select("id,display_name,avatar_url").eq("id",currentUser.id).maybeSingle();
+  if(error)throw error;
+  let profile=data;
+  if(!profile){
+    const name=currentUser.user_metadata?.display_name||currentUser.email?.split("@")[0]||"नयाँ सदस्य";
+    const result=await db.from("profiles").upsert({id:currentUser.id,display_name:name},{onConflict:"id"}).select("id,display_name,avatar_url").single();
+    if(result.error)throw result.error;
+    profile=result.data;
   }
-  profilesCache[currentUser.id] = profile;
-  const name = profileName(profile);
-  $("myName").textContent = name;
-  $("myEmail").textContent = currentUser.email || "";
-  $("myAvatar").textContent = initials(name);
-  if (profile.avatar_url) {
-    $("myAvatar").innerHTML = `<img src="${esc(profile.avatar_url)}" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:50%">`;
-  }
-  $("displayName").value = name;
+  profilesCache[currentUser.id]=profile;
+  $("myName").textContent=profileName(profile);
+  $("myEmail").textContent=currentUser.email||"";
+  $("myAvatar").innerHTML=profile.avatar_url?`<img src="${esc(profile.avatar_url)}" alt="">`:esc(initials(profileName(profile)));
+  $("displayName").value=profileName(profile);
 }
 
 $("authForm").addEventListener("submit",async e=>{
   e.preventDefault();
-  const button = $("authSubmit");
-  button.disabled = true;
-  status("authStatus","कृपया पर्खनुहोस्...");
-  try {
-    const email = $("authEmail").value.trim().toLowerCase();
-    const password = $("authPassword").value;
-    if (authMode === "signup") {
-      const name = $("authName").value.trim();
-      if (!name) throw new Error("आफ्नो नाम लेख्नुहोस्।");
-      const {data,error} = await db.auth.signUp({
-        email,password,
-        options:{data:{display_name:name}}
-      });
-      if (error) throw error;
-      if (!data.session) {
-        status("authStatus","खाता बन्यो। Email मा आएको Confirmation Link खोलेर पुष्टि गर्नुहोस्।","success");
-      } else {
-        status("authStatus","खाता सफलतापूर्वक बन्यो।","success");
-        await startApp(data.user);
-      }
-    } else {
-      const {data,error} = await db.auth.signInWithPassword({email,password});
-      if (error) throw error;
-      status("authStatus","Login सफल भयो।","success");
+  const button=$("authSubmit");button.disabled=true;status("authStatus","कृपया पर्खनुहोस्...");
+  try{
+    const email=$("authEmail").value.trim().toLowerCase(),password=$("authPassword").value;
+    if(authMode==="signup"){
+      const name=$("authName").value.trim();if(!name)throw new Error("आफ्नो नाम लेख्नुहोस्।");
+      const {data,error}=await db.auth.signUp({email,password,options:{data:{display_name:name}}});
+      if(error)throw error;
+      if(!data.session)status("authStatus","खाता बन्यो। Email मा आएको Confirmation Link खोलेर पुष्टि गर्नुहोस्।","success");
+      else{status("authStatus","खाता सफलतापूर्वक बन्यो।","success");await startApp(data.user);}
+    }else{
+      const {data,error}=await db.auth.signInWithPassword({email,password});
+      if(error)throw error;
       await startApp(data.user);
     }
-  } catch(err) {
-    status("authStatus",err.message || "काम सफल भएन।","error");
-  } finally {
-    button.disabled = false;
-  }
+  }catch(err){status("authStatus",err.message||"काम सफल भएन।","error");}
+  finally{button.disabled=false;}
 });
 
-async function startApp(user) {
-  currentUser = user;
-  $("authSection").classList.add("hidden");
-  $("appSection").classList.remove("hidden");
-  $("logoutBtn").classList.remove("hidden");
-  try {
-    await loadMyProfile();
-    await Promise.all([loadFeed(),loadMembers()]);
-  } catch(err) {
-    alert("प्रोफाइल वा डेटा लोड भएन: " + err.message);
-  }
+async function startApp(user){
+  currentUser=user;$("authSection").classList.add("hidden");$("appSection").classList.remove("hidden");$("logoutBtn").classList.remove("hidden");
+  try{await loadMyProfile();await Promise.all([loadFeed(),loadMembers()]);}
+  catch(err){alert("प्रोफाइल वा डेटा लोड भएन: "+err.message);}
 }
-
-$("logoutBtn").onclick = async()=>{
-  await db.auth.signOut();
-  location.reload();
-};
+$("logoutBtn").onclick=async()=>{await db.auth.signOut();location.reload();};
 
 $("profileForm").addEventListener("submit",async e=>{
-  e.preventDefault();
-  const name = $("displayName").value.trim();
-  if (!name) return status("profileStatus","नाम आवश्यक छ।","error");
-  try {
-    const {data,error} = await db.from("profiles")
-      .upsert({id:currentUser.id,display_name:name},{onConflict:"id"})
-      .select("id,display_name,avatar_url").single();
-    if (error) throw error;
-    profilesCache[currentUser.id] = data;
-    $("myName").textContent = name;
-    $("myAvatar").textContent = initials(name);
+  e.preventDefault();const name=$("displayName").value.trim();
+  if(!name)return status("profileStatus","नाम आवश्यक छ।","error");
+  try{
+    const {data,error}=await db.from("profiles").upsert({id:currentUser.id,display_name:name},{onConflict:"id"}).select("id,display_name,avatar_url").single();
+    if(error)throw error;
+    profilesCache[currentUser.id]=data;$("myName").textContent=name;
+    $("myAvatar").innerHTML=data.avatar_url?`<img src="${esc(data.avatar_url)}" alt="">`:esc(initials(name));
     status("profileStatus","Profile नाम सुरक्षित भयो।","success");
-  } catch(err) {
-    status("profileStatus",err.message,"error");
-  }
+  }catch(err){status("profileStatus",err.message,"error");}
 });
 
-async function loadProfiles(ids) {
-  const missing = [...new Set(ids)].filter(id=>id && !profilesCache[id]);
-  if (!missing.length) return;
-  const {data,error} = await db.from("profiles")
-    .select("id,display_name,avatar_url").in("id",missing);
-  if (error) throw error;
-  (data || []).forEach(p=>profilesCache[p.id]=p);
+async function loadProfiles(ids){
+  const missing=[...new Set(ids)].filter(id=>id&&!profilesCache[id]);
+  if(!missing.length)return;
+  const {data,error}=await db.from("profiles").select("id,display_name,avatar_url").in("id",missing);
+  if(error)throw error;(data||[]).forEach(p=>profilesCache[p.id]=p);
 }
 
-async function loadFeed() {
-  $("feed").innerHTML = '<div class="empty">पोस्टहरू लोड हुँदैछन्...</div>';
-  const {data,error} = await db.from("blog_posts")
-    .select("id,title,content,image_url,created_at,author_id,author_name")
-    .order("created_at",{ascending:false}).limit(60);
-  if (error) throw error;
-  const posts = data || [];
-  const authorIds = posts.map(p=>p.author_id).filter(Boolean);
-  await loadProfiles(authorIds);
-
-  if (!posts.length) {
-    $("feed").innerHTML = '<div class="panel empty">अहिलेसम्म पोस्ट छैन। पहिलो पोस्ट तपाईंले लेख्नुहोस्।</div>';
-    return;
-  }
-  const postIds = posts.map(p=>p.id);
-  const [likesResult,commentsResult] = await Promise.all([
+async function loadFeed(){
+  $("feed").innerHTML='<div class="empty">पोस्टहरू लोड हुँदैछन्...</div>';
+  const {data,error}=await db.from("blog_posts").select("id,title,content,image_url,created_at,author_id,author_name").order("created_at",{ascending:false}).limit(60);
+  if(error)throw error;
+  const posts=data||[];
+  if(!posts.length){$("feed").innerHTML='<div class="panel empty">अहिलेसम्म पोस्ट छैन। पहिलो पोस्ट तपाईंले लेख्नुहोस्।</div>';return;}
+  const postIds=posts.map(p=>p.id);
+  await loadProfiles(posts.map(p=>p.author_id));
+  const [likesResult,commentsResult,reactionsResult]=await Promise.all([
     db.from("post_likes").select("post_id,user_id").in("post_id",postIds),
-    db.from("post_comments").select("id,post_id,user_id,content,created_at").in("post_id",postIds).order("created_at",{ascending:true})
+    db.from("post_comments").select("id,post_id,user_id,content,created_at,parent_comment_id").in("post_id",postIds).order("created_at",{ascending:true}),
+    db.from("post_reactions").select("post_id,user_id,reaction").in("post_id",postIds)
   ]);
-  if (likesResult.error) throw likesResult.error;
-  if (commentsResult.error) throw commentsResult.error;
-  await loadProfiles((commentsResult.data||[]).map(c=>c.user_id));
+  if(likesResult.error)throw likesResult.error;
+  if(commentsResult.error)throw commentsResult.error;
+  if(reactionsResult.error)throw reactionsResult.error;
+  const likes=likesResult.data||[],comments=commentsResult.data||[],reactions=reactionsResult.data||[];
+  await loadProfiles([
+    ...comments.map(c=>c.user_id),
+    ...reactions.map(r=>r.user_id)
+  ]);
 
-  const likes = likesResult.data || [];
-  const comments = commentsResult.data || [];
-  $("feed").innerHTML = posts.map(post=>{
-    const profile = profilesCache[post.author_id];
-    const author = profileName(profile) || post.author_name || "मेरो साथी सदस्य";
-    const postLikes = likes.filter(l=>l.post_id===post.id);
-    const liked = postLikes.some(l=>l.user_id===currentUser.id);
-    const postComments = comments.filter(c=>c.post_id===post.id);
+  $("feed").innerHTML=posts.map(post=>{
+    const profile=profilesCache[post.author_id];
+    const author=profileName(profile)||post.author_name||"मेरो साथी सदस्य";
+    const postLikes=likes.filter(l=>l.post_id===post.id);
+    const liked=postLikes.some(l=>l.user_id===currentUser.id);
+    const postComments=comments.filter(c=>c.post_id===post.id);
+    const roots=postComments.filter(c=>!c.parent_comment_id);
+    const postReactions=reactions.filter(r=>r.post_id===post.id);
+    const myReaction=postReactions.find(r=>r.user_id===currentUser.id);
+    const reactionCounts=REACTIONS.map(r=>({...r,count:postReactions.filter(x=>x.reaction===r.value).length}));
+    const reactionNames=REACTIONS.map(r=>{
+      const people=postReactions.filter(x=>x.reaction===r.value);
+      if(!people.length)return "";
+      return `${r.value} ${people.map(x=>profileName(profilesCache[x.user_id])).join(", ")}`;
+    }).filter(Boolean).join("  ·  ");
+
     return `<article class="post" data-post="${esc(post.id)}">
       <div class="post-head">
-        <div class="avatar">${esc(initials(author))}</div>
+        ${avatarHTML(profile)}
         <div><div class="author">${esc(author)}</div><div class="post-date">${esc(dateText(post.created_at))}</div></div>
       </div>
       <div class="post-title">${esc(post.title)}</div>
       <div class="post-content">${esc(post.content)}</div>
       ${post.image_url?`<img class="post-image" src="${esc(post.image_url)}" alt="पोस्ट फोटो" loading="lazy">`:""}
+
+      <div class="reaction-bar">
+        ${reactionCounts.map(r=>`<button class="reaction-btn ${myReaction?.reaction===r.value?"selected":""}" data-reaction="${esc(r.value)}" data-post="${esc(post.id)}" title="${esc(r.label)}">${r.value} ${r.count||""}</button>`).join("")}
+      </div>
+      ${reactionNames?`<div class="reaction-details">${esc(reactionNames)}</div>`:`<div class="reaction-details">अहिलेसम्म प्रतिक्रिया छैन।</div>`}
+
       <div class="post-actions">
         <button class="btn ${liked?"primary":""}" data-like="${esc(post.id)}">${liked?"♥ मन पर्‍यो":"♡ Like"} · ${postLikes.length}</button>
-        <span class="btn">💬 ${postComments.length} Comment</span>
+        <button class="btn" data-comments-toggle="${esc(post.id)}">💬 Comment · ${postComments.length}</button>
       </div>
-      <div class="comments">
-        <div>${postComments.map(c=>{
-          const cp = profilesCache[c.user_id];
-          return `<div class="comment"><strong>${esc(profileName(cp))}:</strong> ${esc(c.content)} <span class="muted">${esc(dateText(c.created_at))}</span></div>`;
-        }).join("")}</div>
+
+      <section class="comment-area hidden" id="comments-${esc(post.id)}">
+        <div>
+          ${roots.map(c=>renderComment(c,postComments)).join("")}
+        </div>
         <form class="comment-form" data-comment="${esc(post.id)}">
           <input class="field" style="margin:0" name="comment" maxlength="3000" required placeholder="आफ्नो Comment लेख्नुहोस्...">
           <button class="btn primary">पठाउनुहोस्</button>
         </form>
-      </div>
+      </section>
     </article>`;
   }).join("");
 }
 
+function renderComment(comment,allComments){
+  const profile=profilesCache[comment.user_id];
+  const replies=allComments.filter(c=>String(c.parent_comment_id)===String(comment.id));
+  return `<div class="comment">
+    <div class="comment-head">
+      ${avatarHTML(profile,30)}
+      <div><strong>${esc(profileName(profile))}</strong><div class="muted">${esc(dateText(comment.created_at))}</div></div>
+    </div>
+    <div class="comment-body">${esc(comment.content)}</div>
+    <div class="comment-tools"><button class="text-action" data-reply-toggle="${esc(comment.id)}">↳ Reply</button></div>
+    <form class="reply-form hidden" data-reply-form="${esc(comment.id)}">
+      <input class="field" style="margin:0" name="reply" maxlength="3000" required placeholder="जवाफ लेख्नुहोस्...">
+      <button class="btn">पठाउनुहोस्</button>
+    </form>
+    ${replies.length?`<div class="reply-list">${replies.map(r=>`
+      <div class="comment">
+        <div class="comment-head">${avatarHTML(profilesCache[r.user_id],30)}
+          <div><strong>${esc(profileName(profilesCache[r.user_id]))}</strong><div class="muted">${esc(dateText(r.created_at))}</div></div>
+        </div>
+        <div class="comment-body">${esc(r.content)}</div>
+      </div>`).join("")}</div>`:""}
+  </div>`;
+}
+
 $("feed").addEventListener("click",async e=>{
-  const btn = e.target.closest("[data-like]");
-  if (!btn) return;
-  const postId = btn.dataset.like;
-  btn.disabled = true;
-  try {
-    const {data,error} = await db.from("post_likes")
-      .select("id").eq("post_id",postId).eq("user_id",currentUser.id).maybeSingle();
-    if (error) throw error;
-    if (data) {
-      const result = await db.from("post_likes").delete()
-        .eq("post_id",postId).eq("user_id",currentUser.id);
-      if (result.error) throw result.error;
-    } else {
-      const result = await db.from("post_likes").insert({post_id:postId,user_id:currentUser.id});
-      if (result.error) throw result.error;
-    }
-    await loadFeed();
-  } catch(err) {
-    alert("Like गर्न सकिएन: "+err.message);
-    btn.disabled = false;
+  const reactionBtn=e.target.closest("[data-reaction]");
+  if(reactionBtn){
+    const postId=reactionBtn.dataset.post,reaction=reactionBtn.dataset.reaction;
+    reactionBtn.disabled=true;
+    try{
+      const {data,error}=await db.from("post_reactions").select("id,reaction").eq("post_id",postId).eq("user_id",currentUser.id).maybeSingle();
+      if(error)throw error;
+      if(data){
+        if(data.reaction===reaction){
+          const result=await db.from("post_reactions").delete().eq("post_id",postId).eq("user_id",currentUser.id);
+          if(result.error)throw result.error;
+        }else{
+          const result=await db.from("post_reactions").update({reaction}).eq("post_id",postId).eq("user_id",currentUser.id);
+          if(result.error)throw result.error;
+        }
+      }else{
+        const result=await db.from("post_reactions").insert({post_id:postId,user_id:currentUser.id,reaction});
+        if(result.error)throw result.error;
+      }
+      await loadFeed();
+    }catch(err){alert("प्रतिक्रिया दिन सकिएन: "+err.message);reactionBtn.disabled=false;}
+    return;
+  }
+
+  const likeBtn=e.target.closest("[data-like]");
+  if(likeBtn){
+    const postId=likeBtn.dataset.like;likeBtn.disabled=true;
+    try{
+      const {data,error}=await db.from("post_likes").select("id").eq("post_id",postId).eq("user_id",currentUser.id).maybeSingle();
+      if(error)throw error;
+      if(data){
+        const result=await db.from("post_likes").delete().eq("post_id",postId).eq("user_id",currentUser.id);
+        if(result.error)throw result.error;
+      }else{
+        const result=await db.from("post_likes").insert({post_id:postId,user_id:currentUser.id});
+        if(result.error)throw result.error;
+      }
+      await loadFeed();
+    }catch(err){alert("Like गर्न सकिएन: "+err.message);likeBtn.disabled=false;}
+    return;
+  }
+
+  const toggle=e.target.closest("[data-comments-toggle]");
+  if(toggle){
+    const area=$("comments-"+toggle.dataset.commentsToggle);
+    area.classList.toggle("hidden");
+    toggle.textContent=area.classList.contains("hidden")?"💬 Comment":"💬 Comment बन्द गर्नुहोस्";
+    return;
+  }
+
+  const reply=e.target.closest("[data-reply-toggle]");
+  if(reply){
+    const form=$(`reply-form-${reply.dataset.replyToggle}`)||document.querySelector(`[data-reply-form="${reply.dataset.replyToggle}"]`);
+    if(form)form.classList.toggle("hidden");
   }
 });
 
 $("feed").addEventListener("submit",async e=>{
-  const form = e.target.closest("[data-comment]");
-  if (!form) return;
+  const commentForm=e.target.closest("[data-comment]");
+  const replyForm=e.target.closest("[data-reply-form]");
+  if(!commentForm&&!replyForm)return;
   e.preventDefault();
-  const input = form.elements.comment;
-  const content = input.value.trim();
-  if (!content) return;
-  const button = form.querySelector("button");
-  button.disabled = true;
-  try {
-    const {error} = await db.from("post_comments").insert({
-      post_id:form.dataset.comment,user_id:currentUser.id,content
-    });
-    if (error) throw error;
+  const form=commentForm||replyForm;
+  const field=form.elements[commentForm?"comment":"reply"];
+  const content=field.value.trim();if(!content)return;
+  const button=form.querySelector("button");button.disabled=true;
+  try{
+    const payload={
+      post_id:form.closest("[data-post]").dataset.post,
+      user_id:currentUser.id,
+      content
+    };
+    if(replyForm)payload.parent_comment_id=Number(replyForm.dataset.replyForm);
+    const {error}=await db.from("post_comments").insert(payload);
+    if(error)throw error;
     await loadFeed();
-  } catch(err) {
-    alert("Comment पठाउन सकिएन: "+err.message);
-    button.disabled = false;
-  }
+    const postId=form.closest("[data-post]")?.dataset.post;
+    if(postId)$("comments-"+postId)?.classList.remove("hidden");
+  }catch(err){alert("Comment/Reply पठाउन सकिएन: "+err.message);button.disabled=false;}
 });
 
 $("postForm").addEventListener("submit",async e=>{
   e.preventDefault();
-  const title = $("postTitle").value.trim();
-  const content = $("postContent").value.trim();
-  const file = $("postImage").files[0];
-  const button = $("publishBtn");
-  if (!title || !content) return status("postStatus","शीर्षक र विवरण दुवै लेख्नुहोस्।","error");
-  if (file && (!file.type.startsWith("image/") || file.size>5*1024*1024))
-    return status("postStatus","फोटो JPG, PNG वा WEBP र ५ MB भन्दा सानो हुनुपर्छ।","error");
-
-  button.disabled = true;
-  status("postStatus","पोस्ट प्रकाशित हुँदैछ...");
-  try {
-    let imageUrl = null;
-    if (file) {
-      const safe = file.name.toLowerCase().replace(/[^a-z0-9._-]/g,"-").slice(-60);
-      const path = `${currentUser.id}/${Date.now()}-${crypto.randomUUID()}-${safe}`;
-      const {error:uploadError} = await db.storage.from(BUCKET).upload(path,file,{
-        upsert:false,contentType:file.type,cacheControl:"3600"
-      });
-      if (uploadError) throw uploadError;
-      imageUrl = db.storage.from(BUCKET).getPublicUrl(path).data.publicUrl;
+  const title=$("postTitle").value.trim(),content=$("postContent").value.trim(),file=$("postImage").files[0],button=$("publishBtn");
+  if(!title||!content)return status("postStatus","शीर्षक र विवरण दुवै लेख्नुहोस्।","error");
+  if(file&&(!file.type.startsWith("image/")||file.size>5*1024*1024))return status("postStatus","फोटो JPG, PNG वा WEBP र ५ MB भन्दा सानो हुनुपर्छ।","error");
+  button.disabled=true;status("postStatus","पोस्ट प्रकाशित हुँदैछ...");
+  try{
+    let imageUrl=null;
+    if(file){
+      const safe=file.name.toLowerCase().replace(/[^a-z0-9._-]/g,"-").slice(-60);
+      const path=`${currentUser.id}/${Date.now()}-${crypto.randomUUID()}-${safe}`;
+      const {error:uploadError}=await db.storage.from(BUCKET).upload(path,file,{upsert:false,contentType:file.type,cacheControl:"3600"});
+      if(uploadError)throw uploadError;
+      imageUrl=db.storage.from(BUCKET).getPublicUrl(path).data.publicUrl;
     }
-    const author = profilesCache[currentUser.id]?.display_name || currentUser.email?.split("@")[0] || "सदस्य";
-    const {error} = await db.from("blog_posts").insert({
-      title,content,image_url:imageUrl,author_id:currentUser.id,author_name:author
-    });
-    if (error) throw error;
-    $("postForm").reset();
-    status("postStatus","पोस्ट सफलतापूर्वक साझा भयो।","success");
-    await loadFeed();
-  } catch(err) {
-    status("postStatus",err.message || "पोस्ट प्रकाशित हुन सकेन।","error");
-  } finally {
-    button.disabled = false;
-  }
+    const author=profilesCache[currentUser.id]?.display_name||currentUser.email?.split("@")[0]||"सदस्य";
+    const {error}=await db.from("blog_posts").insert({title,content,image_url:imageUrl,author_id:currentUser.id,author_name:author});
+    if(error)throw error;
+    $("postForm").reset();status("postStatus","पोस्ट सफलतापूर्वक साझा भयो।","success");await loadFeed();
+  }catch(err){status("postStatus",err.message||"पोस्ट प्रकाशित हुन सकेन।","error");}
+  finally{button.disabled=false;}
 });
 
-async function loadMembers() {
-  $("members").innerHTML = '<div class="empty">सदस्यहरू खोजिँदै...</div>';
-  const {data,error} = await db.from("profiles")
-    .select("id,display_name,avatar_url").order("display_name").limit(150);
-  if (error) throw error;
-  membersCache = (data||[]).filter(p=>p.id!==currentUser.id);
-  membersCache.forEach(p=>profilesCache[p.id]=p);
-  renderMembers();
+async function loadMembers(){
+  $("members").innerHTML='<div class="empty">सदस्यहरू खोजिँदै...</div>';
+  const {data,error}=await db.from("profiles").select("id,display_name,avatar_url").order("display_name").limit(150);
+  if(error)throw error;
+  membersCache=(data||[]).filter(p=>p.id!==currentUser.id);
+  membersCache.forEach(p=>profilesCache[p.id]=p);renderMembers();
 }
-function renderMembers() {
-  const query = $("memberSearch").value.trim().toLowerCase();
-  const list = membersCache.filter(p=>profileName(p).toLowerCase().includes(query));
-  if (!list.length) {
-    $("members").innerHTML = '<div class="empty">सदस्य भेटिएन।</div>';
-    return;
-  }
-  $("members").innerHTML = list.map(p=>`
+function renderMembers(){
+  const query=$("memberSearch").value.trim().toLowerCase();
+  const list=membersCache.filter(p=>profileName(p).toLowerCase().includes(query));
+  if(!list.length){$("members").innerHTML='<div class="empty">सदस्य भेटिएन।</div>';return;}
+  $("members").innerHTML=list.map(p=>`
     <div class="member">
-      <div class="avatar">${esc(initials(profileName(p)))}</div>
+      ${avatarHTML(p)}
       <div class="member-info"><strong>${esc(profileName(p))}</strong><small>मेरो साथी सदस्य</small></div>
       <button class="btn" data-chat="${esc(p.id)}">Message</button>
     </div>`).join("");
 }
 $("memberSearch").addEventListener("input",renderMembers);
-
 $("members").addEventListener("click",e=>{
-  const btn = e.target.closest("[data-chat]");
-  if (!btn) return;
-  const profile = profilesCache[btn.dataset.chat];
-  if (profile) openChat(profile);
+  const btn=e.target.closest("[data-chat]");if(!btn)return;
+  const profile=profilesCache[btn.dataset.chat];if(profile)openChat(profile);
 });
-
-function openChat(profile) {
-  activeChatUser = profile;
-  $("chatPanel").classList.remove("hidden");
-  $("chatTitle").textContent = profileName(profile);
-  $("messages").innerHTML = '<div class="empty">सन्देश लोड हुँदैछन्...</div>';
-  loadMessages();
+function openChat(profile){
+  activeChatUser=profile;$("chatPanel").classList.remove("hidden");$("chatTitle").textContent=profileName(profile);
+  $("messages").innerHTML='<div class="empty">सन्देश लोड हुँदैछन्...</div>';loadMessages();
   $("chatPanel").scrollIntoView({behavior:"smooth",block:"nearest"});
 }
-$("closeChat").onclick = ()=>{
-  activeChatUser = null;
-  $("chatPanel").classList.add("hidden");
-};
+$("closeChat").onclick=()=>{activeChatUser=null;$("chatPanel").classList.add("hidden");};
 
-async function loadMessages() {
-  if (!activeChatUser) return;
-  const otherId = activeChatUser.id;
-  const {data,error} = await db.from("private_messages")
-    .select("id,sender_id,receiver_id,content,created_at")
+async function loadMessages(){
+  if(!activeChatUser)return;
+  const otherId=activeChatUser.id;
+  const {data,error}=await db.from("private_messages").select("id,sender_id,receiver_id,content,created_at")
     .or(`and(sender_id.eq.${currentUser.id},receiver_id.eq.${otherId}),and(sender_id.eq.${otherId},receiver_id.eq.${currentUser.id})`)
     .order("created_at",{ascending:true}).limit(100);
-  if (error) {
-    status("messageStatus",error.message,"error");
-    return;
-  }
-  $("messages").innerHTML = (data||[]).map(m=>`
-    <div class="message ${m.sender_id===currentUser.id?"mine":""}">
-      ${esc(m.content)}
+  if(error){status("messageStatus",error.message,"error");return;}
+  $("messages").innerHTML=(data||[]).map(m=>`
+    <div class="message ${m.sender_id===currentUser.id?"mine":""}">${esc(m.content)}
       <div class="message-time">${esc(dateText(m.created_at))}</div>
-    </div>`).join("") || '<div class="empty">अहिलेसम्म सन्देश छैन। पहिलो सन्देश पठाउनुहोस्।</div>';
-  $("messages").scrollTop = $("messages").scrollHeight;
-  status("messageStatus","");
+    </div>`).join("")||'<div class="empty">अहिलेसम्म सन्देश छैन। पहिलो सन्देश पठाउनुहोस्।</div>';
+  $("messages").scrollTop=$("messages").scrollHeight;status("messageStatus","");
 }
-$("reloadMessages").onclick = loadMessages;
-
+$("reloadMessages").onclick=loadMessages;
 $("messageForm").addEventListener("submit",async e=>{
-  e.preventDefault();
-  if (!activeChatUser) return;
-  const content = $("messageText").value.trim();
-  if (!content) return;
-  const button = e.submitter;
-  button.disabled = true;
-  try {
-    const {error} = await db.from("private_messages").insert({
-      sender_id:currentUser.id,receiver_id:activeChatUser.id,content
-    });
-    if (error) throw error;
-    $("messageText").value = "";
-    await loadMessages();
-  } catch(err) {
-    status("messageStatus",err.message,"error");
-  } finally {
-    button.disabled = false;
-  }
+  e.preventDefault();if(!activeChatUser)return;
+  const content=$("messageText").value.trim();if(!content)return;
+  const button=e.submitter;button.disabled=true;
+  try{
+    const {error}=await db.from("private_messages").insert({sender_id:currentUser.id,receiver_id:activeChatUser.id,content});
+    if(error)throw error;$("messageText").value="";await loadMessages();
+  }catch(err){status("messageStatus",err.message,"error");}
+  finally{button.disabled=false;}
 });
 
-$("refreshBtn").onclick = async()=>{
-  try { await loadFeed(); }
-  catch(err) { $("feed").innerHTML=`<div class="panel status error">${esc(err.message)}</div>`; }
+$("refreshBtn").onclick=async()=>{
+  try{await loadFeed();}
+  catch(err){$("feed").innerHTML=`<div class="panel status error">${esc(err.message)}</div>`;}
 };
 
-async function boot() {
-  const {data,error} = await db.auth.getSession();
-  if (error) {
-    status("authStatus",error.message,"error");
-    return;
-  }
-  if (data.session?.user) {
-    await startApp(data.session.user);
-  }
-  db.auth.onAuthStateChange((event,session)=>{
-    if (event==="SIGNED_OUT") location.reload();
-  });
+async function boot(){
+  const {data,error}=await db.auth.getSession();
+  if(error){status("authStatus",error.message,"error");return;}
+  if(data.session?.user)await startApp(data.session.user);
+  db.auth.onAuthStateChange((event)=>{if(event==="SIGNED_OUT")location.reload();});
 }
 boot();
 </script>
-<script src="script.js" defer></script>
 <script src="site-nav.js"></script>
 </body>
 </html>
