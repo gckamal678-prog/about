@@ -1,0 +1,558 @@
+
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1220">
+<title>Notifications | मेरो साथी</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+:root{
+  --bg:#0b1220;
+  --panel:#111c2e;
+  --panel2:#17243a;
+  --text:#edf3fc;
+  --muted:#9aaac0;
+  --line:rgba(255,255,255,.1);
+  --blue:#69b7ff;
+  --purple:#9b8cff;
+  --green:#86efac;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:"DM Sans","Noto Sans Devanagari",sans-serif;
+  line-height:1.6;
+}
+button{font:inherit;cursor:pointer}
+a{color:inherit;text-decoration:none}
+.hidden{display:none!important}
+
+.topbar{
+  position:sticky;
+  top:0;
+  z-index:10;
+  background:#0b1220ed;
+  backdrop-filter:blur(15px);
+  border-bottom:1px solid var(--line);
+}
+.topinner{
+  max-width:950px;
+  margin:auto;
+  padding:12px 18px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-weight:800;
+  font-size:19px;
+}
+.logo{
+  width:42px;
+  height:42px;
+  border-radius:14px;
+  background:linear-gradient(135deg,var(--blue),var(--purple));
+  display:grid;
+  place-items:center;
+  color:#07111f;
+  font-size:23px;
+}
+.brand small{
+  display:block;
+  color:var(--muted);
+  font-size:10px;
+  font-weight:500;
+  margin-top:-3px;
+}
+.btn{
+  border:1px solid var(--line);
+  border-radius:11px;
+  padding:9px 14px;
+  background:var(--panel2);
+  color:var(--text);
+  font-size:13px;
+  font-weight:700;
+}
+.btn.primary{
+  background:linear-gradient(110deg,#79c5ff,#a99bff);
+  color:#07111f;
+  border:0;
+}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+
+.wrap{
+  width:min(850px,calc(100% - 28px));
+  margin:27px auto 55px;
+}
+.heading{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-bottom:20px;
+}
+.heading h1{
+  margin:0;
+  font-size:clamp(25px,5vw,34px);
+}
+.heading p{
+  margin:4px 0 0;
+  color:var(--muted);
+  font-size:13px;
+}
+.panel{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:17px;
+  padding:18px;
+  margin-bottom:15px;
+}
+.stats{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
+  margin-bottom:18px;
+}
+.stat{
+  padding:15px;
+  border:1px solid var(--line);
+  background:var(--panel);
+  border-radius:14px;
+}
+.stat strong{
+  display:block;
+  font-size:25px;
+}
+.stat span{
+  color:var(--muted);
+  font-size:12px;
+}
+.tabs{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-bottom:16px;
+}
+.tab.active{
+  background:linear-gradient(110deg,#79c5ff,#a99bff);
+  color:#07111f;
+  border-color:transparent;
+}
+.notification{
+  display:flex;
+  align-items:flex-start;
+  gap:13px;
+  padding:16px;
+  border:1px solid var(--line);
+  border-radius:15px;
+  background:var(--panel);
+  margin-bottom:11px;
+}
+.notice-icon{
+  width:43px;
+  height:43px;
+  flex:0 0 43px;
+  border-radius:14px;
+  display:grid;
+  place-items:center;
+  font-size:20px;
+  background:var(--panel2);
+}
+.notice-content{
+  flex:1;
+  min-width:0;
+}
+.notice-content p{
+  margin:0;
+  font-size:13px;
+  overflow-wrap:anywhere;
+}
+.notice-content strong{color:var(--blue)}
+.notice-content small{
+  display:block;
+  color:var(--muted);
+  font-size:11px;
+  margin-top:5px;
+}
+.notice-post{
+  display:block;
+  padding:8px 10px;
+  margin-top:9px;
+  border-radius:9px;
+  background:var(--panel2);
+  font-size:12px;
+  color:#c9d9ee;
+  overflow-wrap:anywhere;
+}
+.empty{
+  text-align:center;
+  color:var(--muted);
+  padding:40px 15px;
+  font-size:13px;
+}
+.status{
+  color:var(--muted);
+  font-size:13px;
+  white-space:pre-wrap;
+  margin-top:10px;
+}
+.status.error{color:#ff9aaa}
+footer{
+  text-align:center;
+  padding:25px;
+  color:var(--muted);
+  font-size:11px;
+}
+@media(max-width:500px){
+  .topinner{padding:10px 12px}
+  .brand{font-size:16px}
+  .logo{width:37px;height:37px}
+  .btn{padding:8px 10px;font-size:12px}
+  .panel{padding:14px}
+  .notification{padding:13px;gap:10px}
+  .notice-icon{width:38px;height:38px;flex-basis:38px}
+}
+</style>
+</head>
+
+<body>
+
+<header class="topbar">
+  <div class="topinner">
+    <a class="brand" href="community.html">
+      <span class="logo">♡</span>
+      <span>मेरो साथी<small>Notifications</small></span>
+    </a>
+
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <a class="btn" href="community.html">Community</a>
+      <a class="btn" href="messages.html">Messages</a>
+      <a class="btn" href="profile.html">Profile</a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section id="authBox" class="panel hidden">
+    <h2>Login आवश्यक छ</h2>
+    <p class="muted">आफ्ना Notifications हेर्न Community मा Login गर्नुहोस्।</p>
+    <a class="btn primary" href="community.html">Community खोल्नुहोस्</a>
+  </section>
+
+  <section id="mainSection" class="hidden">
+
+    <div class="heading">
+      <div>
+        <h1>🔔 Notifications</h1>
+        <p>तपाईंका पोस्टमा आएका प्रतिक्रिया यहाँ देखिन्छन्।</p>
+      </div>
+      <button class="btn primary" id="refreshBtn">↻ Refresh</button>
+    </div>
+
+    <div class="stats">
+      <div class="stat">
+        <strong id="likeCount">0</strong>
+        <span>❤️ कुल Likes</span>
+      </div>
+      <div class="stat">
+        <strong id="commentCount">0</strong>
+        <span>💬 कुल Comments</span>
+      </div>
+    </div>
+
+    <section class="panel">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">
+        <h2 style="margin:0;font-size:19px">तपाईंका गतिविधिहरू</h2>
+        <span class="muted" id="lastUpdated"></span>
+      </div>
+
+      <div class="tabs" style="margin-top:15px">
+        <button class="btn tab active" data-filter="all">सबै</button>
+        <button class="btn tab" data-filter="like">❤️ Likes</button>
+        <button class="btn tab" data-filter="comment">💬 Comments</button>
+      </div>
+
+      <div id="notificationList">
+        <div class="empty">Notifications लोड हुँदैछन्...</div>
+      </div>
+
+      <div id="status" class="status"></div>
+    </section>
+
+  </section>
+
+</main>
+
+<footer>मेरो साथी · My Friend — तपाईंको डिजिटल संसार</footer>
+
+<script>
+"use strict";
+
+const SUPABASE_URL="https://zbyntmyybhdcwmttkuys.supabase.co";
+const SUPABASE_KEY="sb_publishable_N8U3og_Ntm-ImrtM8c1NGA_-Rqb3dSy";
+
+const db=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+const $=id=>document.getElementById(id);
+
+let currentUser=null;
+let notifications=[];
+let currentFilter="all";
+
+function esc(value){
+  return String(value??"").replace(/[&<>"']/g,c=>({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+  })[c]);
+}
+
+function dateText(value){
+  if(!value)return "";
+  return new Date(value).toLocaleString("ne-NP",{
+    dateStyle:"medium",
+    timeStyle:"short"
+  });
+}
+
+function setStatus(message,type=""){
+  $("status").textContent=message;
+  $("status").className="status "+type;
+}
+
+/* Load notifications */
+async function loadNotifications(){
+  const button=$("refreshBtn");
+  button.disabled=true;
+
+  $("notificationList").innerHTML=
+    '<div class="empty">Notifications लोड हुँदैछन्...</div>';
+
+  setStatus("");
+
+  try{
+    /* Find my posts */
+    const {data:posts,error:postError}=await db.from("blog_posts")
+      .select("id,title,created_at")
+      .eq("author_id",currentUser.id)
+      .order("created_at",{ascending:false})
+      .limit(200);
+
+    if(postError)throw postError;
+
+    const myPosts=posts||[];
+    const postMap={};
+
+    myPosts.forEach(post=>{
+      postMap[post.id]=post;
+    });
+
+    $("likeCount").textContent="0";
+    $("commentCount").textContent="0";
+
+    if(!myPosts.length){
+      notifications=[];
+      renderNotifications();
+      $("lastUpdated").textContent="अहिले अपडेट भयो";
+      return;
+    }
+
+    const postIds=myPosts.map(p=>p.id);
+
+    /* Fetch likes and comments */
+    const [likesResult,commentsResult]=await Promise.all([
+      db.from("post_likes")
+        .select("id,post_id,user_id")
+        .in("post_id",postIds),
+
+      db.from("post_comments")
+        .select("id,post_id,user_id,content,created_at")
+        .in("post_id",postIds)
+        .order("created_at",{ascending:false})
+    ]);
+
+    if(likesResult.error)throw likesResult.error;
+    if(commentsResult.error)throw commentsResult.error;
+
+    const likes=likesResult.data||[];
+    const comments=commentsResult.data||[];
+
+    $("likeCount").textContent=likes.length;
+    $("commentCount").textContent=comments.length;
+
+    /* Collect member IDs */
+    const memberIds=[
+      ...new Set([
+        ...likes.map(x=>x.user_id),
+        ...comments.map(x=>x.user_id)
+      ])
+    ].filter(Boolean);
+
+    let profileMap={};
+
+    if(memberIds.length){
+      const {data:profiles,error:profileError}=await db.from("profiles")
+        .select("id,display_name")
+        .in("id",memberIds);
+
+      if(profileError)throw profileError;
+
+      (profiles||[]).forEach(p=>{
+        profileMap[p.id]=p;
+      });
+    }
+
+    /* Build notifications */
+    const likeNotices=likes
+      .filter(l=>l.user_id!==currentUser.id)
+      .map(l=>{
+        const post=postMap[l.post_id];
+        const person=profileMap[l.user_id]?.display_name||"एक सदस्य";
+
+        return {
+          type:"like",
+          icon:"❤️",
+          person,
+          postTitle:post?.title||"तपाईंको पोस्ट",
+          text:"तपाईंको पोस्ट मन पराउनुभयो।",
+          created_at:post?.created_at||"",
+          postId:l.post_id
+        };
+      });
+
+    const commentNotices=comments
+      .filter(c=>c.user_id!==currentUser.id)
+      .map(c=>{
+        const post=postMap[c.post_id];
+        const person=profileMap[c.user_id]?.display_name||"एक सदस्य";
+
+        return {
+          type:"comment",
+          icon:"💬",
+          person,
+          postTitle:post?.title||"तपाईंको पोस्ट",
+          text:c.content,
+          created_at:c.created_at,
+          postId:c.post_id
+        };
+      });
+
+    notifications=[...likeNotices,...commentNotices];
+
+    notifications.sort((a,b)=>
+      new Date(b.created_at)-new Date(a.created_at)
+    );
+
+    renderNotifications();
+
+    $("lastUpdated").textContent=
+      "अपडेट: "+new Date().toLocaleTimeString("ne-NP");
+
+  }catch(err){
+    $("notificationList").innerHTML=
+      '<div class="empty">Notifications लोड हुन सकेन।</div>';
+    setStatus(err.message||"डेटा लोड गर्न समस्या भयो।","error");
+  }finally{
+    button.disabled=false;
+  }
+}
+
+/* Render notification list */
+function renderNotifications(){
+  const list=currentFilter==="all"
+    ?notifications
+    :notifications.filter(n=>n.type===currentFilter);
+
+  if(!list.length){
+    $("notificationList").innerHTML=`
+      <div class="empty">
+        <div style="font-size:36px;margin-bottom:10px">🔔</div>
+        ${currentFilter==="all"
+          ?"अहिलेसम्म कुनै नयाँ प्रतिक्रिया छैन।"
+          :"यस प्रकारको कुनै प्रतिक्रिया छैन।"}
+      </div>`;
+    return;
+  }
+
+  $("notificationList").innerHTML=list.map(n=>`
+    <article class="notification">
+      <div class="notice-icon">${n.icon}</div>
+      <div class="notice-content">
+        <p>
+          <strong>${esc(n.person)}</strong>
+          ${esc(n.text)}
+        </p>
+        <small>${esc(dateText(n.created_at))}</small>
+        <a class="notice-post" href="community.html">
+          📝 पोस्ट: ${esc(n.postTitle)}
+        </a>
+      </div>
+    </article>
+  `).join("");
+}
+
+/* Filter tabs */
+document.querySelectorAll("[data-filter]").forEach(button=>{
+  button.addEventListener("click",()=>{
+    currentFilter=button.dataset.filter;
+
+    document.querySelectorAll("[data-filter]").forEach(tab=>{
+      tab.classList.toggle("active",tab===button);
+    });
+
+    renderNotifications();
+  });
+});
+
+/* Refresh */
+$("refreshBtn").onclick=loadNotifications;
+
+/* Boot */
+async function boot(){
+  try{
+    const {data,error}=await db.auth.getSession();
+
+    if(error)throw error;
+
+    currentUser=data.session?.user||null;
+
+    $("loading")?.classList.add("hidden");
+
+    if(!currentUser){
+      $("authBox").classList.remove("hidden");
+      return;
+    }
+
+    $("mainSection").classList.remove("hidden");
+
+    await loadNotifications();
+
+  }catch(err){
+    $("authBox").classList.remove("hidden");
+    $("authBox").innerHTML=`
+      <h2>समस्या भयो</h2>
+      <p class="status error">${esc(err.message)}</p>
+      <a class="btn" href="community.html">Community</a>`;
+  }
+
+  db.auth.onAuthStateChange((event)=>{
+    if(event==="SIGNED_OUT")location.reload();
+  });
+}
+
+boot();
+</script>
+
+</body>
+</html>
