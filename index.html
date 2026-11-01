@@ -36,17 +36,11 @@ body{
  color:var(--text);min-height:100vh;line-height:1.65;
  padding-bottom:92px;overflow-x:hidden
 }
-body.light-mode{
- --bg:#f4f7fc;--surface:#fff;--surface2:#edf3fb;
- --text:#14243b;--muted:#64748b;--line:rgba(36,66,105,.13);
- --accent:#087fbd;--accent2:#7255d7;
- --shadow:0 15px 40px rgba(35,60,95,.09);
- background:#f4f7fc
-}
 button,input,textarea{font:inherit}
 button,a{-webkit-tap-highlight-color:transparent}
 button{cursor:pointer}
 a{color:inherit;text-decoration:none}
+.hidden{display:none!important}
 .container{width:min(750px,calc(100% - 24px));margin:auto}
 
 /* HEADER */
@@ -56,7 +50,6 @@ a{color:inherit;text-decoration:none}
  backdrop-filter:blur(18px);
  border-bottom:1px solid var(--line)
 }
-body.light-mode .site-header{background:rgba(244,247,252,.95)}
 .header-inner{
  min-height:65px;display:flex;align-items:center;
  justify-content:space-between;gap:12px
@@ -110,9 +103,6 @@ body.light-mode .site-header{background:rgba(244,247,252,.95)}
  justify-content:center;gap:6px;cursor:pointer;position:relative;overflow:hidden
 }
 .story-card.add-story{border:2px dashed var(--accent)}
-.story-avatar{
- width:42px;height:42px;border-radius:50%;border:2px solid var(--accent);object-fit:cover
-}
 .story-card span{font-size:10px;font-weight:700;text-align:center;width:100%;padding:0 4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 
 /* COMPOSER */
@@ -133,7 +123,7 @@ body.light-mode .site-header{background:rgba(244,247,252,.95)}
  display:none;position:absolute;bottom:40px;left:0;
  background:var(--surface2);border:1px solid var(--line);
  border-radius:10px;padding:8px;font-size:18px;z-index:10;
- width:220px;display:flex;flex-wrap:wrap;gap:6px
+ width:220px;flex-wrap:wrap;gap:6px
 }
 .emoji-dropdown span{cursor:pointer;padding:3px;border-radius:6px}
 .emoji-dropdown span:hover{background:var(--surface)}
@@ -146,7 +136,7 @@ body.light-mode .site-header{background:rgba(244,247,252,.95)}
  font-size:11px;font-weight:700;background:var(--surface2);color:var(--text)
 }
 
-/* POST CARDS */
+/* FEED & POST CARDS */
 .feed-heading{
  display:flex;justify-content:space-between;align-items:center;
  margin:15px 0 10px
@@ -155,28 +145,71 @@ body.light-mode .site-header{background:rgba(244,247,252,.95)}
 .post-grid{display:flex;flex-direction:column;gap:16px}
 .post-card{
  background:var(--surface);border:1px solid var(--line);
- border-radius:17px;padding:16px;box-shadow:var(--shadow)
+ border-radius:17px;padding:16px;box-shadow:var(--shadow);position:relative
 }
-.post-header{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.post-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.post-author-wrap{display:flex;align-items:center;gap:10px}
 .post-user-avatar{
  width:40px;height:40px;border-radius:50%;object-fit:cover;background:var(--surface2)
 }
 .post-author-info strong{display:block;font-size:14px}
 .post-author-info small{color:var(--muted);font-size:10px}
+.post-options{position:relative}
+.options-btn{background:none;border:0;color:var(--muted);font-size:18px;padding:4px 8px;cursor:pointer}
+.options-dropdown{
+ display:none;position:absolute;right:0;top:30px;
+ background:var(--surface2);border:1px solid var(--line);
+ border-radius:8px;box-shadow:var(--shadow);z-index:10;width:110px
+}
+.options-dropdown button{
+ width:100%;text-align:left;background:none;border:0;
+ color:var(--text);padding:8px 12px;font-size:11px;font-weight:700;cursor:pointer
+}
+.options-dropdown button:hover{background:var(--surface)}
+
 .post-title{font-size:17px;font-weight:800;margin-bottom:8px}
 .post-content{font-size:13px;line-height:1.7;white-space:pre-wrap;overflow-wrap:anywhere;margin-bottom:12px}
 .post-image{
  width:100%;max-height:400px;object-fit:cover;border-radius:12px;margin-bottom:12px;background:var(--surface2)
 }
+
+/* REACTIONS & ACTIONS */
+.reaction-bar{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0 6px}
+.reaction-btn{border:1px solid var(--line);border-radius:20px;background:var(--surface2);color:var(--text);padding:4px 9px;font-size:12px}
+.reaction-btn.selected{border-color:var(--accent);background:#173b5b}
+.reaction-details{margin-bottom:10px;color:var(--muted);font-size:11px}
+
 .post-actions-bar{
  display:flex;justify-content:space-between;align-items:center;
- border-top:1px solid var(--line);padding-top:10px;margin-top:10px
+ border-top:1px solid var(--line);padding-top:10px;margin-top:10px;flex-wrap:wrap;gap:8px
 }
 .post-action-btn{
  background:transparent;border:0;color:var(--muted);font-size:12px;font-weight:700;
- display:flex;align-items:center;gap:5px
+ display:flex;align-items:center;gap:5px;padding:6px 10px;border-radius:8px
 }
+.post-action-btn:hover{background:var(--surface2)}
 .post-action-btn.active{color:var(--accent)}
+
+/* COMMENTS SECTION */
+.comment-area{border-top:1px solid var(--line);margin-top:12px;padding-top:12px}
+.comment{padding:9px 0;border-bottom:1px solid var(--line);font-size:12px}
+.comment-head{display:flex;align-items:center;gap:8px;margin-bottom:4px}
+.comment-body{overflow-wrap:anywhere;white-space:pre-wrap;line-height:1.6;margin-left:36px}
+.comment-tools{margin:4px 0 0 36px}
+.text-action{border:0;background:none;color:var(--accent);font-size:11px;padding:2px}
+.reply-list{margin:8px 0 0 32px;padding-left:10px;border-left:2px solid var(--line)}
+.comment-form,.reply-form{display:flex;gap:7px;margin-top:10px}
+.comment-form input,.reply-form input{flex:1;min-width:0;border:1px solid var(--line);background:var(--surface2);color:var(--text);border-radius:10px;padding:8px 12px;font-size:12px;outline:none}
+
+/* MODALS */
+.modal-overlay{
+ display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);
+ z-index:3000;justify-content:center;align-items:center;padding:15px;backdrop-filter:blur(5px)
+}
+.modal-box{
+ background:var(--surface);border:1px solid var(--line);
+ border-radius:18px;width:100%;max-width:450px;padding:20px;box-shadow:var(--shadow)
+}
 
 /* NAVIGATION */
 #main-nav{
@@ -237,13 +270,13 @@ body.light-mode .site-header{background:rgba(244,247,252,.95)}
 
  <!-- STORIES BAR -->
  <section class="stories-container" id="stories-bar">
-  <div class="story-card add-story" onclick="alert('छिट्टै आउँदैछ: Story फिचर!')">
+  <div class="story-card add-story" onclick="openStoryModal()">
    <span style="font-size:22px;color:var(--accent)">＋</span>
    <span>तपाईंको Story</span>
   </div>
  </section>
 
- <!-- POST COMPOSER (Facebook/X Style) -->
+ <!-- POST COMPOSER -->
  <section class="composer" id="post-composer-box">
   <form id="inline-post-form">
    <textarea id="composer-content" placeholder="तपाईं के सोच्दै हुनुहुन्छ? यहाँ लेख्नुहोस्..." maxlength="5000" required></textarea>
@@ -256,7 +289,7 @@ body.light-mode .site-header{background:rgba(244,247,252,.95)}
      </label>
      <div class="emoji-picker-wrap">
       <button type="button" class="secondary-button" id="emoji-toggle">😀 Emoji</button>
-      <div class="emoji-dropdown" id="emoji-box" style="display:none">
+      <div class="emoji-dropdown" id="emoji-box">
        <span onclick="addEmoji('😊')">😊</span><span onclick="addEmoji('❤️')">❤️</span>
        <span onclick="addEmoji('🔥')">🔥</span><span onclick="addEmoji('👍')">👍</span>
        <span onclick="addEmoji('👏')">👏</span><span onclick="addEmoji('🙏')">🙏</span>
@@ -283,6 +316,21 @@ body.light-mode .site-header{background:rgba(244,247,252,.95)}
 
 </main>
 
+<!-- STORY UPLOAD MODAL -->
+<div class="modal-overlay" id="story-modal">
+ <div class="modal-box">
+  <h3 style="margin-bottom:10px;font-size:15px">नयाँ स्टोरी थप्नुहोस्</h3>
+  <form id="story-form" onsubmit="uploadStory(event)">
+   <input type="text" id="story-caption" placeholder="स्टोरीको क्याप्सन..." maxlength="100" style="width:100%;padding:10px;margin-bottom:10px;background:var(--surface2);border:1px solid var(--line);color:var(--text);border-radius:8px;" required>
+   <input type="file" id="story-file" accept="image/*" style="margin-bottom:12px;width:100%;font-size:11px" required>
+   <div style="display:flex;justify-content:flex-end;gap:8px">
+    <button type="button" class="secondary-button" onclick="closeStoryModal()">रद्द गर्नुहोस्</button>
+    <button type="submit" class="primary-button" id="story-btn">स्टोरी सेयर गर्नुहोस्</button>
+   </div>
+  </form>
+ </div>
+</div>
+
 <footer class="footer">
  © <span id="current-year">2026</span> मेरो साथी · सर्वाधिकार सुरक्षित।
 </footer>
@@ -304,14 +352,21 @@ const BUCKET="blog-images";
 const db=window.supabase?.createClient(SUPABASE_URL,SUPABASE_KEY);
 
 const $=id=>document.getElementById(id);
-let currentUser=null;
+let currentUser=null,profilesCache={},cachedPosts=[];
+
+const REACTIONS=[
+ {value:"👌",label:"सहमति"},
+ {value:"🤔",label:"सोच"},
+ {value:"😘",label:"माया"},
+ {value:"😰",label:"सहानुभूति"},
+ {value:"🤛",label:"समर्थन"}
+];
 
 function showToast(msg){
  const t=$("site-toast");t.textContent=msg;t.classList.add("show");
  setTimeout(()=>t.classList.remove("show"),2500);
 }
 
-// Emoji Picker Toggle
 $("emoji-toggle").onclick=()=>{
  const box=$("emoji-box");
  box.style.display=box.style.display==="flex"?"none":"flex";
@@ -321,14 +376,25 @@ window.addEmoji=(emoji)=>{
  $("emoji-box").style.display="none";
 };
 
-// Live Time & Weather simulation
 setInterval(()=>{
  $("real-time").textContent=new Date().toLocaleTimeString("ne-NP");
 },1000);
 $("weather-temp").textContent="२४°C";
 $("user-location").textContent="नेपाल";
 
-// Check Auth & Profile Header
+function profileName(p){return p?.display_name||"मेरो साथी सदस्य";}
+function avatarHTML(p,size=35){
+ const name=profileName(p);
+ return `<div class="post-user-avatar" style="width:${size}px;height:${size}px;display:grid;place-items:center;font-weight:800;color:var(--accent);overflow:hidden">${p?.avatar_url?`<img src="${p.avatar_url}" style="width:100%;height:100%;object-fit:cover">`:(name.charAt(0)||"M").toUpperCase()}</div>`;
+}
+
+async function loadProfiles(ids){
+ const missing=[...new Set(ids)].filter(id=>id&&!profilesCache[id]);
+ if(!missing.length)return;
+ const {data}=await db.from("profiles").select("id,display_name,avatar_url").in("id",missing);
+ (data||[]).forEach(p=>profilesCache[p.id]=p);
+}
+
 async function boot(){
  if(!db)return;
  const {data}=await db.auth.getSession();
@@ -336,33 +402,97 @@ async function boot(){
  
  if(currentUser){
   const {data:profile}=await db.from("profiles").select("display_name,avatar_url").eq("id",currentUser.id).maybeSingle();
-  if(profile?.avatar_url){
-   $("header-user-photo").src=profile.avatar_url;
-  }else{
-   $("header-user-initials").textContent=(profile?.display_name||"म").charAt(0).toUpperCase();
-   $("header-user-initials").hidden=false;
-   $("header-user-photo").hidden=true;
+  if(profile){
+   profilesCache[currentUser.id]=profile;
+   if(profile.avatar_url) $("header-user-photo").src=profile.avatar_url;
+   else {
+    $("header-user-initials").textContent=(profile.display_name||"म").charAt(0).toUpperCase();
+    $("header-user-initials").hidden=false;$("header-user-photo").hidden=true;
+   }
   }
  }
  loadFeed();
+ loadStories();
+ initRealtime();
 }
 
-// Handle Inline Post Submission
+// Supabase Realtime Setup
+function initRealtime(){
+ db.channel('public-db-changes')
+  .on('postgres_changes', { event: '*', schema: 'public', table: 'blog_posts' }, () => {
+    loadFeed();
+  })
+  .on('postgres_changes', { event: '*', schema: 'public', table: 'post_comments' }, () => {
+    loadFeed();
+  })
+  .subscribe();
+}
+
+// Story Modals
+window.openStoryModal=()=>{
+ if(!currentUser) return showToast("स्टोरी हाल्न पहिले Login गर्नुहोस्!");
+ $("story-modal").style.display="flex";
+};
+window.closeStoryModal=()=>{ $("story-modal").style.display="none"; };
+
+window.uploadStory=async(e)=>{
+ e.preventDefault();
+ const caption=$("story-caption").value.trim();
+ const file=$("story-file").files[0];
+ const btn=$("story-btn");
+ btn.disabled=true; btn.textContent="अपलोड हुँदैछ...";
+ try{
+  const path=`stories/${currentUser.id}/${Date.now()}-${file.name}`;
+  const {error:upErr}=await db.storage.from(BUCKET).upload(path,file);
+  if(upErr)throw upErr;
+  const imageUrl=db.storage.from(BUCKET).getPublicUrl(path).data.publicUrl;
+  
+  const {error}=await db.from("stories").insert({user_id:currentUser.id, image_url:imageUrl, caption});
+  if(error)throw error;
+
+  showToast("स्टोरी सफलतापूर्वक सेयर भयो! 🌟");
+  closeStoryModal();
+  loadStories();
+ }catch(err){
+  showToast("स्टोरी सेयर गर्न सकिएन: "+err.message);
+ }finally{
+  btn.disabled=false; btn.textContent="स्टोरी सेयर गर्नुहोस्";
+ }
+};
+
+async function loadStories(){
+ const {data}=await db.from("stories").select("id, image_url, caption, user_id, created_at").order("created_at",{ascending:false}).limit(20);
+ const container=$("stories-bar");
+ const addCard=`<div class="story-card add-story" onclick="openStoryModal()"><span style="font-size:22px;color:var(--accent)">＋</span><span>तपाईंको Story</span></div>`;
+ 
+ if(!data || !data.length){
+  container.innerHTML=addCard;
+  return;
+ }
+ await loadProfiles(data.map(s=>s.user_id));
+ container.innerHTML=addCard + data.map(s=>{
+  const profile=profilesCache[s.user_id];
+  return `<div class="story-card" title="${s.caption}">
+   <img src="${s.image_url}" style="width:100%;height:100%;object-fit:cover;position:absolute">
+   <div style="position:absolute;bottom:0;background:rgba(0,0,0,0.6);width:100%;padding:3px;">
+    <span>${profileName(profile)}</span>
+   </div>
+  </div>`;
+ }).join("");
+}
+
 $("inline-post-form").onsubmit=async(e)=>{
  e.preventDefault();
  if(!currentUser){
-  alert("पोष्ट गर्न पहिले Login गर्नुहोस्!");
-  location.href="community.html";
+  showToast("पोष्ट गर्न पहिले Login गर्नुहोस्!");
   return;
  }
- 
  const content=$("composer-content").value.trim();
  const title=$("composer-title").value.trim()||content.slice(0,30)+"...";
  const file=$("composer-image").files[0];
  const btn=$("publish-btn");
  
  btn.disabled=true;btn.textContent="पोष्ट हुँदैछ...";
- 
  try{
   let imageUrl=null;
   if(file){
@@ -371,55 +501,215 @@ $("inline-post-form").onsubmit=async(e)=>{
    if(upErr)throw upErr;
    imageUrl=db.storage.from(BUCKET).getPublicUrl(path).data.publicUrl;
   }
-  
-  const authorName=currentUser.user_metadata?.display_name||currentUser.email.split("@")[0];
+  const authorName=profilesCache[currentUser.id]?.display_name||currentUser.email.split("@")[0];
   const {error}=await db.from("blog_posts").insert({
    title,content,image_url:imageUrl,author_id:currentUser.id,author_name:authorName
   });
   if(error)throw error;
-  
   $("inline-post-form").reset();
   showToast("पोष्ट सफलतापूर्वक सेयर भयो! 🎉");
   loadFeed();
- }catch(err){
-  alert("पोष्ट गर्न सकिएन: "+err.message);
- }finally{
-  btn.disabled=false;btn.textContent="पोष्ट गर्नुहोस्";
- }
+ }catch(err){showToast("पोष्ट गर्न सकिएन: "+err.message);}
+ finally{btn.disabled=false;btn.textContent="पोष्ट गर्नुहोस्";}
 };
 
-// Load Posts & Feed with Share & Bookmark
 async function loadFeed(){
- const {data,error}=await db.from("blog_posts").select("id,title,content,image_url,created_at,author_name").order("created_at",{ascending:false});
+ const {data:posts,error}=await db.from("blog_posts").select("id,title,content,image_url,created_at,author_id,author_name").order("created_at",{ascending:false}).limit(50);
  if(error){$("post-grid").innerHTML="फिड लोड गर्न असफल।";return;}
  
- const posts=data||[];
- $("post-count").textContent=`${posts.length} वटा पोष्टहरू`;
- 
- if(!posts.length){
+ cachedPosts=posts||[];
+ $("post-count").textContent=`${cachedPosts.length} वटा पोष्टहरू`;
+ if(!cachedPosts.length){
   $("post-grid").innerHTML='<div style="text-align:center;padding:30px;color:var(--muted)">अहिलेसम्म कुनै पोष्ट छैन। पहिलो पोष्ट तपाईं लेख्नुहोस्!</div>';
   return;
  }
- 
- $("post-grid").innerHTML=posts.map(p=>`
-  <article class="post-card">
+
+ const postIds=cachedPosts.map(p=>p.id);
+ await loadProfiles(cachedPosts.map(p=>p.author_id));
+
+ const [likesRes,commentsRes,reactionsRes]=await Promise.all([
+  db.from("post_likes").select("post_id,user_id").in("post_id",postIds),
+  db.from("post_comments").select("id,post_id,user_id,content,created_at,parent_comment_id").in("post_id",postIds).order("created_at",{ascending:true}),
+  db.from("post_reactions").select("post_id,user_id,reaction").in("post_id",postIds)
+ ]);
+
+ const likes=likesRes.data||[], comments=commentsRes.data||[], reactions=reactionsRes.data||[];
+ await loadProfiles([...comments.map(c=>c.user_id),...reactions.map(r=>r.user_id)]);
+
+ $("post-grid").innerHTML=cachedPosts.map(post=>{
+  const profile=profilesCache[post.author_id];
+  const author=profileName(profile)||post.author_name||"मेरो साथी सदस्य";
+  const postLikes=likes.filter(l=>l.post_id===post.id);
+  const liked=currentUser?postLikes.some(l=>l.user_id===currentUser.id):false;
+  const postComments=comments.filter(c=>c.post_id===post.id);
+  const roots=postComments.filter(c=>!c.parent_comment_id);
+  const postReactions=reactions.filter(r=>r.post_id===post.id);
+  const myReaction=currentUser?postReactions.find(r=>r.user_id===currentUser.id):null;
+
+  const reactionCounts=REACTIONS.map(r=>({...r,count:postReactions.filter(x=>x.reaction===r.value).length}));
+  const reactionNames=REACTIONS.map(r=>{
+   const people=postReactions.filter(x=>x.reaction===r.value);
+   if(!people.length)return "";
+   return `${r.value} ${people.map(x=>profileName(profilesCache[x.user_id])).join(", ")}`;
+  }).filter(Boolean).join(" · ");
+
+  const isOwner=currentUser && currentUser.id===post.author_id;
+
+  return `
+  <article class="post-card" data-post="${post.id}">
    <div class="post-header">
-    <div class="post-user-avatar" style="display:grid;place-items:center;font-weight:800;color:var(--accent)">${(p.author_name||"म").charAt(0).toUpperCase()}</div>
-    <div class="post-author-info">
-     <strong>${p.author_name||"मेरो साथी सदस्य"}</strong>
-     <small>${new Date(p.created_at).toLocaleDateString("ne-NP")}</small>
+    <div class="post-author-wrap">
+     ${avatarHTML(profile)}
+     <div class="post-author-info">
+      <strong>${author}</strong>
+      <small>${new Date(post.created_at).toLocaleString("ne-NP")}</small>
+     </div>
     </div>
+    ${isOwner?`
+     <div class="post-options">
+      <button class="options-btn" onclick="toggleOptions('${post.id}')">⋮</button>
+      <div class="options-dropdown" id="opt-${post.id}">
+       <button onclick="editPost('${post.id}')">✏️ सम्पादन</button>
+       <button onclick="deletePost('${post.id}')" style="color:#ff6b6b">🗑️ मेटाउनुहोस्</button>
+      </div>
+     </div>
+    `:""}
    </div>
-   <div class="post-title">${p.title}</div>
-   <div class="post-content">${p.content}</div>
-   ${p.image_url?`<img src="${p.image_url}" class="post-image" alt="Post">`:""}
+   <div class="post-title">${post.title}</div>
+   <div class="post-content">${post.content}</div>
+   ${post.image_url?`<img src="${post.image_url}" class="post-image" alt="Post">`:""}
+
+   <!-- EMOJI REACTIONS -->
+   <div class="reaction-bar">
+    ${reactionCounts.map(r=>`<button class="reaction-btn ${myReaction?.reaction===r.value?"selected":""}" onclick="handleReaction('${post.id}','${r.value}')">${r.value} ${r.count||""}</button>`).join("")}
+   </div>
+   <div class="reaction-details">${reactionNames||"अहिलेसम्म प्रतिक्रिया छैन।"}</div>
+
+   <!-- ACTIONS -->
    <div class="post-actions-bar">
-    <button class="post-action-btn" onclick="sharePost('${p.title}', '${p.id}')">🔗 सेयर गर्नुहोस्</button>
-    <button class="post-action-btn" onclick="bookmarkPost('${p.id}')">🔖 सेभ (Bookmark)</button>
+    <button class="post-action-btn ${liked?"active":""}" onclick="toggleLike('${post.id}')">${liked?"♥ मन पर्यो":"♡ Like"} (${postLikes.length})</button>
+    <button class="post-action-btn" onclick="toggleComments('${post.id}')">💬 Comment (${postComments.length})</button>
+    <button class="post-action-btn" onclick="sharePost('${post.title}','${post.id}')">🔗 सेयर</button>
+    <button class="post-action-btn" onclick="bookmarkPost('${post.id}')">🔖 सेभ</button>
    </div>
-  </article>
- `).join("");
+
+   <!-- COMMENTS AREA -->
+   <section class="comment-area hidden" id="comments-${post.id}">
+    <div>${roots.map(c=>renderComment(c,postComments)).join("")}</div>
+    <form class="comment-form" onsubmit="submitComment(event,'${post.id}')">
+     <input name="comment" maxlength="3000" required placeholder="आफ्नो Comment लेख्नुहोस्...">
+     <button class="primary-button" style="padding:6px 12px">पठाउनुहोस्</button>
+    </form>
+   </section>
+  </article>`;
+ }).join("");
 }
+
+function renderComment(comment,allComments){
+ const profile=profilesCache[comment.user_id];
+ const replies=allComments.filter(c=>String(c.parent_comment_id)===String(comment.id));
+ return `
+ <div class="comment">
+  <div class="comment-head">
+   ${avatarHTML(profile,26)}
+   <strong>${profileName(profile)}</strong>
+   <span style="color:var(--muted);font-size:10px">${new Date(comment.created_at).toLocaleTimeString("ne-NP")}</span>
+  </div>
+  <div class="comment-body">${comment.content}</div>
+  <div class="comment-tools">
+   <button class="text-action" onclick="toggleReplyForm('${comment.id}')">↳ Reply</button>
+  </div>
+  <form class="reply-form hidden" id="reply-form-${comment.id}" onsubmit="submitReply(event,'${comment.post_id}','${comment.id}')">
+   <input name="reply" maxlength="3000" required placeholder="जवाफ लेख्नुहोस्...">
+   <button class="secondary-button">पठाउनुहोस्</button>
+  </form>
+  ${replies.length?`<div class="reply-list">${replies.map(r=>`
+   <div class="comment">
+    <div class="comment-head">${avatarHTML(profilesCache[r.user_id],22)} <strong>${profileName(profilesCache[r.user_id])}</strong></div>
+    <div class="comment-body">${r.content}</div>
+   </div>
+  `).join("")}</div>`:""}
+ </div>`;
+}
+
+// Post Options (Edit & Delete)
+window.toggleOptions=(id)=>{
+ const el=$("opt-"+id);
+ el.style.display=el.style.display==="block"?"none":"block";
+};
+
+window.deletePost=async(id)=>{
+ if(!confirm("के तपाईं यो पोष्ट मेटाउन चाहनुहुन्छ?"))return;
+ const {error}=await db.from("blog_posts").delete().eq("id",id);
+ if(error) showToast("मेटाउन सकिएन: "+error.message);
+ else{
+  showToast("पोष्ट मेटाइयो! 🗑️");
+  loadFeed();
+ }
+};
+
+window.editPost=async(id)=>{
+ const post=cachedPosts.find(p=>p.id===id);
+ if(!post)return;
+ const newContent=prompt("पोष्ट सच्याउनुहोस्:",post.content);
+ if(newContent===null)return;
+ const {error}=await db.from("blog_posts").update({content:newContent}).eq("id",id);
+ if(error) showToast("सम्पादन गर्न सकिएन: "+error.message);
+ else{
+  showToast("पोष्ट सफलतापूर्वक अपडेट भयो! ✨");
+  loadFeed();
+ }
+};
+
+// Like / Reaction Logic
+window.toggleLike=async(postId)=>{
+ if(!currentUser)return showToast("Like गर्न पहिले Login गर्नुहोस्।");
+ const {data}=await db.from("post_likes").select("id").eq("post_id",postId).eq("user_id",currentUser.id).maybeSingle();
+ if(data) await db.from("post_likes").delete().eq("post_id",postId).eq("user_id",currentUser.id);
+ else await db.from("post_likes").insert({post_id:postId,user_id:currentUser.id});
+ loadFeed();
+};
+
+window.handleReaction=async(postId,reaction)=>{
+ if(!currentUser)return showToast("प्रतिक्रिया दिन पहिले Login गर्नुहोस्।");
+ const {data}=await db.from("post_reactions").select("id,reaction").eq("post_id",postId).eq("user_id",currentUser.id).maybeSingle();
+ if(data){
+  if(data.reaction===reaction) await db.from("post_reactions").delete().eq("post_id",postId).eq("user_id",currentUser.id);
+  else await db.from("post_reactions").update({reaction}).eq("post_id",postId).eq("user_id",currentUser.id);
+ }else{
+  await db.from("post_reactions").insert({post_id:postId,user_id:currentUser.id,reaction});
+ }
+ loadFeed();
+};
+
+window.toggleComments=(id)=>{
+ const el=$("comments-"+id);
+ el.classList.toggle("hidden");
+};
+window.toggleReplyForm=(id)=>{
+ const form=$("reply-form-"+id);
+ form.classList.toggle("hidden");
+};
+
+window.submitComment=async(e,postId)=>{
+ e.preventDefault();
+ if(!currentUser)return showToast("Comment गर्न पहिले Login गर्नुहोस्।");
+ const input=e.target.elements.comment;
+ const content=input.value.trim();if(!content)return;
+ await db.from("post_comments").insert({post_id:postId,user_id:currentUser.id,content});
+ input.value="";
+ loadFeed();
+};
+
+window.submitReply=async(e,postId,parentId)=>{
+ e.preventDefault();
+ if(!currentUser)return showToast("Reply दिन पहिले Login गर्नुहोस्।");
+ const input=e.target.elements.reply;
+ const content=input.value.trim();if(!content)return;
+ await db.from("post_comments").insert({post_id:postId,user_id:currentUser.id,content,parent_comment_id:parentId});
+ input.value="";
+ loadFeed();
+};
 
 window.sharePost=(title, id)=>{
  const url=`${location.origin}/index.html?post=${id}`;
