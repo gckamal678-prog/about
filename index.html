@@ -105,43 +105,55 @@ a{color:inherit;text-decoration:none}
 .story-card.add-story{border:2px dashed var(--accent)}
 .story-card span{font-size:10px;font-weight:700;text-align:center;width:100%;padding:0 4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 
-/* COMPOSER */
+/* REDESIGNED COMPOSER */
 .composer{
  background:var(--surface);border:1px solid var(--line);
- border-radius:17px;padding:14px;margin-bottom:15px;
+ border-radius:20px;padding:16px;margin:15px 0;
  box-shadow:var(--shadow)
 }
+.composer-top-row{display:flex;gap:10px;align-items:flex-start;margin-bottom:10px}
+.composer-avatar{
+ width:40px;height:40px;border-radius:50%;overflow:hidden;
+ background:var(--surface2);display:grid;place-items:center;font-weight:800;color:var(--accent);flex-shrink:0
+}
+.composer-inputs{flex:1;display:flex;flex-direction:column;gap:8px}
 .composer textarea{
  width:100%;border:1px solid var(--line);
  background:var(--surface2);color:var(--text);
- border-radius:12px;padding:12px;outline:none;
- resize:vertical;min-height:85px;font-size:13px;margin-bottom:10px
+ border-radius:14px;padding:12px;outline:none;
+ resize:none;min-height:75px;font-size:13px
 }
-.composer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+.composer input[type="text"]{
+ width:100%;border:1px solid var(--line);
+ background:var(--surface2);color:var(--text);
+ border-radius:10px;padding:10px 12px;outline:none;font-size:12px
+}
+.composer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;border-top:1px solid var(--line);padding-top:12px;margin-top:4px}
 .emoji-picker-wrap{position:relative}
 .emoji-dropdown{
- display:none;position:absolute;bottom:40px;left:0;
+ display:none;position:absolute;bottom:45px;left:0;
  background:var(--surface2);border:1px solid var(--line);
- border-radius:10px;padding:8px;font-size:18px;z-index:10;
- width:220px;flex-wrap:wrap;gap:6px
+ border-radius:12px;padding:8px;font-size:18px;z-index:10;
+ width:220px;flex-wrap:wrap;gap:6px;box-shadow:var(--shadow)
 }
-.emoji-dropdown span{cursor:pointer;padding:3px;border-radius:6px}
+.emoji-dropdown span{cursor:pointer;padding:4px;border-radius:6px}
 .emoji-dropdown span:hover{background:var(--surface)}
 .primary-button{
- border:0;border-radius:11px;padding:9px 16px;
+ border:0;border-radius:12px;padding:9px 18px;
  font-size:12px;font-weight:800;background:linear-gradient(110deg,#75ddff,#b5a2ff);color:#071322
 }
 .secondary-button{
- border:1px solid var(--line);border-radius:11px;padding:8px 12px;
- font-size:11px;font-weight:700;background:var(--surface2);color:var(--text)
+ border:1px solid var(--line);border-radius:10px;padding:8px 12px;
+ font-size:11px;font-weight:700;background:var(--surface2);color:var(--text);
+ display:inline-flex;align-items:center;gap:5px
 }
 
 /* FEED & POST CARDS */
 .feed-heading{
  display:flex;justify-content:space-between;align-items:center;
- margin:15px 0 10px
+ margin:20px 0 10px
 }
-.feed-heading h2{font-size:16px;font-weight:800}
+.feed-heading h2{font-size:15px;font-weight:700;color:var(--muted);letter-spacing:0.5px}
 .post-grid{display:flex;flex-direction:column;gap:16px}
 .post-card{
  background:var(--surface);border:1px solid var(--line);
@@ -173,10 +185,18 @@ a{color:inherit;text-decoration:none}
  width:100%;max-height:400px;object-fit:cover;border-radius:12px;margin-bottom:12px;background:var(--surface2)
 }
 
-/* REACTIONS & ACTIONS */
-.reaction-bar{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0 6px}
-.reaction-btn{border:1px solid var(--line);border-radius:20px;background:var(--surface2);color:var(--text);padding:4px 9px;font-size:12px}
-.reaction-btn.selected{border-color:var(--accent);background:#173b5b}
+/* LONG PRESS REACTION POPUP BAR */
+.reaction-popup-container{position:relative;display:inline-block}
+.reaction-bar{
+ display:none;position:absolute;bottom:42px;left:0;
+ background:var(--surface2);border:1px solid var(--line);
+ border-radius:30px;padding:6px 10px;gap:6px;box-shadow:var(--shadow);z-index:20;
+ align-items:center;animation:fadeIn 0.15s ease
+}
+@keyframes fadeIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+.reaction-bar.show{display:flex}
+.reaction-btn{border:0;background:none;font-size:18px;cursor:pointer;padding:2px;transition:transform 0.1s}
+.reaction-btn:hover{transform:scale(1.25)}
 .reaction-details{margin-bottom:10px;color:var(--muted);font-size:11px}
 
 .post-actions-bar{
@@ -185,7 +205,7 @@ a{color:inherit;text-decoration:none}
 }
 .post-action-btn{
  background:transparent;border:0;color:var(--muted);font-size:12px;font-weight:700;
- display:flex;align-items:center;gap:5px;padding:6px 10px;border-radius:8px
+ display:flex;align-items:center;gap:5px;padding:6px 10px;border-radius:8px;cursor:pointer
 }
 .post-action-btn:hover{background:var(--surface2)}
 .post-action-btn.active{color:var(--accent)}
@@ -276,19 +296,24 @@ a{color:inherit;text-decoration:none}
   </div>
  </section>
 
- <!-- POST COMPOSER -->
+ <!-- REDESIGNED POST COMPOSER -->
  <section class="composer" id="post-composer-box">
   <form id="inline-post-form">
-   <textarea id="composer-content" placeholder="तपाईं के सोच्दै हुनुहुन्छ? यहाँ लेख्नुहोस्..." maxlength="5000" required></textarea>
-   <input type="text" id="composer-title" class="secondary-button" style="width:100%;margin-bottom:10px" placeholder="पोष्टको शीर्षक (Optional)">
+   <div class="composer-top-row">
+    <div class="composer-avatar" id="composer-user-avatar">म</div>
+    <div class="composer-inputs">
+     <textarea id="composer-content" placeholder="आज मनमा के कुरा खेलिरहेछ? यहाँ लेख्नुहोस्..." maxlength="5000" required></textarea>
+     <input type="text" id="composer-title" placeholder="पोष्टको शिर्षक (वैकल्पिक)">
+    </div>
+   </div>
    
    <div class="composer-bottom">
     <div style="display:flex;gap:8px;align-items:center">
-     <label class="secondary-button" style="cursor:pointer">
-      📷 फोटो राख्नुहोस् <input type="file" id="composer-image" accept="image/*" hidden>
+     <label class="secondary-button">
+      📷 फोटो जोड्नुहोस् <input type="file" id="composer-image" accept="image/*" hidden>
      </label>
      <div class="emoji-picker-wrap">
-      <button type="button" class="secondary-button" id="emoji-toggle">😀 Emoji</button>
+      <button type="button" class="secondary-button" id="emoji-toggle">😀 इमोजी</button>
       <div class="emoji-dropdown" id="emoji-box">
        <span onclick="addEmoji('😊')">😊</span><span onclick="addEmoji('❤️')">❤️</span>
        <span onclick="addEmoji('🔥')">🔥</span><span onclick="addEmoji('👍')">👍</span>
@@ -302,10 +327,10 @@ a{color:inherit;text-decoration:none}
   </form>
  </section>
 
- <!-- FEED -->
+ <!-- FEED (बकम्फुसे शब्द हटाइएको) -->
  <section class="feed-section">
   <div class="feed-heading">
-   <h2>सामाजिक फिड (Feed)</h2>
+   <h2>नवीनतम पोष्टहरू</h2>
    <span id="post-count" style="font-size:11px;color:var(--muted)">लोड हुँदैछ...</span>
   </div>
 
@@ -404,10 +429,14 @@ async function boot(){
   const {data:profile}=await db.from("profiles").select("display_name,avatar_url").eq("id",currentUser.id).maybeSingle();
   if(profile){
    profilesCache[currentUser.id]=profile;
-   if(profile.avatar_url) $("header-user-photo").src=profile.avatar_url;
-   else {
-    $("header-user-initials").textContent=(profile.display_name||"म").charAt(0).toUpperCase();
-    $("header-user-initials").hidden=false;$("header-user-photo").hidden=true;
+   if(profile.avatar_url) {
+    $("header-user-photo").src=profile.avatar_url;
+    $("composer-user-avatar").innerHTML=`<img src="${profile.avatar_url}" style="width:100%;height:100%;object-fit:cover">`;
+   } else {
+    const initial=(profile.display_name||"म").charAt(0).toUpperCase();
+    $("header-user-initials").textContent=initial;
+    $("header-user-initials").hidden=false; $("header-user-photo").hidden=true;
+    $("composer-user-avatar").textContent=initial;
    }
   }
  }
@@ -416,19 +445,13 @@ async function boot(){
  initRealtime();
 }
 
-// Supabase Realtime Setup
 function initRealtime(){
  db.channel('public-db-changes')
-  .on('postgres_changes', { event: '*', schema: 'public', table: 'blog_posts' }, () => {
-    loadFeed();
-  })
-  .on('postgres_changes', { event: '*', schema: 'public', table: 'post_comments' }, () => {
-    loadFeed();
-  })
+  .on('postgres_changes', { event: '*', schema: 'public', table: 'blog_posts' }, () => { loadFeed(); })
+  .on('postgres_changes', { event: '*', schema: 'public', table: 'post_comments' }, () => { loadFeed(); })
   .subscribe();
 }
 
-// Story Modals
 window.openStoryModal=()=>{
  if(!currentUser) return showToast("स्टोरी हाल्न पहिले Login गर्नुहोस्!");
  $("story-modal").style.display="flex";
@@ -442,6 +465,7 @@ window.uploadStory=async(e)=>{
  const btn=$("story-btn");
  btn.disabled=true; btn.textContent="अपलोड हुँदैछ...";
  try{
+  if(file.size > 2 * 1024 * 1024) throw new Error("फोटोको साइज २MB भन्दा सानो हुनुपर्छ।");
   const path=`stories/${currentUser.id}/${Date.now()}-${file.name}`;
   const {error:upErr}=await db.storage.from(BUCKET).upload(path,file);
   if(upErr)throw upErr;
@@ -454,7 +478,7 @@ window.uploadStory=async(e)=>{
   closeStoryModal();
   loadStories();
  }catch(err){
-  showToast("स्टोरी सेयर गर्न सकिएन: "+err.message);
+  showToast("त्रुटि: "+err.message);
  }finally{
   btn.disabled=false; btn.textContent="स्टोरी सेयर गर्नुहोस्";
  }
@@ -465,10 +489,7 @@ async function loadStories(){
  const container=$("stories-bar");
  const addCard=`<div class="story-card add-story" onclick="openStoryModal()"><span style="font-size:22px;color:var(--accent)">＋</span><span>तपाईंको Story</span></div>`;
  
- if(!data || !data.length){
-  container.innerHTML=addCard;
-  return;
- }
+ if(!data || !data.length){ container.innerHTML=addCard; return; }
  await loadProfiles(data.map(s=>s.user_id));
  container.innerHTML=addCard + data.map(s=>{
   const profile=profilesCache[s.user_id];
@@ -483,19 +504,17 @@ async function loadStories(){
 
 $("inline-post-form").onsubmit=async(e)=>{
  e.preventDefault();
- if(!currentUser){
-  showToast("पोष्ट गर्न पहिले Login गर्नुहोस्!");
-  return;
- }
+ if(!currentUser){ showToast("पोष्ट गर्न पहिले Login गर्नुहोस्!"); return; }
  const content=$("composer-content").value.trim();
  const title=$("composer-title").value.trim()||content.slice(0,30)+"...";
  const file=$("composer-image").files[0];
  const btn=$("publish-btn");
  
- btn.disabled=true;btn.textContent="पोष्ट हुँदैछ...";
+ btn.disabled=true; btn.textContent="पोष्ट हुँदैछ...";
  try{
   let imageUrl=null;
   if(file){
+   if(file.size > 2 * 1024 * 1024) throw new Error("फोटोको साइज २MB भन्दा सानो हुनुपर्छ।");
    const path=`${currentUser.id}/${Date.now()}-${file.name}`;
    const {error:upErr}=await db.storage.from(BUCKET).upload(path,file);
    if(upErr)throw upErr;
@@ -509,8 +528,8 @@ $("inline-post-form").onsubmit=async(e)=>{
   $("inline-post-form").reset();
   showToast("पोष्ट सफलतापूर्वक सेयर भयो! 🎉");
   loadFeed();
- }catch(err){showToast("पोष्ट गर्न सकिएन: "+err.message);}
- finally{btn.disabled=false;btn.textContent="पोष्ट गर्नुहोस्";}
+ }catch(err){showToast("त्रुटि: "+err.message);}
+ finally{btn.disabled=false; btn.textContent="पोष्ट गर्नुहोस्";}
 };
 
 async function loadFeed(){
@@ -518,7 +537,7 @@ async function loadFeed(){
  if(error){$("post-grid").innerHTML="फिड लोड गर्न असफल।";return;}
  
  cachedPosts=posts||[];
- $("post-count").textContent=`${cachedPosts.length} वटा पोष्टहरू`;
+ $("post-count").textContent=`${cachedPosts.length} पोष्टहरू`;
  if(!cachedPosts.length){
   $("post-grid").innerHTML='<div style="text-align:center;padding:30px;color:var(--muted)">अहिलेसम्म कुनै पोष्ट छैन। पहिलो पोष्ट तपाईं लेख्नुहोस्!</div>';
   return;
@@ -546,7 +565,6 @@ async function loadFeed(){
   const postReactions=reactions.filter(r=>r.post_id===post.id);
   const myReaction=currentUser?postReactions.find(r=>r.user_id===currentUser.id):null;
 
-  const reactionCounts=REACTIONS.map(r=>({...r,count:postReactions.filter(x=>x.reaction===r.value).length}));
   const reactionNames=REACTIONS.map(r=>{
    const people=postReactions.filter(x=>x.reaction===r.value);
    if(!people.length)return "";
@@ -579,15 +597,24 @@ async function loadFeed(){
    <div class="post-content">${post.content}</div>
    ${post.image_url?`<img src="${post.image_url}" class="post-image" alt="Post">`:""}
 
-   <!-- EMOJI REACTIONS -->
-   <div class="reaction-bar">
-    ${reactionCounts.map(r=>`<button class="reaction-btn ${myReaction?.reaction===r.value?"selected":""}" onclick="handleReaction('${post.id}','${r.value}')">${r.value} ${r.count||""}</button>`).join("")}
-   </div>
-   <div class="reaction-details">${reactionNames||"अहिलेसम्म प्रतिक्रिया छैन।"}</div>
+   <div class="reaction-details">${reactionNames||""}</div>
 
-   <!-- ACTIONS -->
+   <!-- ACTIONS & LONG PRESS / HOVER REACTION POPUP -->
    <div class="post-actions-bar">
-    <button class="post-action-btn ${liked?"active":""}" onclick="toggleLike('${post.id}')">${liked?"♥ मन पर्यो":"♡ Like"} (${postLikes.length})</button>
+    <div class="reaction-popup-container" onmouseleave="hideReactionPopup('${post.id}')">
+     <button class="post-action-btn ${liked?"active":""}" 
+             onclick="toggleLike('${post.id}')" 
+             onmouseenter="showReactionPopup('${post.id}')"
+             ontouchstart="handleTouchStart(event, '${post.id}')">
+      ${myReaction ? myReaction.reaction : (liked ? "♥ मन पर्यो" : "♡ Like")} (${postLikes.length})
+     </button>
+     
+     <!-- इमोजी बार जो लङ्ग प्रेस वा होभर गर्दा मात्र देखिन्छ -->
+     <div class="reaction-bar" id="react-bar-${post.id}">
+      ${REACTIONS.map(r=>`<button class="reaction-btn" onclick="handleReaction('${post.id}','${r.value}')">${r.value}</button>`).join("")}
+     </div>
+    </div>
+
     <button class="post-action-btn" onclick="toggleComments('${post.id}')">💬 Comment (${postComments.length})</button>
     <button class="post-action-btn" onclick="sharePost('${post.title}','${post.id}')">🔗 सेयर</button>
     <button class="post-action-btn" onclick="bookmarkPost('${post.id}')">🔖 सेभ</button>
@@ -604,6 +631,23 @@ async function loadFeed(){
   </article>`;
  }).join("");
 }
+
+// Long press & Hover logic for reactions
+let pressTimer = null;
+function showReactionPopup(id){
+ $("react-bar-"+id).classList.add("show");
+}
+function hideReactionPopup(id){
+ $("react-bar-"+id).classList.remove("show");
+}
+function handleTouchStart(e, id){
+ pressTimer = setTimeout(()=>{
+  showReactionPopup(id);
+ }, 500); // ०.५ सेकेन्ड थिइराखेपछि देखिने
+}
+window.addEventListener('touchend', ()=>{
+ if(pressTimer) clearTimeout(pressTimer);
+});
 
 function renderComment(comment,allComments){
  const profile=profilesCache[comment.user_id];
@@ -632,7 +676,6 @@ function renderComment(comment,allComments){
  </div>`;
 }
 
-// Post Options (Edit & Delete)
 window.toggleOptions=(id)=>{
  const el=$("opt-"+id);
  el.style.display=el.style.display==="block"?"none":"block";
@@ -641,11 +684,8 @@ window.toggleOptions=(id)=>{
 window.deletePost=async(id)=>{
  if(!confirm("के तपाईं यो पोष्ट मेटाउन चाहनुहुन्छ?"))return;
  const {error}=await db.from("blog_posts").delete().eq("id",id);
- if(error) showToast("मेटाउन सकिएन: "+error.message);
- else{
-  showToast("पोष्ट मेटाइयो! 🗑️");
-  loadFeed();
- }
+ if(error) showToast("त्रुटि: "+error.message);
+ else{ showToast("पोष्ट मेटाइयो! 🗑️"); loadFeed(); }
 };
 
 window.editPost=async(id)=>{
@@ -654,14 +694,10 @@ window.editPost=async(id)=>{
  const newContent=prompt("पोष्ट सच्याउनुहोस्:",post.content);
  if(newContent===null)return;
  const {error}=await db.from("blog_posts").update({content:newContent}).eq("id",id);
- if(error) showToast("सम्पादन गर्न सकिएन: "+error.message);
- else{
-  showToast("पोष्ट सफलतापूर्वक अपडेट भयो! ✨");
-  loadFeed();
- }
+ if(error) showToast("त्रुटि: "+error.message);
+ else{ showToast("पोष्ट अपडेट भयो! ✨"); loadFeed(); }
 };
 
-// Like / Reaction Logic
 window.toggleLike=async(postId)=>{
  if(!currentUser)return showToast("Like गर्न पहिले Login गर्नुहोस्।");
  const {data}=await db.from("post_likes").select("id").eq("post_id",postId).eq("user_id",currentUser.id).maybeSingle();
@@ -672,6 +708,7 @@ window.toggleLike=async(postId)=>{
 
 window.handleReaction=async(postId,reaction)=>{
  if(!currentUser)return showToast("प्रतिक्रिया दिन पहिले Login गर्नुहोस्।");
+ hideReactionPopup(postId);
  const {data}=await db.from("post_reactions").select("id,reaction").eq("post_id",postId).eq("user_id",currentUser.id).maybeSingle();
  if(data){
   if(data.reaction===reaction) await db.from("post_reactions").delete().eq("post_id",postId).eq("user_id",currentUser.id);
@@ -682,33 +719,25 @@ window.handleReaction=async(postId,reaction)=>{
  loadFeed();
 };
 
-window.toggleComments=(id)=>{
- const el=$("comments-"+id);
- el.classList.toggle("hidden");
-};
-window.toggleReplyForm=(id)=>{
- const form=$("reply-form-"+id);
- form.classList.toggle("hidden");
-};
+window.toggleComments=(id)=>{ $("comments-"+id).classList.toggle("hidden"); };
+window.toggleReplyForm=(id)=>{ $("reply-form-"+id).classList.toggle("hidden"); };
 
 window.submitComment=async(e,postId)=>{
  e.preventDefault();
  if(!currentUser)return showToast("Comment गर्न पहिले Login गर्नुहोस्।");
  const input=e.target.elements.comment;
- const content=input.value.trim();if(!content)return;
+ const content=input.value.trim(); if(!content)return;
  await db.from("post_comments").insert({post_id:postId,user_id:currentUser.id,content});
- input.value="";
- loadFeed();
+ input.value=""; loadFeed();
 };
 
 window.submitReply=async(e,postId,parentId)=>{
  e.preventDefault();
  if(!currentUser)return showToast("Reply दिन पहिले Login गर्नुहोस्।");
  const input=e.target.elements.reply;
- const content=input.value.trim();if(!content)return;
+ const content=input.value.trim(); if(!content)return;
  await db.from("post_comments").insert({post_id:postId,user_id:currentUser.id,content,parent_comment_id:parentId});
- input.value="";
- loadFeed();
+ input.value=""; loadFeed();
 };
 
 window.sharePost=(title, id)=>{
@@ -722,10 +751,8 @@ window.bookmarkPost=(id)=>{
  if(!bookmarks.includes(id)){
   bookmarks.push(id);
   localStorage.setItem("saved_bookmarks",JSON.stringify(bookmarks));
-  showToast("पोष्ट बुकमार्कमा सेभ भयो! 🔖");
- }else{
-  showToast("यो पोष्ट पहिले नै सेभ छ।");
- }
+  showToast("बुकमार्कमा सेभ भयो! 🔖");
+ }else{ showToast("यो पोष्ट पहिले नै सेभ छ।"); }
 };
 
 $("current-year").textContent=new Date().getFullYear();
