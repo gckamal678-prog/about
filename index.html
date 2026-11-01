@@ -43,11 +43,11 @@ body.light-mode{
  --shadow:0 15px 40px rgba(35,60,95,.09);
  background:#f4f7fc
 }
-button,input{font:inherit}
+button,input,textarea{font:inherit}
 button,a{-webkit-tap-highlight-color:transparent}
 button{cursor:pointer}
 a{color:inherit;text-decoration:none}
-.container{width:min(850px,calc(100% - 24px));margin:auto}
+.container{width:min(750px,calc(100% - 24px));margin:auto}
 
 /* HEADER */
 .site-header{
@@ -61,26 +61,19 @@ body.light-mode .site-header{background:rgba(244,247,252,.95)}
  min-height:65px;display:flex;align-items:center;
  justify-content:space-between;gap:12px
 }
-.brand{
- display:flex;align-items:center;gap:9px;
- min-width:0;pointer-events:none
-}
+.brand{display:flex;align-items:center;gap:9px;min-width:0}
 .brand-logo{
  width:39px;height:39px;object-fit:cover;
- border-radius:50%;border:1px solid var(--line);
- pointer-events:none
+ border-radius:50%;border:1px solid var(--line)
 }
 .brand-name{font-size:16px;font-weight:800;white-space:nowrap}
 .header-right{display:flex;align-items:center;gap:8px}
 .profile-link{
  width:40px;height:40px;border-radius:50%;
  overflow:hidden;border:2px solid var(--accent);
- display:block;flex-shrink:0;
- background:var(--surface2)
+ display:block;flex-shrink:0;background:var(--surface2)
 }
-.profile-link img{
- width:100%;height:100%;object-fit:cover;display:block
-}
+.profile-link img{width:100%;height:100%;object-fit:cover;display:block}
 .header-profile-initials{
  width:100%;height:100%;display:grid;
  place-items:center;font-size:15px;font-weight:800;
@@ -104,135 +97,86 @@ body.light-mode .site-header{background:rgba(244,247,252,.95)}
  background:#39d98a;box-shadow:0 0 8px #39d98a
 }
 
-/* HERO */
-.hero{padding:13px 0 8px}
-.hero-panel{
- position:relative;overflow:hidden;
- border:1px solid rgba(125,190,255,.2);
- border-radius:20px;padding:18px;
- background:linear-gradient(115deg,#101e35,#172b49 65%,#29234c);
- box-shadow:var(--shadow)
+/* STORIES */
+.stories-container{
+ display:flex;gap:10px;overflow-x:auto;padding:12px 0;
+ scrollbar-width:none
 }
-body.light-mode .hero-panel{
- background:linear-gradient(115deg,#fff,#e7f1fd 65%,#eee8ff)
+.stories-container::-webkit-scrollbar{display:none}
+.story-card{
+ flex:0 0 74px;height:115px;border-radius:14px;
+ background:var(--surface);border:1px solid var(--line);
+ display:flex;flex-direction:column;align-items:center;
+ justify-content:center;gap:6px;cursor:pointer;position:relative;overflow:hidden
 }
-.hero-panel:after{
- content:"♡";position:absolute;right:12px;top:-28px;
- font-size:130px;color:rgba(140,190,255,.06);
- pointer-events:none
+.story-card.add-story{border:2px dashed var(--accent)}
+.story-avatar{
+ width:42px;height:42px;border-radius:50%;border:2px solid var(--accent);object-fit:cover
 }
-.hero-kicker{
- color:var(--accent);font-size:9px;
- font-weight:800;letter-spacing:1.5px;margin-bottom:5px
-}
-.hero h1{
- position:relative;z-index:1;
- font-size:clamp(20px,5vw,27px);
- line-height:1.35;font-weight:800;margin-bottom:5px
-}
-.hero p{
- position:relative;z-index:1;
- max-width:570px;color:var(--muted);
- font-size:11px;line-height:1.7
-}
-.hero-actions{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
-.primary-button,.secondary-button{
- border:0;border-radius:11px;padding:9px 14px;
- font-size:11px;font-weight:800;
- display:inline-flex;align-items:center;justify-content:center;gap:6px
-}
-.primary-button{background:linear-gradient(110deg,#75ddff,#b5a2ff);color:#071322}
-.secondary-button{background:var(--surface);color:var(--text);border:1px solid var(--line)}
-
-/* FEED */
-.feed-section{padding:12px 0 25px}
-.feed-heading{
- display:flex;justify-content:space-between;align-items:center;
- margin:5px 0 10px
-}
-.feed-heading h2{font-size:16px;font-weight:800}
-.post-count{font-size:10px;color:var(--muted)}
+.story-card span{font-size:10px;font-weight:700;text-align:center;width:100%;padding:0 4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 
 /* COMPOSER */
 .composer{
  background:var(--surface);border:1px solid var(--line);
- border-radius:17px;padding:13px;margin-bottom:13px;
+ border-radius:17px;padding:14px;margin-bottom:15px;
  box-shadow:var(--shadow)
 }
-.composer-top{display:flex;align-items:center;gap:9px}
-.user-avatar{
- width:38px;height:38px;border-radius:50%;
- object-fit:cover;background:var(--surface2);
- border:1px solid var(--line);flex-shrink:0
+.composer textarea{
+ width:100%;border:1px solid var(--line);
+ background:var(--surface2);color:var(--text);
+ border-radius:12px;padding:12px;outline:none;
+ resize:vertical;min-height:85px;font-size:13px;margin-bottom:10px
 }
-.composer-input{
- flex:1;min-width:0;border:1px solid var(--line);
- background:var(--surface2);color:var(--muted);
- border-radius:22px;padding:10px 14px;
- text-align:left;font-size:11px
+.composer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+.emoji-picker-wrap{position:relative}
+.emoji-dropdown{
+ display:none;position:absolute;bottom:40px;left:0;
+ background:var(--surface2);border:1px solid var(--line);
+ border-radius:10px;padding:8px;font-size:18px;z-index:10;
+ width:220px;display:flex;flex-wrap:wrap;gap:6px
 }
-.composer-actions{
- display:flex;justify-content:space-around;
- gap:8px;border-top:1px solid var(--line);
- margin-top:12px;padding-top:10px
+.emoji-dropdown span{cursor:pointer;padding:3px;border-radius:6px}
+.emoji-dropdown span:hover{background:var(--surface)}
+.primary-button{
+ border:0;border-radius:11px;padding:9px 16px;
+ font-size:12px;font-weight:800;background:linear-gradient(110deg,#75ddff,#b5a2ff);color:#071322
 }
-.composer-action{
- border:0;background:transparent;color:var(--muted);
- font-size:10px;font-weight:700;padding:4px
-}
-.composer-action span{margin-right:4px}
-
-/* SEARCH */
-.search-wrap{position:relative;margin-bottom:12px}
-.search-wrap span{
- position:absolute;left:13px;top:50%;
- transform:translateY(-50%);color:var(--muted)
-}
-.search-input{
- width:100%;height:43px;border:1px solid var(--line);
- background:var(--surface);color:var(--text);
- border-radius:13px;padding:0 13px 0 38px;
- outline:none;font-size:11px
+.secondary-button{
+ border:1px solid var(--line);border-radius:11px;padding:8px 12px;
+ font-size:11px;font-weight:700;background:var(--surface2);color:var(--text)
 }
 
 /* POST CARDS */
-.post-grid{display:grid;grid-template-columns:1fr;gap:12px}
+.feed-heading{
+ display:flex;justify-content:space-between;align-items:center;
+ margin:15px 0 10px
+}
+.feed-heading h2{font-size:16px;font-weight:800}
+.post-grid{display:flex;flex-direction:column;gap:16px}
 .post-card{
- overflow:hidden;min-width:0;border-radius:17px;
  background:var(--surface);border:1px solid var(--line);
- box-shadow:var(--shadow);cursor:pointer
+ border-radius:17px;padding:16px;box-shadow:var(--shadow)
 }
-.post-image-wrap{
- width:100%;aspect-ratio:16/9;
- background:var(--surface2);overflow:hidden
+.post-header{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.post-user-avatar{
+ width:40px;height:40px;border-radius:50%;object-fit:cover;background:var(--surface2)
 }
-.post-image{width:100%;height:100%;object-fit:cover;display:block}
-.no-image{
- height:100%;display:grid;place-items:center;
- color:var(--accent);font-size:25px;background:var(--surface2)
+.post-author-info strong{display:block;font-size:14px}
+.post-author-info small{color:var(--muted);font-size:10px}
+.post-title{font-size:17px;font-weight:800;margin-bottom:8px}
+.post-content{font-size:13px;line-height:1.7;white-space:pre-wrap;overflow-wrap:anywhere;margin-bottom:12px}
+.post-image{
+ width:100%;max-height:400px;object-fit:cover;border-radius:12px;margin-bottom:12px;background:var(--surface2)
 }
-.post-body{padding:13px 14px}
-.post-meta{
- display:flex;align-items:center;gap:7px;
- color:var(--muted);font-size:9px;margin-bottom:6px
+.post-actions-bar{
+ display:flex;justify-content:space-between;align-items:center;
+ border-top:1px solid var(--line);padding-top:10px;margin-top:10px
 }
-.post-meta .dot{
- width:4px;height:4px;border-radius:50%;background:var(--accent)
+.post-action-btn{
+ background:transparent;border:0;color:var(--muted);font-size:12px;font-weight:700;
+ display:flex;align-items:center;gap:5px
 }
-.post-title{font-size:15px;line-height:1.5;font-weight:800;margin-bottom:5px}
-.post-excerpt{
- color:var(--muted);font-size:11px;line-height:1.8;
- display:-webkit-box;-webkit-line-clamp:3;
- -webkit-box-orient:vertical;overflow:hidden
-}
-.read-more{color:var(--accent);font-size:10px;font-weight:800;margin-top:10px}
-.empty-state{
- padding:30px 15px;border:1px dashed var(--line);
- border-radius:15px;text-align:center;background:var(--surface)
-}
-.empty-state h3{font-size:13px;margin-bottom:5px}
-.empty-state p,.status-message{color:var(--muted);font-size:11px}
-.status-message{text-align:center;padding:12px 5px}
+.post-action-btn.active{color:var(--accent)}
 
 /* NAVIGATION */
 #main-nav{
@@ -241,104 +185,27 @@ body.light-mode .hero-panel{
  transform:translateX(-50%);
  width:min(620px,calc(100% - 14px));
  display:flex;justify-content:space-around;gap:3px;
- padding:6px 5px;
- background:rgba(17,28,46,.97);color:#edf3fc;
+ padding:6px 5px;background:rgba(17,28,46,.97);color:#edf3fc;
  border:1px solid rgba(255,255,255,.14);
  border-radius:16px;box-shadow:0 10px 35px rgba(0,0,0,.4);
  backdrop-filter:blur(18px)
 }
 #main-nav a{
- flex:1;min-width:0;display:flex;flex-direction:column;
- align-items:center;justify-content:center;gap:2px;
- padding:5px 2px;border-radius:11px;
- color:#aab8cc;font-size:9px;font-weight:700;white-space:nowrap
+ flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+ padding:5px 2px;border-radius:11px;color:#aab8cc;font-size:9px;font-weight:700
 }
-#main-nav .nav-icon{font-size:17px;line-height:1.2}
+#main-nav .nav-icon{font-size:17px}
 #main-nav a.active{background:linear-gradient(120deg,#24486a,#3c3567);color:#fff}
 
-/* SETTINGS */
-.settings-backdrop{
- display:none;position:fixed;inset:0;z-index:1100;
- background:rgba(0,0,0,.55);align-items:flex-end;justify-content:center
-}
-.settings-backdrop.open{display:flex}
-.settings-panel{
- width:min(520px,100%);background:var(--surface);
- border:1px solid var(--line);border-radius:22px 22px 0 0;
- padding:20px 18px 30px;box-shadow:var(--shadow)
-}
-.settings-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px}
-.settings-head h2{font-size:16px}
-.close-settings{
- border:0;background:var(--surface2);color:var(--text);
- border-radius:10px;width:35px;height:35px;font-size:19px
-}
-.setting-row{
- display:flex;justify-content:space-between;align-items:center;
- gap:12px;padding:13px 0;border-bottom:1px solid var(--line)
-}
-.setting-row strong{font-size:12px}
-.setting-row small{display:block;color:var(--muted);font-size:10px}
-.setting-control{
- border:1px solid var(--line);border-radius:10px;
- background:var(--surface2);color:var(--text);
- padding:8px 12px;font-size:11px;font-weight:700
-}
-
-/* ARTICLE */
-.reader-overlay{
- display:none;position:fixed;inset:0;z-index:1200;
- overflow-y:auto;padding:14px 8px;
- background:rgba(3,8,17,.9);backdrop-filter:blur(10px)
-}
-.reader-overlay.open{display:block}
-.reader{
- width:min(720px,100%);margin:auto;
- background:var(--bg);border:1px solid var(--line);
- border-radius:17px;overflow:hidden
-}
-.reader-toolbar{
- position:sticky;top:0;z-index:2;
- display:flex;align-items:center;justify-content:space-between;
- padding:11px 14px;background:var(--surface);
- border-bottom:1px solid var(--line)
-}
-.reader-toolbar strong{font-size:12px}
-.reader-close{
- width:34px;height:34px;border:1px solid var(--line);
- border-radius:10px;color:var(--text);
- background:var(--surface2);font-size:20px
-}
-.reader-content{padding:18px}
-.reader-date{color:var(--accent);font-size:10px;margin-bottom:8px}
-.reader-title{font-size:23px;line-height:1.4;margin-bottom:15px}
-.reader-image{
- width:100%;max-height:430px;object-fit:contain;
- border-radius:12px;background:var(--surface2);margin-bottom:15px
-}
-.reader-text{font-size:13px;line-height:2;white-space:pre-wrap;overflow-wrap:anywhere}
-.reader-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}
-.footer{
- text-align:center;border-top:1px solid var(--line);
- padding:18px 0 25px;color:var(--muted);font-size:9px
-}
 .site-toast{
  position:fixed;left:50%;bottom:100px;z-index:2000;
  transform:translate(-50%,15px);opacity:0;
  background:var(--surface2);color:var(--text);
  border:1px solid var(--line);border-radius:10px;
- padding:10px 15px;font-size:11px;pointer-events:none;
- transition:.2s
+ padding:10px 15px;font-size:11px;pointer-events:none;transition:.2s
 }
 .site-toast.show{opacity:1;transform:translate(-50%,0)}
-.lang-en{display:none}
-body.english-mode .lang-ne{display:none}
-body.english-mode .lang-en{display:inline}
-
-@media(min-width:700px){
- .hero-panel{padding:23px 27px}
- .post-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-}
+.footer{text-align:center;padding:25px 0;color:var(--muted);font-size:10px}
 </style>
 </head>
 
@@ -346,564 +213,233 @@ body.english-mode .lang-en{display:inline}
 
 <header class="site-header">
  <div class="container header-inner">
-
-  <!-- LEFT: Brand only. This image is deliberately not clickable. -->
-  <div class="brand" aria-label="मेरो साथी">
-   <img class="brand-logo" src="mylogo.png" alt="मेरो साथी लोगो">
+  <div class="brand">
+   <img class="brand-logo" src="mylogo.png" alt="Logo">
    <span class="brand-name">मेरो साथी</span>
   </div>
-
-  <!-- RIGHT: User profile photo and profile link -->
   <div class="header-right">
-   <a href="profile.html" class="profile-link" aria-label="आफ्नो प्रोफाइल खोल्नुहोस्">
-    <img id="header-user-photo" src="mylogo.png" alt="User profile">
+   <a href="profile.html" class="profile-link" aria-label="प्रोफाइल">
+    <img id="header-user-photo" src="mylogo.png" alt="Profile">
     <span id="header-user-initials" class="header-profile-initials" hidden>म</span>
    </a>
   </div>
-
  </div>
 </header>
 
-<section class="container live-info" aria-label="Live information">
- <div class="live-info-item"><span class="live-dot"></span><strong id="real-time">समय लोड हुँदै...</strong></div>
- <div class="live-info-item"><span>🌡️</span><strong id="weather-temp">--°C</strong></div>
- <div class="live-info-item"><span>🌤️</span><strong id="weather-condition">मौसम</strong></div>
- <div class="live-info-item"><span>📍</span><strong id="user-location">स्थान</strong></div>
-</section>
+<main class="container">
 
-<main>
+ <!-- LIVE INFO -->
+ <section class="live-info" aria-label="Live info">
+  <div class="live-info-item"><span class="live-dot"></span><strong id="real-time">समय लोड हुँदै...</strong></div>
+  <div class="live-info-item"><span>🌡️</span><strong id="weather-temp">--°C</strong></div>
+  <div class="live-info-item"><span>📍</span><strong id="user-location">स्थान</strong></div>
+ </section>
 
- <section class="hero">
-  <div class="container">
-   <div class="hero-panel">
-    <div class="hero-kicker">मेरो साथी · MY FRIEND</div>
-    <h1>
-     <span class="lang-ne">मेरो साथीमा स्वागत छ।</span>
-     <span class="lang-en">Welcome to My Friend.</span>
-    </h1>
-    <p>
-     <span class="lang-ne">आफ्ना विचार, अनुभव र खुसीका पल साथीहरूसँग बाँड्नुहोस्।</span>
-     <span class="lang-en">Share your thoughts, experiences and happy moments with friends.</span>
-    </p>
-    <div class="hero-actions">
-     <a href="#home-feed" class="primary-button">✦ पोस्टहरू हेर्नुहोस्</a>
-     <a href="profile.html" class="secondary-button">♡ मेरो प्रोफाइल</a>
-    </div>
-   </div>
+ <!-- STORIES BAR -->
+ <section class="stories-container" id="stories-bar">
+  <div class="story-card add-story" onclick="alert('छिट्टै आउँदैछ: Story फिचर!')">
+   <span style="font-size:22px;color:var(--accent)">＋</span>
+   <span>तपाईंको Story</span>
   </div>
  </section>
 
- <section class="feed-section container" id="home-feed">
+ <!-- POST COMPOSER (Facebook/X Style) -->
+ <section class="composer" id="post-composer-box">
+  <form id="inline-post-form">
+   <textarea id="composer-content" placeholder="तपाईं के सोच्दै हुनुहुन्छ? यहाँ लेख्नुहोस्..." maxlength="5000" required></textarea>
+   <input type="text" id="composer-title" class="secondary-button" style="width:100%;margin-bottom:10px" placeholder="पोष्टको शीर्षक (Optional)">
+   
+   <div class="composer-bottom">
+    <div style="display:flex;gap:8px;align-items:center">
+     <label class="secondary-button" style="cursor:pointer">
+      📷 फोटो राख्नुहोस् <input type="file" id="composer-image" accept="image/*" hidden>
+     </label>
+     <div class="emoji-picker-wrap">
+      <button type="button" class="secondary-button" id="emoji-toggle">😀 Emoji</button>
+      <div class="emoji-dropdown" id="emoji-box" style="display:none">
+       <span onclick="addEmoji('😊')">😊</span><span onclick="addEmoji('❤️')">❤️</span>
+       <span onclick="addEmoji('🔥')">🔥</span><span onclick="addEmoji('👍')">👍</span>
+       <span onclick="addEmoji('👏')">👏</span><span onclick="addEmoji('🙏')">🙏</span>
+       <span onclick="addEmoji('🎉')">🎉</span><span onclick="addEmoji('✨')">✨</span>
+      </div>
+     </div>
+    </div>
+    <button type="submit" class="primary-button" id="publish-btn">पोष्ट गर्नुहोस्</button>
+   </div>
+  </form>
+ </section>
 
+ <!-- FEED -->
+ <section class="feed-section">
   <div class="feed-heading">
-   <h2><span class="lang-ne">पोस्टहरू</span><span class="lang-en">Posts</span></h2>
-   <span class="post-count" id="post-count">पोस्टहरू...</span>
-  </div>
-
-  <!-- Home composer: Login and signup are not shown here -->
-  <section class="composer" id="post-composer">
-   <div class="composer-top">
-    <img src="mylogo.png" class="user-avatar" id="composer-avatar" alt="User">
-    <button class="composer-input" type="button" id="open-composer">
-     तपाईं के सोच्दै हुनुहुन्छ?
-    </button>
-   </div>
-   <div class="composer-actions">
-    <button class="composer-action" type="button" id="add-photo"><span>📷</span> फोटो</button>
-    <button class="composer-action" type="button" id="write-post"><span>✍️</span> पोस्ट लेख्नुहोस्</button>
-   </div>
-  </section>
-
-  <div class="search-wrap">
-   <span>⌕</span>
-   <input type="search" id="post-search" class="search-input"
-    placeholder="पोस्ट खोज्नुहोस्..." autocomplete="off"
-    aria-label="पोस्ट खोज्नुहोस्">
+   <h2>सामाजिक फिड (Feed)</h2>
+   <span id="post-count" style="font-size:11px;color:var(--muted)">लोड हुँदैछ...</span>
   </div>
 
   <div id="post-grid" class="post-grid">
-   <div class="status-message">पोस्टहरू लोड हुँदैछन्...</div>
+   <div style="text-align:center;padding:30px;color:var(--muted)">पोष्टहरू लोड हुँदैछन्...</div>
   </div>
-
  </section>
+
 </main>
 
 <footer class="footer">
- © <span id="current-year">2026</span> · सर्वाधिकार सुरक्षित।
+ © <span id="current-year">2026</span> मेरो साथी · सर्वाधिकार सुरक्षित।
 </footer>
 
-<!-- SETTINGS -->
-<div class="settings-backdrop" id="settings-backdrop">
- <section class="settings-panel">
-  <div class="settings-head">
-   <h2>सेटिङ</h2>
-   <button class="close-settings" id="close-settings" type="button">×</button>
-  </div>
-
-  <div class="setting-row">
-   <div><strong>भाषा / Language</strong><small>वेबसाइटको भाषा परिवर्तन</small></div>
-   <button class="setting-control" id="lang-toggle" type="button">नेपाली</button>
-  </div>
-
-  <div class="setting-row">
-   <div><strong>Theme</strong><small>Dark / Light Mode</small></div>
-   <button class="setting-control" id="theme-toggle" type="button">Dark</button>
-  </div>
-
-  <div class="setting-row">
-   <div><strong>प्रोफाइल</strong><small>आफ्नो फोटो र विवरण</small></div>
-   <a class="setting-control" href="profile.html">खोल्नुहोस्</a>
-  </div>
-
-  <div class="setting-row">
-   <div><strong>खाता</strong><small>Password र Logout</small></div>
-   <a class="setting-control" href="settings.html">खोल्नुहोस्</a>
-  </div>
- </section>
-</div>
-
-<!-- ARTICLE READER -->
-<div class="reader-overlay" id="reader-overlay" aria-hidden="true">
- <article class="reader" role="dialog" aria-modal="true">
-  <div class="reader-toolbar">
-   <strong>मेरो साथी</strong>
-   <button type="button" class="reader-close" id="reader-close">×</button>
-  </div>
-  <div class="reader-content">
-   <div class="reader-date" id="reader-date"></div>
-   <h1 class="reader-title" id="reader-title"></h1>
-   <img class="reader-image" id="reader-image" alt="" hidden>
-   <div class="reader-text" id="reader-text"></div>
-   <div class="reader-actions">
-    <button class="secondary-button" id="share-post" type="button">↗ शेयर</button>
-    <button class="secondary-button" id="copy-post-link" type="button">⧉ लिंक कपी</button>
-   </div>
-  </div>
- </article>
-</div>
-
-<nav id="main-nav" aria-label="Main navigation">
- <a href="index.html" class="active" aria-current="page"><span class="nav-icon">⌂</span><span>Home</span></a>
+<nav id="main-nav">
+ <a href="index.html" class="active"><span class="nav-icon">⌂</span><span>Home</span></a>
  <a href="messages.html"><span class="nav-icon">✉</span><span>Message</span></a>
  <a href="notifications.html"><span class="nav-icon">♢</span><span>सूचना</span></a>
- <a href="emergency.html"><span class="nav-icon">＋</span><span>Emergency</span></a>
- <a href="#" id="open-settings"><span class="nav-icon">⚙</span><span>Setting</span></a>
+ <a href="settings.html"><span class="nav-icon">⚙</span><span>Setting</span></a>
 </nav>
 
-<div id="site-toast" class="site-toast" role="status"></div>
+<div id="site-toast" class="site-toast"></div>
 
 <script>
 "use strict";
-
 const SUPABASE_URL="https://zbyntmyybhdcwmttkuys.supabase.co";
 const SUPABASE_KEY="sb_publishable_N8U3og_Ntm-ImrtM8c1NGA_-Rqb3dSy";
-const db=window.supabase?.createClient
- ?window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY):null;
+const BUCKET="blog-images";
+const db=window.supabase?.createClient(SUPABASE_URL,SUPABASE_KEY);
 
-let allPosts=[];
-let activePost=null;
-let toastTimer=null;
+const $=id=>document.getElementById(id);
+let currentUser=null;
 
-const postGrid=document.getElementById("post-grid");
-const postCount=document.getElementById("post-count");
-const searchInput=document.getElementById("post-search");
-const readerOverlay=document.getElementById("reader-overlay");
-const readerTitle=document.getElementById("reader-title");
-const readerDate=document.getElementById("reader-date");
-const readerText=document.getElementById("reader-text");
-const readerImage=document.getElementById("reader-image");
-const themeButton=document.getElementById("theme-toggle");
-const languageButton=document.getElementById("lang-toggle");
-
-function isEnglish(){
- return document.body.classList.contains("english-mode");
+function showToast(msg){
+ const t=$("site-toast");t.textContent=msg;t.classList.add("show");
+ setTimeout(()=>t.classList.remove("show"),2500);
 }
 
-function showToast(message){
- const toast=document.getElementById("site-toast");
- toast.textContent=message;
- toast.classList.add("show");
- clearTimeout(toastTimer);
- toastTimer=setTimeout(()=>toast.classList.remove("show"),2500);
-}
+// Emoji Picker Toggle
+$("emoji-toggle").onclick=()=>{
+ const box=$("emoji-box");
+ box.style.display=box.style.display==="flex"?"none":"flex";
+};
+window.addEmoji=(emoji)=>{
+ $("composer-content").value+=emoji;
+ $("emoji-box").style.display="none";
+};
 
-function setLanguage(language,save=true){
- const selected=language==="EN"?"EN":"NE";
- const english=selected==="EN";
- document.body.classList.toggle("english-mode",english);
- document.documentElement.lang=english?"en":"ne";
- languageButton.textContent=english?"English":"नेपाली";
- searchInput.placeholder=english?"Search posts...":"पोस्ट खोज्नुहोस्...";
- if(save){
-  try{localStorage.setItem("kamalgc_portal_language",selected)}catch(e){}
- }
- if(allPosts.length)filterAndRenderPosts();
-}
-languageButton.addEventListener("click",()=>{
- setLanguage(isEnglish()?"NE":"EN");
-});
+// Live Time & Weather simulation
+setInterval(()=>{
+ $("real-time").textContent=new Date().toLocaleTimeString("ne-NP");
+},1000);
+$("weather-temp").textContent="२४°C";
+$("user-location").textContent="नेपाल";
 
-function setTheme(theme,save=true){
- const light=theme==="light";
- document.body.classList.toggle("light-mode",light);
- themeButton.textContent=light?"Light":"Dark";
- document.querySelector('meta[name="theme-color"]')
-  .setAttribute("content",light?"#f4f7fc":"#080d19");
- if(save){
-  try{localStorage.setItem("kamalgc_portal_theme",light?"light":"dark")}catch(e){}
- }
-}
-themeButton.addEventListener("click",()=>{
- setTheme(document.body.classList.contains("light-mode")?"dark":"light");
-});
-
-try{
- setLanguage(localStorage.getItem("kamalgc_portal_language")||"NE",false);
-}catch(e){setLanguage("NE",false)}
-try{
- setTheme(localStorage.getItem("kamalgc_portal_theme")||"dark",false);
-}catch(e){setTheme("dark",false)}
-
-/* Settings */
-const settingsBackdrop=document.getElementById("settings-backdrop");
-document.getElementById("open-settings").addEventListener("click",e=>{
- e.preventDefault();
- settingsBackdrop.classList.add("open");
-});
-document.getElementById("close-settings").addEventListener("click",()=>{
- settingsBackdrop.classList.remove("open");
-});
-settingsBackdrop.addEventListener("click",e=>{
- if(e.target===settingsBackdrop)settingsBackdrop.classList.remove("open");
-});
-
-/* Profile photo in the right side of header */
-async function loadHeaderProfile(){
- const photo=document.getElementById("header-user-photo");
- const initials=document.getElementById("header-user-initials");
- const composerAvatar=document.getElementById("composer-avatar");
-
+// Check Auth & Profile Header
+async function boot(){
  if(!db)return;
-
- try{
-  const {data,error}=await db.auth.getSession();
-  if(error)throw error;
-  const user=data.session?.user;
-  if(!user)return;
-
-  const {data:profile,error:profileError}=await db.from("profiles")
-   .select("display_name,avatar_url")
-   .eq("id",user.id)
-   .maybeSingle();
-
-  if(profileError)throw profileError;
-
+ const {data}=await db.auth.getSession();
+ currentUser=data.session?.user||null;
+ 
+ if(currentUser){
+  const {data:profile}=await db.from("profiles").select("display_name,avatar_url").eq("id",currentUser.id).maybeSingle();
   if(profile?.avatar_url){
-   photo.src=profile.avatar_url;
-   composerAvatar.src=profile.avatar_url;
+   $("header-user-photo").src=profile.avatar_url;
   }else{
-   const name=profile?.display_name||user.email||"म";
-   initials.textContent=String(name).trim().charAt(0).toUpperCase();
-   initials.hidden=false;
-   photo.hidden=true;
-   composerAvatar.src="mylogo.png";
+   $("header-user-initials").textContent=(profile?.display_name||"म").charAt(0).toUpperCase();
+   $("header-user-initials").hidden=false;
+   $("header-user-photo").hidden=true;
   }
- }catch(error){
-  console.warn("Header profile could not load:",error);
  }
+ loadFeed();
 }
 
-/* Post composer: check the real Supabase session before routing */
-async function openPostComposer(){
- const buttons=[
-  document.getElementById("open-composer"),
-  document.getElementById("add-photo"),
-  document.getElementById("write-post")
- ].filter(Boolean);
-
- buttons.forEach(button=>button.disabled=true);
-
+// Handle Inline Post Submission
+$("inline-post-form").onsubmit=async(e)=>{
+ e.preventDefault();
+ if(!currentUser){
+  alert("पोष्ट गर्न पहिले Login गर्नुहोस्!");
+  location.href="community.html";
+  return;
+ }
+ 
+ const content=$("composer-content").value.trim();
+ const title=$("composer-title").value.trim()||content.slice(0,30)+"...";
+ const file=$("composer-image").files[0];
+ const btn=$("publish-btn");
+ 
+ btn.disabled=true;btn.textContent="पोष्ट हुँदैछ...";
+ 
  try{
-  if(!db){
-   showToast("सेवा अहिले उपलब्ध छैन। कृपया केहीबेरपछि फेरि प्रयास गर्नुहोस्।");
-   return;
+  let imageUrl=null;
+  if(file){
+   const path=`${currentUser.id}/${Date.now()}-${file.name}`;
+   const {error:upErr}=await db.storage.from(BUCKET).upload(path,file);
+   if(upErr)throw upErr;
+   imageUrl=db.storage.from(BUCKET).getPublicUrl(path).data.publicUrl;
   }
-
-  const {data,error}=await db.auth.getSession();
+  
+  const authorName=currentUser.user_metadata?.display_name||currentUser.email.split("@")[0];
+  const {error}=await db.from("blog_posts").insert({
+   title,content,image_url:imageUrl,author_id:currentUser.id,author_name:authorName
+  });
   if(error)throw error;
-
-  const session=data?.session;
-  if(session?.user){
-   location.href="community.html#postForm";
-   return;
-  }
-
-  location.href="community.html#authSection";
- }catch(error){
-  console.error("Post navigation/authentication check failed:",error);
-  showToast("Login अवस्था जाँच गर्न सकिएन। कृपया फेरि प्रयास गर्नुहोस्।");
+  
+  $("inline-post-form").reset();
+  showToast("पोष्ट सफलतापूर्वक सेयर भयो! 🎉");
+  loadFeed();
+ }catch(err){
+  alert("पोष्ट गर्न सकिएन: "+err.message);
  }finally{
-  buttons.forEach(button=>button.disabled=false);
+  btn.disabled=false;btn.textContent="पोष्ट गर्नुहोस्";
  }
-}
+};
 
-document.getElementById("open-composer").addEventListener("click",openPostComposer);
-document.getElementById("add-photo").addEventListener("click",openPostComposer);
-document.getElementById("write-post").addEventListener("click",openPostComposer);
-
-/* Blog posts */
-function formatDate(value){
- if(!value)return "";
- const date=new Date(value);
- if(Number.isNaN(date.getTime()))return "";
- return date.toLocaleDateString(isEnglish()?"en-IN":"ne-NP",{
-  year:"numeric",month:"long",day:"numeric"
- });
-}
-
-function createPostCard(post){
- const card=document.createElement("article");
- card.className="post-card";
- card.tabIndex=0;
-
- const imageWrap=document.createElement("div");
- imageWrap.className="post-image-wrap";
-
- if(post.image_url){
-  const image=document.createElement("img");
-  image.className="post-image";
-  image.src=post.image_url;
-  image.alt=post.title||"Post image";
-  image.loading="lazy";
-  image.onerror=()=>{
-   image.remove();
-   const empty=document.createElement("div");
-   empty.className="no-image";
-   empty.textContent="✦";
-   imageWrap.appendChild(empty);
-  };
-  imageWrap.appendChild(image);
- }else{
-  const empty=document.createElement("div");
-  empty.className="no-image";
-  empty.textContent="✦";
-  imageWrap.appendChild(empty);
- }
-
- const body=document.createElement("div");
- body.className="post-body";
-
- const meta=document.createElement("div");
- meta.className="post-meta";
-
- const date=document.createElement("span");
- date.textContent=formatDate(post.created_at);
-
- const dot=document.createElement("span");
- dot.className="dot";
-
- const author=document.createElement("span");
- author.textContent="मेरो साथी";
-
- meta.append(date,dot,author);
-
- const title=document.createElement("h3");
- title.className="post-title";
- title.textContent=post.title||"शीर्षक नभएको पोस्ट";
-
- const excerpt=document.createElement("p");
- excerpt.className="post-excerpt";
- const content=post.content||"";
- excerpt.textContent=content.length>190
-  ?content.slice(0,190).trim()+"...":content;
-
- const more=document.createElement("div");
- more.className="read-more";
- more.textContent="पूरा पोस्ट पढ्नुहोस् →";
-
- body.append(meta,title,excerpt,more);
- card.append(imageWrap,body);
-
- card.addEventListener("click",()=>openPost(post));
- card.addEventListener("keydown",e=>{
-  if(e.key==="Enter"||e.key===" "){
-   e.preventDefault();
-   openPost(post);
-  }
- });
- return card;
-}
-
-function renderPosts(posts){
- postGrid.replaceChildren();
- postCount.textContent=posts.length+" पोस्ट";
-
+// Load Posts & Feed with Share & Bookmark
+async function loadFeed(){
+ const {data,error}=await db.from("blog_posts").select("id,title,content,image_url,created_at,author_name").order("created_at",{ascending:false});
+ if(error){$("post-grid").innerHTML="फिड लोड गर्न असफल।";return;}
+ 
+ const posts=data||[];
+ $("post-count").textContent=`${posts.length} वटा पोष्टहरू`;
+ 
  if(!posts.length){
-  const empty=document.createElement("div");
-  empty.className="empty-state";
-  const title=document.createElement("h3");
-  title.textContent="अहिले पोस्ट भेटिएन";
-  const desc=document.createElement("p");
-  desc.textContent="पछि फेरि प्रयास गर्नुहोस्।";
-  empty.append(title,desc);
-  postGrid.appendChild(empty);
+  $("post-grid").innerHTML='<div style="text-align:center;padding:30px;color:var(--muted)">अहिलेसम्म कुनै पोष्ट छैन। पहिलो पोष्ट तपाईं लेख्नुहोस्!</div>';
   return;
  }
-
- const fragment=document.createDocumentFragment();
- posts.forEach(post=>fragment.appendChild(createPostCard(post)));
- postGrid.appendChild(fragment);
+ 
+ $("post-grid").innerHTML=posts.map(p=>`
+  <article class="post-card">
+   <div class="post-header">
+    <div class="post-user-avatar" style="display:grid;place-items:center;font-weight:800;color:var(--accent)">${(p.author_name||"म").charAt(0).toUpperCase()}</div>
+    <div class="post-author-info">
+     <strong>${p.author_name||"मेरो साथी सदस्य"}</strong>
+     <small>${new Date(p.created_at).toLocaleDateString("ne-NP")}</small>
+    </div>
+   </div>
+   <div class="post-title">${p.title}</div>
+   <div class="post-content">${p.content}</div>
+   ${p.image_url?`<img src="${p.image_url}" class="post-image" alt="Post">`:""}
+   <div class="post-actions-bar">
+    <button class="post-action-btn" onclick="sharePost('${p.title}', '${p.id}')">🔗 सेयर गर्नुहोस्</button>
+    <button class="post-action-btn" onclick="bookmarkPost('${p.id}')">🔖 सेभ (Bookmark)</button>
+   </div>
+  </article>
+ `).join("");
 }
 
-function filterAndRenderPosts(){
- const query=searchInput.value.trim().toLocaleLowerCase();
- renderPosts(allPosts.filter(post=>
-  (post.title||"").toLocaleLowerCase().includes(query)||
-  (post.content||"").toLocaleLowerCase().includes(query)
- ));
-}
+window.sharePost=(title, id)=>{
+ const url=`${location.origin}/index.html?post=${id}`;
+ navigator.clipboard.writeText(url);
+ showToast("पोष्टको लिंक कपी भयो! 📋");
+};
 
-async function loadPosts(){
- if(!db){
-  postGrid.innerHTML='<div class="empty-state"><h3>जडान हुन सकेन</h3><p>इन्टरनेट जडान जाँच गर्नुहोस्।</p></div>';
-  return;
- }
-
- postGrid.innerHTML='<div class="status-message">पोस्टहरू लोड हुँदैछन्...</div>';
-
- try{
-  const {data,error}=await db.from("blog_posts")
-   .select("id,title,content,image_url,created_at")
-   .order("created_at",{ascending:false});
-
-  if(error)throw error;
-
-  allPosts=data||[];
-  filterAndRenderPosts();
-
-  const postId=new URLSearchParams(location.search).get("post");
-  if(postId){
-   const selected=allPosts.find(p=>String(p.id)===postId);
-   if(selected)openPost(selected,false);
-  }
- }catch(error){
-  console.error("Post loading error:",error);
-  postGrid.innerHTML='<div class="empty-state"><h3>पोस्ट लोड हुन सकेन</h3><p>केही समयपछि फेरि प्रयास गर्नुहोस्।</p></div>';
- }
-}
-
-function openPost(post,updateAddress=true){
- activePost=post;
- readerTitle.textContent=post.title||"";
- readerDate.textContent=formatDate(post.created_at);
- readerText.textContent=post.content||"";
-
- if(post.image_url){
-  readerImage.src=post.image_url;
-  readerImage.alt=post.title||"Post image";
-  readerImage.hidden=false;
+window.bookmarkPost=(id)=>{
+ let bookmarks=JSON.parse(localStorage.getItem("saved_bookmarks")||"[]");
+ if(!bookmarks.includes(id)){
+  bookmarks.push(id);
+  localStorage.setItem("saved_bookmarks",JSON.stringify(bookmarks));
+  showToast("पोष्ट बुकमार्कमा सेभ भयो! 🔖");
  }else{
-  readerImage.removeAttribute("src");
-  readerImage.hidden=true;
+  showToast("यो पोष्ट पहिले नै सेभ छ।");
  }
+};
 
- readerOverlay.classList.add("open");
- readerOverlay.setAttribute("aria-hidden","false");
- document.body.style.overflow="hidden";
-
- if(updateAddress){
-  const url=new URL(location.href);
-  url.searchParams.set("post",post.id);
-  history.pushState({postId:post.id},"",url);
- }
-}
-
-function closePost(updateAddress=true){
- readerOverlay.classList.remove("open");
- readerOverlay.setAttribute("aria-hidden","true");
- document.body.style.overflow="";
- activePost=null;
-
- if(updateAddress){
-  const url=new URL(location.href);
-  url.searchParams.delete("post");
-  history.pushState({},"",url);
- }
-}
-
-document.getElementById("reader-close").addEventListener("click",()=>closePost());
-readerOverlay.addEventListener("click",e=>{
- if(e.target===readerOverlay)closePost();
-});
-document.addEventListener("keydown",e=>{
- if(e.key==="Escape"){
-  if(readerOverlay.classList.contains("open"))closePost();
-  settingsBackdrop.classList.remove("open");
- }
-});
-window.addEventListener("popstate",()=>{
- const id=new URLSearchParams(location.search).get("post");
- if(id){
-  const post=allPosts.find(p=>String(p.id)===id);
-  if(post)openPost(post,false);
- }else closePost(false);
-});
-searchInput.addEventListener("input",filterAndRenderPosts);
-
-async function copyText(text){
- if(navigator.clipboard&&window.isSecureContext){
-  await navigator.clipboard.writeText(text);
-  return;
- }
- const area=document.createElement("textarea");
- area.value=text;
- area.style.position="fixed";
- area.style.opacity="0";
- document.body.appendChild(area);
- area.select();
- const copied=document.execCommand("copy");
- area.remove();
- if(!copied)throw new Error("Copy failed");
-}
-
-document.getElementById("share-post").addEventListener("click",async()=>{
- if(!activePost)return;
- const url=new URL(location.href);
- url.searchParams.set("post",activePost.id);
- try{
-  if(navigator.share){
-   await navigator.share({
-    title:activePost.title||"मेरो साथी",
-    text:(activePost.content||"").slice(0,150),
-    url:url.toString()
-   });
-  }else{
-   await copyText(url.toString());
-   showToast("पोस्टको लिंक कपी भयो।");
-  }
- }catch(e){
-  if(e.name!=="AbortError")showToast("शेयर गर्न सकिएन।");
- }
-});
-
-document.getElementById("copy-post-link").addEventListener("click",async()=>{
- if(!activePost)return;
- const url=new URL(location.href);
- url.searchParams.set("post",activePost.id);
- try{
-  await copyText(url.toString());
-  showToast("लिंक कपी भयो।");
- }catch(e){
-  showToast("लिंक कपी हुन सकेन।");
- }
-});
-
-document.getElementById("current-year").textContent=new Date().getFullYear();
-
-loadHeaderProfile();
-loadPosts();
+$("current-year").textContent=new Date().getFullYear();
+boot();
 </script>
-
-<script src="script.js" defer></script>
 </body>
 </html>
