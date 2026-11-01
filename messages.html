@@ -2,398 +2,976 @@
 <html lang="ne">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#0b1220">
-<title>Private Messages | मेरो साथी</title>
+<title>मेरो सन्देश | मेरो साथी</title>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <style>
-:root{--bg:#0b1220;--panel:#111c2e;--panel2:#17243a;--text:#edf3fc;--muted:#9aaac0;--line:rgba(255,255,255,.1);--blue:#69b7ff;--purple:#9b8cff;--danger:#fb7185;--green:#86efac}
-body.light-theme{--bg:#f1f5f9;--panel:#fff;--panel2:#f8fafc;--text:#0f172a;--muted:#64748b;--line:rgba(0,0,0,.1);--blue:#2563eb;--purple:#7c3aed;--green:#16a34a}
-html.reduce-motion *,html.reduce-motion *::before,html.reduce-motion *::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--text);font-family:"DM Sans","Noto Sans Devanagari",sans-serif;line-height:1.6}
-button,input,textarea{font:inherit}button{cursor:pointer}button:disabled{opacity:.55;cursor:not-allowed}
-a{color:inherit;text-decoration:none}.hidden{display:none!important}
-.topbar{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(15px);border-bottom:1px solid var(--line)}
-.topinner{max-width:1150px;margin:auto;padding:12px 18px;display:flex;justify-content:space-between;align-items:center;gap:12px}
-.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:19px}
-.logo{width:42px;height:42px;border-radius:14px;background:linear-gradient(135deg,var(--blue),var(--purple));display:grid;place-items:center;color:#07111f;font-size:23px}
-.brand small{display:block;color:var(--muted);font-size:10px;font-weight:500;margin-top:-3px}
-.header-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-.btn{border:1px solid var(--line);border-radius:11px;padding:9px 14px;background:var(--panel2);color:var(--text);font-size:13px;font-weight:700}
-.btn.primary{background:linear-gradient(110deg,#79c5ff,#a99bff);color:#07111f;border:0}
-.btn.danger{border-color:rgba(251,113,133,.35);color:#ff9aaa}
-.wrap{width:min(1150px,calc(100% - 28px));margin:25px auto 50px}
-.heading{margin-bottom:20px}.heading h1{font-size:clamp(25px,5vw,36px);margin:0 0 5px}.heading p{color:var(--muted);margin:0}
-.auth-box{max-width:450px;margin:50px auto}.panel{background:var(--panel);border:1px solid var(--line);border-radius:17px;padding:18px}
-.field{width:100%;padding:12px 13px;border-radius:11px;border:1px solid var(--line);background:var(--bg);color:var(--text);outline:none;margin:6px 0 12px}
-.field:focus,.search:focus{border-color:var(--blue)}textarea.field{resize:vertical}
-.muted{color:var(--muted);font-size:12px}.status{font-size:13px;color:var(--muted);margin-top:9px;white-space:pre-wrap;overflow-wrap:anywhere}.status.error{color:#ff9aaa}.status.success{color:var(--green)}
-.inbox{display:grid;grid-template-columns:330px minmax(0,1fr);gap:16px;min-height:600px}
-.sidebar{background:var(--panel);border:1px solid var(--line);border-radius:17px;overflow:hidden}
-.side-head{padding:17px;border-bottom:1px solid var(--line)}.side-head h2{margin:0 0 10px;font-size:18px}
-.search{width:100%;padding:11px 12px;background:var(--bg);border:1px solid var(--line);border-radius:10px;color:var(--text);outline:none}
-.side-actions{display:flex;gap:7px;margin-top:10px;flex-wrap:wrap}
-.contact-list{max-height:620px;overflow:auto}
-.contact{width:100%;display:flex;align-items:center;gap:11px;padding:13px 14px;border:0;border-bottom:1px solid var(--line);background:transparent;color:var(--text);text-align:left;position:relative}
-.contact:hover,.contact.active{background:var(--panel2)}
-.avatar-wrap{position:relative;flex:0 0 43px}.avatar{width:43px;height:43px;border-radius:50%;background:linear-gradient(135deg,#244d70,#574b83);display:grid;place-items:center;font-weight:800;color:white;overflow:hidden}
-.avatar img{width:100%;height:100%;object-fit:cover}.online-dot{position:absolute;bottom:2px;right:2px;width:10px;height:10px;background:var(--green);border:2px solid var(--panel);border-radius:50%}
-.contact-info{flex:1;min-width:0}.contact-info strong{display:block;font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.contact-info small{display:block;color:var(--muted);font-size:11px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.chat{background:var(--panel);border:1px solid var(--line);border-radius:17px;display:flex;flex-direction:column;min-width:0;overflow:hidden}
-.chat-head{display:flex;align-items:center;gap:11px;padding:14px 17px;border-bottom:1px solid var(--line)}
-.chat-head-info{flex:1;min-width:0}.chat-head-info strong{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.chat-head-info small{color:var(--muted);font-size:11px}
-.chat-body{flex:1;min-height:350px;max-height:520px;overflow:auto;padding:18px;scroll-behavior:smooth}
-.bubble-row{display:flex;margin:10px 0}.bubble-row.mine{justify-content:flex-end}
-.bubble{max-width:min(78%,520px);padding:10px 13px;border-radius:14px;background:var(--panel2);font-size:13px;white-space:pre-wrap;overflow-wrap:anywhere;box-shadow:0 2px 4px rgba(0,0,0,.1)}
-.bubble-row.mine .bubble{background:linear-gradient(135deg,#174a70,#226496);border-bottom-right-radius:4px}.bubble-row:not(.mine) .bubble{border-bottom-left-radius:4px}
-.bubble-time{display:block;text-align:right;color:#c4d3e6;font-size:10px;margin-top:5px}
-.chat-compose{padding:13px;border-top:1px solid var(--line)}.compose-row{display:flex;gap:9px;align-items:flex-end}
-.compose-row textarea{flex:1;min-width:0;min-height:48px;max-height:130px;margin:0;resize:none}.compose-row button{min-height:46px}
-.empty{text-align:center;color:var(--muted);padding:35px 15px;font-size:13px}.mobile-back{display:none}
-footer{text-align:center;color:var(--muted);font-size:11px;padding:25px}
-@media(max-width:760px){
- .wrap{margin-top:16px}.inbox{display:block;min-height:0}.sidebar{min-height:450px}.contact-list{max-height:65vh}
- .chat{min-height:75vh;margin-top:12px}.chat-body{min-height:45vh;max-height:none}
- .mobile-back{display:inline-block}.inbox.chat-open .sidebar{display:none}.inbox:not(.chat-open) .chat{display:none}
- .topinner{padding:10px 12px}.brand{font-size:16px}.logo{width:37px;height:37px}.header-actions .btn{padding:8px 10px}
+:root{
+  color-scheme:dark;
+  --bg:#0b1220;
+  --panel:#111c2e;
+  --panel2:#17243a;
+  --panel3:#1c2c45;
+  --text:#edf3fc;
+  --muted:#9aaac0;
+  --line:rgba(255,255,255,.10);
+  --blue:#69b7ff;
+  --purple:#9b8cff;
+  --green:#86efac;
+  --danger:#fb7185;
+  --input:#0b1220;
+  --bubble-in:#17243a;
+  --shadow:0 18px 50px rgba(0,0,0,.18);
 }
-@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+
+:root.light{
+  color-scheme:light;
+  --bg:#f3f6fb;
+  --panel:#ffffff;
+  --panel2:#edf2f9;
+  --panel3:#e4ebf5;
+  --text:#172337;
+  --muted:#65748a;
+  --line:rgba(20,40,70,.12);
+  --blue:#2878d0;
+  --purple:#7764d8;
+  --green:#16864b;
+  --danger:#d83f5e;
+  --input:#f7f9fc;
+  --bubble-in:#edf2f9;
+  --shadow:0 18px 50px rgba(35,55,85,.08);
+}
+
+*{box-sizing:border-box}
+html{background:var(--bg);scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:"DM Sans","Noto Sans Devanagari",sans-serif;
+  line-height:1.6;
+  transition:background .18s,color .18s;
+}
+button,input,textarea{font:inherit}
+button{cursor:pointer}
+button:disabled{opacity:.55;cursor:not-allowed}
+.hidden{display:none!important}
+
+.wrap{
+  width:min(1180px,calc(100% - 28px));
+  margin:25px auto 45px;
+}
+.heading{margin-bottom:20px}
+.heading h1{
+  font-size:clamp(25px,5vw,35px);
+  margin:0 0 5px;
+  letter-spacing:-.5px;
+}
+.heading p{color:var(--muted);margin:0;font-size:14px}
+
+.btn{
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:9px 13px;
+  background:var(--panel2);
+  color:var(--text);
+  font-size:13px;
+  font-weight:700;
+  transition:transform .15s,background .15s;
+}
+.btn:hover{background:var(--panel3)}
+.btn:active{transform:scale(.98)}
+.btn.primary{
+  background:linear-gradient(110deg,#79c5ff,#a99bff);
+  color:#07111f;
+  border:0;
+}
+
+.panel{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:18px;
+  box-shadow:var(--shadow);
+}
+.auth-box{max-width:460px;margin:48px auto}
+.field{
+  width:100%;
+  padding:12px 13px;
+  border-radius:12px;
+  border:1px solid var(--line);
+  background:var(--input);
+  color:var(--text);
+  outline:none;
+  margin:6px 0 12px;
+}
+.field:focus,.search:focus{
+  border-color:var(--blue);
+  box-shadow:0 0 0 3px color-mix(in srgb,var(--blue) 18%,transparent);
+}
+textarea.field{resize:none}
+.muted{color:var(--muted);font-size:12px}
+.status{
+  font-size:13px;
+  color:var(--muted);
+  margin-top:8px;
+  white-space:pre-wrap;
+}
+.status.error{color:var(--danger)}
+.status.success{color:var(--green)}
+
+.inbox{
+  display:grid;
+  grid-template-columns:320px minmax(0,1fr);
+  gap:16px;
+  min-height:650px;
+}
+.sidebar,.chat{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:18px;
+  overflow:hidden;
+  box-shadow:var(--shadow);
+  min-width:0;
+}
+.side-head{
+  padding:16px;
+  border-bottom:1px solid var(--line);
+}
+.side-head h2{margin:0 0 12px;font-size:17px}
+.search{
+  width:100%;
+  padding:11px 12px;
+  background:var(--input);
+  border:1px solid var(--line);
+  border-radius:12px;
+  color:var(--text);
+  outline:none;
+}
+.side-actions{
+  display:flex;
+  gap:8px;
+  margin-top:10px;
+}
+.side-actions .btn{flex:1}
+.contact-list{max-height:620px;overflow:auto}
+
+.contact{
+  width:100%;
+  display:flex;
+  align-items:center;
+  gap:11px;
+  padding:12px 14px;
+  border:0;
+  border-bottom:1px solid var(--line);
+  background:transparent;
+  color:var(--text);
+  text-align:left;
+}
+.contact:hover,.contact.active{background:var(--panel2)}
+.avatar-wrap{position:relative;flex:0 0 43px}
+.avatar{
+  width:43px;
+  height:43px;
+  border-radius:50%;
+  background:linear-gradient(135deg,#244d70,#574b83);
+  display:grid;
+  place-items:center;
+  font-weight:800;
+  color:white;
+  overflow:hidden;
+}
+.avatar img{width:100%;height:100%;object-fit:cover}
+.contact-info{flex:1;min-width:0}
+.contact-info strong{
+  display:block;
+  font-size:13px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.contact-info small{
+  display:block;
+  color:var(--muted);
+  font-size:11px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+.chat{
+  display:flex;
+  flex-direction:column;
+  min-height:650px;
+}
+.welcome{
+  display:grid;
+  place-content:center;
+  text-align:center;
+  flex:1;
+  padding:28px;
+  color:var(--muted);
+}
+.welcome-icon{font-size:48px;margin-bottom:8px}
+.welcome h2{color:var(--text);margin:0 0 6px}
+
+.active-chat{
+  display:flex;
+  flex-direction:column;
+  flex:1;
+  min-height:0;
+}
+.chat-head{
+  display:flex;
+  align-items:center;
+  gap:11px;
+  padding:13px 16px;
+  border-bottom:1px solid var(--line);
+  background:var(--panel);
+}
+.chat-head-info{flex:1;min-width:0}
+.chat-head-info strong{
+  display:block;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.chat-head-info small{color:var(--muted);font-size:11px}
+
+.chat-body{
+  flex:1;
+  min-height:360px;
+  max-height:570px;
+  overflow:auto;
+  padding:18px;
+  background:radial-gradient(
+    ellipse at top,
+    color-mix(in srgb,var(--panel2) 38%,transparent),
+    transparent 65%
+  );
+}
+.bubble-row{display:flex;margin:9px 0}
+.bubble-row.mine{justify-content:flex-end}
+.bubble{
+  max-width:min(78%,560px);
+  padding:10px 13px;
+  border-radius:16px;
+  background:var(--bubble-in);
+  font-size:13px;
+  white-space:pre-wrap;
+  overflow-wrap:anywhere;
+  box-shadow:0 2px 5px rgba(0,0,0,.06);
+}
+.bubble-row.mine .bubble{
+  background:linear-gradient(135deg,#176096,#2878b4);
+  color:#fff;
+  border-bottom-right-radius:5px;
+}
+.bubble-row:not(.mine) .bubble{border-bottom-left-radius:5px}
+.bubble-time{
+  display:block;
+  text-align:right;
+  color:inherit;
+  opacity:.68;
+  font-size:10px;
+  margin-top:5px;
+}
+
+.chat-compose{
+  padding:12px;
+  border-top:1px solid var(--line);
+  background:var(--panel);
+}
+.compose-shell{
+  display:flex;
+  align-items:flex-end;
+  gap:9px;
+  padding:7px;
+  border:1px solid var(--line);
+  border-radius:16px;
+  background:var(--input);
+}
+.compose-shell:focus-within{
+  border-color:var(--blue);
+  box-shadow:0 0 0 3px color-mix(in srgb,var(--blue) 15%,transparent);
+}
+.compose-shell textarea{
+  flex:1;
+  min-width:0;
+  min-height:42px;
+  max-height:130px;
+  margin:0;
+  padding:9px 10px;
+  border:0;
+  background:transparent;
+  box-shadow:none;
+  outline:none;
+  resize:none;
+  color:var(--text);
+}
+.compose-shell textarea:focus{box-shadow:none}
+.send-btn{
+  width:44px;
+  height:44px;
+  display:grid;
+  place-items:center;
+  border-radius:12px;
+  padding:0;
+  font-size:18px;
+  flex:0 0 44px;
+}
+.compose-hint{
+  display:flex;
+  justify-content:space-between;
+  gap:8px;
+  padding:5px 5px 0;
+  color:var(--muted);
+  font-size:10px;
+}
+.empty{
+  text-align:center;
+  color:var(--muted);
+  padding:30px 14px;
+  font-size:13px;
+}
+.mobile-back{display:none}
+footer{
+  text-align:center;
+  color:var(--muted);
+  font-size:11px;
+  padding:20px;
+}
+
+@media(max-width:760px){
+  .wrap{margin-top:15px}
+  .inbox{display:block;min-height:0}
+  .sidebar{min-height:55vh}
+  .contact-list{max-height:65vh}
+  .chat{min-height:78vh;margin-top:10px}
+  .chat-body{min-height:45vh;max-height:none}
+  .mobile-back{display:inline-block}
+  .inbox.chat-open .sidebar{display:none}
+  .inbox:not(.chat-open) .chat{display:none}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    scroll-behavior:auto!important;
+    transition:none!important;
+    animation:none!important;
+  }
+}
 </style>
 </head>
+
 <body>
-<header class="topbar">
- <div class="topinner">
-  <div class="brand"><span class="logo">♡</span><span>मेरो साथी<small>निजी सन्देश</small></span></div>
-  <div class="header-actions">
-   <button class="btn" id="themeToggle" type="button" aria-label="Theme परिवर्तन">🌙</button>
-   <button class="btn hidden" id="logoutBtn" type="button">Logout</button>
-  </div>
- </div>
-</header>
-
 <main class="wrap">
- <section class="heading"><h1>💬 मेरो सन्देश</h1><p>साथीहरूसँग वास्तविक समयमा कुराकानी गर्नुहोस्।</p></section>
+  <section class="heading">
+    <h1>💬 मेरो सन्देश</h1>
+    <p>साथीहरूसँग निजी रूपमा कुराकानी गर्नुहोस्।</p>
+  </section>
 
- <section id="authSection" class="panel auth-box">
-  <h2>Login आवश्यक छ</h2><p class="muted">Private Messages प्रयोग गर्न पहिले आफ्नो खातामा Login गर्नुहोस्।</p>
-  <form id="loginForm">
-   <label for="email">Email</label><input class="field" id="email" type="email" autocomplete="email" required placeholder="आफ्नो Email">
-   <label for="password">Password</label><input class="field" id="password" type="password" autocomplete="current-password" required placeholder="Password">
-   <button class="btn primary" id="loginBtn" style="width:100%" type="submit">Login गर्नुहोस्</button>
-  </form>
-  <div id="authStatus" class="status" role="status" aria-live="polite"></div>
-  <p class="muted">खाता छैन भने <a href="community.html" style="color:var(--blue)">Community मा गएर खाता खोल्नुहोस्।</a></p>
- </section>
+  <section id="authSection" class="panel auth-box">
+    <h2>Login आवश्यक छ</h2>
+    <p class="muted">Private Messages प्रयोग गर्न पहिले आफ्नो खातामा Login गर्नुहोस्।</p>
 
- <section id="appSection" class="hidden">
-  <div class="inbox" id="inbox">
-   <aside class="sidebar">
-    <div class="side-head">
-     <h2>👥 मेरा साथीहरू</h2><input class="search" id="memberSearch" type="search" placeholder="साथी खोज्नुहोस्..." aria-label="साथी खोज्नुहोस्">
-     <div class="side-actions"><button class="btn" id="allMembersBtn" type="button">सबै सदस्य</button><button class="btn" id="refreshBtn" type="button">↻ Refresh</button></div>
+    <form id="loginForm">
+      <label for="email">Email</label>
+      <input class="field" id="email" type="email" autocomplete="email" required placeholder="आफ्नो Email">
+
+      <label for="password">Password</label>
+      <input class="field" id="password" type="password" autocomplete="current-password" required placeholder="Password">
+
+      <button class="btn primary" id="loginBtn" type="submit" style="width:100%">
+        Login गर्नुहोस्
+      </button>
+    </form>
+
+    <div id="authStatus" class="status" role="status"></div>
+    <p class="muted">खाता बनाउन वा प्रोफाइल व्यवस्थापन गर्न आफ्नो मुख्य पेज प्रयोग गर्नुहोस्।</p>
+  </section>
+
+  <section id="appSection" class="hidden">
+    <div class="inbox" id="inbox">
+      <aside class="sidebar">
+        <div class="side-head">
+          <h2>👥 मेरा साथीहरू</h2>
+          <input class="search" id="memberSearch" aria-label="साथी खोज्नुहोस्" placeholder="साथी खोज्नुहोस्...">
+
+          <div class="side-actions">
+            <button class="btn" id="allMembersBtn" type="button">सबै सदस्य</button>
+            <button class="btn" id="refreshBtn" type="button">↻ Refresh</button>
+          </div>
+        </div>
+
+        <div class="contact-list" id="contactList">
+          <div class="empty">सदस्यहरू लोड हुँदैछन्...</div>
+        </div>
+      </aside>
+
+      <section class="chat" id="chatPanel">
+        <div class="welcome" id="welcome">
+          <div class="welcome-icon">💌</div>
+          <h2>कुराकानी सुरु गर्नुहोस्</h2>
+          <p>कुनै साथी छानेर सन्देश पठाउनुहोस्।</p>
+        </div>
+
+        <div id="activeChat" class="active-chat hidden">
+          <div class="chat-head">
+            <button class="btn mobile-back" id="backBtn" type="button" aria-label="साथीहरूको सूचीमा फर्कनुहोस्">←</button>
+
+            <div class="avatar-wrap">
+              <div class="avatar" id="chatAvatar">M</div>
+            </div>
+
+            <div class="chat-head-info">
+              <strong id="chatName">साथी</strong>
+              <small id="chatStatusText">निजी कुराकानी</small>
+            </div>
+
+            <button class="btn" id="chatRefresh" type="button" aria-label="सन्देश refresh">↻</button>
+          </div>
+
+          <div class="chat-body" id="chatMessages" aria-live="polite">
+            <div class="empty">सन्देश लोड हुँदैछन्...</div>
+          </div>
+
+          <form class="chat-compose" id="messageForm">
+            <div class="compose-shell">
+              <textarea id="messageText" maxlength="5000" required rows="1" aria-label="सन्देश" placeholder="सन्देश लेख्नुहोस्…"></textarea>
+              <button class="btn primary send-btn" id="sendBtn" type="submit" aria-label="सन्देश पठाउनुहोस्">➤</button>
+            </div>
+
+            <div class="compose-hint">
+              <span>Enter = पठाउने · Shift+Enter = नयाँ लाइन</span>
+              <span id="charCount">0/5000</span>
+            </div>
+            <div class="status" id="messageStatus" role="status"></div>
+          </form>
+        </div>
+      </section>
     </div>
-    <div class="contact-list" id="contactList"><div class="empty">सदस्यहरू लोड हुँदैछन्...</div></div>
-   </aside>
-   <section class="chat" id="chatPanel">
-    <div class="empty" id="welcome"><div style="font-size:42px;margin-bottom:10px">💌</div><h2>कुराकानी सुरु गर्नुहोस्</h2><p>बायाँपट्टिबाट कुनै साथी छान्नुहोस्।</p></div>
-    <div id="activeChat" class="hidden" style="display:flex;flex-direction:column;flex:1;min-height:0">
-     <div class="chat-head">
-      <button class="btn mobile-back" id="backBtn" type="button" aria-label="साथी सूचीमा फर्कनुहोस्">←</button>
-      <div class="avatar-wrap"><div class="avatar" id="chatAvatar">M</div></div>
-      <div class="chat-head-info"><strong id="chatName">साथी</strong><small id="chatStatusText">निजी कुराकानी</small></div>
-      <button class="btn" id="chatRefresh" type="button" aria-label="सन्देश refresh">↻</button>
-     </div>
-     <div class="chat-body" id="chatMessages" aria-live="polite"><div class="empty">सन्देश लोड हुँदैछन्...</div></div>
-     <form class="chat-compose" id="messageForm">
-      <div class="compose-row"><textarea class="field" id="messageText" maxlength="5000" required rows="1" placeholder="सन्देश लेख्नुहोस् (Enter = Send, Shift+Enter = New Line)" aria-label="सन्देश"></textarea><button class="btn primary" id="sendBtn" type="submit">पठाउनुहोस् ➤</button></div>
-      <div class="status" id="messageStatus" role="status" aria-live="polite"></div>
-     </form>
-    </div>
-   </section>
-  </div>
- </section>
+  </section>
 </main>
-<footer>मेरो साथी · My Friend — निजी कुराकानी</footer>
+
+<footer>मेरो साथी · निजी कुराकानी</footer>
 
 <script>
 "use strict";
-const SUPABASE_URL="https://zbyntmyybhdcwmttkuys.supabase.co";
-const SUPABASE_KEY="sb_publishable_N8U3og_Ntm-ImrtM8c1NGA_-Rqb3dSy";
-const db=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
-const $=id=>document.getElementById(id);
 
-let currentUser=null,profiles=[],profileMap={},conversations=[],activeFriend=null;
-let allMembersVisible=false,realTimeChannel=null,loadingMessages=false,sendingMessage=false;
-let chatRequestToken=0, userSettings={theme:"dark",font_size:"normal",reduced_motion:false,notif_messages:true,notif_sound:false};
-let notificationPermissionRequested=false;
-const renderedMessageIds=new Set();
+const SUPABASE_URL = "https://zbyntmyybhdcwmttkuys.supabase.co";
+const SUPABASE_KEY = "sb_publishable_N8U3og_Ntm-ImrtM8c1NGA_-Rqb3dSy";
+const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+const $ = id => document.getElementById(id);
 
-function esc(value){return String(value??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
-function nameOf(profile){return profile?.display_name?.trim()||"मेरो साथी सदस्य";}
-function initial(name){return String(name||"M").trim().charAt(0)||"M";}
+let currentUser = null;
+let profiles = [];
+let profileMap = {};
+let conversations = [];
+let activeFriend = null;
+let allMembersVisible = false;
+let realTimeChannel = null;
+let isSending = false;
+let chatRequestToken = 0;
+let seenMessageIds = new Set();
+
+/* Settings page theme integration */
+function getLocalTheme(){
+  try{
+    const direct = localStorage.getItem("theme");
+    if(direct === "light" || direct === "dark") return direct;
+
+    const raw = localStorage.getItem("digital_notebook_settings");
+    if(raw){
+      const prefs = JSON.parse(raw);
+      if(prefs?.theme === "light" || prefs?.theme === "dark") return prefs.theme;
+    }
+  }catch(error){
+    console.warn("Theme preference read failed", error);
+  }
+  return null;
+}
+
+function applyTheme(theme){
+  const mode = theme === "light" ? "light" : "dark";
+  document.documentElement.classList.toggle("light", mode === "light");
+  document.documentElement.dataset.theme = mode;
+
+  const meta = document.querySelector('meta[name="theme-color"]');
+  if(meta) meta.content = mode === "light" ? "#f3f6fb" : "#0b1220";
+}
+
+function applyLocalPreferences(){
+  const theme = getLocalTheme();
+  if(theme) applyTheme(theme);
+
+  try{
+    const raw = localStorage.getItem("digital_notebook_settings");
+    if(raw){
+      const prefs = JSON.parse(raw);
+
+      if(prefs?.font_size === "small") document.documentElement.style.fontSize = "14px";
+      else if(prefs?.font_size === "large") document.documentElement.style.fontSize = "18px";
+      else document.documentElement.style.fontSize = "";
+
+      if(prefs?.reduced_motion === true){
+        document.documentElement.style.setProperty("scroll-behavior", "auto");
+      }else{
+        document.documentElement.style.removeProperty("scroll-behavior");
+      }
+    }
+  }catch(error){
+    console.warn("Preferences read failed", error);
+  }
+}
+
+applyLocalPreferences();
+
+window.addEventListener("storage", event => {
+  if(event.key === "theme" || event.key === "digital_notebook_settings"){
+    applyLocalPreferences();
+  }
+});
+window.addEventListener("focus", applyLocalPreferences);
+window.addEventListener("pageshow", applyLocalPreferences);
+
+function esc(value){
+  return String(value ?? "").replace(/[&<>"']/g, c => ({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+  })[c]);
+}
+
+function nameOf(profile){
+  return profile?.display_name || "मेरो साथी सदस्य";
+}
+
+function initial(name){
+  return String(name || "M").trim().charAt(0) || "M";
+}
+
 function dateText(value){
- if(!value)return "";
- const date=new Date(value);
- if(Number.isNaN(date.getTime()))return "";
- return date.toLocaleString("ne-NP",{dateStyle:"medium",timeStyle:"short"});
+  if(!value) return "";
+  const date = new Date(value);
+  if(Number.isNaN(date.getTime())) return "";
+  return date.toLocaleString("ne-NP", {dateStyle:"medium",timeStyle:"short"});
 }
-function setStatus(id,message,type=""){
- const el=$(id);if(!el)return;
- el.textContent=message;el.className="status "+type;
+
+function setStatus(id, message, type=""){
+  const element = $(id);
+  if(!element) return;
+  element.textContent = message;
+  element.className = "status " + type;
 }
+
 function avatarHTML(profile){
- if(profile?.avatar_url)return `<img src="${esc(profile.avatar_url)}" alt="" loading="lazy" referrerpolicy="no-referrer">`;
- return esc(initial(nameOf(profile)));
-}
-function scrollToBottom(){const container=$("chatMessages");container.scrollTop=container.scrollHeight;}
-function messageBelongsToActiveChat(message){
- if(!activeFriend||!currentUser)return false;
- const friendId=activeFriend.id;
- return (message.sender_id===currentUser.id&&message.receiver_id===friendId)||
-        (message.sender_id===friendId&&message.receiver_id===currentUser.id);
-}
-function appendMessageUI(message){
- if(!message?.id||renderedMessageIds.has(String(message.id)))return;
- if(!messageBelongsToActiveChat(message))return;
- renderedMessageIds.add(String(message.id));
- const emptyEl=$("chatMessages").querySelector(".empty");if(emptyEl)emptyEl.remove();
- const mine=message.sender_id===currentUser.id;
- const row=document.createElement("div");row.className=`bubble-row ${mine?"mine":""}`;
- const bubble=document.createElement("div");bubble.className="bubble";
- // Use textContent for message content to prevent HTML injection.
- bubble.appendChild(document.createTextNode(String(message.content??"")));
- const time=document.createElement("span");time.className="bubble-time";time.textContent=dateText(message.created_at);
- bubble.appendChild(time);row.appendChild(bubble);$("chatMessages").appendChild(row);
-}
-function resetRenderedMessages(){renderedMessageIds.clear();$("chatMessages").innerHTML="";}
-
-function applyUserSettings(s){
- userSettings={...userSettings,...(s||{})};
- document.body.classList.toggle("light-theme",userSettings.theme==="light");
- document.documentElement.style.fontSize=userSettings.font_size==="large"?"18px":"16px";
- document.documentElement.classList.toggle("reduce-motion",!!userSettings.reduced_motion);
- $("themeToggle").textContent=userSettings.theme==="light"?"☀️":"🌙";
- $("themeToggle").setAttribute("aria-label",userSettings.theme==="light"?"Light theme सक्रिय":"Dark theme सक्रिय");
-}
-async function loadUserSettings(){
- // Settings page and this page share the same user_settings row. SQL/RLS is required.
- const {data,error}=await db.from("user_settings").select("theme,font_size,reduced_motion,notif_messages,notif_sound").eq("user_id",currentUser.id).maybeSingle();
- if(error){console.warn("Settings load failed:",error.message);applyUserSettings({});return;}
- applyUserSettings(data||{});
-}
-async function saveTheme(theme){
- if(!currentUser){applyUserSettings({theme});return;}
- const btn=$("themeToggle");btn.disabled=true;
- try{
-  const {data:existing,error:readError}=await db.from("user_settings").select("user_id").eq("user_id",currentUser.id).maybeSingle();
-  if(readError)throw readError;
-  const result=existing
-   ? await db.from("user_settings").update({theme,updated_at:new Date().toISOString()}).eq("user_id",currentUser.id)
-   : await db.from("user_settings").insert({user_id:currentUser.id,theme});
-  if(result.error)throw result.error;
-  applyUserSettings({theme});
- }catch(err){
-  setStatus("messageStatus","Theme save भएन: "+(err.message||"समस्या"),"error");
-  // Keep visual theme responsive, but reload persisted value on next login.
-  applyUserSettings({theme});
- }finally{btn.disabled=false;}
-}
-$("themeToggle").addEventListener("click",()=>saveTheme(userSettings.theme==="light"?"dark":"light"));
-function maybeNotify(message){
- if(!userSettings.notif_messages||!message||message.sender_id===currentUser?.id)return;
- if(document.visibilityState==="visible")return;
- if(!("Notification" in window))return;
- if(Notification.permission==="granted"){
-  const friend=profileMap[message.sender_id];
-  try{new Notification(nameOf(friend),{body:String(message.content||"नयाँ सन्देश"),icon:friend?.avatar_url||undefined,tag:"private-message-"+message.id});}catch(e){console.warn("Notification failed",e);}
- }else if(Notification.permission==="default"&&!notificationPermissionRequested){
-  notificationPermissionRequested=true;
-  // Ask only after a user gesture (theme button or later interaction), not automatically on page load.
- }
-}
-
-async function loadProfiles(){
- const {data,error}=await db.from("profiles").select("id,display_name,avatar_url").order("display_name").limit(300);
- if(error)throw error;
- profiles=(data||[]).filter(p=>p.id!==currentUser.id);profileMap={};
- (data||[]).forEach(p=>{profileMap[p.id]=p;});
-}
-async function loadConversations(){
- const {data,error}=await db.from("private_messages").select("id,sender_id,receiver_id,content,created_at")
-  .or(`sender_id.eq.${currentUser.id},receiver_id.eq.${currentUser.id}`)
-  .order("created_at",{ascending:false}).limit(500);
- if(error)throw error;
- const latest={};
- (data||[]).forEach(message=>{
-  const friendId=message.sender_id===currentUser.id?message.receiver_id:message.sender_id;
-  if(!friendId||friendId===currentUser.id)return;
-  if(!latest[friendId])latest[friendId]=message;
- });
- conversations=Object.entries(latest).map(([friendId,message])=>({friendId,message}));
- conversations.sort((a,b)=>new Date(b.message.created_at)-new Date(a.message.created_at));
-}
-function renderContacts(){
- const query=$("memberSearch").value.trim().toLocaleLowerCase();
- const ids=conversations.map(c=>c.friendId);
- let list=allMembersVisible?profiles:ids.map(id=>profileMap[id]).filter(Boolean);
- list=list.filter(p=>nameOf(p).toLocaleLowerCase().includes(query));
- if(!list.length){
-  $("contactList").innerHTML=`<div class="empty">${allMembersVisible?"कुनै सदस्य भेटिएन।":"अहिलेसम्म कुराकानी छैन। सबै सदस्य हेर्न 'सबै सदस्य' थिच्नुहोस्।"}</div>`;
-  return;
- }
- $("contactList").innerHTML=list.map(profile=>{
-  const conversation=conversations.find(c=>c.friendId===profile.id);
-  const preview=conversation?.message?.content||"कुराकानी सुरु गर्नुहोस्";
-  const active=activeFriend?.id===profile.id;
-  return `<button class="contact ${active?"active":""}" type="button" data-friend="${esc(profile.id)}">
-   <div class="avatar-wrap"><div class="avatar">${avatarHTML(profile)}</div></div>
-   <div class="contact-info"><strong>${esc(nameOf(profile))}</strong><small>${esc(preview)}</small></div>
-  </button>`;
- }).join("");
-}
-async function refreshInbox(){
- await Promise.all([loadProfiles(),loadConversations()]);
- renderContacts();
-}
-function cleanupRealtime(){
- if(realTimeChannel){db.removeChannel(realTimeChannel);realTimeChannel=null;}
-}
-function setupRealtimeSubscription(){
- cleanupRealtime();
- realTimeChannel=db.channel(`private-messages-${currentUser.id}`)
- .on("postgres_changes",{event:"INSERT",schema:"public",table:"private_messages"},payload=>{
-  const message=payload.new;
-  if(!message||!currentUser)return;
-  if(message.sender_id!==currentUser.id&&message.receiver_id!==currentUser.id)return;
-  // Refresh the inbox without blocking the live message rendering.
-  loadConversations().then(renderContacts).catch(err=>console.warn("Inbox refresh failed:",err));
-  if(messageBelongsToActiveChat(message)){
-   appendMessageUI(message);scrollToBottom();
-  }else{maybeNotify(message);}
- })
- .subscribe(status=>{
-  if(status==="CHANNEL_ERROR"||status==="TIMED_OUT"){
-   setStatus("messageStatus","Realtime connection समस्या भयो। Refresh गरेर फेरि प्रयास गर्नुहोस्।","error");
+  if(profile?.avatar_url){
+    return `<img src="${esc(profile.avatar_url)}" alt="">`;
   }
- });
+  return esc(initial(nameOf(profile)));
 }
+
+function scrollToBottom(){
+  const container = $("chatMessages");
+  container.scrollTop = container.scrollHeight;
+}
+
+function messagePairMatches(message, friendId){
+  return (
+    (message.sender_id === currentUser.id && message.receiver_id === friendId) ||
+    (message.sender_id === friendId && message.receiver_id === currentUser.id)
+  );
+}
+
+/* Database theme optional: SQL नभएसम्म local theme प्रयोग हुन्छ */
+async function loadSavedThemeFromDatabase(){
+  if(!currentUser) return;
+
+  try{
+    const {data, error} = await db.from("user_settings")
+      .select("theme")
+      .eq("user_id", currentUser.id)
+      .maybeSingle();
+
+    if(error){
+      console.info("user_settings theme not configured; using local preference.");
+      return;
+    }
+
+    if(data?.theme === "light" || data?.theme === "dark"){
+      applyTheme(data.theme);
+    }
+  }catch(error){
+    console.info("Database theme lookup skipped", error);
+  }
+}
+
+/* Login */
+$("loginForm").addEventListener("submit", async event => {
+  event.preventDefault();
+
+  const button = $("loginBtn");
+  button.disabled = true;
+  setStatus("authStatus", "Login हुँदैछ...");
+
+  try{
+    const email = $("email").value.trim().toLowerCase();
+    const password = $("password").value;
+
+    const {data, error} = await db.auth.signInWithPassword({email, password});
+    if(error) throw error;
+
+    await startApp(data.user);
+  }catch(error){
+    setStatus("authStatus", error.message || "Login सफल भएन।", "error");
+  }finally{
+    button.disabled = false;
+  }
+});
+
+/* Start app */
 async function startApp(user){
- currentUser=user;
- $("authSection").classList.add("hidden");$("appSection").classList.remove("hidden");$("logoutBtn").classList.remove("hidden");
- setStatus("authStatus","");
- try{await loadUserSettings();await refreshInbox();setupRealtimeSubscription();}
- catch(err){$("contactList").innerHTML=`<div class="empty">लोड गर्न सकेन: ${esc(err.message||"अज्ञात समस्या")}</div>`;}
-}
-function resetAppUI(){
- cleanupRealtime();currentUser=null;profiles=[];profileMap={};conversations=[];activeFriend=null;
- $("appSection").classList.add("hidden");$("authSection").classList.remove("hidden");$("logoutBtn").classList.add("hidden");
- $("inbox").classList.remove("chat-open");$("contactList").innerHTML='<div class="empty">Login गर्नुहोस्।</div>';
-}
-$("loginForm").addEventListener("submit",async e=>{
- e.preventDefault();const btn=$("loginBtn");btn.disabled=true;setStatus("authStatus","Login हुँदैछ...");
- try{
-  const email=$("email").value.trim().toLowerCase(),password=$("password").value;
-  const {data,error}=await db.auth.signInWithPassword({email,password});if(error)throw error;
-  await startApp(data.user);
- }catch(err){setStatus("authStatus",err.message||"Login सफल भएन।","error");}
- finally{btn.disabled=false;}
-});
-$("logoutBtn").addEventListener("click",async()=>{
- const btn=$("logoutBtn");btn.disabled=true;
- try{cleanupRealtime();const {error}=await db.auth.signOut();if(error)throw error;resetAppUI();}
- catch(err){setStatus("authStatus",err.message||"Logout गर्न सकिएन।","error");}
- finally{btn.disabled=false;}
-});
-$("contactList").addEventListener("click",e=>{
- const button=e.target.closest("[data-friend]");if(!button)return;
- const profile=profileMap[button.dataset.friend];if(profile)openChat(profile);
-});
-$("memberSearch").addEventListener("input",renderContacts);
-$("allMembersBtn").addEventListener("click",()=>{
- allMembersVisible=!allMembersVisible;$("allMembersBtn").textContent=allMembersVisible?"Inbox मात्र":"सबै सदस्य";renderContacts();
-});
-$("refreshBtn").addEventListener("click",async()=>{
- const btn=$("refreshBtn");btn.disabled=true;setStatus("messageStatus","Refresh हुँदैछ...");
- try{await refreshInbox();if(activeFriend)await loadMessages();}
- catch(err){setStatus("messageStatus",err.message||"Refresh असफल भयो।","error");}
- finally{btn.disabled=false;}
-});
-function openChat(profile){
- activeFriend=profile;const token=++chatRequestToken;
- $("welcome").classList.add("hidden");$("activeChat").classList.remove("hidden");
- $("chatName").textContent=nameOf(profile);$("chatAvatar").innerHTML=avatarHTML(profile);
- $("chatStatusText").textContent="निजी कुराकानी";
- $("inbox").classList.add("chat-open");renderContacts();
- loadMessages(token);
-}
-$("backBtn").addEventListener("click",()=>{$("inbox").classList.remove("chat-open");});
-async function loadMessages(token=chatRequestToken){
- if(!activeFriend||!currentUser)return;
- const friendId=activeFriend.id;const requestToken=token;
- $("chatMessages").innerHTML='<div class="empty">सन्देश लोड हुँदैछन्...</div>';
- try{
-  const {data,error}=await db.from("private_messages")
-   .select("id,sender_id,receiver_id,content,created_at")
-   .or(`and(sender_id.eq.${currentUser.id},receiver_id.eq.${friendId}),and(sender_id.eq.${friendId},receiver_id.eq.${currentUser.id})`)
-   .order("created_at",{ascending:true}).limit(300);
-  if(error)throw error;
-  // Ignore a stale response if user switched chats while request was running.
-  if(requestToken!==chatRequestToken||activeFriend?.id!==friendId)return;
-  resetRenderedMessages();
-  if(!data||!data.length){
-   $("chatMessages").innerHTML='<div class="empty">अहिलेसम्म सन्देश छैन। पहिलो सन्देश पठाउनुहोस्।</div>';return;
+  currentUser = user;
+  $("authSection").classList.add("hidden");
+  $("appSection").classList.remove("hidden");
+
+  await loadSavedThemeFromDatabase();
+
+  try{
+    await Promise.all([loadProfiles(), loadConversations()]);
+    renderContacts();
+    setupRealtimeSubscription();
+  }catch(error){
+    $("contactList").innerHTML = `<div class="empty">${esc(error.message || "डेटा लोड हुन सकेन।")}</div>`;
   }
-  data.forEach(message=>appendMessageUI(message));scrollToBottom();
- }catch(err){
-  if(requestToken===chatRequestToken)$("chatMessages").innerHTML=`<div class="empty">सन्देश लोड हुन सकेन: ${esc(err.message||"अज्ञात समस्या")}</div>`;
- }
 }
-$("chatRefresh").addEventListener("click",()=>loadMessages());
-$("messageText").addEventListener("keydown",e=>{
- if(e.key==="Enter"&&!e.shiftKey){
-  e.preventDefault();
-  if(!$("sendBtn").disabled)$("messageForm").requestSubmit();
- }
+
+/* Profiles */
+async function loadProfiles(){
+  const {data, error} = await db.from("profiles")
+    .select("id,display_name,avatar_url")
+    .order("display_name")
+    .limit(300);
+
+  if(error) throw error;
+
+  profiles = (data || []).filter(profile => profile.id !== currentUser.id);
+  profileMap = {};
+
+  (data || []).forEach(profile => {
+    profileMap[profile.id] = profile;
+  });
+}
+
+/* Conversation list */
+async function loadConversations(){
+  const {data, error} = await db.from("private_messages")
+    .select("id,sender_id,receiver_id,content,created_at")
+    .or(`sender_id.eq.${currentUser.id},receiver_id.eq.${currentUser.id}`)
+    .order("created_at", {ascending:false})
+    .limit(500);
+
+  if(error) throw error;
+
+  const latest = {};
+
+  (data || []).forEach(message => {
+    const friendId = message.sender_id === currentUser.id
+      ? message.receiver_id
+      : message.sender_id;
+
+    if(friendId && friendId !== currentUser.id && !latest[friendId]){
+      latest[friendId] = message;
+    }
+  });
+
+  conversations = Object.entries(latest).map(([friendId, message]) => ({
+    friendId,
+    message
+  }));
+
+  conversations.sort((a,b) =>
+    new Date(b.message.created_at) - new Date(a.message.created_at)
+  );
+}
+
+/* Realtime messages */
+function setupRealtimeSubscription(){
+  if(realTimeChannel) db.removeChannel(realTimeChannel);
+
+  realTimeChannel = db.channel("private-messages-live")
+    .on("postgres_changes", {
+      event:"INSERT",
+      schema:"public",
+      table:"private_messages"
+    }, payload => {
+      const message = payload.new;
+      if(!message || !currentUser) return;
+
+      if(message.sender_id !== currentUser.id &&
+         message.receiver_id !== currentUser.id) return;
+
+      loadConversations()
+        .then(renderContacts)
+        .catch(console.error);
+
+      if(activeFriend && messagePairMatches(message, activeFriend.id)){
+        appendMessageUI(message);
+        scrollToBottom();
+      }
+    })
+    .subscribe(status => {
+      if(status === "CHANNEL_ERROR" || status === "TIMED_OUT"){
+        console.warn("Private message realtime:", status);
+      }
+    });
+}
+
+/* Add one message, avoiding duplicate realtime events */
+function appendMessageUI(message){
+  if(!message?.id || seenMessageIds.has(message.id)) return;
+  seenMessageIds.add(message.id);
+
+  const container = $("chatMessages");
+  const empty = container.querySelector(".empty");
+  if(empty) empty.remove();
+
+  const row = document.createElement("div");
+  row.className = "bubble-row " +
+    (message.sender_id === currentUser.id ? "mine" : "");
+
+  const bubble = document.createElement("div");
+  bubble.className = "bubble";
+  bubble.append(document.createTextNode(String(message.content ?? "")));
+
+  const time = document.createElement("span");
+  time.className = "bubble-time";
+  time.textContent = dateText(message.created_at);
+
+  bubble.appendChild(time);
+  row.appendChild(bubble);
+  container.appendChild(row);
+}
+
+/* Contact list */
+function renderContacts(){
+  const query = $("memberSearch").value.trim().toLocaleLowerCase();
+
+  let list = allMembersVisible
+    ? profiles
+    : conversations.map(c => profileMap[c.friendId]).filter(Boolean);
+
+  list = list.filter(profile =>
+    nameOf(profile).toLocaleLowerCase().includes(query)
+  );
+
+  if(!list.length){
+    $("contactList").innerHTML = `
+      <div class="empty">
+        ${allMembersVisible
+          ? "कुनै सदस्य भेटिएन।"
+          : "अहिलेसम्म कुराकानी छैन। सबै सदस्य हेर्न 'सबै सदस्य' थिच्नुहोस्।"}
+      </div>`;
+    return;
+  }
+
+  $("contactList").innerHTML = list.map(profile => {
+    const conversation = conversations.find(c => c.friendId === profile.id);
+    const preview = conversation?.message?.content || "कुराकानी सुरु गर्नुहोस्";
+    const active = activeFriend?.id === profile.id;
+
+    return `
+      <button class="contact ${active ? "active" : ""}"
+              data-friend="${esc(profile.id)}" type="button">
+        <div class="avatar-wrap">
+          <div class="avatar">${avatarHTML(profile)}</div>
+        </div>
+        <div class="contact-info">
+          <strong>${esc(nameOf(profile))}</strong>
+          <small>${esc(preview)}</small>
+        </div>
+      </button>`;
+  }).join("");
+}
+
+$("contactList").addEventListener("click", event => {
+  const button = event.target.closest("[data-friend]");
+  if(!button) return;
+
+  const profile = profileMap[button.dataset.friend];
+  if(profile) openChat(profile);
 });
-$("messageForm").addEventListener("submit",async e=>{
- e.preventDefault();
- if(!activeFriend||!currentUser||sendingMessage)return;
- const content=$("messageText").value.trim();if(!content)return;
- if(content.length>5000){setStatus("messageStatus","सन्देश 5000 अक्षरभन्दा लामो हुन सक्दैन।","error");return;}
- const receiverId=activeFriend.id;
- if(receiverId===currentUser.id){setStatus("messageStatus","आफैँलाई सन्देश पठाउन मिल्दैन।","error");return;}
- sendingMessage=true;const btn=$("sendBtn");btn.disabled=true;setStatus("messageStatus","पठाउँदै...");
- try{
-  const {data,error}=await db.from("private_messages").insert({
-   sender_id:currentUser.id,receiver_id:receiverId,content
-  }).select("id,sender_id,receiver_id,content,created_at").single();
-  if(error)throw error;
-  $("messageText").value="";setStatus("messageStatus","सन्देश पठाइयो।","success");
-  // Realtime may arrive before/after insert response; ID-based dedupe handles both.
-  if(data&&messageBelongsToActiveChat(data)){appendMessageUI(data);scrollToBottom();}
-  loadConversations().then(renderContacts).catch(err=>console.warn("Conversation refresh failed:",err));
- }catch(err){setStatus("messageStatus",err.message||"सन्देश पठाउन सकिएन।","error");}
- finally{sendingMessage=false;btn.disabled=false;}
+
+$("memberSearch").addEventListener("input", renderContacts);
+
+$("allMembersBtn").onclick = () => {
+  allMembersVisible = !allMembersVisible;
+  $("allMembersBtn").textContent = allMembersVisible ? "Inbox मात्र" : "सबै सदस्य";
+  renderContacts();
+};
+
+$("refreshBtn").onclick = async () => {
+  const button = $("refreshBtn");
+  button.disabled = true;
+
+  try{
+    await Promise.all([loadProfiles(), loadConversations()]);
+    renderContacts();
+    if(activeFriend) await loadMessages();
+  }catch(error){
+    setStatus("messageStatus", error.message || "Refresh असफल भयो।", "error");
+  }finally{
+    button.disabled = false;
+  }
+};
+
+/* Open chat */
+function openChat(profile){
+  activeFriend = profile;
+  chatRequestToken++;
+  seenMessageIds.clear();
+
+  $("welcome").classList.add("hidden");
+  $("activeChat").classList.remove("hidden");
+  $("chatName").textContent = nameOf(profile);
+  $("chatAvatar").innerHTML = avatarHTML(profile);
+
+  $("inbox").classList.add("chat-open");
+  renderContacts();
+  loadMessages();
+}
+
+$("backBtn").onclick = () => {
+  $("inbox").classList.remove("chat-open");
+};
+
+/* Load selected conversation */
+async function loadMessages(){
+  if(!activeFriend) return;
+
+  const friendId = activeFriend.id;
+  const token = ++chatRequestToken;
+
+  $("chatMessages").innerHTML = '<div class="empty">सन्देश लोड हुँदैछन्...</div>';
+
+  try{
+    const {data, error} = await db.from("private_messages")
+      .select("id,sender_id,receiver_id,content,created_at")
+      .or(`and(sender_id.eq.${currentUser.id},receiver_id.eq.${friendId}),and(sender_id.eq.${friendId},receiver_id.eq.${currentUser.id})`)
+      .order("created_at", {ascending:true})
+      .limit(300);
+
+    if(error) throw error;
+
+    /* यदि user ले अर्को chat खोलेको छ भने पुरानो response नदेखाउने */
+    if(token !== chatRequestToken || activeFriend?.id !== friendId) return;
+
+    seenMessageIds.clear();
+
+    if(!data?.length){
+      $("chatMessages").innerHTML =
+        '<div class="empty">अहिलेसम्म सन्देश छैन। पहिलो सन्देश पठाउनुहोस्।</div>';
+      return;
+    }
+
+    $("chatMessages").innerHTML = "";
+    data.forEach(message => appendMessageUI(message));
+    scrollToBottom();
+
+  }catch(error){
+    if(token === chatRequestToken){
+      $("chatMessages").innerHTML =
+        `<div class="empty">सन्देश लोड हुन सकेन: ${esc(error.message)}</div>`;
+    }
+  }
+}
+
+$("chatRefresh").onclick = loadMessages;
+
+/* Composer */
+$("messageText").addEventListener("input", () => {
+  const textarea = $("messageText");
+  $("charCount").textContent = `${textarea.value.length}/5000`;
+  textarea.style.height = "auto";
+  textarea.style.height = Math.min(textarea.scrollHeight, 130) + "px";
 });
+
+$("messageText").addEventListener("keydown", event => {
+  if(event.key === "Enter" && !event.shiftKey){
+    event.preventDefault();
+    if(!$("sendBtn").disabled) $("messageForm").requestSubmit();
+  }
+});
+
+/* Send message */
+$("messageForm").addEventListener("submit", async event => {
+  event.preventDefault();
+
+  if(!activeFriend || isSending) return;
+
+  const content = $("messageText").value.trim();
+  if(!content) return;
+
+  if(content.length > 5000){
+    setStatus("messageStatus", "सन्देश 5000 अक्षरभन्दा लामो हुन मिल्दैन।", "error");
+    return;
+  }
+
+  isSending = true;
+  const button = $("sendBtn");
+  button.disabled = true;
+  setStatus("messageStatus", "पठाउँदै...");
+
+  try{
+    const {error} = await db.from("private_messages").insert({
+      sender_id:currentUser.id,
+      receiver_id:activeFriend.id,
+      content
+    });
+
+    if(error) throw error;
+
+    $("messageText").value = "";
+    $("messageText").style.height = "auto";
+    $("charCount").textContent = "0/5000";
+    setStatus("messageStatus", "सन्देश पठाइयो।", "success");
+
+  }catch(error){
+    setStatus("messageStatus", error.message || "सन्देश पठाउन सकिएन।", "error");
+  }finally{
+    isSending = false;
+    button.disabled = false;
+  }
+});
+
+/* Boot */
 async function boot(){
- try{
-  const {data,error}=await db.auth.getSession();if(error)throw error;
-  if(data.session?.user)await startApp(data.session.user);
- }catch(err){setStatus("authStatus",err.message||"Session जाँच गर्न सकिएन।","error");}
- db.auth.onAuthStateChange((event,session)=>{
-  if(event==="SIGNED_OUT"){cleanupRealtime();resetAppUI();}
-  else if(event==="SIGNED_IN"&&session?.user&&!currentUser){startApp(session.user);}
- });
+  applyLocalPreferences();
+
+  const {data, error} = await db.auth.getSession();
+  if(error){
+    setStatus("authStatus", error.message, "error");
+    return;
+  }
+
+  if(data.session?.user){
+    await startApp(data.session.user);
+  }
+
+  db.auth.onAuthStateChange((event, session) => {
+    if(event === "SIGNED_OUT"){
+      currentUser = null;
+      location.reload();
+    }else if(event === "TOKEN_REFRESHED" && session?.user){
+      currentUser = session.user;
+    }
+  });
 }
-window.addEventListener("beforeunload",cleanupRealtime);
+
 boot();
 </script>
-<script src="script.js" defer></script>
-<script src="site-nav.js"></script>
 </body>
-</html>
+</html>प
