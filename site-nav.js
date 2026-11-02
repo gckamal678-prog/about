@@ -1,158 +1,160 @@
-
 (() => {
   "use strict";
 
-  // एउटै navigation दोहोरिन नदिन
-  if (window.__meroSathiNavStarted) return;
-  window.__meroSathiNavStarted = true;
+  const LANGUAGE_KEY = "kamalgc_portal_language";
+  const currentPage = (location.pathname.split("/").pop() || "index.html").toLowerCase();
 
-  const currentPage =
-    location.pathname.split("/").pop() || "index.html";
-
-  // तलको Navigation मा यी चारवटा मात्र
-  const navItems = [
-    {
-      href: "index.html",
-      icon: "⌂",
-      ne: "Home",
-      en: "Home"
-    },
-    {
-      href: "messages.html",
-      icon: "✉",
-      ne: "सन्देश",
-      en: "Message"
-    },
-    {
-      href: "notifications.html",
-      icon: "♢",
-      ne: "सूचना",
-      en: "Notifications"
-    },
-    {
-      href: "settings.html",
-      icon: "⚙",
-      ne: "सेटिङ",
-      en: "Setting"
+  const readLanguage = () => {
+    try {
+      return localStorage.getItem(LANGUAGE_KEY) === "EN" ? "EN" : "NP";
+    } catch {
+      return "NP";
     }
+  };
+
+  const labels = {
+    NP: {
+      home: "🏠 Home",
+      messages: "💬 Messages",
+      notifications: "🔔 Notifications",
+      settings: "⚙️ Settings",
+      login: "🔐 Login",
+      profile: "👤 Profile"
+    },
+    EN: {
+      home: "🏠 Home",
+      messages: "💬 Messages",
+      notifications: "🔔 Notifications",
+      settings: "⚙️ Settings",
+      login: "🔐 Login",
+      profile: "👤 Profile"
+    }
+  };
+
+  const navItems = [
+    { key: "home", href: "index.html", pages: ["index.html", "community.html"] },
+    { key: "messages", href: "messages.html", pages: ["messages.html"] },
+    { key: "notifications", href: "notifications.html", pages: ["notifications.html"] },
+    { key: "settings", href: "settings.html", pages: ["settings.html", "profile.html"] }
   ];
 
-  // Navigation को CSS
   const style = document.createElement("style");
-
   style.textContent = `
-    body {
-      padding-bottom: 104px !important;
-    }
-
-    #mero-sathi-nav {
+    .ms-site-nav {
       position: fixed;
-      z-index: 9990;
-      left: 50%;
-      bottom: max(10px, env(safe-area-inset-bottom));
-      transform: translateX(-50%);
-      width: min(720px, calc(100% - 18px));
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 999;
       display: flex;
-      justify-content: space-around;
-      gap: 4px;
-      padding: 8px;
-      background: rgba(17, 28, 46, .97);
-      color: #edf3fc;
-      border: 1px solid rgba(255, 255, 255, .14);
-      border-radius: 18px;
-      box-shadow: 0 12px 40px rgba(0, 0, 0, .35);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
+      justify-content: center;
+      padding: 8px 10px calc(8px + env(safe-area-inset-bottom));
+      background: rgba(11,18,32,.96);
+      border-top: 1px solid rgba(255,255,255,.12);
+      backdrop-filter: blur(16px);
     }
-
-    #mero-sathi-nav a {
-      flex: 1;
-      min-width: 0;
+    .ms-site-nav-inner {
+      width: min(900px,100%);
+      display: grid;
+      grid-template-columns: repeat(4,minmax(0,1fr));
+      gap: 6px;
+    }
+    .ms-site-nav a {
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 3px;
-      padding: 7px 3px;
-      border-radius: 12px;
-      color: #aab8cc;
+      min-height: 42px;
+      padding: 7px 5px;
+      border-radius: 11px;
+      color: #b8c5d8;
       text-decoration: none;
-      font-family: inherit;
-      font-size: 10px;
-      font-weight: 700;
-      line-height: 1.3;
-      white-space: nowrap;
+      font: 700 12px/1.3 system-ui,sans-serif;
+      text-align: center;
+      overflow-wrap: anywhere;
     }
-
-    #mero-sathi-nav .nav-icon {
-      font-size: 20px;
-      line-height: 1.2;
-    }
-
-    #mero-sathi-nav a.active {
-      background: linear-gradient(
-        120deg,
-        #24486a,
-        #3c3567
-      );
+    .ms-site-nav a:hover,
+    .ms-site-nav a:focus-visible {
+      background: rgba(105,183,255,.14);
       color: #fff;
+      outline: none;
     }
-
-    #mero-sathi-nav a:focus-visible {
-      outline: 2px solid #69b7ff;
-      outline-offset: 2px;
+    .ms-site-nav a[aria-current="page"] {
+      background: rgba(105,183,255,.2);
+      color: #8ccaff;
     }
-
-    @media (min-width: 700px) {
-      #mero-sathi-nav {
-        bottom: 16px;
-        padding: 10px 14px;
+    body.light-mode .ms-site-nav,
+    body.light-theme .ms-site-nav {
+      background: rgba(255,255,255,.96);
+      border-top-color: rgba(0,0,0,.12);
+    }
+    body.light-mode .ms-site-nav a,
+    body.light-theme .ms-site-nav a {
+      color: #475569;
+    }
+    body.light-mode .ms-site-nav a[aria-current="page"],
+    body.light-theme .ms-site-nav a[aria-current="page"] {
+      color: #1d4ed8;
+      background: rgba(37,99,235,.12);
+    }
+    @media(min-width:700px) {
+      .ms-site-nav {
+        top: 0;
+        bottom: auto;
+        padding: 8px 14px;
+        border-top: 0;
+        border-bottom: 1px solid rgba(255,255,255,.12);
       }
-
-      #mero-sathi-nav a {
-        font-size: 11px;
+      .ms-site-nav-inner {
+        display: flex;
+        justify-content: flex-end;
+      }
+      .ms-site-nav a {
+        min-width: 105px;
+        padding: 10px 12px;
+      }
+      body {
+        padding-top: 58px;
       }
     }
   `;
-
   document.head.appendChild(style);
 
-  // Navigation बनाउने
-  const nav = document.createElement("nav");
+  function renderNav() {
+    const oldNav = document.querySelector(".ms-site-nav");
+    if (oldNav) oldNav.remove();
 
-  nav.id = "mero-sathi-nav";
-  nav.setAttribute("aria-label", "Main navigation");
+    const language = readLanguage();
+    const text = labels[language];
+    const nav = document.createElement("nav");
+    nav.className = "ms-site-nav";
+    nav.setAttribute("aria-label", "Main navigation");
 
-  let english = false;
+    const inner = document.createElement("div");
+    inner.className = "ms-site-nav-inner";
 
-  try {
-    english =
-      localStorage.getItem("kamalgc_portal_language") === "EN";
-  } catch (error) {}
+    navItems.forEach(item => {
+      const link = document.createElement("a");
+      link.href = item.href;
+      link.textContent = text[item.key];
 
-  navItems.forEach(item => {
-    const link = document.createElement("a");
+      if (item.pages.includes(currentPage)) {
+        link.setAttribute("aria-current", "page");
+      }
 
-    link.href = item.href;
+      inner.appendChild(link);
+    });
 
-    if (currentPage === item.href) {
-      link.classList.add("active");
-      link.setAttribute("aria-current", "page");
-    }
+    nav.appendChild(inner);
+    document.body.appendChild(nav);
+  }
 
-    const icon = document.createElement("span");
-    icon.className = "nav-icon";
-    icon.textContent = item.icon;
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", renderNav, { once: true });
+  } else {
+    renderNav();
+  }
 
-    const label = document.createElement("span");
-    label.textContent = english ? item.en : item.ne;
-
-    link.appendChild(icon);
-    link.appendChild(label);
-
-    nav.appendChild(link);
+  window.addEventListener("storage", event => {
+    if (event.key === LANGUAGE_KEY) renderNav();
   });
-
-  document.body.appendChild(nav);
-
 })();
