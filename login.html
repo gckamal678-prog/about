@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Login | मेरो साथी</title>
+  <meta name="theme-color" content="#080d19">
+  <link rel="icon" href="mylogo.png">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg:#080d19; --panel:#101a2b; --field:#17253b;
+      --text:#f4f7ff; --muted:#a5b2c7; --line:rgba(163,190,230,.16);
+      --accent:#72d5ff; --purple:#a78bfa;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;min-height:100vh;padding:20px;
+      display:grid;place-items:center;
+      font-family:system-ui,"Noto Sans Devanagari",sans-serif;
+      background:radial-gradient(ellipse at top,rgba(46,125,205,.18),transparent 45%),var(--bg);
+      color:var(--text)
+    }
+    .card{
+      width:min(100%,440px);padding:26px;
+      background:var(--panel);border:1px solid var(--line);
+      border-radius:20px;box-shadow:0 18px 55px #0005
+    }
+    .brand{text-align:center;margin-bottom:22px}
+    .brand img{width:62px;height:62px;object-fit:cover;border-radius:50%}
+    h1{font-size:23px;margin:8px 0}
+    .muted{color:var(--muted);font-size:13px}
+    .tabs{display:flex;gap:8px;margin:20px 0}
+    .tabs button{
+      flex:1;padding:10px;border-radius:10px;border:1px solid var(--line);
+      background:var(--field);color:var(--text);font-weight:700;cursor:pointer
+    }
+    .tabs button.active{background:linear-gradient(110deg,var(--accent),var(--purple));color:#071322}
+    label{display:block;font-size:13px;font-weight:700;margin:13px 0 6px}
+    input{
+      width:100%;padding:12px;border-radius:10px;
+      border:1px solid var(--line);background:var(--field);color:var(--text);
+      outline:none;font:inherit
+    }
+    input:focus{border-color:var(--accent)}
+    .submit{
+      width:100%;margin-top:18px;padding:12px;border:0;border-radius:11px;
+      background:linear-gradient(110deg,var(--accent),var(--purple));
+      color:#071322;font-weight:800;cursor:pointer
+    }
+    button:disabled{opacity:.6;cursor:wait}
+    .link-btn{
+      display:block;margin:14px auto 0;border:0;background:none;
+      color:var(--accent);cursor:pointer;font:inherit;font-size:13px
+    }
+    .status{margin-top:14px;font-size:13px;line-height:1.6;overflow-wrap:anywhere}
+    .status.error{color:#ff9aaa}.status.success{color:#75e0ad}
+    .back{display:block;text-align:center;margin-top:20px;color:var(--muted);font-size:13px}
+    .hidden{display:none!important}
+  </style>
+</head>
+<body>
+  <main class="card">
+    <header class="brand">
+      <img src="mylogo.png" alt="मेरो साथी लोगो">
+      <h1>मेरो साथी</h1>
+      <div class="muted">आफ्नो account मा प्रवेश गर्नुहोस्</div>
+    </header>
+
+    <div class="tabs">
+      <button type="button" id="loginTab" class="active">Login</button>
+      <button type="button" id="signupTab">नयाँ Account</button>
+    </div>
+
+    <form id="authForm">
+      <label for="email">Email</label>
+      <input id="email" type="email" autocomplete="email" required>
+
+      <label for="password">Password</label>
+      <input id="password" type="password" minlength="8"
+             autocomplete="current-password" required>
+
+      <div id="confirmWrap" class="hidden">
+        <label for="confirmPassword">Password फेरि लेख्नुहोस्</label>
+        <input id="confirmPassword" type="password" minlength="8"
+               autocomplete="new-password">
+      </div>
+
+      <button class="submit" id="submitBtn" type="submit">Login</button>
+    </form>
+
+    <button class="link-btn" id="resetBtn" type="button">Password बिर्सनुभयो?</button>
+    <div class="status" id="status" aria-live="polite"></div>
+    <a class="back" href="index.html">← Home मा फर्कनुहोस्</a>
+  </main>
+
+  <script>
+    "use strict";
+
+    const SUPABASE_URL = "https://zbyntmyybhdcwmttkuys.supabase.co";
+    const SUPABASE_KEY = "sb_publishable_N8U3og_Ntm-ImrtM8c1NGA_-Rqb3dSy";
+    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    const $ = id => document.getElementById(id);
+
+    let mode = "login";
+
+    function showStatus(message, type = "") {
+      $("status").textContent = message;
+      $("status").className = "status" + (type ? " " + type : "");
+    }
+
+    function setMode(nextMode) {
+      mode = nextMode;
+      const signup = mode === "signup";
+      $("loginTab").classList.toggle("active", !signup);
+      $("signupTab").classList.toggle("active", signup);
+      $("confirmWrap").classList.toggle("hidden", !signup);
+      $("resetBtn").classList.toggle("hidden", signup);
+      $("submitBtn").textContent = signup ? "Account बनाउनुहोस्" : "Login";
+      $("password").autocomplete = signup ? "new-password" : "current-password";
+      showStatus("");
+    }
+
+    $("loginTab").addEventListener("click", () => setMode("login"));
+    $("signupTab").addEventListener("click", () => setMode("signup"));
+
+    $("authForm").addEventListener("submit", async event => {
+      event.preventDefault();
+      const email = $("email").value.trim();
+      const password = $("password").value;
+      const confirmPassword = $("confirmPassword").value;
+      const button = $("submitBtn");
+
+      if (password.length < 8) {
+        showStatus("Password कम्तीमा ८ अक्षरको हुनुपर्छ।", "error");
+        return;
+      }
+      if (mode === "signup" && password !== confirmPassword) {
+        showStatus("दुवै Password मिलेनन्।", "error");
+        return;
+      }
+
+      button.disabled = true;
+      showStatus(mode === "signup" ? "Account बनाउँदैछ..." : "Login हुँदैछ...");
+
+      try {
+        if (mode === "signup") {
+          const { data, error } = await supabase.auth.signUp({
+            email,
+            password,
+            options: {
+              emailRedirectTo: location.origin + "/index.html"
+            }
+          });
+          if (error) throw error;
+
+          if (data.session) {
+            showStatus("Account बनेको छ। Home मा लैजाँदैछ...", "success");
+            location.replace("index.html");
+          } else {
+            showStatus(
+              "Account बनेको छ। Email मा आएको confirmation link खोलेपछि Login गर्नुहोस्।",
+              "success"
+            );
+          }
+        } else {
+          const { error } = await supabase.auth.signInWithPassword({
+            email,
+            password
+          });
+          if (error) throw error;
+
+          showStatus("Login सफल भयो। Home मा लैजाँदैछ...", "success");
+          location.replace("index.html");
+        }
+      } catch (error) {
+        showStatus(error.message || "प्रक्रिया सफल भएन। फेरि प्रयास गर्नुहोस्।", "error");
+      } finally {
+        button.disabled = false;
+      }
+    });
+
+    $("resetBtn").addEventListener("click", async () => {
+      const email = $("email").value.trim();
+      if (!email) {
+        showStatus("पहिले आफ्नो Email लेख्नुहोस्।", "error");
+        $("email").focus();
+        return;
+      }
+
+      const button = $("resetBtn");
+      button.disabled = true;
+      showStatus("Reset link पठाउँदैछ...");
+
+      try {
+        const { error } = await supabase.auth.resetPasswordForEmail(email, {
+          redirectTo: location.origin + "/settings.html"
+        });
+        if (error) throw error;
+        showStatus("Password reset link पठाइएको छ। Inbox र Spam जाँच गर्नुहोस्।", "success");
+      } catch (error) {
+        showStatus(error.message || "Reset link पठाउन सकिएन।", "error");
+      } finally {
+        button.disabled = false;
+      }
+    });
+
+    (async () => {
+      try {
+        const { data, error } = await supabase.auth.getSession();
+        if (error) throw error;
+        if (data.session) location.replace("index.html");
+      } catch (error) {
+        showStatus(error.message || "Session जाँच गर्न सकिएन।", "error");
+      }
+    })();
+  </script>
+</body>
+</html>
