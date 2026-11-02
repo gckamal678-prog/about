@@ -2,159 +2,165 @@
   "use strict";
 
   const LANGUAGE_KEY = "kamalgc_portal_language";
-  const currentPage = (location.pathname.split("/").pop() || "index.html").toLowerCase();
+  const THEME_KEY = "kamalgc_portal_theme";
 
-  const readLanguage = () => {
-    try {
-      return localStorage.getItem(LANGUAGE_KEY) === "EN" ? "EN" : "NP";
-    } catch {
-      return "NP";
-    }
-  };
+  const currentFile = (location.pathname.split("/").pop() || "index.html")
+    .toLowerCase();
 
-  const labels = {
-    NP: {
-      home: "🏠 Home",
-      messages: "💬 Messages",
-      notifications: "🔔 Notifications",
-      settings: "⚙️ Settings",
-      login: "🔐 Login",
-      profile: "👤 Profile"
+  const language = localStorage.getItem(LANGUAGE_KEY) || "NP";
+  const isNepali = language === "NP";
+
+  const items = [
+    {
+      href: "index.html",
+      icon: "⌂",
+      en: "Home",
+      np: "गृहपृष्ठ",
+      active: ["index.html", "", "community.html"]
     },
-    EN: {
-      home: "🏠 Home",
-      messages: "💬 Messages",
-      notifications: "🔔 Notifications",
-      settings: "⚙️ Settings",
-      login: "🔐 Login",
-      profile: "👤 Profile"
+    {
+      href: "settings.html",
+      icon: "⚙",
+      en: "Settings",
+      np: "सेटिङ",
+      active: ["settings.html", "profile.html"]
+    },
+    {
+      href: "login.html",
+      icon: "↪",
+      en: "Login",
+      np: "लगइन",
+      active: ["login.html"]
     }
-  };
-
-  const navItems = [
-    { key: "home", href: "index.html", pages: ["index.html", "community.html"] },
-    { key: "messages", href: "messages.html", pages: ["messages.html"] },
-    { key: "notifications", href: "notifications.html", pages: ["notifications.html"] },
-    { key: "settings", href: "settings.html", pages: ["settings.html", "profile.html"] }
   ];
 
-  const style = document.createElement("style");
-  style.textContent = `
-    .ms-site-nav {
-      position: fixed;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      z-index: 999;
-      display: flex;
-      justify-content: center;
-      padding: 8px 10px calc(8px + env(safe-area-inset-bottom));
-      background: rgba(11,18,32,.96);
-      border-top: 1px solid rgba(255,255,255,.12);
-      backdrop-filter: blur(16px);
-    }
-    .ms-site-nav-inner {
-      width: min(900px,100%);
-      display: grid;
-      grid-template-columns: repeat(4,minmax(0,1fr));
-      gap: 6px;
-    }
-    .ms-site-nav a {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 42px;
-      padding: 7px 5px;
-      border-radius: 11px;
-      color: #b8c5d8;
-      text-decoration: none;
-      font: 700 12px/1.3 system-ui,sans-serif;
-      text-align: center;
-      overflow-wrap: anywhere;
-    }
-    .ms-site-nav a:hover,
-    .ms-site-nav a:focus-visible {
-      background: rgba(105,183,255,.14);
-      color: #fff;
-      outline: none;
-    }
-    .ms-site-nav a[aria-current="page"] {
-      background: rgba(105,183,255,.2);
-      color: #8ccaff;
-    }
-    body.light-mode .ms-site-nav,
-    body.light-theme .ms-site-nav {
-      background: rgba(255,255,255,.96);
-      border-top-color: rgba(0,0,0,.12);
-    }
-    body.light-mode .ms-site-nav a,
-    body.light-theme .ms-site-nav a {
-      color: #475569;
-    }
-    body.light-mode .ms-site-nav a[aria-current="page"],
-    body.light-theme .ms-site-nav a[aria-current="page"] {
-      color: #1d4ed8;
-      background: rgba(37,99,235,.12);
-    }
-    @media(min-width:700px) {
-      .ms-site-nav {
-        top: 0;
-        bottom: auto;
-        padding: 8px 14px;
-        border-top: 0;
-        border-bottom: 1px solid rgba(255,255,255,.12);
-      }
-      .ms-site-nav-inner {
+  const nav = document.createElement("nav");
+  nav.id = "shared-site-nav";
+  nav.setAttribute("aria-label", isNepali ? "मुख्य नेभिगेसन" : "Main navigation");
+
+  nav.innerHTML = `
+    <style>
+      #shared-site-nav {
+        position: fixed;
+        z-index: 9999;
+        left: 50%;
+        bottom: max(8px, env(safe-area-inset-bottom));
+        transform: translateX(-50%);
+        width: min(560px, calc(100% - 16px));
         display: flex;
-        justify-content: flex-end;
+        justify-content: space-around;
+        gap: 5px;
+        padding: 7px;
+        border: 1px solid var(--line, rgba(150,170,200,.2));
+        border-radius: 17px;
+        background: var(--nav-bg, rgba(17,28,46,.96));
+        color: var(--nav-text, #eef4ff);
+        box-shadow: 0 8px 30px rgba(0,0,0,.25);
+        backdrop-filter: blur(16px);
+        font-family: inherit;
       }
-      .ms-site-nav a {
-        min-width: 105px;
-        padding: 10px 12px;
+      #shared-site-nav a {
+        flex: 1;
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2px;
+        padding: 7px 3px;
+        border-radius: 11px;
+        color: var(--nav-muted, #aab8cc);
+        text-decoration: none;
+        font-size: 11px;
+        font-weight: 700;
       }
-      body {
-        padding-top: 58px;
+      #shared-site-nav a.active {
+        color: var(--nav-active-text, #fff);
+        background: var(--nav-active-bg, linear-gradient(120deg,#24486a,#3c3567));
       }
-    }
+      #shared-site-nav .nav-icon { font-size: 18px; line-height: 1.2; }
+      body { padding-bottom: 100px !important; }
+      @media (min-width: 850px) {
+        #shared-site-nav {
+          top: 12px;
+          bottom: auto;
+          left: auto;
+          right: 16px;
+          transform: none;
+          width: auto;
+          border-radius: 14px;
+        }
+        #shared-site-nav a {
+          flex-direction: row;
+          gap: 7px;
+          padding: 9px 14px;
+        }
+        body { padding-bottom: 24px !important; }
+      }
+    </style>
   `;
-  document.head.appendChild(style);
 
-  function renderNav() {
-    const oldNav = document.querySelector(".ms-site-nav");
-    if (oldNav) oldNav.remove();
+  items.forEach(item => {
+    const link = document.createElement("a");
+    link.href = item.href;
 
-    const language = readLanguage();
-    const text = labels[language];
-    const nav = document.createElement("nav");
-    nav.className = "ms-site-nav";
-    nav.setAttribute("aria-label", "Main navigation");
+    if (item.active.includes(currentFile)) {
+      link.classList.add("active");
+      link.setAttribute("aria-current", "page");
+    }
 
-    const inner = document.createElement("div");
-    inner.className = "ms-site-nav-inner";
+    link.innerHTML = `
+      <span class="nav-icon" aria-hidden="true">${item.icon}</span>
+      <span>${isNepali ? item.np : item.en}</span>
+    `;
 
-    navItems.forEach(item => {
-      const link = document.createElement("a");
-      link.href = item.href;
-      link.textContent = text[item.key];
-
-      if (item.pages.includes(currentPage)) {
-        link.setAttribute("aria-current", "page");
-      }
-
-      inner.appendChild(link);
-    });
-
-    nav.appendChild(inner);
-    document.body.appendChild(nav);
-  }
-
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", renderNav, { once: true });
-  } else {
-    renderNav();
-  }
-
-  window.addEventListener("storage", event => {
-    if (event.key === LANGUAGE_KEY) renderNav();
+    nav.appendChild(link);
   });
+
+  // Add a language switch that updates the shared preference.
+  const languageButton = document.createElement("button");
+  languageButton.type = "button";
+  languageButton.textContent = isNepali ? "EN" : "ने";
+  languageButton.setAttribute(
+    "aria-label",
+    isNepali ? "Switch to English" : "नेपालीमा बदल्नुहोस्"
+  );
+
+  languageButton.style.cssText = `
+    flex: 0 0 auto;
+    border: 1px solid var(--line, rgba(150,170,200,.25));
+    border-radius: 10px;
+    padding: 7px 10px;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    font-size: 11px;
+    font-weight: 800;
+    cursor: pointer;
+  `;
+
+  languageButton.addEventListener("click", () => {
+    const nextLanguage = isNepali ? "EN" : "NP";
+    localStorage.setItem(LANGUAGE_KEY, nextLanguage);
+    location.reload();
+  });
+
+  nav.appendChild(languageButton);
+
+  // Apply the saved theme preference when available.
+  const theme = localStorage.getItem(THEME_KEY);
+  if (theme === "light") {
+    nav.style.setProperty("--nav-bg", "rgba(255,255,255,.96)");
+    nav.style.setProperty("--nav-text", "#172033");
+    nav.style.setProperty("--nav-muted", "#536078");
+    nav.style.setProperty("--nav-active-text", "#fff");
+    nav.style.setProperty("--nav-active-bg", "linear-gradient(120deg,#3678b8,#7255b5)");
+  }
+
+  // Replace any older page-specific navigation to prevent duplicates.
+  document.querySelectorAll("#main-nav, #site-nav").forEach(oldNav => {
+    oldNav.remove();
+  });
+
+  document.body.appendChild(nav);
 })();
