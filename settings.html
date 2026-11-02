@@ -1,46 +1,54 @@
-
 <!DOCTYPE html>
 <html lang="ne">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#0b1220">
-<title>Setting | मेरो साथी</title>
+<meta name="description" content="मेरो साथी — Profile र account settings">
+<title>Settings | मेरो साथी</title>
 
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="mylogo.png">
+<link rel="apple-touch-icon" href="mylogo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
 :root{
---bg:#0b1220;--panel:#111c2e;--panel2:#17243a;
---text:#edf3fc;--muted:#9aaac0;--line:rgba(255,255,255,.1);
---blue:#69b7ff;--purple:#9b8cff;--green:#86efac;--red:#ff9aaa;
---switch-bg:#23344e;
+  --bg:#0b1220;--panel:#111c2e;--panel2:#17243a;
+  --text:#edf3fc;--muted:#9aaac0;--line:rgba(255,255,255,.1);
+  --blue:#69b7ff;--purple:#9b8cff;--green:#86efac;--red:#ff9aaa;
+  --switch-bg:#23344e;
 }
-body.light-theme{
---bg:#f1f5f9;--panel:#fff;--panel2:#f8fafc;
---text:#0f172a;--muted:#64748b;--line:rgba(0,0,0,.1);
---blue:#2563eb;--purple:#7c3aed;--green:#16a34a;
---red:#dc2626;--switch-bg:#cbd5e1;
+body.light-theme,body.light-mode{
+  --bg:#f1f5f9;--panel:#fff;--panel2:#f8fafc;
+  --text:#0f172a;--muted:#64748b;--line:rgba(0,0,0,.1);
+  --blue:#2563eb;--purple:#7c3aed;--green:#16a34a;
+  --red:#dc2626;--switch-bg:#cbd5e1;
 }
 *{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
 body{
-margin:0;background:var(--bg);color:var(--text);
-font-family:"DM Sans","Noto Sans Devanagari",sans-serif;
-line-height:1.6;transition:.25s;
+  margin:0;background:var(--bg);color:var(--text);
+  font-family:"DM Sans","Noto Sans Devanagari",sans-serif;
+  line-height:1.6;transition:background .2s,color .2s;
+  padding-bottom:100px;overflow-x:hidden;
 }
-button,input,textarea{font:inherit}
+button,input,textarea,select{font:inherit}
 button{cursor:pointer}
+button:disabled{opacity:.55;cursor:not-allowed}
 a{color:inherit;text-decoration:none}
 .hidden{display:none!important}
 .topbar{
-position:sticky;top:0;z-index:10;background:var(--bg);
-border-bottom:1px solid var(--line);backdrop-filter:blur(15px);
+  position:sticky;top:0;z-index:20;
+  background:var(--bg);border-bottom:1px solid var(--line);
+  backdrop-filter:blur(15px);
 }
 .topinner{
-max-width:950px;margin:auto;padding:12px 18px;
-display:flex;align-items:center;justify-content:space-between;
+  max-width:950px;margin:auto;padding:12px 18px;
+  display:flex;align-items:center;justify-content:space-between;
 }
 .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:19px}
 .brand img{width:42px;height:42px;border-radius:13px;object-fit:cover}
@@ -49,65 +57,62 @@ display:flex;align-items:center;justify-content:space-between;
 .heading h1{font-size:26px;margin:0}
 .heading p{color:var(--muted);font-size:13px;margin:5px 0}
 .panel{
-background:var(--panel);border:1px solid var(--line);
-border-radius:18px;padding:20px;margin-bottom:17px;
+  background:var(--panel);border:1px solid var(--line);
+  border-radius:18px;padding:20px;margin-bottom:17px;
 }
 .section-title{font-size:18px;font-weight:800;margin:0 0 5px}
 .description{font-size:12px;color:var(--muted);margin:0 0 16px}
 .field{
-width:100%;padding:12px 13px;border-radius:11px;
-border:1px solid var(--line);background:var(--bg);
-color:var(--text);outline:none;margin:6px 0 13px;
+  width:100%;padding:12px 13px;border-radius:11px;
+  border:1px solid var(--line);background:var(--bg);
+  color:var(--text);outline:none;margin:6px 0 13px;
 }
 .field:focus{border-color:var(--blue)}
 textarea.field{resize:vertical;min-height:80px}
 label{font-size:12px;color:var(--muted);font-weight:600}
-.status{font-size:13px;color:var(--muted);margin-top:10px;white-space:pre-wrap}
+.status{font-size:13px;color:var(--muted);margin-top:10px;white-space:pre-wrap;overflow-wrap:anywhere}
 .status.error{color:var(--red)}
 .status.success{color:var(--green)}
 .small{font-size:11px;color:var(--muted)}
 .btn{
-border:1px solid var(--line);border-radius:11px;padding:10px 14px;
-background:var(--panel2);color:var(--text);font-size:13px;font-weight:700;
+  border:1px solid var(--line);border-radius:11px;padding:10px 14px;
+  background:var(--panel2);color:var(--text);font-size:13px;font-weight:700;
 }
 .btn.primary{background:linear-gradient(110deg,#79c5ff,#a99bff);color:#07111f;border:0}
 .btn.danger{background:#48202c;border-color:#743044;color:#ffc1cc}
-.btn:disabled{opacity:.5;cursor:not-allowed}
 .actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:12px}
-
-/* Profile */
 .cover{
-height:210px;border-radius:15px;position:relative;overflow:hidden;
-background:
-radial-gradient(circle at 20% 30%,#69b7ff66,transparent 35%),
-radial-gradient(circle at 80% 60%,#9b8cff77,transparent 35%),
-linear-gradient(120deg,#14243a,#253451);
-background-size:cover;background-position:center;
+  height:210px;border-radius:15px;position:relative;overflow:hidden;
+  background:
+    radial-gradient(circle at 20% 30%,#69b7ff66,transparent 35%),
+    radial-gradient(circle at 80% 60%,#9b8cff77,transparent 35%),
+    linear-gradient(120deg,#14243a,#253451);
+  background-size:cover;background-position:center;
 }
 .cover:after{
-content:"";position:absolute;width:250px;height:250px;
-border:1px solid #ffffff20;border-radius:50%;
-right:10%;top:-120px;pointer-events:none;
+  content:"";position:absolute;width:250px;height:250px;
+  border:1px solid #ffffff20;border-radius:50%;
+  right:10%;top:-120px;pointer-events:none;
 }
 .cover-edit{
-position:absolute;right:12px;bottom:12px;z-index:2;
-background:#07111fdd;color:white;border:1px solid #ffffff30;
-border-radius:10px;padding:8px 12px;font-size:12px;font-weight:700;
+  position:absolute;right:12px;bottom:12px;z-index:2;
+  background:#07111fdd;color:white;border:1px solid #ffffff30;
+  border-radius:10px;padding:8px 12px;font-size:12px;font-weight:700;
 }
 .profile-main{padding:0 20px 18px;margin-top:-55px;position:relative}
 .profile-photo{
-width:112px;height:112px;border-radius:50%;border:5px solid var(--panel);
-background:linear-gradient(135deg,#244d70,#574b83);
-display:grid;place-items:center;overflow:hidden;
-font-size:40px;font-weight:800;color:white;
+  width:112px;height:112px;border-radius:50%;border:5px solid var(--panel);
+  background:linear-gradient(135deg,#244d70,#574b83);
+  display:grid;place-items:center;overflow:hidden;
+  font-size:40px;font-weight:800;color:white;
 }
 .profile-photo img{width:100%;height:100%;object-fit:cover}
 .profile-info{
-display:flex;justify-content:space-between;align-items:flex-end;
-gap:12px;flex-wrap:wrap;margin-top:12px;
+  display:flex;justify-content:space-between;align-items:flex-end;
+  gap:12px;flex-wrap:wrap;margin-top:12px;
 }
 .profile-info h2{margin:0;font-size:clamp(22px,5vw,30px);overflow-wrap:anywhere}
-.profile-info p{margin:3px 0 0;color:var(--muted);font-size:13px}
+.profile-info p{margin:3px 0 0;color:var(--muted);font-size:13px;overflow-wrap:anywhere}
 .bio-display{white-space:pre-wrap;overflow-wrap:anywhere;margin-top:12px;font-size:14px}
 .stats{display:flex;gap:10px;margin-top:17px}
 .stat{flex:1;background:var(--panel2);border-radius:12px;padding:10px;text-align:center}
@@ -116,17 +121,18 @@ gap:12px;flex-wrap:wrap;margin-top:12px;
 .section-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:14px}
 .section-head h2{margin:0;font-size:19px}
 .post{
-background:var(--panel);border:1px solid var(--line);
-border-radius:15px;padding:16px;margin-bottom:12px;
+  background:var(--panel);border:1px solid var(--line);
+  border-radius:15px;padding:16px;margin-bottom:12px;
 }
-.post-title{font-size:18px;font-weight:800;margin:0 0 7px}
+.post-title{font-size:18px;font-weight:800;margin:0 0 7px;overflow-wrap:anywhere}
 .post-date{font-size:11px;color:var(--muted);margin-bottom:10px}
 .post-content{font-size:14px;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.85}
 .post-image{width:100%;max-height:430px;object-fit:contain;background:var(--panel2);border-radius:12px;margin-top:12px}
 .empty{text-align:center;padding:28px 12px;color:var(--muted);font-size:13px}
-
-/* Switches */
-.switch-row{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--line);gap:12px}
+.switch-row{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:10px 0;border-bottom:1px solid var(--line);gap:12px;
+}
 .switch-row:last-child{border-bottom:0}
 .switch-info{display:flex;flex-direction:column}
 .switch-title{font-size:14px;font-weight:600}
@@ -137,26 +143,28 @@ border-radius:15px;padding:16px;margin-bottom:12px;
 .slider:before{position:absolute;content:"";height:18px;width:18px;left:3px;bottom:3px;background:white;transition:.3s;border-radius:50%}
 .switch input:checked+.slider{background:var(--blue)}
 .switch input:checked+.slider:before{transform:translateX(22px)}
+.switch input:focus-visible+.slider{outline:2px solid var(--blue);outline-offset:3px}
 .account-email{padding:12px;border-radius:11px;background:var(--panel2);overflow-wrap:anywhere;font-size:14px}
 .info{padding:12px;border-radius:11px;background:var(--panel2);color:var(--muted);font-size:12px;margin-top:12px}
 .footer{text-align:center;padding:22px;color:var(--muted);font-size:11px}
 @media(max-width:550px){
-.topinner{padding:10px 12px}.brand{font-size:16px}.brand img{width:37px;height:37px}
-.panel{padding:14px}.cover{height:155px}
-.profile-main{padding:0 12px 15px;margin-top:-47px}
-.profile-photo{width:98px;height:98px;font-size:34px}
-.profile-info{align-items:flex-start}.stats{gap:7px}
-.stat{padding:9px 4px}.heading h1{font-size:23px}
+  .topinner{padding:10px 12px}
+  .brand{font-size:16px}.brand img{width:37px;height:37px}
+  .panel{padding:14px}.cover{height:155px}
+  .profile-main{padding:0 12px 15px;margin-top:-47px}
+  .profile-photo{width:98px;height:98px;font-size:34px}
+  .profile-info{align-items:flex-start}
+  .stats{gap:7px}.stat{padding:9px 4px}
+  .heading h1{font-size:23px}
 }
 </style>
 </head>
 
 <body>
-
 <header class="topbar">
   <div class="topinner">
     <a class="brand" href="index.html">
-      <img src="mylogo.png" alt="मेरो साथी">
+      <img src="mylogo.png" alt="मेरो साथी लोगो">
       <span>मेरो साथी</span>
     </a>
   </div>
@@ -164,29 +172,31 @@ border-radius:15px;padding:16px;margin-bottom:12px;
 
 <main class="wrap">
   <section class="heading">
-    <h1>⚙️ Setting</h1>
+    <h1>⚙️ Settings</h1>
     <p>आफ्नो Profile, Account, Privacy र Preferences व्यवस्थापन गर्नुहोस्।</p>
   </section>
 
-  <section class="panel empty" id="loading">Settings लोड हुँदैछ...</section>
+  <section class="panel empty" id="loading" role="status">Settings लोड हुँदैछ...</section>
 
   <section class="panel hidden" id="loginBox">
     <h2 class="section-title">Login आवश्यक छ</h2>
     <p class="description">Settings प्रयोग गर्न पहिले Login गर्नुहोस्।</p>
-    <a class="btn primary" href="community.html">Community खोल्नुहोस्</a>
+    <a class="btn primary" href="index.html">Home / Community खोल्नुहोस्</a>
+  </section>
+
+  <section class="panel hidden" id="errorBox" role="alert">
+    <h2 class="section-title">Settings लोड हुन सकेन</h2>
+    <p class="status error" id="fatalError"></p>
+    <button class="btn" id="retryBoot" type="button">फेरि प्रयास गर्नुहोस्</button>
   </section>
 
   <div id="settingsContent" class="hidden">
-
-    <!-- Integrated Profile -->
     <section class="panel" style="padding:0;overflow:hidden">
       <div class="cover" id="coverPhoto">
         <button class="cover-edit hidden" id="coverEditBtn" type="button">📷 Cover बदल्नुहोस्</button>
       </div>
-
       <div class="profile-main">
-        <div class="profile-photo" id="avatar">M</div>
-
+        <div class="profile-photo" id="avatar">म</div>
         <div class="profile-info">
           <div>
             <h2 id="currentName">सदस्य</h2>
@@ -194,27 +204,17 @@ border-radius:15px;padding:16px;margin-bottom:12px;
           </div>
           <button class="btn primary" id="profileEditToggle" type="button">✏️ Profile सम्पादन</button>
         </div>
-
         <div class="bio-display" id="currentBioDisplay">तपाईंको सार्वजनिक Profile</div>
-
         <div class="stats">
-          <div class="stat">
-            <strong id="postCount">0</strong>
-            <span>Posts</span>
-          </div>
-          <div class="stat">
-            <strong id="memberSince">—</strong>
-            <span>Member Since</span>
-          </div>
+          <div class="stat"><strong id="postCount">0</strong><span>Posts</span></div>
+          <div class="stat"><strong id="memberSince">—</strong><span>Member Since</span></div>
         </div>
       </div>
     </section>
 
-    <!-- Profile Edit -->
     <section class="panel hidden" id="profileEditPanel">
       <h2 class="section-title">👤 Profile सम्पादन</h2>
       <p class="description">नाम, Bio, Profile फोटो र Cover Photo परिवर्तन गर्नुहोस्।</p>
-
       <form id="profileForm">
         <label for="displayName">देखिने नाम</label>
         <input class="field" id="displayName" maxlength="60" required placeholder="आफ्नो नाम लेख्नुहोस्">
@@ -229,16 +229,14 @@ border-radius:15px;padding:16px;margin-bottom:12px;
         <input class="field" id="coverFile" type="file" accept="image/jpeg,image/png,image/webp">
 
         <div class="small">JPG, PNG वा WEBP मात्र। प्रत्येक फोटो अधिकतम ३ MB।</div>
-
         <div class="actions">
           <button class="btn primary" id="saveProfile" type="submit">परिवर्तन सुरक्षित गर्नुहोस्</button>
           <button class="btn" id="cancelProfileEdit" type="button">बन्द</button>
         </div>
       </form>
-      <div class="status" id="profileStatus"></div>
+      <div class="status" id="profileStatus" aria-live="polite"></div>
     </section>
 
-    <!-- Public Posts -->
     <section>
       <div class="section-head">
         <h2>📝 मेरा पोस्टहरू</h2>
@@ -247,91 +245,81 @@ border-radius:15px;padding:16px;margin-bottom:12px;
       <div id="postFeed"><div class="empty">पोस्टहरू लोड हुँदैछन्...</div></div>
     </section>
 
-    <!-- Appearance -->
     <section class="panel">
       <h2 class="section-title">🎨 Appearance</h2>
-      <p class="description">App को Theme परिवर्तन गर्नुहोस्।</p>
+      <p class="description">Theme परिवर्तन गर्नुहोस्। यो preference shared theme key मा सुरक्षित हुन्छ।</p>
       <div class="switch-row">
         <div class="switch-info">
           <span class="switch-title">Dark Theme</span>
           <span class="switch-desc">Dark / Light Mode</span>
         </div>
-        <label class="switch">
-          <input type="checkbox" id="themeToggle" checked>
+        <label class="switch" aria-label="Dark theme">
+          <input type="checkbox" id="themeToggle">
           <span class="slider"></span>
         </label>
       </div>
     </section>
 
-    <!-- Notifications -->
+    <section class="panel">
+      <h2 class="section-title">🌐 Language</h2>
+      <p class="description">भाषा preference shared language key मा सुरक्षित हुन्छ।</p>
+      <div class="switch-row">
+        <div class="switch-info">
+          <span class="switch-title">English</span>
+          <span class="switch-desc">नेपाली / English</span>
+        </div>
+        <label class="switch" aria-label="English language">
+          <input type="checkbox" id="languageToggle">
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div class="small" id="languageStatus" aria-live="polite"></div>
+    </section>
+
     <section class="panel">
       <h2 class="section-title">🔔 Notifications</h2>
       <div class="switch-row">
-        <div class="switch-info">
-          <span class="switch-title">Direct Messages</span>
-          <span class="switch-desc">नयाँ म्यासेजको सूचना</span>
-        </div>
-        <label class="switch">
-          <input type="checkbox" id="notifMessage" checked>
-          <span class="slider"></span>
-        </label>
+        <div class="switch-info"><span class="switch-title">Direct Messages</span><span class="switch-desc">नयाँ म्यासेजको सूचना</span></div>
+        <label class="switch" aria-label="Direct message notifications"><input type="checkbox" id="notifMessage"><span class="slider"></span></label>
       </div>
       <div class="switch-row">
-        <div class="switch-info">
-          <span class="switch-title">System Updates</span>
-          <span class="switch-desc">App घोषणा र अपडेट</span>
-        </div>
-        <label class="switch">
-          <input type="checkbox" id="notifSystem" checked>
-          <span class="slider"></span>
-        </label>
+        <div class="switch-info"><span class="switch-title">System Updates</span><span class="switch-desc">App घोषणा र अपडेट</span></div>
+        <label class="switch" aria-label="System update notifications"><input type="checkbox" id="notifSystem"><span class="slider"></span></label>
       </div>
     </section>
 
-    <!-- Privacy -->
     <section class="panel">
       <h2 class="section-title">🔒 Privacy & Safety</h2>
       <div class="switch-row">
-        <div class="switch-info">
-          <span class="switch-title">Online Status</span>
-          <span class="switch-desc">Active स्थिति देखाउने</span>
-        </div>
-        <label class="switch">
-          <input type="checkbox" id="privacyOnline" checked>
-          <span class="slider"></span>
-        </label>
+        <div class="switch-info"><span class="switch-title">Online Status</span><span class="switch-desc">Active स्थिति देखाउने preference</span></div>
+        <label class="switch" aria-label="Online status"><input type="checkbox" id="privacyOnline"><span class="slider"></span></label>
       </div>
     </section>
 
-    <!-- Email -->
     <section class="panel">
       <h2 class="section-title">📧 Account Email</h2>
       <div class="account-email" id="accountEmail">—</div>
       <div class="info">Email परिवर्तन गर्न यो पेजमा सुविधा राखिएको छैन।</div>
     </section>
 
-    <!-- Password -->
     <section class="panel">
       <h2 class="section-title">🔑 Password परिवर्तन</h2>
       <p class="description">नयाँ Password कम्तीमा ८ अक्षरको हुनुपर्छ।</p>
-
       <form id="directPasswordForm">
         <label for="directPassword">नयाँ Password</label>
         <input class="field" id="directPassword" type="password" minlength="8" required autocomplete="new-password">
-
         <label for="confirmDirectPassword">Password फेरि लेख्नुहोस्</label>
         <input class="field" id="confirmDirectPassword" type="password" minlength="8" required autocomplete="new-password">
-
         <button class="btn primary" id="saveDirectPassword" type="submit">Password सुरक्षित गर्नुहोस्</button>
       </form>
-      <div class="status" id="directPasswordStatus"></div>
+      <div class="status" id="directPasswordStatus" aria-live="polite"></div>
 
       <hr style="border:0;border-top:1px solid var(--line);margin:20px 0">
 
       <h3 class="section-title" style="font-size:15px">Email बाट Reset</h3>
       <p class="description">Password Reset Link इमेलमा पठाउनुहोस्।</p>
       <button class="btn" id="sendReset" type="button">Reset Link पठाउनुहोस्</button>
-      <div class="status" id="resetStatus"></div>
+      <div class="status" id="resetStatus" aria-live="polite"></div>
 
       <section class="panel hidden" id="newPasswordPanel" style="margin-top:18px">
         <h3 class="section-title">Recovery बाट नयाँ Password</h3>
@@ -342,25 +330,19 @@ border-radius:15px;padding:16px;margin-bottom:12px;
           <input class="field" id="confirmPassword" type="password" minlength="8" required autocomplete="new-password">
           <button class="btn primary" id="updatePassword" type="submit">Password अपडेट गर्नुहोस्</button>
         </form>
-        <div class="status" id="passwordStatus"></div>
+        <div class="status" id="passwordStatus" aria-live="polite"></div>
       </section>
     </section>
 
-    <!-- Danger Zone -->
     <section class="panel" style="border-color:rgba(255,154,170,.3)">
       <h2 class="section-title" style="color:var(--red)">⚠️ Danger Zone</h2>
-      <div class="actions">
-        <button class="btn danger" id="logoutBtn" type="button">Logout</button>
-      </div>
-      <div class="status" id="logoutStatus"></div>
+      <div class="actions"><button class="btn danger" id="logoutBtn" type="button">Logout</button></div>
+      <div class="status" id="logoutStatus" aria-live="polite"></div>
     </section>
-
   </div>
 </main>
 
-<footer class="footer">
-  © <span id="currentYear"></span> · मेरो साथी। सर्वाधिकार सुरक्षित।
-</footer>
+<footer class="footer">© <span id="currentYear"></span> · मेरो साथी। सर्वाधिकार सुरक्षित।</footer>
 
 <script>
 "use strict";
@@ -368,53 +350,64 @@ border-radius:15px;padding:16px;margin-bottom:12px;
 const SUPABASE_URL="https://zbyntmyybhdcwmttkuys.supabase.co";
 const SUPABASE_KEY="sb_publishable_N8U3og_Ntm-ImrtM8c1NGA_-Rqb3dSy";
 const BUCKET="blog-images";
-
-const db=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
 const $=id=>document.getElementById(id);
 
+let db=null;
 let currentUser=null;
 let profile=null;
 let avatarPreviewUrl=null;
 let coverPreviewUrl=null;
 
+const THEME_KEY="kamalgc_portal_theme";
+const LANGUAGE_KEY="kamalgc_portal_language";
+
+function safeStorageGet(key){
+  try{return localStorage.getItem(key)}catch{return null}
+}
+function safeStorageSet(key,value){
+  try{localStorage.setItem(key,value)}catch(error){console.warn("Preference could not be saved:",key)}
+}
 function showStatus(id,msg,type=""){
   const el=$(id);
+  if(!el)return;
   el.textContent=msg;
   el.className="status"+(type?" "+type:"");
 }
-
-function initials(name){
-  return (String(name||"M").trim().charAt(0)||"M").toUpperCase();
+function showFatalError(message){
+  $("loading").classList.add("hidden");
+  $("loginBox").classList.add("hidden");
+  $("settingsContent").classList.add("hidden");
+  $("errorBox").classList.remove("hidden");
+  $("fatalError").textContent=message;
 }
-
+function initials(name){
+  return (String(name||"म").trim().charAt(0)||"म").toUpperCase();
+}
 function renderAvatar(url,name){
   const el=$("avatar");
   if(url){
     const img=document.createElement("img");
-    img.src=url;
-    img.alt="Profile photo";
+    img.src=url;img.alt="Profile photo";img.loading="lazy";
     el.replaceChildren(img);
   }else{
     el.textContent=initials(name);
   }
 }
-
 function renderCover(url){
   const cover=$("coverPhoto");
   if(url){
-    cover.style.backgroundImage=`url("${url.replace(/"/g,"%22")}")`;
+    const safe=safeImageUrl(url);
+    cover.style.backgroundImage=safe?`url("${safe.replace(/"/g,"%22")}")`:"";
   }else{
     cover.style.backgroundImage="";
   }
 }
-
 function dateText(value){
   if(!value)return "";
-  return new Date(value).toLocaleString("ne-NP",{
-    dateStyle:"medium",timeStyle:"short"
-  });
+  const date=new Date(value);
+  if(Number.isNaN(date.getTime()))return "";
+  return date.toLocaleString("ne-NP",{dateStyle:"medium",timeStyle:"short"});
 }
-
 function safeImageUrl(url){
   if(!url)return "";
   try{
@@ -423,6 +416,38 @@ function safeImageUrl(url){
   }catch{return ""}
 }
 
+/* Shared theme preference */
+function applyTheme(theme){
+  const isLight=theme==="light";
+  document.body.classList.toggle("light-theme",isLight);
+  document.body.classList.toggle("light-mode",isLight);
+  $("themeToggle").checked=!isLight;
+  safeStorageSet(THEME_KEY,isLight?"light":"dark");
+}
+function initTheme(){
+  const saved=safeStorageGet(THEME_KEY)||safeStorageGet("theme")||"dark";
+  applyTheme(saved==="light"?"light":"dark");
+}
+$("themeToggle").addEventListener("change",()=>{
+  applyTheme($("themeToggle").checked?"dark":"light");
+});
+
+/* Shared language preference */
+function initLanguage(){
+  const english=safeStorageGet(LANGUAGE_KEY)==="EN";
+  $("languageToggle").checked=english;
+  $("languageStatus").textContent=english?"English चयन गरिएको छ।":"नेपाली चयन गरिएको छ।";
+}
+$("languageToggle").addEventListener("change",()=>{
+  const language=$("languageToggle").checked?"EN":"NP";
+  safeStorageSet(LANGUAGE_KEY,language);
+  $("languageStatus").textContent=language==="EN"?"English चयन गरिएको छ।":"नेपाली चयन गरिएको छ।";
+  // Shared navigation reads this key when the page loads.
+  // Refresh the page so navigation labels use the selected language.
+  location.reload();
+});
+
+/* Profile */
 async function loadProfile(){
   const {data,error}=await db.from("profiles")
     .select("id,display_name,avatar_url,cover_url,bio,created_at")
@@ -432,16 +457,11 @@ async function loadProfile(){
   if(error)throw error;
 
   profile=data||{
-    id:currentUser.id,
-    display_name:"",
-    avatar_url:null,
-    cover_url:null,
-    bio:"",
-    created_at:currentUser.created_at
+    id:currentUser.id,display_name:"",avatar_url:null,
+    cover_url:null,bio:"",created_at:currentUser.created_at
   };
 
   const name=profile.display_name||"मेरो साथी सदस्य";
-
   $("displayName").value=profile.display_name||"";
   $("userBio").value=profile.bio||"";
   $("currentName").textContent=name;
@@ -453,9 +473,7 @@ async function loadProfile(){
   renderCover(profile.cover_url);
 
   const created=profile.created_at||currentUser.created_at;
-  $("memberSince").textContent=created
-    ?new Date(created).getFullYear().toString()
-    :"—";
+  $("memberSince").textContent=created?new Date(created).getFullYear().toString():"—";
 
   await loadPosts();
 }
@@ -480,7 +498,6 @@ async function loadPosts(){
   }
 
   $("postFeed").replaceChildren();
-
   posts.forEach(post=>{
     const article=document.createElement("article");
     article.className="post";
@@ -503,12 +520,9 @@ async function loadPosts(){
     if(imageUrl){
       const img=document.createElement("img");
       img.className="post-image";
-      img.src=imageUrl;
-      img.alt="Post photo";
-      img.loading="lazy";
+      img.src=imageUrl;img.alt="Post photo";img.loading="lazy";
       article.appendChild(img);
     }
-
     $("postFeed").appendChild(article);
   });
 }
@@ -518,85 +532,62 @@ $("profileEditToggle").addEventListener("click",()=>{
   $("profileEditPanel").classList.remove("hidden");
   $("profileEditPanel").scrollIntoView({behavior:"smooth",block:"center"});
 });
+$("coverEditBtn").addEventListener("click",()=>$("coverFile").click());
 
-$("coverEditBtn").addEventListener("click",()=>{
-  $("coverFile").click();
-});
-
+function clearPreviewUrls(){
+  if(avatarPreviewUrl)URL.revokeObjectURL(avatarPreviewUrl);
+  if(coverPreviewUrl)URL.revokeObjectURL(coverPreviewUrl);
+  avatarPreviewUrl=null;coverPreviewUrl=null;
+}
 $("cancelProfileEdit").addEventListener("click",()=>{
   $("profileEditPanel").classList.add("hidden");
   $("profileStatus").textContent="";
   $("displayName").value=profile?.display_name||"";
   $("userBio").value=profile?.bio||"";
-  $("avatarFile").value="";
-  $("coverFile").value="";
+  $("avatarFile").value="";$("coverFile").value="";
   renderAvatar(profile?.avatar_url,profile?.display_name);
   renderCover(profile?.cover_url);
-
-  if(avatarPreviewUrl)URL.revokeObjectURL(avatarPreviewUrl);
-  if(coverPreviewUrl)URL.revokeObjectURL(coverPreviewUrl);
-  avatarPreviewUrl=null;
-  coverPreviewUrl=null;
+  clearPreviewUrls();
 });
 
 function validateImage(file){
-  return file &&
-    ["image/jpeg","image/png","image/webp"].includes(file.type) &&
+  return !!file&&
+    ["image/jpeg","image/png","image/webp"].includes(file.type)&&
     file.size<=3*1024*1024;
 }
-
 $("avatarFile").addEventListener("change",e=>{
-  const file=e.target.files[0];
-  if(!file)return;
-
+  const file=e.target.files[0];if(!file)return;
   if(!validateImage(file)){
     showStatus("profileStatus","JPG, PNG वा WEBP फोटो मात्र। अधिकतम ३ MB।","error");
-    e.target.value="";
-    return;
+    e.target.value="";return;
   }
-
   if(avatarPreviewUrl)URL.revokeObjectURL(avatarPreviewUrl);
   avatarPreviewUrl=URL.createObjectURL(file);
   renderAvatar(avatarPreviewUrl,$("displayName").value);
 });
-
 $("coverFile").addEventListener("change",e=>{
-  const file=e.target.files[0];
-  if(!file)return;
-
+  const file=e.target.files[0];if(!file)return;
   if(!validateImage(file)){
     showStatus("profileStatus","JPG, PNG वा WEBP फोटो मात्र। अधिकतम ३ MB।","error");
-    e.target.value="";
-    return;
+    e.target.value="";return;
   }
-
   if(coverPreviewUrl)URL.revokeObjectURL(coverPreviewUrl);
   coverPreviewUrl=URL.createObjectURL(file);
   renderCover(coverPreviewUrl);
 });
 
-/* Upload image */
 async function uploadImage(file,folder){
-  const ext=file.type==="image/png"?"png":
-    file.type==="image/webp"?"webp":"jpg";
-
+  const ext=file.type==="image/png"?"png":file.type==="image/webp"?"webp":"jpg";
   const path=`${currentUser.id}/${folder}-${Date.now()}.${ext}`;
-
   const {error}=await db.storage.from(BUCKET).upload(path,file,{
-    upsert:false,
-    contentType:file.type,
-    cacheControl:"3600"
+    upsert:false,contentType:file.type,cacheControl:"3600"
   });
-
   if(error)throw error;
-
   return db.storage.from(BUCKET).getPublicUrl(path).data.publicUrl;
 }
 
-/* Save profile */
 $("profileForm").addEventListener("submit",async e=>{
   e.preventDefault();
-
   const name=$("displayName").value.trim();
   const bio=$("userBio").value.trim();
   const avatarFile=$("avatarFile").files[0];
@@ -604,57 +595,40 @@ $("profileForm").addEventListener("submit",async e=>{
   const button=$("saveProfile");
 
   if(!name){
-    showStatus("profileStatus","कृपया आफ्नो नाम लेख्नुहोस्।","error");
-    return;
+    showStatus("profileStatus","कृपया आफ्नो नाम लेख्नुहोस्।","error");return;
   }
-
   if(avatarFile&&!validateImage(avatarFile)){
-    showStatus("profileStatus","Profile फोटोको प्रकार वा आकार मिलेन।","error");
-    return;
+    showStatus("profileStatus","Profile फोटोको प्रकार वा आकार मिलेन।","error");return;
   }
-
   if(coverFile&&!validateImage(coverFile)){
-    showStatus("profileStatus","Cover फोटोको प्रकार वा आकार मिलेन।","error");
-    return;
+    showStatus("profileStatus","Cover फोटोको प्रकार वा आकार मिलेन।","error");return;
   }
 
   button.disabled=true;
   showStatus("profileStatus","Profile सुरक्षित हुँदैछ...");
-
   try{
     let avatarUrl=profile?.avatar_url||null;
     let coverUrl=profile?.cover_url||null;
-
     if(avatarFile)avatarUrl=await uploadImage(avatarFile,"avatar");
     if(coverFile)coverUrl=await uploadImage(coverFile,"cover");
 
     const {data,error}=await db.from("profiles").upsert({
-      id:currentUser.id,
-      display_name:name,
-      bio:bio,
-      avatar_url:avatarUrl,
-      cover_url:coverUrl
+      id:currentUser.id,display_name:name,bio,
+      avatar_url:avatarUrl,cover_url:coverUrl
     },{onConflict:"id"})
     .select("id,display_name,avatar_url,cover_url,bio,created_at")
     .single();
 
     if(error)throw error;
-
     profile=data;
 
     $("currentName").textContent=data.display_name||"मेरो साथी सदस्य";
     $("currentBioDisplay").textContent=data.bio||"तपाईंको सार्वजनिक Profile";
+    $("profileSubtitle").textContent=currentUser.email||"मेरो साथी सदस्य";
     renderAvatar(data.avatar_url,data.display_name);
     renderCover(data.cover_url);
-
-    $("avatarFile").value="";
-    $("coverFile").value="";
-
-    if(avatarPreviewUrl)URL.revokeObjectURL(avatarPreviewUrl);
-    if(coverPreviewUrl)URL.revokeObjectURL(coverPreviewUrl);
-    avatarPreviewUrl=null;
-    coverPreviewUrl=null;
-
+    $("avatarFile").value="";$("coverFile").value="";
+    clearPreviewUrls();
     showStatus("profileStatus","Profile सफलतापूर्वक अपडेट भयो।","success");
   }catch(error){
     showStatus("profileStatus",error.message||"Profile अपडेट हुन सकेन।","error");
@@ -663,66 +637,41 @@ $("profileForm").addEventListener("submit",async e=>{
   }
 });
 
-/* Theme */
-const themeToggle=$("themeToggle");
-const savedTheme=localStorage.getItem("theme");
-
-if(savedTheme==="light"){
-  document.body.classList.add("light-theme");
-  themeToggle.checked=false;
-}else{
-  themeToggle.checked=true;
-}
-
-themeToggle.addEventListener("change",()=>{
-  const theme=themeToggle.checked?"dark":"light";
-  document.body.classList.toggle("light-theme",theme==="light");
-  localStorage.setItem("theme",theme);
-});
-
-/* Save preference toggles locally */
+/* Local preference toggles */
 const preferenceIds=["notifMessage","notifSystem","privacyOnline"];
-
 preferenceIds.forEach(id=>{
-  const saved=localStorage.getItem("setting_"+id);
-  if(saved!==null)$(id).checked=saved==="true";
-
+  const key="setting_"+id;
+  const saved=safeStorageGet(key);
+  $(id).checked=saved===null?true:saved==="true";
   $(id).addEventListener("change",()=>{
-    localStorage.setItem("setting_"+id,$(id).checked);
+    safeStorageSet(key,String($(id).checked));
   });
 });
 
 /* Direct password update */
 $("directPasswordForm").addEventListener("submit",async e=>{
   e.preventDefault();
-
   const password=$("directPassword").value;
   const confirm=$("confirmDirectPassword").value;
   const button=$("saveDirectPassword");
 
   if(password.length<8){
-    showStatus("directPasswordStatus","Password कम्तीमा ८ अक्षरको हुनुपर्छ।","error");
-    return;
+    showStatus("directPasswordStatus","Password कम्तीमा ८ अक्षरको हुनुपर्छ।","error");return;
   }
   if(password!==confirm){
-    showStatus("directPasswordStatus","दुवै Password मिलेनन्।","error");
-    return;
+    showStatus("directPasswordStatus","दुवै Password मिलेनन्।","error");return;
   }
 
   button.disabled=true;
   showStatus("directPasswordStatus","Password परिवर्तन हुँदैछ...");
-
   try{
     const {error}=await db.auth.updateUser({password});
     if(error)throw error;
-
     $("directPasswordForm").reset();
     showStatus("directPasswordStatus","Password सफलतापूर्वक परिवर्तन भयो।","success");
   }catch(error){
     showStatus("directPasswordStatus",error.message||"Password परिवर्तन हुन सकेन।","error");
-  }finally{
-    button.disabled=false;
-  }
+  }finally{button.disabled=false}
 });
 
 /* Send reset email */
@@ -730,19 +679,15 @@ $("sendReset").addEventListener("click",async()=>{
   const button=$("sendReset");
   button.disabled=true;
   showStatus("resetStatus","Reset Link पठाउँदैछ...");
-
   try{
     const {error}=await db.auth.resetPasswordForEmail(currentUser.email,{
       redirectTo:location.origin+location.pathname
     });
     if(error)throw error;
-
     showStatus("resetStatus","Reset Link इमेलमा पठाइएको छ। Inbox र Spam जाँच गर्नुहोस्।","success");
   }catch(error){
     showStatus("resetStatus",error.message||"Reset Link पठाउन सकिएन।","error");
-  }finally{
-    button.disabled=false;
-  }
+  }finally{button.disabled=false}
 });
 
 /* Recovery password form */
@@ -750,48 +695,38 @@ function showRecoveryForm(){
   $("newPasswordPanel").classList.remove("hidden");
   $("newPasswordPanel").scrollIntoView({behavior:"smooth",block:"center"});
 }
-
 $("newPasswordForm").addEventListener("submit",async e=>{
   e.preventDefault();
-
   const password=$("newPassword").value;
   const confirm=$("confirmPassword").value;
   const button=$("updatePassword");
 
   if(password.length<8){
-    showStatus("passwordStatus","Password कम्तीमा ८ अक्षरको हुनुपर्छ।","error");
-    return;
+    showStatus("passwordStatus","Password कम्तीमा ८ अक्षरको हुनुपर्छ।","error");return;
   }
   if(password!==confirm){
-    showStatus("passwordStatus","दुवै Password मिलेनन्।","error");
-    return;
+    showStatus("passwordStatus","दुवै Password मिलेनन्।","error");return;
   }
 
   button.disabled=true;
   showStatus("passwordStatus","Password अपडेट हुँदैछ...");
-
   try{
     const {error}=await db.auth.updateUser({password});
     if(error)throw error;
-
     $("newPasswordForm").reset();
     showStatus("passwordStatus","Password सफलतापूर्वक अपडेट भयो।","success");
     setTimeout(()=>$("newPasswordPanel").classList.add("hidden"),1800);
   }catch(error){
     showStatus("passwordStatus",error.message||"Password अपडेट हुन सकेन।","error");
-  }finally{
-    button.disabled=false;
-  }
+  }finally{button.disabled=false}
 });
 
 /* Logout */
 $("logoutBtn").addEventListener("click",async()=>{
   if(!confirm("के तपाईं Logout गर्न चाहनुहुन्छ?"))return;
-
   const button=$("logoutBtn");
   button.disabled=true;
   showStatus("logoutStatus","Logout हुँदैछ...");
-
   try{
     const {error}=await db.auth.signOut();
     if(error)throw error;
@@ -802,9 +737,20 @@ $("logoutBtn").addEventListener("click",async()=>{
   }
 });
 
-/* Boot */
+/* App boot */
 async function boot(){
+  $("errorBox").classList.add("hidden");
+  $("loginBox").classList.add("hidden");
+  $("settingsContent").classList.add("hidden");
+  $("loading").classList.remove("hidden");
+  $("loading").textContent="Settings लोड हुँदैछ...";
+
   try{
+    if(!window.supabase?.createClient){
+      throw new Error("Supabase library लोड भएन। इन्टरनेट जाँच गरेर फेरि प्रयास गर्नुहोस्।");
+    }
+    db=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+
     const {data,error}=await db.auth.getSession();
     if(error)throw error;
 
@@ -818,28 +764,26 @@ async function boot(){
 
     $("settingsContent").classList.remove("hidden");
     $("coverEditBtn").classList.remove("hidden");
-
     await loadProfile();
 
-    if(location.hash.includes("type=recovery")){
-      showRecoveryForm();
-    }
+    if(location.hash.includes("type=recovery"))showRecoveryForm();
+
+    db.auth.onAuthStateChange((event,session)=>{
+      if(event==="PASSWORD_RECOVERY"){
+        currentUser=session?.user||currentUser;
+        showRecoveryForm();
+      }
+      if(event==="SIGNED_OUT")location.replace("index.html");
+    });
   }catch(error){
-    $("loading").textContent=error.message||"Settings लोड गर्न सकिएन।";
+    showFatalError(error.message||"Settings लोड गर्न सकिएन।");
   }
 }
 
-db.auth.onAuthStateChange((event,session)=>{
-  if(event==="PASSWORD_RECOVERY"){
-    currentUser=session?.user||currentUser;
-    showRecoveryForm();
-  }
-  if(event==="SIGNED_OUT"){
-    location.replace("index.html");
-  }
-});
-
+$("retryBoot").addEventListener("click",boot);
 $("currentYear").textContent=new Date().getFullYear();
+initTheme();
+initLanguage();
 boot();
 </script>
 
